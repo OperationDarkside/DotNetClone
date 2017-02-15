@@ -15,6 +15,7 @@ public:
 	Creates a new FileStream instance
 	*/
 	FileStream();
+	//FileStream(FileStream& stream);
 	/**
 	Creates a new FileStream instance with a file connection
 
@@ -31,6 +32,9 @@ public:
 	*/
 	FileStream(String& path, FileMode fm, FileAccess fa);
 	~FileStream();
+
+	string toString();
+	string getTypeString();
 
 	/**
 	Closes the current FileStream
@@ -91,6 +95,6 @@ public:
 	void Write(char* bytes, int offset, int count);
 
 private:
-	fstream file;
+	fstream& fs;
 	String path;
 };

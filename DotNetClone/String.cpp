@@ -41,7 +41,9 @@ int String::compareTo(String * str)
 
 bool String::contains(String * str)
 {
-	if (value.find(str->value) > -1) {
+	size_t pos = value.find(str->value);
+
+	if (pos != string::npos) {
 		return true;
 	}
 	else {

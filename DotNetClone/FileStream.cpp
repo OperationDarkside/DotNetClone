@@ -2,31 +2,33 @@
 
 
 
-FileStream::FileStream()
+FileStream::FileStream() : fs(fstream()), path(String())
 {
 }
 
-FileStream::FileStream(String & path, FileMode fm)
+FileStream::FileStream(String & path, FileMode fm) : fs(fstream()), path(String())
 {
 	this->path = path;
+	this->fs = fstream();
 
 	switch (fm)
 	{
 	case Append:
-		file.open(path.getStringValue(), ios::app | ios::in | ios::out | ios::binary);
+		this->fs.open(path.getStringValue(), ios::app | ios::in | ios::out | ios::binary);
 		break;
 	case Truncate:
-		file.open(path.getStringValue(), ios::trunc | ios::in | ios::out | ios::binary);
+		this->fs.open(path.getStringValue(), ios::trunc | ios::in | ios::out | ios::binary);
 		break;
 	default:
-		file.open(path.getStringValue(), ios::in | ios::out | ios::binary);
+		this->fs.open(path.getStringValue(), ios::in | ios::out | ios::binary);
 		break;
 	}
 }
 
-FileStream::FileStream(String & path, FileMode fm, FileAccess fa)
+FileStream::FileStream(String & path, FileMode fm, FileAccess fa) : fs(fstream()), path(String())
 {
 	this->path = path;
+	this->fs = fstream();
 
 	switch (fm)
 	{
@@ -34,13 +36,13 @@ FileStream::FileStream(String & path, FileMode fm, FileAccess fa)
 		switch (fa)
 		{
 		case 0:
-			file.open(path.getStringValue(), ios::app | ios::in | ios::binary);
+			this->fs.open(path.getStringValue(), ios::app | ios::in | ios::binary);
 			break;
 		case 1:
-			file.open(path.getStringValue(), ios::app | ios::in | ios::out | ios::binary);
+			this->fs.open(path.getStringValue(), ios::app | ios::in | ios::out | ios::binary);
 			break;
 		case 2:
-			file.open(path.getStringValue(), ios::app | ios::out | ios::binary);
+			this->fs.open(path.getStringValue(), ios::app | ios::out | ios::binary);
 			break;
 		}
 		break;
@@ -48,13 +50,13 @@ FileStream::FileStream(String & path, FileMode fm, FileAccess fa)
 		switch (fa)
 		{
 		case 0:
-			file.open(path.getStringValue(), ios::trunc | ios::in | ios::binary);
+			this->fs.open(path.getStringValue(), ios::trunc | ios::in | ios::binary);
 			break;
 		case 1:
-			file.open(path.getStringValue(), ios::trunc | ios::in | ios::out | ios::binary);
+			this->fs.open(path.getStringValue(), ios::trunc | ios::in | ios::out | ios::binary);
 			break;
 		case 2:
-			file.open(path.getStringValue(), ios::trunc | ios::out | ios::binary);
+			this->fs.open(path.getStringValue(), ios::trunc | ios::out | ios::binary);
 			break;
 		}
 		break;
@@ -62,13 +64,13 @@ FileStream::FileStream(String & path, FileMode fm, FileAccess fa)
 		switch (fa)
 		{
 		case 0:
-			file.open(path.getStringValue(), ios::in | ios::binary);
+			this->fs.open(path.getStringValue(), ios::in | ios::binary);
 			break;
 		case 1:
-			file.open(path.getStringValue(), ios::in | ios::out | ios::binary);
+			this->fs.open(path.getStringValue(), ios::in | ios::out | ios::binary);
 			break;
 		case 2:
-			file.open(path.getStringValue(), ios::out | ios::binary);
+			this->fs.open(path.getStringValue(), ios::out | ios::binary);
 			break;
 		}
 		break;
@@ -80,14 +82,24 @@ FileStream::~FileStream()
 {
 }
 
+string FileStream::toString()
+{
+	return string("System.IO.FileStream");
+}
+
+string FileStream::getTypeString()
+{
+	return string("FileStream");
+}
+
 void FileStream::Close()
 {
-	this->file.close();
+	this->fs.close();
 }
 
 void FileStream::Flush()
 {
-	this->file.flush();
+	this->fs.flush();
 }
 
 long FileStream::Length()
@@ -95,11 +107,11 @@ long FileStream::Length()
 	long pos = 0;
 	long len = 0;
 
-	pos = this->file.tellg();
+	pos = this->fs.tellg();
 
-	this->file.seekg(0, this->file.end);
-	len = this->file.tellg();
-	this->file.seekg(pos);
+	this->fs.seekg(0, this->fs.end);
+	len = this->fs.tellg();
+	this->fs.seekg(pos);
 
 	return len;
 }
@@ -111,24 +123,25 @@ String FileStream::Name()
 
 long FileStream::Position()
 {
-	return this->file.tellp();
+	return this->fs.tellp();
 }
 
 void FileStream::Position(long pos)
 {
-	this->file.seekg(pos, ios::beg);
+	this->fs.seekg(pos, ios::beg);
 }
 
 int FileStream::Read(char * bytes, int offset, int count)
 {
 	int cntr = 0;
+	int sz = 0;
 	char* buffer;
 
 	if (bytes != nullptr) {
 		// this->file.seekg(offset);
 		buffer = new char[count];
 
-		this->file.read(buffer, count);
+		this->fs.read(buffer, count);
 
 		if (sizeof(bytes) >= (offset + count)) {
 			cntr = offset;
@@ -138,7 +151,11 @@ int FileStream::Read(char * bytes, int offset, int count)
 				bytes[cntr++] = buffer[i];
 			}
 
-			return sizeof(buffer);
+			sz = sizeof(buffer);
+
+			delete[] buffer;
+
+			return sz;
 		}
 		else {
 			cerr << "Buffer is not big enough" << endl;
@@ -151,9 +168,9 @@ int FileStream::Read(char * bytes, int offset, int count)
 
 long FileStream::Seek(long offset, SeekOrigin origin)
 {
-	this->file.seekg(offset, origin);
-
-	return this->file.tellg();
+	this->fs.seekg(offset, origin);
+	
+	return this->fs.tellg();
 }
 
 void FileStream::Write(char * bytes, int offset, int count)
@@ -170,7 +187,9 @@ void FileStream::Write(char * bytes, int offset, int count)
 			tmp[i] = bytes[cntr++];
 		}
 
-		this->file.write(tmp, count);
+		this->fs.write(tmp, count);
+
+		delete[] tmp;
 	}
 	else {
 		cerr << "Buffer is not big enough" << endl;

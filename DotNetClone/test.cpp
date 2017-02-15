@@ -39,6 +39,14 @@ int main() {
 	peter = peter.toLower();
 
 	Console::WriteLine(&peter);
+
+	Console::WriteLine(peter.contains(&String("b")));
+
+	/*
+	FileStream fs(String(""),FileMode::Append);
+
+	FileStream fs2;
+	*/
 	
 	/*
 	fstream fs;

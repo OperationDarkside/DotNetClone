@@ -357,4 +357,3 @@ public:
 private:
 	std::string value;
 };
-

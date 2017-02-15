@@ -29,7 +29,7 @@ String Console::ReadLine()
 
 	getline(cin, res);
 
-	return new String(&res);
+	return String(&res);
 }
 
 void Console::Write(bool value)

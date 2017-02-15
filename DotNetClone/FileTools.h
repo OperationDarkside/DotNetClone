@@ -4,24 +4,22 @@
 
 enum FileMode
 {
-	Append = 0,
-	Create = 1,
-	CreateNew = 2,
-	Open = 3,
-	OpenOrCreate = 4,
-	Truncate = 5
+	Append,
+	Create,
+	CreateNew,
+	Open,
+	OpenOrCreate,
+	Truncate
 };
-
 enum FileAccess
 {
 	Read = 0,
 	ReadWrite = 1,
 	Write = 2
 };
-
 enum SeekOrigin
 {
-	Begin = ios::beg,
-	Current = ios::cur,
-	End = ios::end
+	Begin = std::ios::beg,
+	Current = std::ios::cur,
+	End = std::ios::end
 };
