@@ -2,6 +2,9 @@
 #include "String.h"
 
 #pragma once
+/**
+Object related wrapper for primitive bool type
+*/
 class Boolean : public Object
 {
 public:

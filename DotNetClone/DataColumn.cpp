@@ -8,10 +8,12 @@ DataColumn::DataColumn()
 
 DataColumn::DataColumn(const char * name)
 {
+	this->name = String(&string(name));
 }
 
 DataColumn::DataColumn(String & name)
 {
+	this->name = name;
 }
 
 
@@ -31,7 +33,7 @@ string DataColumn::getTypeString()
 
 String DataColumn::ColumnName()
 {
-	return String();
+	return this->name;
 }
 
 void DataColumn::ColumnName(String & columnName)

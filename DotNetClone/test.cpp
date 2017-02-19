@@ -10,6 +10,17 @@
 #include <iostream>
 #include <typeinfo>
 
+void addRows(DataTable& t) {
+	DataRow row;
+
+	row = t.NewRow();
+
+	row.SetField(0, String("Peter"));
+	row.SetField(1, true);
+
+	t.Rows().Add(row);
+}
+
 int main() {
 
 	DateTime* dt = new DateTime(2017, 2, 4);
@@ -49,14 +60,9 @@ int main() {
 	table.Columns().Add(DataColumn("Vorname"));
 	table.Columns().Add(DataColumn("Ja/Nein"));
 
-	DataRow row;
+	addRows(table);
 
-	row = table.NewRow();
-
-	row.SetField(0, String("Peter"));
-	row.SetField(1, true);
-
-	table.Rows().Add(row);
+	DataRow row = table.Rows()[0];
 
 	Console::WriteLine(&row.Field<String>(0));
 	Console::WriteLine(row.Field<bool>(1));

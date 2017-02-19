@@ -21,7 +21,7 @@ string DataColumnCollection::getTypeString()
 	return string("DataColumnCollection");
 }
 
-void DataColumnCollection::Add(DataColumn & column)
+void DataColumnCollection::Add(DataColumn& column)
 {
 	this->cols.push_back(column);
 }
