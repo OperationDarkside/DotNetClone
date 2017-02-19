@@ -25,7 +25,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -112,8 +112,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boolean.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Convert.cpp" />
+    <ClCompile Include="DataColumn.cpp" />
+    <ClCompile Include="DataColumnCollection.cpp" />
+    <ClCompile Include="DataRow.cpp" />
+    <ClCompile Include="DataRowCollection.cpp" />
+    <ClCompile Include="DataTable.cpp" />
     <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="FileStream.cpp" />
@@ -123,8 +129,14 @@
     <ClCompile Include="TimeSpan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boolean.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Convert.h" />
+    <ClInclude Include="DataColumn.h" />
+    <ClInclude Include="DataColumnCollection.h" />
+    <ClInclude Include="DataRow.h" />
+    <ClInclude Include="DataRowCollection.h" />
+    <ClInclude Include="DataTable.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="FileStream.h" />

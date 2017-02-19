@@ -8,7 +8,7 @@ class Object
 {
 public:
 	Object();
-	~Object();
+	virtual ~Object();
 
 	/**
 	Compares the pointer of Object o and this instance

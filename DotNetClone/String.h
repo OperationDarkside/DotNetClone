@@ -354,6 +354,8 @@ public:
 	String& operator+=(int number);
 	bool operator==(String& str);
 	bool operator==(const char* str);
+	String operator=(const char* str);
+	String operator=(string& str);
 private:
 	std::string value;
 };

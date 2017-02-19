@@ -108,27 +108,85 @@ void File::Move(String & sourceFileName, String & destFileName)
 
 char * File::ReadAllBytes(String & path)
 {
-	return nullptr;
+	long len = 0;
+	char* buffer;
+	FileStream fs(path, FileMode::Open);
+
+	len = fs.Length();
+
+	buffer = new char[len];
+
+	fs.Read(buffer, 0, len);
+
+	fs.Close();
+
+	return buffer;
 }
 
 vector<String*> File::ReadAllLines(String & path)
 {
-	return vector<String*>();
+	string temp;
+	vector<String*> res;
+	ifstream fs(path.getStringValue(), ios::in);
+
+	while (getline(fs, temp)) {
+		res.push_back(new String(&temp));
+	}
+
+	fs.close();
+
+	return res;
 }
 
 String File::ReadAllText(String & path)
 {
-	return String();
+	string temp;
+	string res;
+	ifstream fs(path.getStringValue(), ios::in);
+
+	while (getline(fs, temp)) {
+		res += temp;
+	}
+
+	fs.close();
+
+	return String(&res);
 }
 
 void File::WriteAllBytes(String & path, char * bytes)
 {
+	ofstream fs(path.getStringValue(), ios::out);
+
+	fs << bytes;
+
+	fs.close();
 }
 
 void File::WriteAllLines(String & path, vector<String*> contents)
 {
+	long len = 0;
+	String* line;
+	ofstream fs(path.getStringValue(), ios::out);
+
+	len = contents.size();
+
+	for (long i = 0; i < len; i++)
+	{
+		line = contents[i];
+
+		if (line != nullptr) {
+			fs << (*line).getStringValue() << endl;
+		}
+	}
+
+	fs.close();
 }
 
 void File::WriteAllText(String & path, String & contents)
 {
+	ofstream fs(path.getStringValue(), ios::out);
+
+	fs << contents.getStringValue();
+
+	fs.close();
 }

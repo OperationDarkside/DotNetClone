@@ -2,14 +2,17 @@
 #include "DateTime.h"
 #include "Console.h"
 #include "FileStream.h"
+#include "Boolean.h"
+#include "DataTable.h"
 #include <iostream>
 #include <chrono>
 #include <ctime>
 #include <iostream>
+#include <typeinfo>
 
 int main() {
-	
-	DateTime* dt = new DateTime(2017,2,4);
+
+	DateTime* dt = new DateTime(2017, 2, 4);
 	std::cout << dt->Day() << "-" << dt->Month() << "-" << dt->Year() << std::endl;
 	std::cout << dt->toLongDateString().getStringValue() << std::endl << dt->toLongTimeString().getStringValue() << std::endl;
 	dt->Year(2014);
@@ -17,7 +20,7 @@ int main() {
 
 	DateTime* dt1 = new DateTime(456734564423L);
 	std::cout << dt1->toLongDateString().getStringValue() << std::endl << dt1->toLongTimeString().getStringValue() << std::endl;
-	
+
 	Object* o = new Object();
 	std::cout << o->toString() << std::endl;
 
@@ -42,43 +45,21 @@ int main() {
 
 	Console::WriteLine(peter.contains(&String("b")));
 
-	/*
-	FileStream fs(String(""),FileMode::Append);
+	DataTable table("Kohlepfanne");
+	table.Columns().Add(DataColumn("Vorname"));
+	table.Columns().Add(DataColumn("Ja/Nein"));
 
-	FileStream fs2;
-	*/
-	
-	/*
-	fstream fs;
-	fs.open("peter.txt", ios::in | ios::out | ios::binary);
+	DataRow row;
 
-	fs << "Hallo Welt, ihr Pisser!";
+	row = table.NewRow();
 
-	long pos1 = fs.tellg();
-	long pos2 = fs.tellp();
+	row.SetField(0, String("Peter"));
+	row.SetField(1, true);
 
-	fs.close();
+	table.Rows().Add(row);
 
-	fstream ifs;
-	ifs.open("peter.txt", ios::in | ios::binary);
+	Console::WriteLine(&row.Field<String>(0));
+	Console::WriteLine(row.Field<bool>(1));
 
-	char* buffer = new char[10];
-
-	ifs.read(buffer, 10);
-
-	pos1 = ifs.tellg();
-	pos2 = ifs.tellp();
-
-	ifs.close();
-
-	fstream ofs;
-	ofs.open("peter.txt", ios::out | ios::binary);
-
-	ofs.seekg(10);
-	ofs << "Blubb";
-	pos1 = ofs.tellg();
-
-	ofs.close();
-	*/
 	system("PAUSE");
 }

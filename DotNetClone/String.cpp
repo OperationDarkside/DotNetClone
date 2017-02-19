@@ -499,3 +499,17 @@ bool String::operator==(const char * str)
 
 	return (this->value.compare(tmp1) == 0);
 }
+
+String String::operator=(const char * str)
+{
+	this->value = str;
+
+	return *this;
+}
+
+String String::operator=(string & str)
+{
+	this->value = str;
+
+	return *this;
+}
