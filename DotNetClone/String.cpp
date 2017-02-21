@@ -36,7 +36,8 @@ std::string String::getStringValue()
 
 int String::compareTo(String * str)
 {
-	return this->value.compare(str->value);
+	int res = this->value.compare(str->value);
+	return res;
 }
 
 bool String::contains(String * str)
@@ -82,32 +83,84 @@ bool String::endsWith(String * str)
 
 unsigned int String::indexOf(char c)
 {
-	return this->value.find(c);
+	size_t found = 0;
+
+	found = this->value.find(c);
+
+	if (found == std::string::npos) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::indexOf(char c, unsigned int startIndex)
 {
-	return this->value.find(c, startIndex);
+	size_t found = 0;
+
+	found = this->value.find(c, startIndex);
+
+	if (found == std::string::npos) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::indexOf(char c, unsigned int startIndex, unsigned int count)
 {
-	return this->value.find(new char[1]{ c }, startIndex, count);
+	size_t found = 0;
+
+	found = this->value.find(c, startIndex);
+
+	if (found == std::string::npos) {
+		return -1;
+	}
+	if (found > (startIndex + count)) {
+		return -1;
+	}
+	return found;
 }
 
 unsigned int String::indexOf(String * str)
 {
-	return this->value.find(str->value);
+	size_t found = 0;
+
+	found = this->value.find(str->value);
+
+	if (found == std::string::npos) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::indexOf(String * str, unsigned int startIndex)
 {
-	return this->value.find(str->value, startIndex);
+	size_t found = 0;
+
+	found = this->value.find(str->value, startIndex);
+
+	if (found == std::string::npos) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::indexOf(String * str, unsigned int startIndex, unsigned int count)
 {
-	return this->value.find(str->value.data(), startIndex, count);
+	size_t found = 0;
+
+	found = this->value.find(str->value, startIndex);
+
+	if (found == std::string::npos) {
+		return -1;
+	}
+	if (found > (startIndex + count)) {
+		return -1;
+	}
+	return found;
 }
 
 String String::insert(unsigned int startIndex, String * str)
@@ -118,32 +171,65 @@ String String::insert(unsigned int startIndex, String * str)
 
 unsigned int String::lastIndexOf(char c)
 {
-	return this->value.find_last_of(c);
+	size_t found = this->value.find_last_of(c);
+	if (found == std::string::npos) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::lastIndexOf(char c, unsigned int startIndex)
 {
-	return this->value.find_last_of(c, startIndex);
+	size_t found = this->value.find_last_of(c, startIndex);
+	if (found == std::string::npos) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::lastIndexOf(char c, unsigned int startIndex, unsigned int count)
 {
-	return this->value.find_last_of(new char[1]{ c }, startIndex, count);
+	size_t found = this->value.find_last_of(new char[1]{ c }, startIndex, count);
+	if (found == std::string::npos) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::lastIndexOf(String * str)
 {
-	return this->value.find_last_of(str->value);
+	size_t found = this->value.rfind(str->value);
+	if (found == std::string::npos) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::lastIndexOf(String * str, unsigned int startIndex)
 {
-	return this->value.find_last_of(str->value, startIndex);
+	size_t found = this->value.rfind(str->value, startIndex);
+	if (found == std::string::npos) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::lastIndexOf(String * str, unsigned int startIndex, unsigned int count)
 {
-	return this->value.find_last_of(str->value.data(), startIndex, count);
+	size_t found = this->value.rfind(str->value, startIndex);
+	if (found == std::string::npos) {
+		return -1;
+	}
+	if (found > (startIndex - str->value.size()) && found < (startIndex - count + str->value.size())) {
+		return -1;
+	}
+
+	return found;
 }
 
 unsigned int String::length()
@@ -184,7 +270,7 @@ String String::padRight(int totalWidth)
 	len = this->value.size();
 
 	if (totalWidth > len) {
-		this->value.insert(len, totalWidth, ' ');
+		this->value.insert(len, totalWidth - len, ' ');
 	}
 
 	return this;
@@ -197,7 +283,7 @@ String String::padRight(int totalWidth, char paddingChar)
 	len = this->value.size();
 
 	if (totalWidth > len) {
-		this->value.insert(len, totalWidth, paddingChar);
+		this->value.insert(len, totalWidth - len, paddingChar);
 	}
 
 	return this;

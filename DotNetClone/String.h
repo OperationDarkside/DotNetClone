@@ -43,7 +43,7 @@ public:
 	/**
 	Clones this Instance
 
-	@return String pointer with the same value
+	@return String with the same value
 	*/
 	String clone();
 	/**
