@@ -86,6 +86,17 @@ template<typename T>
 inline void DataRow::SetField(int columnNr, T& value)
 {
 	T* o = new T(value);
+
+	if(columnNr >= this->cols->Count()){
+		throw "Column Nr out of Range!";
+		return;
+	}
+
+	DataColumn col = (*this->cols)[columnNr];
+	if(!col.checkType<T>(value)){
+		throw "Type mismatch!";
+		return;
+	}
 	
 	this->items[columnNr] = o;
 }

@@ -25,6 +25,8 @@ public:
 	@return The column number
 	*/
 	long Count();
+
+	DataColumn& operator[](int colNr);
 private:
 	vector<DataColumn> cols;
 };

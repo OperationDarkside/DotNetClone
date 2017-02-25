@@ -477,7 +477,7 @@ String String::trimEnd()
 	unsigned int last = 0;
 
 	last = this->value.find_last_not_of(' ');
-	this->value = this->value.substr(last);
+	this->value = this->value.substr(0, last + 1);
 	return this;
 }
 
@@ -490,7 +490,7 @@ String String::trimStart()
 	{
 		return this;
 	}
-	this->value = this->value.substr(0, first);
+	this->value = this->value.substr(first);
 	return this;
 }
 
@@ -541,7 +541,7 @@ String& operator+(String& str, int number)
 
 String & operator+(int number, String & str)
 {
-	str += std::to_string(number) + str.value;
+	str.value = std::to_string(number) + str.value;
 
 	return str;
 }

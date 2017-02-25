@@ -1,5 +1,6 @@
 #include "Object.h"
 #include "String.h"
+#include <typeinfo>
 
 #pragma once
 /**
@@ -9,8 +10,8 @@ class DataColumn : public Object
 {
 public:
 	DataColumn();
-	DataColumn(const char* name);
-	DataColumn(String& name);
+	DataColumn(const char* name, Object* o);
+	DataColumn(String& name, Object* o);
 	~DataColumn();
 
 	string toString();
@@ -25,10 +26,31 @@ public:
 	/**
 	Sets the name of this column instance
 
-	@param The column name
+	@param columnName The column name
 	*/
 	void ColumnName(String& columnName);
+
+	/**
+	Compares the DataType of this Column with the given Type
+
+	@param var Variable of the Type to compare
+	*/
+	template <typename T>
+	bool checkType(T val);
+
+	String DataType();
 private:
 	String name;
+	const type_info* type;
 };
 
+template<typename T>
+inline bool DataColumn::checkType(T val){
+	if(typeid(T).hash_code() == this->type->hash_code()){
+		return true;
+	} else{
+		return false;
+	}
+
+	return true;
+}

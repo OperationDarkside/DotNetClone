@@ -121,9 +121,14 @@
     <ClCompile Include="DataRowCollection.cpp" />
     <ClCompile Include="DataTable.cpp" />
     <ClCompile Include="DateTime.cpp" />
+    <ClCompile Include="Double.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="FileStream.cpp" />
+    <ClCompile Include="Float.cpp" />
+    <ClCompile Include="Integer.cpp" />
+    <ClCompile Include="Long.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Short.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
@@ -138,10 +143,15 @@
     <ClInclude Include="DataRowCollection.h" />
     <ClInclude Include="DataTable.h" />
     <ClInclude Include="DateTime.h" />
+    <ClInclude Include="Double.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="FileStream.h" />
     <ClInclude Include="FileTools.h" />
+    <ClInclude Include="Float.h" />
+    <ClInclude Include="Integer.h" />
+    <ClInclude Include="Long.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Short.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="TimeSpan.h" />
   </ItemGroup>

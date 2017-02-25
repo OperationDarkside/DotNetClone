@@ -217,6 +217,235 @@ void test_String_Class(){
 	} else{
 		Console::WriteLine("Error");
 	}
+
+	String str_remove1("Test");
+	str_remove1 = str_remove1.remove(2);
+	if(str_remove1 == "Te"){
+		Console::WriteLine("remove works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_remove2("Test");
+	str_remove2 = str_remove2.remove(1,2);
+	if(str_remove2 == "Tt"){
+		Console::WriteLine("remove with count works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_replace1("Test");
+	str_replace1 = str_replace1.replace('e','a');
+	if(str_replace1 == "Tast"){
+		Console::WriteLine("replace works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_replace2("Test mit Replace");
+	str_replace2 = str_replace2.replace(&String("mit"), &String("ohne"));
+	if(str_replace2 == "Test ohne Replace"){
+		Console::WriteLine("replace works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_split1("Test;mit;Split");
+	vector<String*> array_split1 = str_split1.split(';');
+	if(*array_split1[2] ==  "Split"){
+		Console::WriteLine("split works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_split2("TestlostmitlostSplit");
+	vector<String*> array_split2 = str_split2.split(&String("lost"));
+	if(*array_split2[2] == "Split"){
+		Console::WriteLine("split mit String works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_startsWith("Test mit Start");
+	if(str_startsWith.startsWith(&String("Test"))){
+		Console::WriteLine("startsWith works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_sub("Test mit Substring");
+	str_sub = str_sub.substring(5);
+	if(str_sub == "mit Substring"){
+		Console::WriteLine("substring works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_sub1("Test mit Substring");
+	str_sub1 = str_sub1.substring(5,3);
+	if(str_sub1 == "mit"){
+		Console::WriteLine("substring with count works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_toCharArr1("Test mit toCharArray");
+	char* charArr1 = str_toCharArr1.toCharArray();
+	if(strcmp(charArr1, "Test mit toCharArray") == 0){
+		Console::WriteLine("toCharArray works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_toCharArr2("Test mit toCharArray");
+	char* charArr2 = str_toCharArr2.toCharArray(5,3);
+	if(strcmp(charArr2, "mit") == 0){
+		Console::WriteLine("toCharArray with startIndex and count works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_toLower("Test mit ToLoWeR");
+	str_toLower = str_toLower.toLower();
+	if(str_toLower == "test mit tolower"){
+		Console::WriteLine("toLower works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_toUpper("Test mit Toupper");
+	str_toUpper = str_toUpper.toUpper();
+	if(str_toUpper == "TEST MIT TOUPPER"){
+		Console::WriteLine("toUpper works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_trim("    Test mit Trim    ");
+	str_trim = str_trim.trim();
+	if(str_trim == "Test mit Trim"){
+		Console::WriteLine("trim works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_trimEnd("Test mit TrimEnd    ");
+	str_trimEnd = str_trimEnd.trimEnd();
+	if(str_trimEnd == "Test mit TrimEnd"){
+		Console::WriteLine("trimEnd works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_trimStart("    Test mit TrimStart");
+	str_trimStart = str_trimStart.trimStart();
+	if(str_trimStart == "Test mit TrimStart"){
+		Console::WriteLine("trimStart works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add;
+	str_operator_add = String("Hallo ") + String("Welt!");
+	if(str_operator_add == "Hallo Welt!"){
+		Console::WriteLine("operator_add String String works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add2;
+	str_operator_add2 = String("Hallo ") + "Welt!";
+	if(str_operator_add2 == "Hallo Welt!"){
+		Console::WriteLine("operator_add String const char* works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add3;
+	str_operator_add3 = "Hallo " + String("Welt!");
+	if(str_operator_add3 == "Hallo Welt!"){
+		Console::WriteLine("operator_add const char* String works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add4;
+	str_operator_add4 = string("Hallo ") + String("Welt!");
+	if(str_operator_add4 == "Hallo Welt!"){
+		Console::WriteLine("operator_add std::string String works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add5;
+	str_operator_add5 = String("Hallo ") + string("Welt!");
+	if(str_operator_add5 == "Hallo Welt!"){
+		Console::WriteLine("operator_add String std::string works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add6;
+	str_operator_add6 = String("Mambo Nr. ") + 5;
+	if(str_operator_add6 == "Mambo Nr. 5"){
+		Console::WriteLine("operator_add String int works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add7;
+	str_operator_add7 = 5 + String(" Mambos there are");
+	if(str_operator_add7 == "5 Mambos there are"){
+		Console::WriteLine("operator_add int String works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add8("Hallo ");
+	str_operator_add8 += String("Welt!");
+	if(str_operator_add8 == "Hallo Welt!"){
+		Console::WriteLine("operator_add += String works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add9("Hallo ");
+	str_operator_add9 += string("Welt!");
+	if(str_operator_add9 == "Hallo Welt!"){
+		Console::WriteLine("operator_add += std::string works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add10("Hallo ");
+	str_operator_add10 += "Welt!";
+	if(str_operator_add10 == "Hallo Welt!"){
+		Console::WriteLine("operator_add += const char* works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_add11("Mambo Nr. ");
+	str_operator_add11 += 5;
+	if(str_operator_add11 == "Mambo Nr. 5"){
+		Console::WriteLine("operator_add += int works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_assign = "Hallo Welt!";
+	if(str_operator_assign == "Hallo Welt!"){
+		Console::WriteLine("operator_assign const char* works!");
+	} else{
+		Console::WriteLine("Error");
+	}
+
+	String str_operator_assign2 = String("Hallo Welt!");
+	if(str_operator_assign2 == "Hallo Welt!"){
+		Console::WriteLine("operator_assign String works!");
+	} else{
+		Console::WriteLine("Error");
+	}
 }
 
 int main(){
@@ -256,14 +485,19 @@ int main(){
 
 	Console::WriteLine(peter.contains(&String("b")));
 
-	/*DataTable table("Kohlepfanne");
-	table.Columns().Add(DataColumn("Vorname"));
-	table.Columns().Add(DataColumn("Ja/Nein"));
+	DataTable table("Kohlepfanne");
+	table.Columns().Add(DataColumn(String("Vorname"), &String()));
+	table.Columns().Add(DataColumn("Ja/Nein", &Boolean()));
+
+	DataRow r = table.NewRow();
+	r.SetField<String>(0, String("Hallo Welt!"));
+	r.SetField(1, true);
+	table.Rows().Add(r);
 
 	DataRow row = table.Rows()[0];
 
 	Console::WriteLine(&row.Field<String>(0));
-	Console::WriteLine(row.Field<bool>(1));*/
+	Console::WriteLine(row.Field<bool>(1));
 
 	system("PAUSE");
 }

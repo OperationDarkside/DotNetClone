@@ -30,3 +30,7 @@ long DataColumnCollection::Count()
 {
 	return this->cols.size();
 }
+
+DataColumn & DataColumnCollection::operator[](int colNr){
+		return cols[colNr];
+}
