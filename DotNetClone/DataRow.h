@@ -8,8 +8,7 @@
 /**
 Row Object to a DataTable
 */
-class DataRow : public Object
-{
+class DataRow: public Object{
 	friend class DataTable;
 
 public:
@@ -60,8 +59,7 @@ private:
 };
 
 template<typename T>
-inline T DataRow::Field(int columnNr)
-{
+inline T DataRow::Field(int columnNr){
 	T* res;
 	Object* o = items[columnNr];
 
@@ -70,8 +68,7 @@ inline T DataRow::Field(int columnNr)
 	return *res;
 }
 template<>
-inline bool DataRow::Field<bool>(int columnNr)
-{
+inline bool DataRow::Field<bool>(int columnNr){
 	Object* o = items[columnNr];
 
 	bool b;
@@ -83,8 +80,7 @@ inline bool DataRow::Field<bool>(int columnNr)
 }
 
 template<typename T>
-inline void DataRow::SetField(int columnNr, T& value)
-{
+inline void DataRow::SetField(int columnNr, T& value){
 	T* o = new T(value);
 
 	if(columnNr >= this->cols->Count()){
@@ -93,10 +89,10 @@ inline void DataRow::SetField(int columnNr, T& value)
 	}
 
 	DataColumn col = (*this->cols)[columnNr];
-	if(!col.checkType<T>(value)){
+	if(!col.checkType(Type::getType<T>(value))){
 		throw "Type mismatch!";
 		return;
 	}
-	
+
 	this->items[columnNr] = o;
 }

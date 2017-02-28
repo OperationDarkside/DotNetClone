@@ -1,17 +1,16 @@
 #include "Object.h"
 #include "String.h"
-#include <typeinfo>
+#include "Type.h"
 
 #pragma once
 /**
 Column Object for the DataTable class
 */
-class DataColumn : public Object
-{
+class DataColumn: public Object{
 public:
 	DataColumn();
-	DataColumn(const char* name, Object* o);
-	DataColumn(String& name, Object* o);
+	DataColumn(const char* name, Type& type);
+	DataColumn(String& name, Type& o);
 	~DataColumn();
 
 	string toString();
@@ -35,22 +34,21 @@ public:
 
 	@param var Variable of the Type to compare
 	*/
-	template <typename T>
-	bool checkType(T val);
+	bool checkType(Type& type);
 
-	String DataType();
+	/**
+	Returns the data type of this column instance
+
+	@return The column's data type
+	*/
+	Type DataType();
+	/**
+	Sets the data type of this column instance
+
+	@param type The column's data type
+	*/
+	void DataType(Type& type);
 private:
 	String name;
-	const type_info* type;
+	Type type;
 };
-
-template<typename T>
-inline bool DataColumn::checkType(T val){
-	if(typeid(T).hash_code() == this->type->hash_code()){
-		return true;
-	} else{
-		return false;
-	}
-
-	return true;
-}

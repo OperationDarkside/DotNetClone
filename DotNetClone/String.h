@@ -1,3 +1,8 @@
+#pragma once
+
+#ifndef STRING_H
+#define STRING_H
+
 #include <string>
 #include <algorithm>
 #include <locale>
@@ -5,8 +10,6 @@
 #include <sstream>
 #include <cctype>
 #include "Object.h"
-
-#pragma once
 
 using namespace std;
 
@@ -359,3 +362,5 @@ public:
 private:
 	std::string value;
 };
+
+#endif

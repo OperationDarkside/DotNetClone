@@ -132,6 +132,7 @@
     <ClCompile Include="String.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
+    <ClCompile Include="Type.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boolean.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="Short.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="TimeSpan.h" />
+    <ClInclude Include="Type.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

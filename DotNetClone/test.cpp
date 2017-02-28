@@ -486,8 +486,8 @@ int main(){
 	Console::WriteLine(peter.contains(&String("b")));
 
 	DataTable table("Kohlepfanne");
-	table.Columns().Add(DataColumn(String("Vorname"), &String()));
-	table.Columns().Add(DataColumn("Ja/Nein", &Boolean()));
+	table.Columns().Add(DataColumn(String("Vorname"), Type::getType<String>(String())));
+	table.Columns().Add(DataColumn("Ja/Nein", Type::getType<bool>(true)));
 
 	DataRow r = table.NewRow();
 	r.SetField<String>(0, String("Hallo Welt!"));
