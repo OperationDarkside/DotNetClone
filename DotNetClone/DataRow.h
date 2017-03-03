@@ -1,7 +1,6 @@
 #include "Object.h"
 #include "String.h"
 #include "Boolean.h"
-#include "DataColumnCollection.h"
 #include <typeinfo>
 
 #pragma once
@@ -9,6 +8,8 @@
 Row Object to a DataTable
 */
 class DataRow: public Object{
+
+	friend class DataColumnCollection;
 	friend class DataTable;
 
 public:
@@ -18,7 +19,6 @@ public:
 
 	string toString();
 	string getTypeString();
-
 
 	/**
 	Returns the value of the cell in the given column
@@ -52,10 +52,12 @@ public:
 	@param bool value of the given type
 	*/
 	void SetField(int columnNr, bool value);
-
+	
 private:
 	DataColumnCollection* cols;
 	vector<Object*> items;
+
+	void RemoveItem(size_t index);
 };
 
 template<typename T>

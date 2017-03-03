@@ -1,9 +1,16 @@
+#ifndef DATATABLE_H
+#define DATATABLE_H
+
 #include "Object.h"
 #include "String.h"
-#include "DataColumnCollection.h"
 #include "DataRowCollection.h"
 
+class DataColumnCollection;
+
 #pragma once
+/**
+In-Memory dynamic Table class
+*/
 class DataTable : public Object
 {
 public:
@@ -17,8 +24,11 @@ public:
 	string toString();
 	string getTypeString();
 
+	friend class DataColumnCollection;
+
 	//Methods
 	DataRow NewRow();
+	
 
 	//Properties
 	String TableName();
@@ -31,5 +41,7 @@ private:
 	String name;
 	DataColumnCollection* columns;
 	DataRowCollection* rows;
-};
 
+	void RemoveColumn(size_t index);
+};
+#endif // !DATATABLE_H

@@ -586,6 +586,16 @@ bool String::operator==(const char * str)
 	return (this->value.compare(tmp1) == 0);
 }
 
+bool String::operator!=(String & str){
+	return (this->value.compare(str.value) != 0);
+}
+
+bool String::operator!=(const char * str){
+	string tmp1(str);
+
+	return (this->value.compare(tmp1) != 0);
+}
+
 String String::operator=(const char * str)
 {
 	this->value = str;

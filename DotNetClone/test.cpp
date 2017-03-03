@@ -9,6 +9,7 @@
 #include <ctime>
 #include <iostream>
 #include <typeinfo>
+#include "DataColumnCollection.h"
 
 String compare_clone(){
 	String str("Something");
@@ -498,6 +499,22 @@ int main(){
 
 	Console::WriteLine(&row.Field<String>(0));
 	Console::WriteLine(row.Field<bool>(1));
+
+
+	DataTable table2("dsfgdfg");
+	table2.Columns().Add(DataColumn("Vorname", Type::getType<String>(String())));
+
+	DataColumn col2("Nachname", Type::getType<String>(String()));
+	table2.Columns().Add(col2);
+	table2.Columns().Add(DataColumn("Pisse", Type::getType<String>(String())));
+
+	DataRow row2 = table2.NewRow();
+	row2.SetField<String>(0,String("Heinz"));
+	row2.SetField<String>(1, String("Herrmann"));
+	row2.SetField<String>(2, String("aus dem Arsch"));
+	table2.Rows().Add(row2);
+
+	table2.Columns().Remove(&col2);
 
 	system("PAUSE");
 }

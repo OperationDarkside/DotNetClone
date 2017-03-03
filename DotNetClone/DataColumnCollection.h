@@ -1,4 +1,9 @@
+#ifndef DATACOLCOLLECTION_H
+#define DATACOLCOLLECTION_H
+
 #include "DataColumn.h"
+
+class DataTable;
 
 #pragma once
 /**
@@ -13,6 +18,8 @@ public:
 	string toString();
 	string getTypeString();
 
+	friend class DataTable;
+
 	/**
 	Adds a DataColumn instance to this collection
 
@@ -25,9 +32,14 @@ public:
 	@return The column number
 	*/
 	long Count();
+	void Remove(DataColumn* column);
+	void Remove(String& name);
+	DataTable* Table();
+	void Table(DataTable* _table);
 
 	DataColumn& operator[](int colNr);
 private:
+	DataTable* table;
 	vector<DataColumn> cols;
 };
-
+#endif // !DATACOLCOLLECTION_H

@@ -13,6 +13,8 @@ public:
 	string toString();
 	string getTypeString();
 
+	friend class DataTable;
+
 	/**
 	Adds a DataRow instance to this collection
 
@@ -27,8 +29,7 @@ public:
 	long Count();
 
 	DataRow& operator[](int columnNr);
-
+	
 private:
 	vector<DataRow> rows;
 };
-

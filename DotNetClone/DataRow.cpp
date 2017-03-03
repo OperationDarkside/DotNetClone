@@ -1,5 +1,5 @@
 #include "DataRow.h"
-
+#include "DataColumnCollection.h"
 
 
 DataRow::DataRow()
@@ -41,4 +41,18 @@ void DataRow::SetField(int columnNr, bool value)
 	boo = new Boolean(value);
 
 	this->items[columnNr] = boo;
+}
+
+void DataRow::RemoveItem(size_t index){
+	size_t len = 0;
+
+	len = this->items.size();
+
+	if((len - 1) < index){
+		throw "Remove item index out of range";
+	}
+
+	delete this->items[index];
+
+	this->items.erase(this->items.begin() + index);
 }
