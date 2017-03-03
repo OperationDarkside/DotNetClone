@@ -10,6 +10,9 @@ So I started this little side-project to bring the comfort of .NET to native C++
 As mentioned above, I am not an experienced C++ developer, so the code is not optimized or anything.
 But I'm open to constructive criticism.
 
+Video documentation about this and my other frameworks:
+https://www.youtube.com/channel/UCBcbGguXSzkj7ocZMEIFnxw
+
 Current working subject: The Data-Classes
 
 Implemented Classes:
