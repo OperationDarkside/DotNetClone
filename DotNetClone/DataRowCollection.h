@@ -22,11 +22,23 @@ public:
 	*/
 	void Add(DataRow& row);
 	/**
+	Removes all rows from this instance
+	*/
+	void Clear();
+	/**
 	Returns the amount of rows in this collection
 
 	@return The row count
 	*/
 	long Count();
+	/**
+	Returns the index of the given DataRow instance in this table
+	*/
+	int IndexOf(DataRow& row);
+	/**
+	Inserts the given row at the given position
+	*/
+	void InsertAt(DataRow& row, int pos);
 
 	DataRow& operator[](int columnNr);
 	
