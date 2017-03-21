@@ -316,7 +316,8 @@ String String::replace(String * oldString, String * newString)
 
 	while ((startPos = this->value.find(oldString->value, startPos)) != std::string::npos) {
 		this->value.replace(startPos, oldString->value.length(), newString->value);
-		startPos += newString->value.length();
+		//startPos += newString->value.length();
+		startPos += 1;
 	}
 
 	return this;

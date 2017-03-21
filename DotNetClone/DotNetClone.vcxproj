@@ -74,16 +74,27 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <PreprocessorDefinitions>_MBCS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UndefinePreprocessorDefinitions>%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\greis\Documents\Visual Studio 2015\Projects\DotNetClone\DotNetClone\boost_include;C:\Users\greis\Documents\Visual Studio 2015\Projects\DotNetClone\DotNetClone\mysql\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\Users\greis\Documents\Visual Studio 2015\Projects\DotNetClone\DotNetClone\mysql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\greis\Documents\Visual Studio 2015\Projects\DotNetClone\DotNetClone\boost_include;C:\Users\greis\Documents\Visual Studio 2015\Projects\DotNetClone\DotNetClone\mysql\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\Users\greis\Documents\Visual Studio 2015\Projects\DotNetClone\DotNetClone\mysql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -91,11 +102,15 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\greis\Documents\Visual Studio 2015\Projects\DotNetClone\DotNetClone\boost_include;C:\Users\greis\Documents\Visual Studio 2015\Projects\DotNetClone\DotNetClone\mysql\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CPPCONN_PUBLIC_FUNC=;mysqlcppconn_EXPORTS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Users\greis\Documents\Visual Studio 2015\Projects\DotNetClone\DotNetClone\mysql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn-static.lib;mysqlcppconn.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,8 +142,16 @@
     <ClCompile Include="Float.cpp" />
     <ClCompile Include="Integer.cpp" />
     <ClCompile Include="Long.cpp" />
+    <ClCompile Include="MySqlCommand.cpp" />
+    <ClCompile Include="MySqlConnection.cpp" />
+    <ClCompile Include="MySqlDataAdapter.cpp" />
+    <ClCompile Include="MySqlDataReader.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Short.cpp" />
+    <ClCompile Include="SqlCommand.cpp" />
+    <ClCompile Include="SqlConnection.cpp" />
+    <ClCompile Include="SqlDataReader.cpp" />
+    <ClCompile Include="SqlParameter.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
@@ -151,8 +174,16 @@
     <ClInclude Include="Float.h" />
     <ClInclude Include="Integer.h" />
     <ClInclude Include="Long.h" />
+    <ClInclude Include="MySqlCommand.h" />
+    <ClInclude Include="MySqlConnection.h" />
+    <ClInclude Include="MySqlDataAdapter.h" />
+    <ClInclude Include="MySqlDataReader.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Short.h" />
+    <ClInclude Include="SqlCommand.h" />
+    <ClInclude Include="SqlConnection.h" />
+    <ClInclude Include="SqlDataReader.h" />
+    <ClInclude Include="SqlParameter.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="Type.h" />

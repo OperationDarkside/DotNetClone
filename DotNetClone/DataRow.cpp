@@ -2,27 +2,27 @@
 #include "DataColumnCollection.h"
 
 
-DataRow::DataRow()
-{
+DataRow::DataRow(){}
+
+DataRow::DataRow(const DataRow & row): cols(row.cols), items(row.items){}
+
+DataRow::DataRow(DataRow && row) noexcept : cols(row.cols), items(row.items){
+	row.cols = nullptr;
 }
 
-DataRow::DataRow(DataColumnCollection * columns) : cols(columns)
-{
+DataRow::DataRow(DataColumnCollection * columns) : cols(columns){
 	this->items.resize(columns->Count());
 }
 
-DataRow::~DataRow()
-{
-	this->Delete();
+DataRow::~DataRow(){
+	//this->Delete();
 }
 
-string DataRow::toString()
-{
+string DataRow::toString(){
 	return string("System.Data.DataRow");
 }
 
-string DataRow::getTypeString()
-{
+string DataRow::getTypeString(){
 	return string("DataRow");
 }
 
@@ -36,8 +36,7 @@ void DataRow::Delete(){
 	}
 }
 
-void DataRow::SetField(int columnNr, bool value)
-{
+void DataRow::SetField(int columnNr, bool value){
 	Boolean* boo;
 
 	if(columnNr >= this->cols->Count()){
@@ -155,6 +154,21 @@ Object* DataRow::operator[](int columnNr){
 	Object* o = items[columnNr];
 
 	return o;
+}
+
+DataRow & DataRow::operator=(const DataRow & row){
+	if(this != &row){
+		this->cols = row.cols;
+		this->items = row.items;
+	}
+
+	return *this;
+}
+
+DataRow & DataRow::operator=(DataRow && row) noexcept{
+	this->cols = row.cols;
+	row.cols = nullptr;
+	return *this;
 }
 
 void DataRow::RemoveItem(size_t index){

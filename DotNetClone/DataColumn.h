@@ -27,6 +27,12 @@ public:
 
 	@param columnName The column name
 	*/
+	void ColumnName(const char* columnName);
+	/**
+	Sets the name of this column instance
+
+	@param columnName The column name
+	*/
 	void ColumnName(String& columnName);
 
 	/**

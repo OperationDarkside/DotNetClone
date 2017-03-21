@@ -19,6 +19,8 @@ class DataRow: public Object{
 
 public:
 	DataRow();
+	DataRow(const DataRow& row);
+	DataRow(DataRow&& row) noexcept;
 	DataRow(DataColumnCollection* columns);
 	~DataRow();
 
@@ -145,10 +147,17 @@ public:
 	 @return 
 	*/
 	Object* operator[](int columnNr);
+	DataRow& operator=(const DataRow& row);
+	DataRow& operator=(DataRow&& row) noexcept;
 private:
 	DataColumnCollection* cols;
 	vector<Object*> items;
 
+	/**
+	Removes one item from the inventory
+
+	@param index Position of the Cell to be deleted
+	*/
 	void RemoveItem(size_t index);
 };
 

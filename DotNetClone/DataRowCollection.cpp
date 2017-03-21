@@ -13,9 +13,9 @@ string DataRowCollection::getTypeString(){
 }
 
 void DataRowCollection::Add(DataRow& row){
-	DataRow* r = new DataRow(row);
+	//DataRow* r = new DataRow(row);
 
-	this->rows.push_back(*r);
+	this->rows.push_back(row);
 }
 
 void DataRowCollection::Clear(){

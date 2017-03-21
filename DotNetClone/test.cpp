@@ -10,6 +10,12 @@
 #include <iostream>
 #include <typeinfo>
 #include "DataColumnCollection.h"
+#include "SqlDataReader.h"
+#include "MySqlConnection.h"
+#include "MySqlCommand.h"
+#include "MySqlDataAdapter.h"
+
+
 
 String compare_clone(){
 	String str("Something");
@@ -228,7 +234,7 @@ void test_String_Class(){
 	}
 
 	String str_remove2("Test");
-	str_remove2 = str_remove2.remove(1,2);
+	str_remove2 = str_remove2.remove(1, 2);
 	if(str_remove2 == "Tt"){
 		Console::WriteLine("remove with count works!");
 	} else{
@@ -236,7 +242,7 @@ void test_String_Class(){
 	}
 
 	String str_replace1("Test");
-	str_replace1 = str_replace1.replace('e','a');
+	str_replace1 = str_replace1.replace('e', 'a');
 	if(str_replace1 == "Tast"){
 		Console::WriteLine("replace works!");
 	} else{
@@ -253,7 +259,7 @@ void test_String_Class(){
 
 	String str_split1("Test;mit;Split");
 	vector<String*> array_split1 = str_split1.split(';');
-	if(*array_split1[2] ==  "Split"){
+	if(*array_split1[2] == "Split"){
 		Console::WriteLine("split works!");
 	} else{
 		Console::WriteLine("Error");
@@ -283,7 +289,7 @@ void test_String_Class(){
 	}
 
 	String str_sub1("Test mit Substring");
-	str_sub1 = str_sub1.substring(5,3);
+	str_sub1 = str_sub1.substring(5, 3);
 	if(str_sub1 == "mit"){
 		Console::WriteLine("substring with count works!");
 	} else{
@@ -299,7 +305,7 @@ void test_String_Class(){
 	}
 
 	String str_toCharArr2("Test mit toCharArray");
-	char* charArr2 = str_toCharArr2.toCharArray(5,3);
+	char* charArr2 = str_toCharArr2.toCharArray(5, 3);
 	if(strcmp(charArr2, "mit") == 0){
 		Console::WriteLine("toCharArray with startIndex and count works!");
 	} else{
@@ -509,12 +515,32 @@ int main(){
 	table2.Columns().Add(DataColumn("Pisse", Type::getType<String>(String())));
 
 	DataRow row2 = table2.NewRow();
-	row2.SetField<String>(0,String("Heinz"));
+	row2.SetField<String>(0, String("Heinz"));
 	row2.SetField<String>(1, String("Herrmann"));
 	row2.SetField<String>(2, String("aus dem Arsch"));
 	table2.Rows().Add(row2);
 
+	DataRow row3 = table2.NewRow();
+	row3.SetField<String>(0, String("Peter"));
+	row3.SetField<String>(1, String("Norbert"));
+	row3.SetField<String>(2, String("Fehler"));
+	table2.Rows().Add(row3);
+
 	table2.Columns().Remove(&col2);
+
+	//SqlDataReader reader;
+
+	MySqlConnection con(String("SERVER=tcp://127.0.0.1:3306;DATABASE=test;UID=root;PASSWORD="));
+
+	con.Open();
+
+	MySqlCommand cmd(String("SELECT * FROM test"), &con);
+
+	MySqlDataAdapter adapt(cmd);
+
+	DataTable memTable;
+
+	adapt.Fill(memTable);
 
 	system("PAUSE");
 }

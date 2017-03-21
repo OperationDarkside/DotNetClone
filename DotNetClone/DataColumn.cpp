@@ -12,7 +12,8 @@ DataColumn::DataColumn(String & name, Type& type){
 	this->type = type;
 }
 
-DataColumn::~DataColumn(){}
+DataColumn::~DataColumn(){
+}
 
 string DataColumn::toString(){
 	return string("System.Data.DataColumn");
@@ -28,6 +29,11 @@ bool DataColumn::checkType(Type& type){
 
 String DataColumn::ColumnName(){
 	return this->name;
+}
+
+void DataColumn::ColumnName(const char * columnName){
+	String* str = new String(&string(columnName));
+	this->name = str;
 }
 
 void DataColumn::ColumnName(String & columnName){

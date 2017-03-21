@@ -34,7 +34,11 @@ string DataTable::getTypeString()
 
 DataRow DataTable::NewRow()
 {
-	return DataRow(&this->columns);
+	DataRow* row;
+
+	row = new DataRow(&this->columns);
+
+	return *row;
 }
 
 void DataTable::Clear(){
