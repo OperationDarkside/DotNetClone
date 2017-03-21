@@ -1,5 +1,5 @@
 # ProjectDNC
-The purpose of this project is to provide basic classes and functionality to make code more readable.
+The purpose of this project is to provide basic classes and functionality to make code more readable. Due to restrictions of C++ there are some modifications. In the future there may be non-dotnet classes.
 
 Motivation:
 C++ is not the programming language I learned from the start. So coming from C# and Java I had problems reading C++ Code.
@@ -32,8 +32,19 @@ Implemented Classes:
 - Float
 - Integer
 - Long
+- MySqlCommand
+- MySqlConnection
+- MySqlDataAdapter
+- MySqlDataReader
 - Object
 - Short
+- SqlCommand
+- SqlConnection
+- SqlDataReader
+- sqlParameter
 - String
 - TimeSpan
 - Type
+
+Maintainer:
+Sebastian Greis
