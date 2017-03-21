@@ -13,7 +13,7 @@ But I'm open to constructive criticism.
 Video documentation about this and my other frameworks:
 https://www.youtube.com/channel/UCBcbGguXSzkj7ocZMEIFnxw
 
-Current working subject: The Data-Classes
+Current working subject: The Sql DataBase interaction Classes
 
 Implemented Classes:
 - Boolean
@@ -45,6 +45,9 @@ Implemented Classes:
 - String
 - TimeSpan
 - Type
+
+Frameworks:
+- MySql Connector 1.1.8 32bit for Windows - non-install
 
 Maintainer:
 Sebastian Greis
