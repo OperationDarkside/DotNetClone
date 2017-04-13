@@ -312,7 +312,7 @@ String String::replace(char oldChar, char newChar)
 
 String String::replace(String * oldString, String * newString)
 {
-	unsigned int startPos = 0;
+	size_t startPos = 0;
 
 	while ((startPos = this->value.find(oldString->value, startPos)) != std::string::npos) {
 		this->value.replace(startPos, oldString->value.length(), newString->value);
@@ -343,9 +343,9 @@ std::vector<String*> String::split(char separator)
 
 std::vector<String*> String::split(String * separator)
 {
-	unsigned int currentPos = 0;
-	unsigned int oldPos = 0;
-	unsigned int len = 0;
+	size_t currentPos = 0;
+	size_t oldPos = 0;
+	size_t len = 0;
 	std::vector<String*> res;
 
 	len = this->value.length();
@@ -386,14 +386,14 @@ String String::substring(unsigned int startIndex, unsigned int length)
 
 char * String::toCharArray()
 {
-	unsigned int len = 0;
+	size_t len = 0;
 	char* target;
 
 	len = this->value.length();
 	target = new char[len + 1];
 
 	//std::copy(this->value.begin(), this->value.begin(), target);
-	for (unsigned int i = 0; i < len; ++i) {
+	for (size_t i = 0; i < len; ++i) {
 		target[i] = this->value[i];
 	}
 	target[len] = '\0';
@@ -460,8 +460,8 @@ String String::toUpper()
 
 String String::trim()
 {
-	unsigned int first = 0;
-	unsigned int last = 0;
+	size_t first = 0;
+	size_t last = 0;
 
 	first = this->value.find_first_not_of(' ');
 	if (std::string::npos == first)
@@ -475,7 +475,7 @@ String String::trim()
 
 String String::trimEnd()
 {
-	unsigned int last = 0;
+	size_t last = 0;
 
 	last = this->value.find_last_not_of(' ');
 	this->value = this->value.substr(0, last + 1);
@@ -484,7 +484,7 @@ String String::trimEnd()
 
 String String::trimStart()
 {
-	unsigned int first = 0;
+	size_t first = 0;
 
 	first = this->value.find_first_not_of(' ');
 	if (std::string::npos == first)

@@ -19,18 +19,20 @@ MySqlCommand::MySqlCommand(String & cmdText, MySqlConnection * connection){
 MySqlCommand::~MySqlCommand(){}
 
 string MySqlCommand::toString(){
-	return string("System.Data.MySql.MySqlClient");
+	return string("System.Data.MySql.MySqlClient.MySqlCommand");
 }
 
 string MySqlCommand::getTypeString(){
-	return string("MySqlClient");
+	return string("MySqlCommand");
 }
 
 int MySqlCommand::ExecuteNonQuery(){
 	int rowsAffected = 0;
+	int query_res = 0;
 	String cmd;
 	SqlConnection* con;
 	MySqlConnection* myCon;
+
 
 	cmd = this->CommandText();
 
@@ -46,21 +48,34 @@ int MySqlCommand::ExecuteNonQuery(){
 
 	myCon = dynamic_cast<MySqlConnection*>(con);
 
-	if(myCon->con->isClosed()){
+	query_res = mysql_query(myCon->connection, cmd.toCharArray());
+
+	if(query_res){
+		cerr << mysql_error(myCon->connection);
+		mysql_close(myCon->connection);
+		throw "Query failed!";
+	}
+
+	return mysql_affected_rows(myCon->connection);
+
+	/*if(!myCon->conn.connected()){
 		throw "Connection is closed";
 	}
 
-	sql::PreparedStatement* ps = myCon->con->prepareStatement(cmd.toCharArray());
+	mysqlpp::Query query = myCon->conn.query(cmd.getStringValue());
+	res = query.execute();
 
-	rowsAffected = ps->executeUpdate();
-
+	rowsAffected = res.rows();
+	*/
 	return rowsAffected;
 }
 
 MySqlDataReader MySqlCommand::ExecuteReader(){
+	int query_res = 0;
 	String cmd;
 	SqlConnection* con;
 	MySqlConnection* myCon;
+	MYSQL_RES* resultset;
 
 	cmd = this->CommandText();
 
@@ -76,16 +91,37 @@ MySqlDataReader MySqlCommand::ExecuteReader(){
 
 	myCon = dynamic_cast<MySqlConnection*>(con);
 
-	if(myCon->con->isClosed()){
+	query_res = mysql_query(myCon->connection, cmd.toCharArray());
+
+	if(query_res){
+		cerr << mysql_error(myCon->connection);
+		mysql_close(myCon->connection);
+		throw "Query failed!";
+	}
+
+	resultset = mysql_store_result(myCon->connection);
+
+	if(resultset == nullptr){
+		cerr << mysql_error(myCon->connection);
+		mysql_close(myCon->connection);
+		throw "Could not store result!";
+	}
+	/*if(!myCon->conn.connected()){
 		throw "Connection is closed";
 	}
 
-	sql::PreparedStatement* ps = myCon->con->prepareStatement(cmd.toCharArray());
+	mysqlpp::Query query = myCon->conn.query(cmd.getStringValue());
+	mysqlpp::StoreQueryResult queryResult = query.store();
 
-	ResultSet* result = ps->executeQuery();
-	ResultSetMetaData* meta = ps->getMetaData();
+	MySqlDataReader res(queryResult);
+	*/
+	return MySqlDataReader(resultset);
+}
 
-	MySqlDataReader res(result, meta);
+MySqlParameterCollection & MySqlCommand::Parameters(){
+	return this->parameters;
+}
 
-	return res;
+void MySqlCommand::Parameters(MySqlParameterCollection & parameters){
+	this->parameters = parameters;
 }

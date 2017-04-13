@@ -3,8 +3,9 @@
 #include "Type.h"
 #include "DataTable.h"
 #include "SqlDataReader.h"
-#include "MySQL\include\cppconn\resultset.h"
-#include "MySQL\include\cppconn\resultset_metadata.h"
+#include <my_global.h>
+#include "mysql.h"
+
 
 class MySqlDataReader: public SqlDataReader{
 
@@ -35,10 +36,14 @@ public:
 	bool NextResult();
 
 private:
-	sql::ResultSet* result;
-	sql::ResultSetMetaData* meta;
+	MYSQL_RES* resultset;
+	String tableName;
+	//vector<String> colNames;
+	//vector<Type> colTypes;
+	vector<pair<String, Type>> cols;
 
-	MySqlDataReader(sql::ResultSet* result, sql::ResultSetMetaData* meta);
+	MySqlDataReader(MYSQL_RES* _resultset);
+	void LoadColumns();
 
 	void FillTable(DataTable& table);
 };

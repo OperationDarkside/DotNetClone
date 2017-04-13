@@ -1,5 +1,6 @@
 #include "SqlCommand.h"
 #include "MySqlDataReader.h"
+#include "MySqlParameterCollection.h"
 
 #pragma once
 class MySqlCommand : public SqlCommand {
@@ -19,9 +20,46 @@ public:
 	MySqlDataReader ExecuteReader();
 	template <typename T>
 	T ExecuteScalar();
+
+	MySqlParameterCollection& Parameters();
+	void Parameters(MySqlParameterCollection& parameters);
+
+private:
+
+	MySqlParameterCollection parameters;
+
 };
 
 template<typename T>
 inline T MySqlCommand::ExecuteScalar(){
-	return T();
+	String cmd;
+	SqlConnection* con;
+	MySqlConnection* myCon;
+	mysqlpp::StoreQueryResult res;
+	T resTemplate;
+
+	cmd = this->CommandText();
+
+	if(cmd == ""){
+		throw "The command is empty";
+	}
+
+	con = this->Connection();
+
+	if(con == nullptr){
+		throw "Connection is null";
+	}
+
+	myCon = dynamic_cast<MySqlConnection*>(con);
+
+	if(!myCon->conn.connected()){
+		throw "Connection is closed";
+	}
+
+	mysqlpp::Query query = myCon->conn.query(cmd.getStringValue());
+	res = query.store();
+
+	resTemplate = res[0][0];
+
+	return resTemplate;
 }

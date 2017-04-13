@@ -15,6 +15,7 @@ Row Object to a DataTable
 class DataRow: public Object{
 
 	friend class DataColumnCollection;
+	friend class DataRowCollection;
 	friend class DataTable;
 
 public:

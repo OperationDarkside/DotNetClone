@@ -14,6 +14,8 @@
 #include "MySqlConnection.h"
 #include "MySqlCommand.h"
 #include "MySqlDataAdapter.h"
+#include <my_global.h>
+#include "mysql.h"
 
 
 
@@ -528,9 +530,69 @@ int main(){
 
 	table2.Columns().Remove(&col2);
 
-	//SqlDataReader reader;
+	// mysql++ ----------------------------------------------
 
-	MySqlConnection con(String("SERVER=tcp://127.0.0.1:3306;DATABASE=test;UID=root;PASSWORD="));
+	/*mysqlpp::Connection conn(false);
+
+	bool connected = conn.connect("test", "127.0.0.1", "root", "", 3306);
+
+	if(connected){
+		mysqlpp::Query query = conn.query("SELECT * FROM test");
+
+		if(mysqlpp::StoreQueryResult res = query.store()){
+			cout << "We have:" << endl;
+			mysqlpp::StoreQueryResult::const_iterator it;
+			for(it = res.begin(); it != res.end(); ++it){
+				mysqlpp::Row row = *it;
+				cout << '\t' << row[0] << " | " << row[1] << endl;
+			}
+		} else{
+			cerr << "Failed to get item list: " << query.error() << endl;
+			return 1;
+		}
+	}*/
+
+	// mysql C API
+
+	cout << mysql_get_client_info() << endl;
+
+	/*MYSQL* conni = mysql_init(NULL);
+	if(mysql_real_connect(conni, "127.0.0.1", "root", "", "test", 3306, NULL, 0)){
+		if(!mysql_query(conni, "SELECT * FROM test")){
+			MYSQL_RES *ressi = mysql_store_result(conni);
+			int num_fields = mysql_num_fields(ressi);
+
+			MYSQL_ROW row;
+			MYSQL_FIELD *field;
+
+			while((row = mysql_fetch_row(ressi))){
+				for(int i = 0; i < num_fields; i++){
+					if(i == 0){
+						while(field = mysql_fetch_field(ressi)){
+							printf("%s ", field->name);
+						}
+
+						printf("\n");
+					}
+					printf("%s ", row[i] ? row[i] : "NULL");
+				}
+				printf("\n");
+			}
+
+			mysql_free_result(ressi);
+			mysql_close(conni);
+		} else{
+			fprintf(stderr, "%s\n", mysql_error(conni));
+			mysql_close(conni);
+		}
+	} else{
+		fprintf(stderr, "%s\n", mysql_error(conni));
+		mysql_close(conni);
+	}*/
+
+	// SQL Interaction -------------------------------------------
+
+	MySqlConnection con(String("SERVER=127.0.0.1:3306;DATABASE=test;UID=root;PASSWORD="));
 
 	con.Open();
 
@@ -541,6 +603,13 @@ int main(){
 	DataTable memTable;
 
 	adapt.Fill(memTable);
+
+	Console::Write("Tablename: ");
+	Console::WriteLine(&memTable.TableName());
+
+	Console::Write(memTable.Rows()[0].Field<long>(0));
+	Console::Write(" | ");
+	Console::WriteLine(&memTable.Rows()[0].Field<String>(1));
 
 	system("PAUSE");
 }

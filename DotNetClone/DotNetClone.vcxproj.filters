@@ -102,6 +102,12 @@
     <ClCompile Include="MySqlDataAdapter.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="MySqlParameterCollection.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="MySqlParameter.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -189,6 +195,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="MySqlDataAdapter.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MySqlParameterCollection.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MySqlParameter.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
