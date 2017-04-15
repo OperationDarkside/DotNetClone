@@ -36,6 +36,8 @@ Implemented Classes:
 - MySqlConnection
 - MySqlDataAdapter
 - MySqlDataReader
+- MySqlParameter
+- MySqlParameterCollection
 - Object
 - Short
 - SqlCommand
@@ -47,7 +49,7 @@ Implemented Classes:
 - Type
 
 Frameworks:
-- MySql Connector 1.1.8 32bit for Windows - non-install
+- MySql C API - Installed
 
 Maintainer:
 Sebastian Greis
