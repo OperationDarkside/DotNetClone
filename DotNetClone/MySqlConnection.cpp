@@ -20,7 +20,7 @@ string MySqlConnection::getTypeString(){
 }
 
 void MySqlConnection::Close(){
-	// this->conn.disconnect();
+	mysql_close(this->connection);
 }
 
 MySqlCommand MySqlConnection::CreateCommand(){

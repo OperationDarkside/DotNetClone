@@ -35,7 +35,6 @@ inline T MySqlCommand::ExecuteScalar(){
 	String cmd;
 	SqlConnection* con;
 	MySqlConnection* myCon;
-	mysqlpp::StoreQueryResult res;
 	T resTemplate;
 
 	cmd = this->CommandText();
@@ -56,10 +55,7 @@ inline T MySqlCommand::ExecuteScalar(){
 		throw "Connection is closed";
 	}
 
-	mysqlpp::Query query = myCon->conn.query(cmd.getStringValue());
-	res = query.store();
-
-	resTemplate = res[0][0];
+	resTemplate = ;
 
 	return resTemplate;
 }

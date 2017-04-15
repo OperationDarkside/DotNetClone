@@ -4,9 +4,12 @@
 
 DataRow::DataRow(){}
 
-DataRow::DataRow(const DataRow & row): cols(row.cols), items(row.items){}
+DataRow::DataRow(const DataRow & row): cols(row.cols), items(row.items){
+	int i = 0;
+	i++;
+}
 
-DataRow::DataRow(DataRow && row) noexcept : cols(row.cols), items(row.items){
+DataRow::DataRow(DataRow && row) : cols(move(row.cols)), items(move(row.items)){
 	row.cols = nullptr;
 }
 
@@ -15,7 +18,7 @@ DataRow::DataRow(DataColumnCollection * columns) : cols(columns){
 }
 
 DataRow::~DataRow(){
-	//this->Delete();
+	this->Delete();
 }
 
 string DataRow::toString(){

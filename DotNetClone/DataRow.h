@@ -21,7 +21,7 @@ class DataRow: public Object{
 public:
 	DataRow();
 	DataRow(const DataRow& row);
-	DataRow(DataRow&& row) noexcept;
+	DataRow(DataRow&& row);
 	DataRow(DataColumnCollection* columns);
 	~DataRow();
 

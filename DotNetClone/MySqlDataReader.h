@@ -36,11 +36,10 @@ public:
 	bool NextResult();
 
 private:
-	MYSQL_RES* resultset;
 	String tableName;
-	//vector<String> colNames;
-	//vector<Type> colTypes;
 	vector<pair<String, Type>> cols;
+	MYSQL_RES* resultset;
+	MYSQL_ROW row;
 
 	MySqlDataReader(MYSQL_RES* _resultset);
 	void LoadColumns();

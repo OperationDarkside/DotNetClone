@@ -17,19 +17,85 @@ void MySqlDataReader::LoadColumns(){
 	while(field = mysql_fetch_field(this->resultset)){
 		if(i == 0){
 			tableName = field->table;
-			i++;
+			++i;
 		}
-
-		// Name
-		//this->colNames.push_back(field->name);
 
 		//Type
 		switch(field->type){
+		case enum_field_types::MYSQL_TYPE_BIT:
+			t = Type::getType<unsigned long>(346534);
+			break;
+		case enum_field_types::MYSQL_TYPE_BLOB:
+			t = Type::getType<char*>("");
+			break;
+		case enum_field_types::MYSQL_TYPE_DATE:
+			t = Type::getType<DateTime>(DateTime());
+			break;
+		case enum_field_types::MYSQL_TYPE_DATETIME:
+			t = Type::getType<DateTime>(DateTime());
+			break;
+		case enum_field_types::MYSQL_TYPE_DATETIME2:
+			t = Type::getType<DateTime>(DateTime());
+			break;
+		case enum_field_types::MYSQL_TYPE_DECIMAL:
+			t = Type::getType<long double>(234.000);
+			break;
+		case enum_field_types::MYSQL_TYPE_DOUBLE:
+			t = Type::getType<double>(132456.0);
+			break;
+		case enum_field_types::MYSQL_TYPE_FLOAT:
+			t = Type::getType<float>(2134);
+			break;
 		case enum_field_types::MYSQL_TYPE_INT24:
 			t = Type::getType<int>(3456);
 			break;
+		case enum_field_types::MYSQL_TYPE_JSON:
+			t = Type::getType<String>(String());
+			break;
 		case enum_field_types::MYSQL_TYPE_LONG:
 			t = Type::getType<long>(3456);
+			break;
+		case enum_field_types::MYSQL_TYPE_LONGLONG:
+			t = Type::getType<long long>(23435);
+			break;
+		case enum_field_types::MYSQL_TYPE_LONG_BLOB:
+			t = Type::getType<char*>("");
+			break;
+		case enum_field_types::MYSQL_TYPE_MEDIUM_BLOB:
+			t = Type::getType<char*>("");
+			break;
+		case enum_field_types::MYSQL_TYPE_NEWDATE:
+			t = Type::getType<DateTime>(DateTime());
+			break;
+		case enum_field_types::MYSQL_TYPE_NEWDECIMAL:
+			t = Type::getType<long double>(3456.0);
+			break;
+		case enum_field_types::MYSQL_TYPE_NULL:
+			t = Type::getType<void*>(nullptr);
+			break;
+		case enum_field_types::MYSQL_TYPE_SHORT:
+			t = Type::getType<short>(213);
+			break;
+		case enum_field_types::MYSQL_TYPE_STRING:
+			t = Type::getType<String>(String());
+			break;
+		case enum_field_types::MYSQL_TYPE_TIME:
+			t = Type::getType<DateTime>(DateTime());
+			break;
+		case enum_field_types::MYSQL_TYPE_TIME2:
+			t = Type::getType<DateTime>(DateTime());
+			break;
+		case enum_field_types::MYSQL_TYPE_TIMESTAMP:
+			t = Type::getType<DateTime>(DateTime());
+			break;
+		case enum_field_types::MYSQL_TYPE_TIMESTAMP2:
+			t = Type::getType<DateTime>(DateTime());
+			break;
+		case enum_field_types::MYSQL_TYPE_TINY:
+			t = Type::getType<short>(1);
+			break;
+		case enum_field_types::MYSQL_TYPE_TINY_BLOB:
+			t = Type::getType<char*>("");
 			break;
 		case enum_field_types::MYSQL_TYPE_VARCHAR:
 			t = Type::getType<String>(String());
@@ -37,8 +103,10 @@ void MySqlDataReader::LoadColumns(){
 		case enum_field_types::MYSQL_TYPE_VAR_STRING:
 			t = Type::getType<String>(String());
 			break;
+		case enum_field_types::MYSQL_TYPE_YEAR:
+			t = Type::getType<int>(1990);
+			break;
 		}
-		//this->colTypes.push_back(t);
 
 		this->cols.push_back(make_pair(field->name, t));
 	}
@@ -98,23 +166,15 @@ void MySqlDataReader::FillTable(DataTable& table){
 }
 
 unsigned int MySqlDataReader::FieldCount(){
-	//return meta->getColumnCount();
 	return mysql_num_fields(this->resultset);
 }
 
 bool MySqlDataReader::GetBoolean(int i){
 	bool res;
-	/*int colType = 0;
 
-	colType = this->meta->getColumnType(i);
 
-	if(colType == sql::DataType::BIT){
-		res = this->result->getBoolean(i);
-	} else{
 
-	}*/
-
-	return false;
+	return res;
 }
 
 char MySqlDataReader::GetByte(int i){
@@ -135,59 +195,99 @@ String MySqlDataReader::GetDataTypeName(int i){
 }
 
 DateTime MySqlDataReader::GetDateTime(int i){
-	return DateTime();
+	DateTime res;
+	MYSQL_FIELD* field;
+
+	if(!(i < this->cols.size())){
+		throw "Column out of Range!";
+	}
+
+	field = mysql_fetch_field_direct(this->resultset, i);
+	if(field->type != enum_field_types::MYSQL_TYPE_DATETIME){
+		throw string("Column Nr." + to_string(i) + " is not of DateTime-type.");
+	}
+
+	// TODO
+
+	// res = this->row[i];
+
+	return res;
 }
 
 double MySqlDataReader::GetDouble(int i){
-	return 0.0;
+	float res;
+	MYSQL_FIELD* field;
+
+	if(!(i < this->cols.size())){
+		throw "Column out of Range!";
+	}
+
+	field = mysql_fetch_field_direct(this->resultset, i);
+	if(field->type != enum_field_types::MYSQL_TYPE_FLOAT){
+		throw string("Column Nr." + to_string(i) + " is not of float-type.");
+	}
+	res = atof(this->row[i]);
+
+	return res;
 }
 
 Type MySqlDataReader::GetFieldType(int i){
-	/*mysqlpp::mysql_type_info colType;
-	Type t;
-
-	colType = this->result.field_type(i);
-
-	// INTEGER
-	if(colType == typeid(mysqlpp::sql_int)){
-		t = Type::getType<int>(3456);
-	}
-	// STRING
-	if(colType == typeid(mysqlpp::sql_varchar)){
-		t = Type::getType<String>(String());
-	}
-
-	return t;*/
 	return this->cols[i].second;
 }
 
 float MySqlDataReader::GetFloat(int i){
-	return 0.0f;
+	float res;
+	MYSQL_FIELD* field;
+
+	if(!(i < this->cols.size())){
+		throw "Column out of Range!";
+	}
+
+	field = mysql_fetch_field_direct(this->resultset, i);
+	if(field->type != enum_field_types::MYSQL_TYPE_FLOAT){
+		throw string("Column Nr." + to_string(i) + " is not of float-type.");
+	}
+	res = atof(this->row[i]);
+
+	return res;
 }
 
 int MySqlDataReader::GetInteger(int i){
-	int res = 0;
-	int colType = 0;
+	int res;
+	MYSQL_FIELD* field;
 
-	/*colType = this->meta->getColumnType(i);
+	if(!(i < this->cols.size())){
+		throw "Column out of Range!";
+	}
 
-	switch(colType){
-	case sql::DataType::INTEGER:
-		res = this->result->getInt(i);
-		break;
-	}*/
+	field = mysql_fetch_field_direct(this->resultset, i);
+	if(field->type != enum_field_types::MYSQL_TYPE_INT24){
+		throw string("Column Nr." + to_string(i) + " is not of int-type.");
+	}
+	res = atoi(this->row[i]);
 
 	return res;
 }
 
 long MySqlDataReader::GetLong(int i){
-	return 0;
+	long res;
+	MYSQL_FIELD* field;
+
+	if(!(i < this->cols.size())){
+		throw "Column out of Range!";
+	}
+
+	field = mysql_fetch_field_direct(this->resultset, i);
+	if(field->type != enum_field_types::MYSQL_TYPE_LONG){
+		throw string("Column Nr." + to_string(i) + " is not of long-type.");
+	}
+	res = atol(this->row[i]);
+
+	return res;
 }
 
 String MySqlDataReader::GetName(int i){
-	/*string name = this->result.field_name(i);
-	return String(&name);*/
-	return String();
+	return this->cols[i].first;
 }
 
 int MySqlDataReader::GetOrdinal(String & name){
@@ -216,25 +316,48 @@ DataTable MySqlDataReader::GetSchemaTable(){
 }
 
 short MySqlDataReader::GetShort(int i){
-	return 0;
+	short res;
+	MYSQL_FIELD* field;
+
+	if(!(i < this->cols.size())){
+		throw "Column out of Range!";
+	}
+
+	field = mysql_fetch_field_direct(this->resultset, i);
+	if(field->type != enum_field_types::MYSQL_TYPE_SHORT){
+		throw string("Column Nr." + to_string(i) + " is not of short-type.");
+	}
+	res = atoi(this->row[i]);
+
+	return res;
 }
 
 String MySqlDataReader::GetString(int i){
 	int colType = 0;
 	String res;
+	MYSQL_FIELD* field;
 
-	/*colType = this->meta->getColumnType(i);
+	if(!(i < this->cols.size())){
+		throw "Column out of Range!";
+	}
 
-	switch(colType){
-	case sql::DataType::VARCHAR:
-		istream* stream = this->result->getBlob(i);
-		res = string(istreambuf_iterator<char>(*stream), {});
-		break;
-	}*/
+	field = mysql_fetch_field_direct(this->resultset, i);
+	if(field->type != enum_field_types::MYSQL_TYPE_JSON || field->type != enum_field_types::MYSQL_TYPE_STRING || field->type != enum_field_types::MYSQL_TYPE_VARCHAR || field->type != enum_field_types::MYSQL_TYPE_VAR_STRING){
+		throw string("Column Nr." + to_string(i) + " is not a string-type.");
+	}
+
+	string str = this->row[i];
+	res = String(&str);
 
 	return res;
 }
 
 bool MySqlDataReader::NextResult(){
-	return false;
+	this->row = mysql_fetch_row(this->resultset);
+
+	if(this->row){
+		return true;
+	} else{
+		return false;
+	}
 }

@@ -604,6 +604,8 @@ int main(){
 
 	adapt.Fill(memTable);
 
+	con.Close();
+
 	Console::Write("Tablename: ");
 	Console::WriteLine(&memTable.TableName());
 

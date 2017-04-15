@@ -15,7 +15,6 @@ MySqlCommand::MySqlCommand(String & cmdText, MySqlConnection * connection){
 	this->Connection(connection);
 }
 
-
 MySqlCommand::~MySqlCommand(){}
 
 string MySqlCommand::toString(){
@@ -27,7 +26,6 @@ string MySqlCommand::getTypeString(){
 }
 
 int MySqlCommand::ExecuteNonQuery(){
-	int rowsAffected = 0;
 	int query_res = 0;
 	String cmd;
 	SqlConnection* con;
@@ -57,17 +55,6 @@ int MySqlCommand::ExecuteNonQuery(){
 	}
 
 	return mysql_affected_rows(myCon->connection);
-
-	/*if(!myCon->conn.connected()){
-		throw "Connection is closed";
-	}
-
-	mysqlpp::Query query = myCon->conn.query(cmd.getStringValue());
-	res = query.execute();
-
-	rowsAffected = res.rows();
-	*/
-	return rowsAffected;
 }
 
 MySqlDataReader MySqlCommand::ExecuteReader(){
@@ -103,18 +90,11 @@ MySqlDataReader MySqlCommand::ExecuteReader(){
 
 	if(resultset == nullptr){
 		cerr << mysql_error(myCon->connection);
+		mysql_free_result(resultset);
 		mysql_close(myCon->connection);
 		throw "Could not store result!";
 	}
-	/*if(!myCon->conn.connected()){
-		throw "Connection is closed";
-	}
 
-	mysqlpp::Query query = myCon->conn.query(cmd.getStringValue());
-	mysqlpp::StoreQueryResult queryResult = query.store();
-
-	MySqlDataReader res(queryResult);
-	*/
 	return MySqlDataReader(resultset);
 }
 
