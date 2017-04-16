@@ -1,5 +1,7 @@
 #pragma once
 #include "String.h"
+#include "Type.h"
+#include "MySqlDbTypes.h"
 
 class MySqlParameter{
 
@@ -8,23 +10,32 @@ class MySqlParameter{
 
 public:
 	MySqlParameter();
-	MySqlParameter(String& parameterName, char value);
-	MySqlParameter(String& parameterName, short value);
-	MySqlParameter(String& parameterName, int value);
-	MySqlParameter(String& parameterName, long value);
-	MySqlParameter(String& parameterName, long long value);
-	MySqlParameter(String& parameterName, float value);
-	MySqlParameter(String& parameterName, double value);
-	MySqlParameter(String& parameterName, String& value);
+	MySqlParameter(MySqlDbTypes _type);
+	MySqlParameter(MySqlDbTypes _type, char value);
+	MySqlParameter(MySqlDbTypes _type, short value);
+	MySqlParameter(MySqlDbTypes _type, int value);
+	MySqlParameter(MySqlDbTypes _type, long value);
+	MySqlParameter(MySqlDbTypes _type, long long value);
+	MySqlParameter(MySqlDbTypes _type, float value);
+	MySqlParameter(MySqlDbTypes _type, double value);
+	MySqlParameter(MySqlDbTypes _type, String& value);
 	~MySqlParameter();
 
 	string toString();
 	string getTypeString();
 
-	String& Name();
-	void Name(String& name);
+	template<typename T>
+	T Value();
+	template<typename T>
+	void Value(T value);
+
+	//String& Name();
+	//void Name(String& name);
 
 private:
-	String name;
+	//String name;
+	//MySqlDbTypes dbType;
+	Type t;
+	MYSQL_BIND param;
+	//void* buffer;
 };
-

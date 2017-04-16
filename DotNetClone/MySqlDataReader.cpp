@@ -4,7 +4,7 @@ MySqlDataReader::~MySqlDataReader(){
 	mysql_free_result(this->resultset);
 }
 
-MySqlDataReader::MySqlDataReader(MYSQL_RES * _resultset): resultset(_resultset){
+MySqlDataReader::MySqlDataReader(MYSQL_STMT* _stmt, MYSQL_RES* _resultset): stmt(_stmt), resultset(_resultset){
 	// Load fields
 	LoadColumns();
 }
@@ -110,6 +110,69 @@ void MySqlDataReader::LoadColumns(){
 
 		this->cols.push_back(make_pair(field->name, t));
 	}
+
+	unsigned int lens = mysql_stmt_field_count(this->stmt);
+	this->row = new MYSQL_BIND[lens];
+	this->buffers = new char*[lens];
+	this->buffer_lengths = new unsigned long[lens];
+	this->lengths = new unsigned long[lens];
+	this->is_nulls = new my_bool[lens];
+	this->errors = new my_bool[lens];
+
+	for(size_t i = 0; i < lens; i++){
+		field = mysql_fetch_field_direct(this->resultset, i);
+
+		this->row[i].buffer_type = field->type;
+
+		switch(field->type){
+		case enum_field_types::MYSQL_TYPE_LONG:{
+			long l = 0;
+			this->row[i].buffer = (char*)&l;
+		}
+											   break;
+		case enum_field_types::MYSQL_TYPE_VAR_STRING:{
+			this->buffers[i] = new char[field->length];
+			this->row[i].buffer = this->buffers[i];
+		}
+													 break;
+		}
+
+		this->row[i].buffer_length = field->length;
+		this->row[i].length = &this->lengths[i];
+		this->row[i].is_null = &this->is_nulls[i];
+		this->row[i].error = &this->errors[i];
+	}
+
+	/*MYSQL_BIND bind[2];
+	unsigned long real_length1 = 0;
+	unsigned long real_length2 = 0;
+	long long_data = 0;
+	char str_data[500];
+	memset(bind, 0, sizeof(bind));
+
+	bind[0].buffer_type = enum_field_types::MYSQL_TYPE_LONG;
+	bind[0].buffer = (char*)&long_data;
+	bind[0].buffer_length = 0;
+	bind[0].length = &real_length1;
+
+	bind[1].buffer_type = enum_field_types::MYSQL_TYPE_VAR_STRING;
+	bind[1].buffer = str_data;
+	bind[1].buffer_length = 500;
+	bind[1].length = &real_length2;
+	*/
+	if(mysql_stmt_bind_result(this->stmt, this->row)){
+		std::cout << mysql_stmt_error(this->stmt) << endl;
+	}
+
+	if(mysql_stmt_store_result(this->stmt)){
+		fprintf(stderr, " mysql_stmt_store_result() failed\n");
+		fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
+		exit(0);
+	}
+
+	/*if(!mysql_stmt_fetch(this->stmt)){
+
+	}*/
 }
 
 void MySqlDataReader::FillTable(DataTable& table){
@@ -117,17 +180,18 @@ void MySqlDataReader::FillTable(DataTable& table){
 	size_t rowCount = 0;
 	Type t;
 	MYSQL_FIELD* field;
-	MYSQL_ROW rowSrc;
+	//MYSQL_ROW rowSrc;
 
 	table = GetSchemaTable();
 
 	colCount = this->cols.size();
-	rowCount = mysql_num_rows(this->resultset);
+	rowCount = mysql_stmt_num_rows(this->stmt);
 
 	for(size_t i = 0; i < rowCount; ++i){
 		DataRow rowDest = table.NewRow();
 
-		rowSrc = mysql_fetch_row(this->resultset);
+		mysql_stmt_fetch(this->stmt);
+		//rowSrc = mysql_fetch_row(this->resultset);
 
 		for(size_t g = 0; g < colCount; ++g){
 			field = mysql_fetch_field_direct(this->resultset, g);
@@ -135,25 +199,25 @@ void MySqlDataReader::FillTable(DataTable& table){
 			switch(field->type){
 			case enum_field_types::MYSQL_TYPE_INT24:
 			{
-				int temp = atoi(rowSrc[g]);
+				int temp = (int)this->row[g].buffer;
 				rowDest.SetField(g, temp);
 			}
 			break;
 			case enum_field_types::MYSQL_TYPE_LONG:
 			{
-				long temp = atol(rowSrc[g]);
+				long temp = *((long*)this->row[g].buffer);
 				rowDest.SetField(g, temp);
 			}
 			break;
 			case enum_field_types::MYSQL_TYPE_VARCHAR:
 			{
-				string str = rowSrc[g];
+				string str = (char*)this->row[g].buffer;
 				String temp(&str);
 				rowDest.SetField<String>(g, temp);
 			}
 			case enum_field_types::MYSQL_TYPE_VAR_STRING:
 			{
-				string str = rowSrc[g];
+				string str = (char*)this->row[g].buffer;
 				String temp(&str);
 				rowDest.SetField<String>(g, temp);
 			}
@@ -226,7 +290,7 @@ double MySqlDataReader::GetDouble(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_FLOAT){
 		throw string("Column Nr." + to_string(i) + " is not of float-type.");
 	}
-	res = atof(this->row[i]);
+	//res = atof(this->row[i]);
 
 	return res;
 }
@@ -247,7 +311,7 @@ float MySqlDataReader::GetFloat(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_FLOAT){
 		throw string("Column Nr." + to_string(i) + " is not of float-type.");
 	}
-	res = atof(this->row[i]);
+	//res = atof(this->row[i]);
 
 	return res;
 }
@@ -264,7 +328,7 @@ int MySqlDataReader::GetInteger(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_INT24){
 		throw string("Column Nr." + to_string(i) + " is not of int-type.");
 	}
-	res = atoi(this->row[i]);
+	//res = atoi(this->row[i]);
 
 	return res;
 }
@@ -281,7 +345,7 @@ long MySqlDataReader::GetLong(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_LONG){
 		throw string("Column Nr." + to_string(i) + " is not of long-type.");
 	}
-	res = atol(this->row[i]);
+	//res = atol(this->row[i]);
 
 	return res;
 }
@@ -302,6 +366,7 @@ DataTable MySqlDataReader::GetSchemaTable(){
 	MYSQL_FIELD *field;
 
 	len = mysql_num_fields(this->resultset);
+	unsigned long long len2 = mysql_stmt_field_count(this->stmt);
 
 	for(size_t i = 0; i < len; i++){
 		DataColumn col;
@@ -327,7 +392,7 @@ short MySqlDataReader::GetShort(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_SHORT){
 		throw string("Column Nr." + to_string(i) + " is not of short-type.");
 	}
-	res = atoi(this->row[i]);
+	//res = atoi(this->row[i]);
 
 	return res;
 }
@@ -346,14 +411,14 @@ String MySqlDataReader::GetString(int i){
 		throw string("Column Nr." + to_string(i) + " is not a string-type.");
 	}
 
-	string str = this->row[i];
-	res = String(&str);
+	//string str = this->row[i];
+	//res = String(&str);
 
 	return res;
 }
 
 bool MySqlDataReader::NextResult(){
-	this->row = mysql_fetch_row(this->resultset);
+	//this->row = mysql_fetch_row(this->resultset);
 
 	if(this->row){
 		return true;

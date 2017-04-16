@@ -20,6 +20,7 @@ DataTable::DataTable(String & name)
 
 DataTable::~DataTable()
 {
+	this->Clear();
 }
 
 string DataTable::toString()

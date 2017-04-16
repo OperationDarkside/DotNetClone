@@ -17,6 +17,14 @@ void DataRowCollection::Add(DataRow& row){
 }
 
 void DataRowCollection::Clear(){
+	size_t len = 0;
+
+	len = this->rows.size();
+
+	for(size_t i = 0; i < len; i++){
+		this->rows[i].Delete();
+	}
+
 	this->rows.clear();
 }
 

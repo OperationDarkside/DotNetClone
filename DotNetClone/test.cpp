@@ -596,7 +596,8 @@ int main(){
 
 	con.Open();
 
-	MySqlCommand cmd(String("SELECT * FROM test"), &con);
+	MySqlCommand cmd(String("SELECT * FROM test WHERE ID = ?"), &con);
+	cmd.Parameters().Add(MySqlParameter(MySqlDbTypes::LONG, 3));
 
 	MySqlDataAdapter adapt(cmd);
 

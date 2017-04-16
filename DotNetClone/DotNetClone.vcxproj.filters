@@ -203,5 +203,8 @@
     <ClInclude Include="MySqlParameter.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="MySqlDbTypes.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

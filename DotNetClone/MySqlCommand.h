@@ -25,9 +25,9 @@ public:
 	void Parameters(MySqlParameterCollection& parameters);
 
 private:
-
 	MySqlParameterCollection parameters;
 
+	MYSQL_BIND* bindParameters();
 };
 
 template<typename T>
@@ -55,7 +55,7 @@ inline T MySqlCommand::ExecuteScalar(){
 		throw "Connection is closed";
 	}
 
-	resTemplate = ;
+	//resTemplate = ;
 
 	return resTemplate;
 }

@@ -181,6 +181,7 @@
     <ClInclude Include="MySqlConnection.h" />
     <ClInclude Include="MySqlDataAdapter.h" />
     <ClInclude Include="MySqlDataReader.h" />
+    <ClInclude Include="MySqlDbTypes.h" />
     <ClInclude Include="MySqlParameter.h" />
     <ClInclude Include="MySqlParameterCollection.h" />
     <ClInclude Include="Object.h" />

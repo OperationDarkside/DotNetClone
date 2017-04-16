@@ -5,6 +5,7 @@
 #include "SqlDataReader.h"
 #include <my_global.h>
 #include "mysql.h"
+#include <iostream>
 
 
 class MySqlDataReader: public SqlDataReader{
@@ -38,10 +39,16 @@ public:
 private:
 	String tableName;
 	vector<pair<String, Type>> cols;
+	MYSQL_STMT* stmt;
 	MYSQL_RES* resultset;
-	MYSQL_ROW row;
+	MYSQL_BIND* row;
+	char** buffers;
+	unsigned long* buffer_lengths;
+	unsigned long* lengths;
+	my_bool* is_nulls;
+	my_bool* errors;
 
-	MySqlDataReader(MYSQL_RES* _resultset);
+	MySqlDataReader(MYSQL_STMT* stmt, MYSQL_RES* _resultset);
 	void LoadColumns();
 
 	void FillTable(DataTable& table);

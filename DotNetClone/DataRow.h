@@ -19,10 +19,9 @@ class DataRow: public Object{
 	friend class DataTable;
 
 public:
-	DataRow();
+	
 	DataRow(const DataRow& row);
 	DataRow(DataRow&& row);
-	DataRow(DataColumnCollection* columns);
 	~DataRow();
 
 	string toString();
@@ -153,6 +152,9 @@ public:
 private:
 	DataColumnCollection* cols;
 	vector<Object*> items;
+
+	DataRow();
+	DataRow(DataColumnCollection* columns);
 
 	/**
 	Removes one item from the inventory

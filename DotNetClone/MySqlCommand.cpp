@@ -27,10 +27,10 @@ string MySqlCommand::getTypeString(){
 
 int MySqlCommand::ExecuteNonQuery(){
 	int query_res = 0;
+	char* cmdP;
 	String cmd;
 	SqlConnection* con;
 	MySqlConnection* myCon;
-
 
 	cmd = this->CommandText();
 
@@ -46,19 +46,36 @@ int MySqlCommand::ExecuteNonQuery(){
 
 	myCon = dynamic_cast<MySqlConnection*>(con);
 
-	query_res = mysql_query(myCon->connection, cmd.toCharArray());
+	if(this->parameters.Count() > 0){
+		query_res = mysql_query(myCon->connection, cmd.toCharArray());
 
-	if(query_res){
-		cerr << mysql_error(myCon->connection);
-		mysql_close(myCon->connection);
-		throw "Query failed!";
+		if(query_res){
+			cerr << mysql_error(myCon->connection);
+			mysql_close(myCon->connection);
+			throw "Query failed!";
+		}
+
+		return mysql_affected_rows(myCon->connection);
+	} else{
+		MYSQL_STMT* stmt;
+		// INIT
+		stmt = mysql_stmt_init(myCon->connection);
+
+		// Prepare
+		cmdP = cmd.toCharArray();
+		mysql_stmt_prepare(stmt, cmdP, strlen(cmdP));
+		mysql_stmt_bind_param(stmt, this->bindParameters());
+		if(mysql_stmt_execute(stmt)){
+			return mysql_stmt_affected_rows(stmt);
+		} else{
+			throw "Query with parameters failed";
+		}
 	}
-
-	return mysql_affected_rows(myCon->connection);
 }
 
 MySqlDataReader MySqlCommand::ExecuteReader(){
 	int query_res = 0;
+	char* cmdP;
 	String cmd;
 	SqlConnection* con;
 	MySqlConnection* myCon;
@@ -78,24 +95,66 @@ MySqlDataReader MySqlCommand::ExecuteReader(){
 
 	myCon = dynamic_cast<MySqlConnection*>(con);
 
-	query_res = mysql_query(myCon->connection, cmd.toCharArray());
+	/*if(this->parameters.Count() > 0){
+		query_res = mysql_query(myCon->connection, cmd.toCharArray());
 
-	if(query_res){
-		cerr << mysql_error(myCon->connection);
-		mysql_close(myCon->connection);
-		throw "Query failed!";
+		if(query_res){
+			cerr << mysql_error(myCon->connection);
+			mysql_close(myCon->connection);
+			throw "Query failed!";
+		}
+
+		resultset = mysql_store_result(myCon->connection);
+
+		if(resultset == nullptr){
+			cerr << mysql_error(myCon->connection);
+			mysql_free_result(resultset);
+			mysql_close(myCon->connection);
+			throw "Could not store result!";
+		}
+	} else{*/
+	MYSQL_STMT* stmt;
+	// INIT
+	stmt = mysql_stmt_init(myCon->connection);
+
+	// Prepare
+	cmdP = cmd.toCharArray();
+	mysql_stmt_prepare(stmt, cmdP, strlen(cmdP));
+
+	// Param count
+	int param_count = mysql_stmt_param_count(stmt);
+	cout << param_count << endl;
+
+	// Parameters
+	if(this->parameters.Count() > 0){
+		if(mysql_stmt_bind_param(stmt, this->bindParameters())){
+			cout << mysql_stmt_error(stmt) << endl;
+			throw "Couldn't bind parameters";
+		}
 	}
 
-	resultset = mysql_store_result(myCon->connection);
+	// Prepare Result
+	MYSQL_RES* prepRes = mysql_stmt_result_metadata(stmt);
 
-	if(resultset == nullptr){
-		cerr << mysql_error(myCon->connection);
-		mysql_free_result(resultset);
-		mysql_close(myCon->connection);
-		throw "Could not store result!";
+	// Columns in result
+	int colCount = mysql_num_fields(prepRes);
+
+	//Execute
+	//mysql_stmt_attr_set(stmt, enum_stmt_attr_type::STMT_ATTR_UPDATE_MAX_LENGTH, (void*)int(1));
+	int ex_res = mysql_stmt_execute(stmt);
+	if(!ex_res){
+		/*if(mysql_stmt_store_result(stmt)){
+			cout << mysql_stmt_error(stmt) << endl;
+			throw "Couldn't store result";
+		}*/
+		resultset = mysql_stmt_result_metadata(stmt);
+	} else{
+		cout << mysql_stmt_error(stmt) << endl;
+		throw "Query with parameters failed";
 	}
+	//}
 
-	return MySqlDataReader(resultset);
+	return MySqlDataReader(stmt, resultset);
 }
 
 MySqlParameterCollection & MySqlCommand::Parameters(){
@@ -104,4 +163,21 @@ MySqlParameterCollection & MySqlCommand::Parameters(){
 
 void MySqlCommand::Parameters(MySqlParameterCollection & parameters){
 	this->parameters = parameters;
+}
+
+MYSQL_BIND * MySqlCommand::bindParameters(){
+	unsigned long paramLen = 0;
+	MYSQL_BIND* params;
+
+	paramLen = this->parameters.Count();
+
+	params = new MYSQL_BIND[paramLen];
+
+	for(size_t i = 0; i < paramLen; ++i){
+		MySqlParameter param = this->parameters[i];
+
+		params[i] = param.param;
+	}
+
+	return params;
 }
