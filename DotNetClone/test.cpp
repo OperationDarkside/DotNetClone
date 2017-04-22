@@ -596,7 +596,7 @@ int main(){
 
 	con.Open();
 
-	MySqlCommand cmd(String("SELECT * FROM test WHERE ID = ?"), &con);
+	MySqlCommand cmd(String("SELECT * FROM test"), &con);
 	cmd.Parameters().Add(MySqlParameter(MySqlDbTypes::LONG, 3));
 
 	MySqlDataAdapter adapt(cmd);
@@ -606,7 +606,7 @@ int main(){
 	adapt.Fill(memTable);
 
 	con.Close();
-
+	
 	Console::Write("Tablename: ");
 	Console::WriteLine(&memTable.TableName());
 

@@ -115,6 +115,44 @@ void DataRow::SetField(int columnNr, long value){
 	this->items[columnNr] = l;
 }
 
+void DataRow::SetField(int columnNr, unsigned long value){
+	ULong* l;
+
+	if(columnNr >= this->cols->Count()){
+		throw "Column Nr out of Range!";
+		return;
+	}
+
+	DataColumn col = (*this->cols)[columnNr];
+	if(!col.checkType(Type::getType<unsigned long>(value))){
+		throw "Type mismatch!";
+		return;
+	}
+
+	l = new ULong(value);
+
+	this->items[columnNr] = l;
+}
+
+void DataRow::SetField(int columnNr, long long value){
+	LongLong* l;
+
+	if(columnNr >= this->cols->Count()){
+		throw "Column Nr out of Range!";
+		return;
+	}
+
+	DataColumn col = (*this->cols)[columnNr];
+	if(!col.checkType(Type::getType<long long>(value))){
+		throw "Type mismatch!";
+		return;
+	}
+
+	l = new LongLong(value);
+
+	this->items[columnNr] = l;
+}
+
 void DataRow::SetField(int columnNr, float value){
 	Float* f;
 
@@ -149,6 +187,25 @@ void DataRow::SetField(int columnNr, double value){
 	}
 
 	d = new Double(value);
+
+	this->items[columnNr] = d;
+}
+
+void DataRow::SetField(int columnNr, long double value){
+	Decimal* d;
+
+	if(columnNr >= this->cols->Count()){
+		throw "Column Nr out of Range!";
+		return;
+	}
+
+	DataColumn col = (*this->cols)[columnNr];
+	if(!col.checkType(Type::getType<long double>(value))){
+		throw "Type mismatch!";
+		return;
+	}
+
+	d = new Decimal(value);
 
 	this->items[columnNr] = d;
 }

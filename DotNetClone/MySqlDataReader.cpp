@@ -125,16 +125,179 @@ void MySqlDataReader::LoadColumns(){
 		this->row[i].buffer_type = field->type;
 
 		switch(field->type){
-		case enum_field_types::MYSQL_TYPE_LONG:{
-			long l = 0;
+		case enum_field_types::MYSQL_TYPE_BIT:
+		{
+			unsigned long l = 0;
 			this->row[i].buffer = (char*)&l;
 		}
-											   break;
-		case enum_field_types::MYSQL_TYPE_VAR_STRING:{
+		break;
+		case enum_field_types::MYSQL_TYPE_BLOB:
+		{
 			this->buffers[i] = new char[field->length];
 			this->row[i].buffer = this->buffers[i];
 		}
-													 break;
+		break;
+		case enum_field_types::MYSQL_TYPE_DATE:
+		{
+			MYSQL_TIME* time;
+
+			time = new MYSQL_TIME();
+
+			this->row[i].buffer = (char*)time;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_DATETIME:
+		{
+			MYSQL_TIME* time;
+
+			time = new MYSQL_TIME();
+
+			this->row[i].buffer = (char*)time;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_DATETIME2:
+		{
+			MYSQL_TIME* time;
+
+			time = new MYSQL_TIME();
+
+			this->row[i].buffer = (char*)time;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_DECIMAL:
+		{
+			long double l = 0;
+			this->row[i].buffer = (char*)&l;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_DOUBLE:
+		{
+			double l = 0;
+			this->row[i].buffer = (char*)&l;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_FLOAT:
+		{
+			float f = 0;
+			this->row[i].buffer = (char*)&f;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_INT24:
+		{
+			int l = 0;
+			this->row[i].buffer = (char*)&l;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_JSON:
+			this->buffers[i] = new char[field->length];
+			this->row[i].buffer = this->buffers[i];
+			break;
+		case enum_field_types::MYSQL_TYPE_LONG:
+		{
+			long l = 0;
+			this->row[i].buffer = (char*)&l;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_LONGLONG:
+		{
+			long long l = 0;
+			this->row[i].buffer = (char*)&l;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_LONG_BLOB:
+			this->buffers[i] = new char[field->length];
+			this->row[i].buffer = this->buffers[i];
+			break;
+		case enum_field_types::MYSQL_TYPE_MEDIUM_BLOB:
+			this->buffers[i] = new char[field->length];
+			this->row[i].buffer = this->buffers[i];
+			break;
+		case enum_field_types::MYSQL_TYPE_NEWDATE:
+		{
+			MYSQL_TIME* time;
+
+			time = new MYSQL_TIME();
+
+			this->row[i].buffer = (char*)time;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_NEWDECIMAL:
+		{
+			long double l = 0;
+			this->row[i].buffer = (char*)&l;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_NULL:
+			t = Type::getType<void*>(nullptr);
+			break;
+		case enum_field_types::MYSQL_TYPE_SHORT:
+		{
+			short l = 0;
+			this->row[i].buffer = (char*)&l;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_STRING:
+			this->buffers[i] = new char[field->length];
+			this->row[i].buffer = this->buffers[i];
+			break;
+		case enum_field_types::MYSQL_TYPE_TIME:
+		{
+			MYSQL_TIME* time;
+
+			time = new MYSQL_TIME();
+
+			this->row[i].buffer = (char*)time;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_TIME2:
+		{
+			MYSQL_TIME* time;
+
+			time = new MYSQL_TIME();
+
+			this->row[i].buffer = (char*)time;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_TIMESTAMP:
+		{
+			MYSQL_TIME* time;
+
+			time = new MYSQL_TIME();
+
+			this->row[i].buffer = (char*)time;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_TIMESTAMP2:
+		{
+			MYSQL_TIME* time;
+
+			time = new MYSQL_TIME();
+
+			this->row[i].buffer = (char*)time;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_TINY:
+		{
+			short l = 0;
+			this->row[i].buffer = (char*)&l;
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_TINY_BLOB:
+			this->buffers[i] = new char[field->length];
+			this->row[i].buffer = this->buffers[i];
+			break;
+		case enum_field_types::MYSQL_TYPE_VARCHAR:
+		{
+			this->buffers[i] = new char[field->length];
+			this->row[i].buffer = this->buffers[i];
+		}
+		break;
+		case enum_field_types::MYSQL_TYPE_VAR_STRING:
+		{
+			this->buffers[i] = new char[field->length];
+			this->row[i].buffer = this->buffers[i];
+		}
+		break;
 		}
 
 		this->row[i].buffer_length = field->length;
@@ -143,36 +306,13 @@ void MySqlDataReader::LoadColumns(){
 		this->row[i].error = &this->errors[i];
 	}
 
-	/*MYSQL_BIND bind[2];
-	unsigned long real_length1 = 0;
-	unsigned long real_length2 = 0;
-	long long_data = 0;
-	char str_data[500];
-	memset(bind, 0, sizeof(bind));
-
-	bind[0].buffer_type = enum_field_types::MYSQL_TYPE_LONG;
-	bind[0].buffer = (char*)&long_data;
-	bind[0].buffer_length = 0;
-	bind[0].length = &real_length1;
-
-	bind[1].buffer_type = enum_field_types::MYSQL_TYPE_VAR_STRING;
-	bind[1].buffer = str_data;
-	bind[1].buffer_length = 500;
-	bind[1].length = &real_length2;
-	*/
 	if(mysql_stmt_bind_result(this->stmt, this->row)){
 		std::cout << mysql_stmt_error(this->stmt) << endl;
 	}
 
 	if(mysql_stmt_store_result(this->stmt)){
-		fprintf(stderr, " mysql_stmt_store_result() failed\n");
-		fprintf(stderr, " %s\n", mysql_stmt_error(stmt));
-		exit(0);
+		std::cout << mysql_stmt_error(this->stmt) << endl;
 	}
-
-	/*if(!mysql_stmt_fetch(this->stmt)){
-
-	}*/
 }
 
 void MySqlDataReader::FillTable(DataTable& table){
@@ -197,16 +337,257 @@ void MySqlDataReader::FillTable(DataTable& table){
 			field = mysql_fetch_field_direct(this->resultset, g);
 
 			switch(field->type){
+			case enum_field_types::MYSQL_TYPE_BIT:
+			{
+				unsigned long temp = *((unsigned long*)this->row[g].buffer);
+				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_BLOB:
+			{
+				string str = (char*)this->row[g].buffer;
+				String temp(&str);
+				rowDest.SetField<String>(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_DATE:
+			{
+				DateTime dt;
+				MYSQL_TIME* time;
+
+				time = (MYSQL_TIME*)this->row[g].buffer;
+
+				dt.addYears(time->year);
+				dt.addMonths(time->month);
+				dt.addDays(time->day);
+				dt.addHours(time->hour);
+				dt.addMinutes(time->minute);
+				dt.addSeconds(time->second);
+				dt.addMicroseconds(time->second_part);
+
+				rowDest.SetField(g, dt);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_DATETIME:
+			{
+				DateTime dt;
+				MYSQL_TIME time;
+
+				time = *((MYSQL_TIME*)this->row[g].buffer);
+
+				dt.addYears(time.year);
+				dt.addMonths(time.month);
+				dt.addDays(time.day);
+				dt.addHours(time.hour);
+				dt.addMinutes(time.minute);
+				dt.addSeconds(time.second);
+				dt.addMicroseconds(time.second_part);
+
+				rowDest.SetField(g, dt);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_DATETIME2:
+			{
+				DateTime dt;
+				MYSQL_TIME* time;
+
+				time = (MYSQL_TIME*)this->row[g].buffer;
+
+				dt.addYears(time->year);
+				dt.addMonths(time->month);
+				dt.addDays(time->day);
+				dt.addHours(time->hour);
+				dt.addMinutes(time->minute);
+				dt.addSeconds(time->second);
+				dt.addMicroseconds(time->second_part);
+
+				rowDest.SetField(g, dt);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_DECIMAL:
+			{
+				long double temp = *((long double*)this->row[g].buffer);
+				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_DOUBLE:
+			{
+				double temp = *((double*)this->row[g].buffer);
+				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_FLOAT:
+			{
+				float temp = *((float*)this->row[g].buffer);
+				rowDest.SetField(g, temp);
+			}
+			break;
+			// -------------------------------------------------------
 			case enum_field_types::MYSQL_TYPE_INT24:
 			{
-				int temp = (int)this->row[g].buffer;
+				int temp = *((int*)this->row[g].buffer);
 				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_JSON:
+			{
+				string str = (char*)this->row[g].buffer;
+				String temp(&str);
+				rowDest.SetField<String>(g, temp);
 			}
 			break;
 			case enum_field_types::MYSQL_TYPE_LONG:
 			{
 				long temp = *((long*)this->row[g].buffer);
 				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_LONGLONG:
+			{
+				long long temp = *((long long*)this->row[g].buffer);
+				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_LONG_BLOB:
+			{
+				string str = (char*)this->row[g].buffer;
+				String temp(&str);
+				rowDest.SetField<String>(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_MEDIUM_BLOB:
+			{
+				string str = (char*)this->row[g].buffer;
+				String temp(&str);
+				rowDest.SetField<String>(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_NEWDATE:
+			{
+				DateTime dt;
+				MYSQL_TIME* time;
+
+				time = (MYSQL_TIME*)this->row[g].buffer;
+
+				dt.addYears(time->year);
+				dt.addMonths(time->month);
+				dt.addDays(time->day);
+				dt.addHours(time->hour);
+				dt.addMinutes(time->minute);
+				dt.addSeconds(time->second);
+				dt.addMicroseconds(time->second_part);
+
+				rowDest.SetField(g, dt);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_NEWDECIMAL:
+			{
+				long double temp = *((long double*)this->row[g].buffer);
+				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_NULL:
+			{
+				long temp = *((long*)this->row[g].buffer);
+				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_SHORT:
+			{
+				short temp = *((short*)this->row[g].buffer);
+				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_STRING:
+			{
+				string str = (char*)this->row[g].buffer;
+				String temp(&str);
+				rowDest.SetField<String>(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_TIME:
+			{
+				DateTime dt;
+				MYSQL_TIME* time;
+
+				time = (MYSQL_TIME*)this->row[g].buffer;
+
+				dt.addYears(time->year);
+				dt.addMonths(time->month);
+				dt.addDays(time->day);
+				dt.addHours(time->hour);
+				dt.addMinutes(time->minute);
+				dt.addSeconds(time->second);
+				dt.addMicroseconds(time->second_part);
+
+				rowDest.SetField(g, dt);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_TIME2:
+			{
+				DateTime dt;
+				MYSQL_TIME* time;
+
+				time = (MYSQL_TIME*)this->row[g].buffer;
+
+				dt.addYears(time->year);
+				dt.addMonths(time->month);
+				dt.addDays(time->day);
+				dt.addHours(time->hour);
+				dt.addMinutes(time->minute);
+				dt.addSeconds(time->second);
+				dt.addMicroseconds(time->second_part);
+
+				rowDest.SetField(g, dt);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_TIMESTAMP:
+			{
+				DateTime dt;
+				MYSQL_TIME* time;
+
+				time = (MYSQL_TIME*)this->row[g].buffer;
+
+				dt.addYears(time->year);
+				dt.addMonths(time->month);
+				dt.addDays(time->day);
+				dt.addHours(time->hour);
+				dt.addMinutes(time->minute);
+				dt.addSeconds(time->second);
+				dt.addMicroseconds(time->second_part);
+
+				rowDest.SetField(g, dt);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_TIMESTAMP2:
+			{
+				DateTime dt;
+				MYSQL_TIME* time;
+
+				time = (MYSQL_TIME*)this->row[g].buffer;
+
+				dt.addYears(time->year);
+				dt.addMonths(time->month);
+				dt.addDays(time->day);
+				dt.addHours(time->hour);
+				dt.addMinutes(time->minute);
+				dt.addSeconds(time->second);
+				dt.addMicroseconds(time->second_part);
+
+				rowDest.SetField(g, dt);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_TINY:
+			{
+				short temp = *((short*)this->row[g].buffer);
+				rowDest.SetField(g, temp);
+			}
+			break;
+			case enum_field_types::MYSQL_TYPE_TINY_BLOB:
+			{
+				string str = (char*)this->row[g].buffer;
+				String temp(&str);
+				rowDest.SetField<String>(g, temp);
 			}
 			break;
 			case enum_field_types::MYSQL_TYPE_VARCHAR:

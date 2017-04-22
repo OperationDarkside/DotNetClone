@@ -137,12 +137,14 @@
     <ClCompile Include="DataRowCollection.cpp" />
     <ClCompile Include="DataTable.cpp" />
     <ClCompile Include="DateTime.cpp" />
+    <ClCompile Include="Decimal.cpp" />
     <ClCompile Include="Double.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="FileStream.cpp" />
     <ClCompile Include="Float.cpp" />
     <ClCompile Include="Integer.cpp" />
     <ClCompile Include="Long.cpp" />
+    <ClCompile Include="LongLong.cpp" />
     <ClCompile Include="MySqlCommand.cpp" />
     <ClCompile Include="MySqlConnection.cpp" />
     <ClCompile Include="MySqlDataAdapter.cpp" />
@@ -159,6 +161,7 @@
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="Type.cpp" />
+    <ClCompile Include="ULong.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boolean.h" />
@@ -170,6 +173,7 @@
     <ClInclude Include="DataRowCollection.h" />
     <ClInclude Include="DataTable.h" />
     <ClInclude Include="DateTime.h" />
+    <ClInclude Include="Decimal.h" />
     <ClInclude Include="Double.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="FileStream.h" />
@@ -177,6 +181,7 @@
     <ClInclude Include="Float.h" />
     <ClInclude Include="Integer.h" />
     <ClInclude Include="Long.h" />
+    <ClInclude Include="LongLong.h" />
     <ClInclude Include="MySqlCommand.h" />
     <ClInclude Include="MySqlConnection.h" />
     <ClInclude Include="MySqlDataAdapter.h" />
@@ -193,6 +198,7 @@
     <ClInclude Include="String.h" />
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="Type.h" />
+    <ClInclude Include="ULong.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

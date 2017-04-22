@@ -4,8 +4,11 @@
 #include "Short.h"
 #include "Integer.h"
 #include "Long.h"
+#include "ULong.h"
 #include "Float.h"
 #include "Double.h"
+#include "Decimal.h"
+#include "LongLong.h"
 #include <typeinfo>
 
 #pragma once
@@ -73,6 +76,22 @@ public:
 	template <>
 	long Field<long>(int columnNr);
 	/**
+	Returns the unsigned long value of the cell in the given column (Wraps the ULong class)
+
+	@param columnNr Zero based column index
+	@return unsigned long cell value
+	*/
+	template <>
+	unsigned long Field<unsigned long>(int columnNr);
+	/**
+	Returns the long long value of the cell in the given column (Wraps the LongLong class)
+
+	@param columnNr Zero based column index
+	@return long long cell value
+	*/
+	template <>
+	long long Field<long long>(int columnNr);
+	/**
 	Returns the float value of the cell in the given column (Wraps the Float class)
 
 	@param columnNr Zero based column index
@@ -126,6 +145,20 @@ public:
 	*/
 	void SetField(int columnNr, long value);
 	/**
+	Sets the value of the cell in the given column (Wraps the ULong class)
+
+	@param columnNr Zero based column index
+	@param unsigned long value of the given type
+	*/
+	void SetField(int columnNr, unsigned long value);
+	/**
+	Sets the value of the cell in the given column (Wraps the LongLong class)
+
+	@param columnNr Zero based column index
+	@param long long value of the given type
+	*/
+	void SetField(int columnNr, long long value);
+	/**
 	Sets the value of the cell in the given column (Wraps the Float class)
 
 	@param columnNr Zero based column index
@@ -139,6 +172,13 @@ public:
 	@param double value of the given type
 	*/
 	void SetField(int columnNr, double value);
+	/**
+	Sets the value of the cell in the given column (Wraps the Decimal class)
+
+	@param columnNr Zero based column index
+	@param long double value of the given type
+	*/
+	void SetField(int columnNr, long double value);
 	
 	/**
 	Returns the pointer to the value in the specified column
@@ -218,6 +258,28 @@ inline long DataRow::Field<long>(int columnNr){
 	return l;
 }
 template<>
+inline unsigned long DataRow::Field<unsigned long>(int columnNr){
+	Object* o = items[columnNr];
+
+	unsigned long l;
+	ULong* ul = dynamic_cast<ULong*>(o);
+
+	l = *ul;
+
+	return l;
+}
+template<>
+inline long long DataRow::Field<long long>(int columnNr){
+	Object* o = items[columnNr];
+
+	long long ll;
+	LongLong* llo = dynamic_cast<LongLong*>(o);
+
+	ll = *llo;
+
+	return ll;
+}
+template<>
 inline float DataRow::Field<float>(int columnNr){
 	Object* o = items[columnNr];
 
@@ -234,6 +296,17 @@ inline double DataRow::Field<double>(int columnNr){
 
 	double d;
 	Double* dob = dynamic_cast<Double*>(o);
+
+	d = *dob;
+
+	return d;
+}
+template<>
+inline long double DataRow::Field<long double>(int columnNr){
+	Object* o = items[columnNr];
+
+	double d;
+	Decimal* dob = dynamic_cast<Decimal*>(o);
 
 	d = *dob;
 
