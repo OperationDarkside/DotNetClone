@@ -320,7 +320,6 @@ void MySqlDataReader::FillTable(DataTable& table){
 	size_t rowCount = 0;
 	Type t;
 	MYSQL_FIELD* field;
-	//MYSQL_ROW rowSrc;
 
 	table = GetSchemaTable();
 
@@ -617,13 +616,13 @@ unsigned int MySqlDataReader::FieldCount(){
 bool MySqlDataReader::GetBoolean(int i){
 	bool res;
 
-
+	res = *((bool*)this->row[i].buffer);
 
 	return res;
 }
 
 char MySqlDataReader::GetByte(int i){
-	return 0;
+	return *((char*)this->row[i].buffer);
 }
 
 long MySqlDataReader::GetBytes(int i, long dataIndex, char * buffer, int bufferIndex, int length){
@@ -635,13 +634,20 @@ long MySqlDataReader::GetChars(int i, long dataIndex, char * buffer, int bufferI
 }
 
 String MySqlDataReader::GetDataTypeName(int i){
-	//return String(&string(this->meta->getColumnTypeName(i).asStdString()));
-	return String();
+	MYSQL_FIELD* field;
+	String res;
+
+	field = mysql_fetch_field_direct(this->resultset, i);
+
+	res = String(field->name);
+
+	return res;
 }
 
 DateTime MySqlDataReader::GetDateTime(int i){
 	DateTime res;
 	MYSQL_FIELD* field;
+	MYSQL_TIME time;
 
 	if(!(i < this->cols.size())){
 		throw "Column out of Range!";
@@ -652,9 +658,17 @@ DateTime MySqlDataReader::GetDateTime(int i){
 		throw string("Column Nr." + to_string(i) + " is not of DateTime-type.");
 	}
 
-	// TODO
 
-	// res = this->row[i];
+
+	time = *((MYSQL_TIME*)this->row[i].buffer);
+
+	res.addYears(time.year);
+	res.addMonths(time.month);
+	res.addDays(time.day);
+	res.addHours(time.hour);
+	res.addMinutes(time.minute);
+	res.addSeconds(time.second);
+	res.addMicroseconds(time.second_part);
 
 	return res;
 }
@@ -671,7 +685,8 @@ double MySqlDataReader::GetDouble(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_FLOAT){
 		throw string("Column Nr." + to_string(i) + " is not of float-type.");
 	}
-	//res = atof(this->row[i]);
+
+	res = *((double*)this->row[i].buffer);
 
 	return res;
 }
@@ -692,7 +707,7 @@ float MySqlDataReader::GetFloat(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_FLOAT){
 		throw string("Column Nr." + to_string(i) + " is not of float-type.");
 	}
-	//res = atof(this->row[i]);
+	res = *((float*)this->row[i].buffer);
 
 	return res;
 }
@@ -709,7 +724,8 @@ int MySqlDataReader::GetInteger(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_INT24){
 		throw string("Column Nr." + to_string(i) + " is not of int-type.");
 	}
-	//res = atoi(this->row[i]);
+
+	res = *((int*)this->row[i].buffer);
 
 	return res;
 }
@@ -726,17 +742,34 @@ long MySqlDataReader::GetLong(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_LONG){
 		throw string("Column Nr." + to_string(i) + " is not of long-type.");
 	}
-	//res = atol(this->row[i]);
+
+	res = *((long*)this->row[i].buffer);
 
 	return res;
 }
 
 String MySqlDataReader::GetName(int i){
+	if(!(i < this->cols.size())){
+		throw "Column out of Range!";
+	}
+
 	return this->cols[i].first;
 }
 
 int MySqlDataReader::GetOrdinal(String & name){
-	return 0;
+	int ordinal = -1;
+	size_t len = 0;
+
+	len = this->cols.size();
+
+	for(size_t i = 0; i < len; i++){
+		if(this->cols[i].first == name){
+			ordinal = i;
+			break;
+		}
+	}
+
+	return ordinal;
 }
 
 DataTable MySqlDataReader::GetSchemaTable(){
@@ -773,7 +806,8 @@ short MySqlDataReader::GetShort(int i){
 	if(field->type != enum_field_types::MYSQL_TYPE_SHORT){
 		throw string("Column Nr." + to_string(i) + " is not of short-type.");
 	}
-	//res = atoi(this->row[i]);
+
+	res = *((short*)this->row[i].buffer);
 
 	return res;
 }
@@ -792,14 +826,18 @@ String MySqlDataReader::GetString(int i){
 		throw string("Column Nr." + to_string(i) + " is not a string-type.");
 	}
 
-	//string str = this->row[i];
-	//res = String(&str);
+	string str = (char*)this->row[i].buffer;
+	res = String(&str);
 
 	return res;
 }
 
+bool MySqlDataReader::HasRows(){
+	return mysql_stmt_num_rows(this->stmt) > 0 ? true : false;
+}
+
 bool MySqlDataReader::NextResult(){
-	//this->row = mysql_fetch_row(this->resultset);
+	mysql_fetch_row(this->resultset);
 
 	if(this->row){
 		return true;

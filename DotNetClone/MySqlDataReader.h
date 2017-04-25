@@ -33,6 +33,7 @@ public:
 	DataTable GetSchemaTable();
 	short GetShort(int i);
 	String GetString(int i);
+	bool HasRows();
 
 	bool NextResult();
 
