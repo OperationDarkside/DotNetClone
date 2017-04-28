@@ -143,6 +143,7 @@
     <ClCompile Include="FileStream.cpp" />
     <ClCompile Include="Float.cpp" />
     <ClCompile Include="Integer.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="Long.cpp" />
     <ClCompile Include="LongLong.cpp" />
     <ClCompile Include="MySqlCommand.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="FileTools.h" />
     <ClInclude Include="Float.h" />
     <ClInclude Include="Integer.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="Long.h" />
     <ClInclude Include="LongLong.h" />
     <ClInclude Include="MySqlCommand.h" />

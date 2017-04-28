@@ -117,6 +117,9 @@
     <ClCompile Include="LongLong.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -222,6 +225,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="LongLong.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
