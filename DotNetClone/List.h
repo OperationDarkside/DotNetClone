@@ -14,8 +14,8 @@ public:
 	void Clear();
 	bool Contains(T item);
 	void CopyTo(T* array[]);
-	void CopyTo(T* array, int arrayIndex);
-	void CopyTo(int index ,T* array, int arrayIndex, int count);
+	// void CopyTo(T* array, int arrayIndex);
+	// void CopyTo(int index ,T* array, int arrayIndex, int count);
 	unsigned long Count();
 	List<T> GetRange(int index, int count);
 	long long IndexOf(T* item);

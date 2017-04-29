@@ -54,13 +54,13 @@ void List<T>::CopyTo(T * array[]){
 
 	*array = temp;
 }
-
+/*
 template<typename T>
 void List<T>::CopyTo(T * array, int arrayIndex){}
 
 template<typename T>
 void List<T>::CopyTo(int index, T * array, int arrayIndex, int count){}
-
+*/
 template<typename T>
 unsigned long List<T>::Count(){
 	return this->values.size();
@@ -163,34 +163,98 @@ void List<T>::InsertRange(int index, List<T> collection){
 
 template<typename T>
 unsigned long List<T>::LastIndexOf(T * item){
-	return 0;
+	long long res = -1;
+	size_t len = 0;
+
+	len = this->values.size() - 1;
+
+	for(size_t i = len; i > -1; --i){
+		if(&this->values[i] == item){
+			res = i;
+			break;
+		}
+	}
+
+	return res;
 }
 
 template<typename T>
 unsigned long List<T>::LastIndexOf(T * item, int index){
-	return 0;
+	long long res = -1;
+	// size_t len = 0;
+
+	// len = this->values.size() - 1;
+
+	if(index < this->values.size()){
+		throw "LastIndexOf: Index out of range";
+	}
+
+	for(size_t i = index; i > -1; --i){
+		if(&this->values[i] == item){
+			res = i;
+			break;
+		}
+	}
+
+	return res;
 }
 
 template<typename T>
 unsigned long List<T>::LastIndexOf(T * item, int index, int count){
-	return 0;
+	long long res = -1;
+	size_t len = 0;
+
+	len = index - count;
+
+	if(index < this->values.size() && len > 0){
+		throw "LastIndexOf: Index and/or count out of range";
+	}
+
+	for(size_t i = index; i > -1; --i){
+		if(&this->values[i] == item){
+			res = i;
+			break;
+		}
+	}
+
+	return res;
 }
 
 template<typename T>
 bool List<T>::Remove(T * item){
-	return false;
+	bool res = false;
+	size_t len = 0;
+
+	len = this->values.size();
+
+	for(size_t i = 0; i < len; i++){
+		if(&this->values[i] == item){
+			this->values.erase(this->values.begin() + i);
+
+			res = true;
+			break;
+		}
+	}
+
+	return res;
 }
 
 template<typename T>
-void List<T>::RemoveAt(int index){}
+void List<T>::RemoveAt(int index){
+	this->values.erase(this->values.begin() + index);
+}
 
 template<typename T>
-void List<T>::RemoveRange(int index, int count){}
+void List<T>::RemoveRange(int index, int count){
+	this->values.erase(this->values.begin() + index, this->values.begin() + index + count);
+}
 
 template<typename T>
-void List<T>::Reverse(){}
+void List<T>::Reverse(){
+	reverse(this->values.begin(), this->values.end());
+}
 
 template<typename T>
 T* List<T>::ToArray(){
-	return nullptr;
+	return this->values.data();
 }
