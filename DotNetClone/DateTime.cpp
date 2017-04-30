@@ -1,177 +1,124 @@
 #include "DateTime.h"
+#include "Convert.h"
 
 
-DateTime::DateTime()
-{
-}
-DateTime::DateTime(long long ms)
-{
+DateTime::DateTime(){}
+DateTime::DateTime(long long ms){
 	microseconds dur(ms);
 	time_point<system_clock> dt(dur);
 	this->tp = dt;
 }
 
-DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day)
-{
-	tm temp = { 0 };
-	temp.tm_year = year - 1900;
-	temp.tm_mon = month - 1;
-	temp.tm_mday = day;
-	temp.tm_isdst = -1;
-
-	time_t tt = mktime(&temp);
-
-	time_point<system_clock> timep = system_clock::from_time_t(tt);
-
-	this->tp = timep;
+DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day){
+	this->tp += years(year);
+	this->tp += months(month);
+	this->tp += days(day);
 }
 
 
-DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day, unsigned int hour, unsigned int minute, unsigned int second)
-{
-	tm* temp = new tm();
-	temp->tm_year = year - 1900;
-	temp->tm_mon = month;
-	temp->tm_mday = day;
-	temp->tm_hour = hour;
-	temp->tm_min = minute;
-	temp->tm_sec = second;
-
-	time_t tt = mktime(temp);
-
-	this->tp = system_clock::from_time_t(tt);
-
-	delete temp;
+DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day, unsigned int hour, unsigned int minute, unsigned int second){
+	this->tp += years(year);
+	this->tp += months(month);
+	this->tp += days(day);
+	this->tp += hours(hour);
+	this->tp += minutes(minute);
+	this->tp += seconds(second);
 }
 
-DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day, unsigned int hour, unsigned int minute, unsigned int second, unsigned int millisecond)
-{
-	tm* temp = new tm();
-	temp->tm_year = year - 1900;
-	temp->tm_mon = month;
-	temp->tm_mday = day;
-	temp->tm_hour = hour;
-	temp->tm_min = minute;
-	temp->tm_sec = second;
-
-	time_t tt = mktime(temp);
-
-	this->tp = system_clock::from_time_t(tt);
-
+DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day, unsigned int hour, unsigned int minute, unsigned int second, unsigned int millisecond){
+	this->tp += years(year);
+	this->tp += months(month);
+	this->tp += days(day);
+	this->tp += hours(hour);
+	this->tp += minutes(minute);
+	this->tp += seconds(second);
 	this->tp += milliseconds(millisecond);
-
-	delete temp;
 }
 
-DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day, unsigned int hour, unsigned int minute, unsigned int second, unsigned int millisecond, unsigned int microsecond)
-{
-	tm* temp = new tm();
-	temp->tm_year = year - 1900;
-	temp->tm_mon = month;
-	temp->tm_mday = day;
-	temp->tm_hour = hour;
-	temp->tm_min = minute;
-	temp->tm_sec = second;
-
-	time_t tt = mktime(temp);
-
-	this->tp = system_clock::from_time_t(tt);
-
+DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day, unsigned int hour, unsigned int minute, unsigned int second, unsigned int millisecond, unsigned int microsecond){
+	this->tp += years(year);
+	this->tp += months(month);
+	this->tp += days(day);
+	this->tp += hours(hour);
+	this->tp += minutes(minute);
+	this->tp += seconds(second);
 	this->tp += milliseconds(millisecond);
 	this->tp += microseconds(microsecond);
-
-	delete temp;
 }
 
-DateTime::~DateTime()
-{
-}
+DateTime::~DateTime(){}
 
-DateTime DateTime::add(TimeSpan * span)
-{
+DateTime DateTime::add(TimeSpan * span){
 	this->tp += microseconds(span->totalMicroseconds());
 
 	return *this;
 }
 
-DateTime DateTime::addDays(double days)
-{
-	this->tp += microseconds((long long)(days * 24 * 3600 * 1000000));
+DateTime DateTime::addDays(long long value){
+	this->tp += days(value);
 
 	return *this;
 }
 
-DateTime DateTime::addHours(double hours)
-{
-	this->tp += microseconds((long long)(hours * 3600 * 1000000));
+DateTime DateTime::addHours(long long value){
+	this->tp += hours(value);
 
 	return *this;
 }
 
-DateTime DateTime::addMicroseconds(long long ms)
-{
+DateTime DateTime::addMicroseconds(long long ms){
 	this->tp += microseconds(ms);
 
 	return *this;
 }
 
-DateTime DateTime::addMilliseconds(double milliseconds)
-{
-	this->tp += microseconds((long long)(milliseconds * 1000));
+DateTime DateTime::addMilliseconds(long long value){
+	this->tp += milliseconds(value);
 
 	return *this;
 }
 
-DateTime DateTime::addMinutes(double minutes)
-{
-	this->tp += microseconds((long long)(minutes * 60 * 1000000));
+DateTime DateTime::addMinutes(long long value){
+	this->tp += minutes(value);
 
 	return *this;
 }
 
-DateTime DateTime::addMonths(double months)
-{
-	this->tp += microseconds((long long)(months * 31 * 24 * 3600 * 1000000));
+DateTime DateTime::addMonths(long long value){
+	this->tp += months(value);
 
 	return *this;
 }
 
-DateTime DateTime::addSeconds(double seconds)
-{
-	this->tp += microseconds((long long)(seconds * 1000000));
+DateTime DateTime::addSeconds(long long value){
+	this->tp += seconds(value);
 
 	return *this;
 }
 
-DateTime DateTime::addTicks(long long ms)
-{
+DateTime DateTime::addTicks(long long ms){
 	this->tp += microseconds(ms);
 
 	return *this;
 }
 
-DateTime DateTime::addYears(long years)
-{
-	this->tp += microseconds((long long)(years * 365 * 24 * 3600 * 1000000));
+DateTime DateTime::addYears(long value){
+	this->tp += years(value);
 
 	return *this;
 }
 
-int DateTime::compareTo(DateTime * value)
-{
-	if (this->tp > value->tp) {
+int DateTime::compareTo(DateTime * value){
+	if(this->tp > value->tp){
 		return 1;
-	}
-	else if (this->tp == value->tp) {
+	} else if(this->tp == value->tp){
 		return 0;
-	}
-	else {
+	} else{
 		return -1;
 	}
 }
 
-TimeSpan DateTime::substract(DateTime * value)
-{
+TimeSpan DateTime::substract(DateTime * value){
 	TimeSpan* res;
 
 	res = new TimeSpan(duration_cast<microseconds>(this->tp - value->tp).count());
@@ -179,8 +126,7 @@ TimeSpan DateTime::substract(DateTime * value)
 	return *res;
 }
 
-DateTime DateTime::substract(TimeSpan * value)
-{
+DateTime DateTime::substract(TimeSpan * value){
 	DateTime * res;
 
 	microseconds dur(value->totalMicroseconds());
@@ -192,111 +138,158 @@ DateTime DateTime::substract(TimeSpan * value)
 	return *res;
 }
 
-String DateTime::toLongDateString()
-{
-	String* res = new String();
-	char buf_day[3];
-	char buf_year[5];
+String DateTime::toLongDateString(){
+	time_t tt;
+	tm* tm;
+	years ys;
+	months mons;
+	days ds;
+	milliseconds ms;
+	time_point<system_clock> tp_temp;
+	time_point<system_clock> tp_wd;
+	String res;
 
-	time_t tt = system_clock::to_time_t(this->tp);
-	tm tm = *localtime(&tt);
-	itoa(tm.tm_mday, buf_day, 10);
-	itoa(tm.tm_year + 1900, buf_year, 10);
+	tp_temp = this->tp;
+	ms = duration_cast<milliseconds>(tp_temp.time_since_epoch());
 
-	*res += *this->getWeekdayName(tm.tm_wday);
-	*res += " ";
-	*res += buf_day;
-	*res += ". ";
-	*res += *this->getMonthName(tm.tm_mon);
-	*res += " ";
-	*res += buf_year;
+	ys = duration_cast<years>(ms);
+	ms -= ys;
+	mons = duration_cast<months>(ms);
+	ms -= mons;
+	ds = duration_cast<days>(ms);
 
-	return res;
-}
+	if(ys > years(1900)){
+		tp_wd = tp_temp - years(1900);
+	} else{
+		tp_wd = tp_temp;
+	}
 
-String DateTime::toLongTimeString()
-{
-	String* res = new String();
-	char buf_hour[3];
-	char buf_min[3];
-	char buf_sec[3];
+	tt = system_clock::to_time_t(tp_wd);
+	tm = localtime(&tt);
 
-	time_t tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
-	tm tm = *localtime(&tt);
-	itoa(tm.tm_hour, buf_hour, 10);
-	itoa(tm.tm_min, buf_min, 10);
-	itoa(tm.tm_sec, buf_sec, 10);
-
-	*res += buf_hour;
-	*res += ":";
-	*res += buf_min;
-	*res += ":";
-	*res += buf_sec;
+	res += this->getWeekdayName(tm->tm_wday);
+	res += ", ";
+	res += this->getMonthName(mons.count());
+	res += " ";
+	res += Convert::toString(ds.count()).padLeft(2, '0');
+	res += ", ";
+	res += Convert::toString(ys.count()).padLeft(4, '0');
 
 	return res;
 }
 
-String DateTime::toUtcString()
-{
-	String* res = new String();
-	char buf_day[2];
-	char buf_mon[2];
-	char buf_year[4];
-	char buf_hour[2];
-	char buf_min[2];
-	char buf_sec[2];
+String DateTime::toLongTimeString(){
+	years ys;
+	months mons;
+	days ds;
+	hours hs;
+	minutes mins;
+	seconds ss;
+	milliseconds ms;
+	time_point<system_clock> tp_temp;
+	String res;
 
-	time_t tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
-	tm tm = *localtime(&tt);
-	itoa(tm.tm_mday, buf_day, 10);
-	itoa(tm.tm_mon, buf_mon, 10);
-	itoa(tm.tm_year, buf_year, 10);
-	itoa(tm.tm_hour, buf_hour, 10);
-	itoa(tm.tm_min, buf_min, 10);
-	itoa(tm.tm_sec, buf_sec, 10);
+	tp_temp = this->tp;
+	ms = duration_cast<milliseconds>(tp_temp.time_since_epoch());
 
-	*res += buf_year;
-	*res += "-";
-	*res += buf_mon;
-	*res += "-";
-	*res += buf_day;
-	*res += "T";
-	*res += buf_hour;
-	*res += ":";
-	*res += buf_min;
-	*res += ":";
-	*res += buf_sec;
+	ys = duration_cast<years>(ms);
+	ms -= ys;
+	mons = duration_cast<months>(ms);
+	ms -= mons;
+	ds = duration_cast<days>(ms);
+	ms -= ds;
+	hs = duration_cast<hours>(ms);
+	ms -= hs;
+	mins = duration_cast<minutes>(ms);
+	ms -= mins;
+	ss = duration_cast<seconds>(ms);
+	ms -= ss;
+
+	res += Convert::toString(hs.count()).padLeft(2, '0');
+	res += ":";
+	res += Convert::toString(mins.count()).padLeft(2, '0');
+	res += ":";
+	res += Convert::toString(ss.count()).padLeft(2, '0');
+	res += ":";
+	res += Convert::toString(ms.count()).padLeft(3, '0');
+
+	return res;
+}
+
+String DateTime::toUtcString(){
+	years ys;
+	months mons;
+	days ds;
+	hours hs;
+	minutes mins;
+	seconds ss;
+	milliseconds ms;
+	time_point<system_clock> tp_temp;
+	String res;
+
+	tp_temp = this->tp;
+	ms = duration_cast<milliseconds>(tp_temp.time_since_epoch());
+
+	ys = duration_cast<years>(ms);
+	ms -= ys;
+	mons = duration_cast<months>(ms);
+	ms -= mons;
+	ds = duration_cast<days>(ms);
+	ms -= ds;
+	hs = duration_cast<hours>(ms);
+	ms -= hs;
+	mins = duration_cast<minutes>(ms);
+	ms -= mins;
+	ss = duration_cast<seconds>(ms);
+	ms -= ss;
+
+	res += Convert::toString(ys.count()).padLeft(4, '0');
+	res += "-";
+	res += Convert::toString(mons.count()).padLeft(2, '0');
+	res += "-";
+	res += Convert::toString(ds.count()).padLeft(2, '0');
+	res += "T";
+	res += Convert::toString(hs.count()).padLeft(2, '0');
+	res += ":";
+	res += Convert::toString(mins.count()).padLeft(2, '0');
+	res += ":";
+	res += Convert::toString(ss.count()).padLeft(2, '0');
+	res += ":";
+	res += Convert::toString(ms.count()).padLeft(3, '0');
 
 
 	return res;
 }
 
-std::string DateTime::toString()
-{
+std::string DateTime::toString(){
 	return toUtcString().getStringValue();
 }
 
-string DateTime::getTypeString()
-{
+string DateTime::getTypeString(){
 	return string("DateTime");
 }
 
-DateTime DateTime::Date()
-{
-	time_t tt;
-	tm tm;
-	DateTime* res;
+DateTime DateTime::Date(){
+	years ys;
+	months mons;
+	days ds;
+	time_point<system_clock> tp_temp;
+	DateTime res;
 
-	tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
-	tm = *localtime(&tt);
+	tp_temp = this->tp;
+	ds = duration_cast<days>(tp_temp.time_since_epoch());
 
-	res = new DateTime(tm.tm_year, tm.tm_mon, tm.tm_mday);
+	ys = duration_cast<years>(ds);
+	ds -= ys;
+	mons = duration_cast<months>(ds);
+	ds -= mons;
 
-	return *res;
+	res = DateTime(ys.count(), mons.count(), ds.count());
+
+	return res;
 }
 
-void DateTime::Date(DateTime & date)
-{
+void DateTime::Date(DateTime & date){
 	system_clock::time_point tmp = this->tp;
 	system_clock::time_point tmp_new = date.tp;
 
@@ -320,19 +313,27 @@ void DateTime::Date(DateTime & date)
 	this->tp = tmp;
 }
 
-unsigned short DateTime::Day()
-{
-	time_t tt;
-	tm tm;
+unsigned short DateTime::Day(){
+	unsigned short res = 0;
+	years ys;
+	months mons;
+	days ds;
+	seconds ss;
 
-	tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
-	tm = *localtime(&tt);
+	ss = duration_cast<seconds>(this->tp.time_since_epoch());
 
-	return tm.tm_mday;
+	ys = duration_cast<years>(ss);
+	ss -= ys;
+	mons = duration_cast<months>(ss);
+	ss -= mons;
+	ds = duration_cast<days>(ss);
+
+	res = ds.count();
+
+	return res;
 }
 
-void DateTime::Day(unsigned short day)
-{
+void DateTime::Day(unsigned short day){
 	system_clock::time_point tmp = this->tp;
 
 	days d = duration_cast<days>(tmp.time_since_epoch());
@@ -345,8 +346,7 @@ void DateTime::Day(unsigned short day)
 	this->tp = tmp;
 }
 
-unsigned short DateTime::DayOfWeek()
-{
+unsigned short DateTime::DayOfWeek(){
 	time_t tt;
 	tm tm;
 
@@ -356,8 +356,7 @@ unsigned short DateTime::DayOfWeek()
 	return tm.tm_wday;
 }
 
-void DateTime::DayOfWeek(unsigned short dow)
-{
+void DateTime::DayOfWeek(unsigned short dow){
 	time_t tt;
 	tm tm;
 
@@ -368,11 +367,10 @@ void DateTime::DayOfWeek(unsigned short dow)
 
 	// still work to do, to keep microseconds
 
-	this->tp = system_clock::from_time_t( mktime(&tm));
+	this->tp = system_clock::from_time_t(mktime(&tm));
 }
 
-unsigned short DateTime::DayOfYear()
-{
+unsigned short DateTime::DayOfYear(){
 	time_t tt;
 	tm tm;
 
@@ -382,8 +380,7 @@ unsigned short DateTime::DayOfYear()
 	return tm.tm_yday;
 }
 
-void DateTime::DayOfYear(unsigned short doy)
-{
+void DateTime::DayOfYear(unsigned short doy){
 	time_t tt;
 	tm tm;
 
@@ -397,19 +394,30 @@ void DateTime::DayOfYear(unsigned short doy)
 	this->tp = system_clock::from_time_t(mktime(&tm));
 }
 
-unsigned short DateTime::Hour()
-{
-	time_t tt;
-	tm tm;
+unsigned short DateTime::Hour(){
+	unsigned short res = 0;
+	years ys;
+	months mons;
+	days ds;
+	hours hs;
+	seconds ss;
 
-	tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
-	tm = *localtime(&tt);
+	ss = duration_cast<seconds>(this->tp.time_since_epoch());
 
-	return tm.tm_mday;
+	ys = duration_cast<years>(ss);
+	ss -= ys;
+	mons = duration_cast<months>(ss);
+	ss -= mons;
+	ds = duration_cast<days>(ss);
+	ss -= ds;
+	hs = duration_cast<hours>(ss);
+
+	res = hs.count();
+
+	return res;
 }
 
-void DateTime::Hour(unsigned short _hours)
-{
+void DateTime::Hour(unsigned short _hours){
 	system_clock::time_point tmp = this->tp;
 
 	hours h = duration_cast<hours>(tmp.time_since_epoch());
@@ -422,14 +430,37 @@ void DateTime::Hour(unsigned short _hours)
 	this->tp = tmp;
 }
 
-long long DateTime::Millisecond()
-{
-	time_point<system_clock, milliseconds> tmp = time_point_cast<milliseconds>(this->tp);
-	return tmp.time_since_epoch().count();
+unsigned int DateTime::Millisecond(){
+	unsigned int res = 0;
+	years ys;
+	months mons;
+	days ds;
+	hours hs;
+	minutes mins;
+	seconds ss;
+	milliseconds ms;
+
+	ms = duration_cast<milliseconds>(this->tp.time_since_epoch());
+
+	ys = duration_cast<years>(ms);
+	ms -= ys;
+	mons = duration_cast<months>(ms);
+	ms -= mons;
+	ds = duration_cast<days>(ms);
+	ms -= ds;
+	hs = duration_cast<hours>(ms);
+	ms -= hs;
+	mins = duration_cast<minutes>(ms);
+	ms -= mins;
+	ss = duration_cast<seconds>(ms);
+	ms -= ss;
+
+	res = ms.count();
+
+	return res;
 }
 
-void DateTime::Millisecond(long long ms)
-{
+void DateTime::Millisecond(unsigned int ms){
 	system_clock::time_point tmp = this->tp;
 
 	milliseconds ms_old = duration_cast<milliseconds>(tmp.time_since_epoch());
@@ -442,19 +473,33 @@ void DateTime::Millisecond(long long ms)
 	this->tp = tmp;
 }
 
-unsigned short DateTime::Minute()
-{
-	time_t tt;
-	tm tm;
+unsigned short DateTime::Minute(){
+	unsigned short res = 0;
+	years ys;
+	months mons;
+	days ds;
+	hours hs;
+	minutes mins;
+	seconds ss;
 
-	tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
-	tm = *localtime(&tt);
+	ss = duration_cast<seconds>(this->tp.time_since_epoch());
 
-	return tm.tm_min;
+	ys = duration_cast<years>(ss);
+	ss -= ys;
+	mons = duration_cast<months>(ss);
+	ss -= mons;
+	ds = duration_cast<days>(ss);
+	ss -= ds;
+	hs = duration_cast<hours>(ss);
+	ss -= hs;
+	mins = duration_cast<minutes>(ss);
+
+	res = mins.count();
+
+	return res;
 }
 
-void DateTime::Minute(unsigned short min)
-{
+void DateTime::Minute(unsigned short min){
 	system_clock::time_point tmp = this->tp;
 
 	minutes min_old = duration_cast<minutes>(tmp.time_since_epoch());
@@ -467,68 +512,82 @@ void DateTime::Minute(unsigned short min)
 	this->tp = tmp;
 }
 
-unsigned short DateTime::Month()
-{
-	time_t tt;
-	tm tm;
+unsigned short DateTime::Month(){
+	unsigned short res = 0;
+	years ys;
+	months mons;
+	seconds ss;
 
-	tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
-	tm = *localtime(&tt);
+	ss = duration_cast<seconds>(this->tp.time_since_epoch());
 
-	return tm.tm_mon;
+	ys = duration_cast<years>(ss);
+	ss -= ys;
+	mons = duration_cast<months>(ss);
+
+	res = mons.count();
+
+	return res;
 }
 
-void DateTime::Month(unsigned short mon)
-{
+void DateTime::Month(unsigned short mon){
 	setTime<months>(mon);
 }
 
-unsigned short DateTime::Second()
-{
-	std::time_t tt;
-	std::tm tm;
+unsigned short DateTime::Second(){
+	unsigned short res = 0;
+	years ys;
+	months mons;
+	days ds;
+	hours hs;
+	minutes mins;
+	seconds ss;
 
-	tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
-	tm = *localtime(&tt);
+	ss = duration_cast<seconds>(this->tp.time_since_epoch());
 
-	return tm.tm_sec;
+	ys = duration_cast<years>(ss);
+	ss -= ys;
+	mons = duration_cast<months>(ss);
+	ss -= mons;
+	ds = duration_cast<days>(ss);
+	ss -= ds;
+	hs = duration_cast<hours>(ss);
+	ss -= hs;
+	mins = duration_cast<minutes>(ss);
+	ss -= mins;
+
+	res = ss.count();
+
+	return res;
 }
 
-void DateTime::Second(unsigned short sec)
-{
+void DateTime::Second(unsigned short sec){
 	setTime<seconds>(sec);
 }
 
-long long DateTime::Ticks()
-{
+long long DateTime::Ticks(){
 	return nanoseconds(this->tp.time_since_epoch()).count();
 }
 
-void DateTime::Ticks(long long micsec)
-{
+void DateTime::Ticks(long long micsec){
 	setTime<microseconds>(micsec);
 }
 
-unsigned short DateTime::Year()
-{
-	time_t tt;
-	tm tm;
+unsigned short DateTime::Year(){
+	unsigned short res = 0;
 
-	tt = system_clock::to_time_t(this->tp);
-	tm = *localtime(&tt);
+	res = duration_cast<years>(this->tp.time_since_epoch()).count();
 
-	return tm.tm_year + 1900;
+	return res;
 }
 
-void DateTime::Year(unsigned short year)
-{
+void DateTime::Year(unsigned short year){
 	setTime<years>(year);
 }
 
 template<typename T>
-void DateTime::setTime(long long nr) {
+void DateTime::setTime(long long nr){
 	system_clock::time_point tmp = this->tp;
-	
+
 	T nr_old = duration_cast<T>(tmp.time_since_epoch());
 	tmp -= nr_old;
 
@@ -539,12 +598,10 @@ void DateTime::setTime(long long nr) {
 	this->tp = tmp;
 }
 
-String * DateTime::getWeekdayName(short wd_nr)
-{
+String DateTime::getWeekdayName(short wd_nr){
 	char* wd;
 
-	switch (wd_nr)
-	{
+	switch(wd_nr){
 	case 0:
 		wd = "Sunday";
 		break;
@@ -568,15 +625,13 @@ String * DateTime::getWeekdayName(short wd_nr)
 		break;
 	}
 
-	return new String(wd);
+	return String(wd);
 }
 
-String * DateTime::getMonthName(short mon_nr)
-{
+String DateTime::getMonthName(short mon_nr){
 	char* mon;
 
-	switch (mon_nr)
-	{
+	switch(mon_nr){
 	case 0:
 		mon = "January";
 		break;
@@ -615,5 +670,5 @@ String * DateTime::getMonthName(short mon_nr)
 		break;
 	}
 
-	return new String(mon);
+	return String(mon);
 }

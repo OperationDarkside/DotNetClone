@@ -73,6 +73,6 @@ void DataRowCollection::RemoveAt(unsigned long index){
 	}
 }
 
-DataRow & DataRowCollection::operator[](int columnNr){
+DataRow & DataRowCollection::operator[](unsigned int columnNr){
 	return this->rows[columnNr];
 }

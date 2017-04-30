@@ -76,7 +76,7 @@ public:
 
 	@param value String to write
 	*/
-	static void Write(String* value);
+	static void Write(String& value);
 	/**
 	Writes a c_string's substring to the standard outputstream
 
@@ -142,7 +142,7 @@ public:
 
 	@param value String to write
 	*/
-	static void WriteLine(String* value);
+	static void WriteLine(String& value);
 	/**
 	Writes a c_string's substring with a new line to the standard outputstream
 

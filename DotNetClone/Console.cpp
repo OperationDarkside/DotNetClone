@@ -72,9 +72,9 @@ void Console::Write(Object * value)
 	cout << value->toString();
 }
 
-void Console::Write(String * value)
+void Console::Write(String& value)
 {
-	cout << value->getStringValue();
+	cout << value.getStringValue();
 }
 
 void Console::Write(char * buffer, long startIndex, long count)
@@ -153,7 +153,7 @@ void Console::WriteLine(Object * value)
 	cout << endl;
 }
 
-void Console::WriteLine(String * value)
+void Console::WriteLine(String& value)
 {
 	Write(value);
 	cout << endl;

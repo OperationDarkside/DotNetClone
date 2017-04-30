@@ -67,6 +67,10 @@ DataRowCollection& DataTable::Rows()
 	return this->rows;
 }
 
+DataRow & DataTable::operator[](unsigned int rowIndex){
+	return this->rows[rowIndex];
+}
+
 void DataTable::RemoveColumn(size_t index){
 	size_t len = 0;
 

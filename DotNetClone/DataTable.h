@@ -60,6 +60,8 @@ public:
 	Returns a reference to the rows of this instance
 	*/
 	DataRowCollection& Rows();
+
+	DataRow& operator[](unsigned int rowIndex);
 private:
 	String name;
 	DataColumnCollection columns;

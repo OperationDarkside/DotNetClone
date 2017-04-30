@@ -48,7 +48,7 @@ public:
 	*/
 	void RemoveAt(unsigned long index);
 
-	DataRow& operator[](int columnNr);
+	DataRow& operator[](unsigned int columnNr);
 	
 private:
 	vector<DataRow> rows;

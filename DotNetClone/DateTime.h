@@ -1,8 +1,10 @@
+#pragma once
 #include "TimeSpan.h"
 #include "String.h"
 #include <ctime>
 #include <chrono>
-#pragma once
+
+
 
 using namespace std;
 using namespace std::chrono;
@@ -81,14 +83,14 @@ public:
 	@param days Number of days to be added
 	@return This instance with the added days
 	*/
-	DateTime addDays(double days);
+	DateTime addDays(long long days);
 	/**
 	Adds the given hours to this instance's timepoint
 
 	@param hours Number of hours to be added
 	@return This instance with the added hours
 	*/
-	DateTime addHours(double hours);
+	DateTime addHours(long long hours);
 	/**
 	Adds the given microsedonds to this instance's timepoint
 
@@ -102,28 +104,28 @@ public:
 	@param milliseconds Number of milliseconds to be added
 	@return This instance with the added milliseconds
 	*/
-	DateTime addMilliseconds(double milliseconds);
+	DateTime addMilliseconds(long long milliseconds);
 	/**
 	Adds the given minutes to this instance's timepoint
 
 	@param minutes Number of minutes to be added
 	@return This instance with the added minutes
 	*/
-	DateTime addMinutes(double minutes);
+	DateTime addMinutes(long long minutes);
 	/**
 	Adds the given months to this instance's timepoint
 
 	@param months Number of months to be added
 	@return This instance with the added months
 	*/
-	DateTime addMonths(double months);
+	DateTime addMonths(long long months);
 	/**
 	Adds the given seconds to this instance's timepoint
 
 	@param seconds Number of seconds to be added
 	@return This instance with the added seconds
 	*/
-	DateTime addSeconds(double seconds);
+	DateTime addSeconds(long long seconds);
 	/**
 	Adds the given ticks to this instance's timepoint (might change)
 
@@ -250,13 +252,13 @@ public:
 
 	@return Milliseconds component
 	*/
-	long long Millisecond();
+	unsigned int Millisecond();
 	/**
 	Sets the millisecond component of this instance
 
 	@param ms Millisecond component to set
 	*/
-	void Millisecond(long long ms);
+	void Millisecond(unsigned int ms);
 	/**
 	Returns the current minutes of this instance
 
@@ -320,8 +322,8 @@ public:
 private:
 	time_point<system_clock> tp;
 
-	String* getWeekdayName(short wd_nr);
-	String* getMonthName(short mon_nr);
+	String getWeekdayName(short wd_nr);
+	String getMonthName(short mon_nr);
 	template<typename T>
 	void setTime(long long nr);
 

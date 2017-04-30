@@ -5,8 +5,8 @@
 #include "Boolean.h"
 #include "DataTable.h"
 #include <iostream>
-#include <chrono>
-#include <ctime>
+// #include <chrono>
+// #include <ctime>
 #include <iostream>
 #include <typeinfo>
 #include "DataColumnCollection.h"
@@ -16,7 +16,6 @@
 #include "MySqlDataAdapter.h"
 #include <my_global.h>
 #include "mysql.h"
-
 
 
 String compare_clone(){
@@ -484,13 +483,13 @@ int main(){
 
 	*sssss += "Welt Nr." + std::to_string(75) + *str2;
 
-	Console::WriteLine(sssss);
+	Console::WriteLine(*sssss);
 
 	String peter("BLUBB PETER");
 
 	peter = peter.toLower();
 
-	Console::WriteLine(&peter);
+	Console::WriteLine(peter);
 
 	Console::WriteLine(peter.contains(&String("b")));
 
@@ -505,7 +504,7 @@ int main(){
 
 	DataRow row = table.Rows()[0];
 
-	Console::WriteLine(&row.Field<String>(0));
+	Console::WriteLine(row.Field<String>(0));
 	Console::WriteLine(row.Field<bool>(1));
 
 
@@ -596,7 +595,7 @@ int main(){
 
 	con.Open();
 
-	MySqlCommand cmd(String("SELECT * FROM test"), &con);
+	MySqlCommand cmd(String("SELECT * FROM test WHERE ID = ?"), &con);
 	cmd.Parameters().Add(MySqlParameter(MySqlDbTypes::LONG, 3));
 
 	MySqlDataAdapter adapt(cmd);
@@ -608,11 +607,19 @@ int main(){
 	con.Close();
 	
 	Console::Write("Tablename: ");
-	Console::WriteLine(&memTable.TableName());
+	Console::WriteLine(memTable.TableName());
 
-	Console::Write(memTable.Rows()[0].Field<long>(0));
+	Console::Write(memTable[0].Field<long>(0));
 	Console::Write(" | ");
-	Console::WriteLine(&memTable.Rows()[0].Field<String>(1));
+	Console::Write(memTable[0].Field<String>(1));
+	Console::Write(" | "); // 2017-04-02T15:24:44
+	DateTime dt_temp = memTable[0].Field<DateTime>(2);
+	Console::WriteLine(&dt_temp);
+
+	DateTime dt_date = dt_temp.Date();
+	Console::WriteLine(&dt_date);
+
+	memTable.Clear();
 
 	system("PAUSE");
 }
