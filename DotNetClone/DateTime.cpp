@@ -1,5 +1,12 @@
 #include "DateTime.h"
 #include "Convert.h"
+#include "date.h"
+
+/*
+Many thanks to Howard Hinnant, who published his great algorithm to get the days since epoche and back.
+Link to the paper: http://howardhinnant.github.io/date_algorithms.html
+Link to github: https://github.com/HowardHinnant/date
+*/
 
 
 DateTime::DateTime(){}
@@ -10,9 +17,14 @@ DateTime::DateTime(long long ms){
 }
 
 DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day){
-	this->tp += years(year);
-	this->tp += months(month);
-	this->tp += days(day);
+	year -= month <= 2;
+	const int era_t = (year >= 0 ? year : year - 399) / 400;
+	const unsigned yoe_t = static_cast<unsigned>(year - era_t * 400);      // [0, 399]
+	const unsigned doy_t = (153 * (month + (month > 2 ? -3 : 9)) + 2) / 5 + day - 1;  // [0, 365]
+	const unsigned doe_t = yoe_t * 365 + yoe_t / 4 - yoe_t / 100 + doy_t;         // [0, 146096]
+	int days_since_epoch = era_t * 146097 + static_cast<int>(doe_t) - 719468;
+
+	this->tp += days(days_since_epoch);
 }
 
 
@@ -49,63 +61,79 @@ DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day, unsi
 DateTime::~DateTime(){}
 
 DateTime DateTime::add(TimeSpan * span){
-	this->tp += microseconds(span->totalMicroseconds());
+	time_point<system_clock> tp_new;
 
-	return *this;
+	tp_new = this->tp + microseconds(span->totalMicroseconds());
+
+	return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
 }
 
 DateTime DateTime::addDays(long long value){
-	this->tp += days(value);
+	time_point<system_clock> tp_new;
 
-	return *this;
+	tp_new = this->tp + days(value);
+
+	return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
 }
 
 DateTime DateTime::addHours(long long value){
-	this->tp += hours(value);
+	time_point<system_clock> tp_new;
 
-	return *this;
+	tp_new = this->tp + hours(value);
+
+	return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
 }
 
 DateTime DateTime::addMicroseconds(long long ms){
-	this->tp += microseconds(ms);
+	time_point<system_clock> tp_new;
 
-	return *this;
+	tp_new = this->tp + microseconds(ms);
+
+	return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
 }
 
 DateTime DateTime::addMilliseconds(long long value){
-	this->tp += milliseconds(value);
+	time_point<system_clock> tp_new;
 
-	return *this;
+	tp_new = this->tp + milliseconds(value);
+
+	return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
 }
 
 DateTime DateTime::addMinutes(long long value){
-	this->tp += minutes(value);
+	time_point<system_clock> tp_new;
 
-	return *this;
+	tp_new = this->tp + minutes(value);
+
+	return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
 }
 
 DateTime DateTime::addMonths(long long value){
-	this->tp += months(value);
+	time_point<system_clock> tp_new;
 
-	return *this;
+	tp_new = this->tp + months(value);
+
+	return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
 }
 
 DateTime DateTime::addSeconds(long long value){
-	this->tp += seconds(value);
+	time_point<system_clock> tp_new;
 
-	return *this;
+	tp_new = this->tp + seconds(value);
+
+	return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
 }
 
 DateTime DateTime::addTicks(long long ms){
-	this->tp += microseconds(ms);
-
-	return *this;
+	return this->addMicroseconds(ms);
 }
 
 DateTime DateTime::addYears(long value){
-	this->tp += years(value);
+	time_point<system_clock> tp_new;
 
-	return *this;
+	tp_new = this->tp + years(value);
+
+	return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
 }
 
 int DateTime::compareTo(DateTime * value){
@@ -139,41 +167,88 @@ DateTime DateTime::substract(TimeSpan * value){
 }
 
 String DateTime::toLongDateString(){
-	time_t tt;
-	tm* tm;
-	years ys;
-	months mons;
+	//time_t tt;
+	//tm* tm1;
+	//years ys;
+	//months mons;
 	days ds;
 	milliseconds ms;
 	time_point<system_clock> tp_temp;
-	time_point<system_clock> tp_wd;
+	// time_point<system_clock> tp_wd;
 	String res;
+
 
 	tp_temp = this->tp;
 	ms = duration_cast<milliseconds>(tp_temp.time_since_epoch());
 
-	ys = duration_cast<years>(ms);
+
+
+
+	/*int year_t = 2017;
+	int month_t = 2;
+	int day_t = 28;
+
+	year_t -= month_t <= 2;
+	const int era_t = (year_t >= 0 ? year_t : year_t - 399) / 400;
+	const unsigned yoe_t = static_cast<unsigned>(year_t - era_t * 400);      // [0, 399]
+	const unsigned doy_t = (153 * (month_t + (month_t > 2 ? -3 : 9)) + 2) / 5 + day_t - 1;  // [0, 365]
+	const unsigned doe_t = yoe_t * 365 + yoe_t / 4 - yoe_t / 100 + doy_t;         // [0, 146096]
+	int days_since_epoch = era_t * 146097 + static_cast<int>(doe_t) - 719468;*/
+	int z = 0;
+	int era = 0;
+	int doe = 0;
+	int yoe = 0;
+	int y = 0;
+	int doy = 0;
+	int mp = 0;
+	int d = 0;
+	int m = 0;
+	int year_final = 0;
+
+	z = duration_cast<days>(ms).count() + 719468;
+	era = (z >= 0 ? z : z - 146096) / 146097;
+	doe = static_cast<unsigned>(z - era * 146097);          // [0, 146096]
+	yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;  // [0, 399]
+	y = static_cast<days::rep>(yoe) + era * 400;
+	doy = doe - (365 * yoe + yoe / 4 - yoe / 100);                // [0, 365]
+	mp = (5 * doy + 2) / 153;                                   // [0, 11]
+	d = doy - (153 * mp + 2) / 5 + 1;                             // [1, 31]
+	m = mp < 10 ? mp + 3 : mp - 9;                              // [1, 12]
+	year_final = y + (m <= 2);
+	//return year_month_day{date::year{y + (m <= 2)}, date::month(m), date::day(d)};
+
+
+	/*ys = duration_cast<years>(ms);
 	ms -= ys;
 	mons = duration_cast<months>(ms);
 	ms -= mons;
 	ds = duration_cast<days>(ms);
 
-	if(ys > years(1900)){
-		tp_wd = tp_temp - years(1900);
+	if(ys > years(1970)){
+		tp_wd = tp_temp - years(1970);
 	} else{
 		tp_wd = tp_temp;
 	}
 
 	tt = system_clock::to_time_t(tp_wd);
-	tm = localtime(&tt);
+	tm1 = localtime(&tt);*/
+	int wd = 0;
 
-	res += this->getWeekdayName(tm->tm_wday);
+	if(z >= -4){
+		wd = (z + 3) % 7;
+	} else{
+		wd = (z + 5) % 7 + 6;
+	}
+
+	//int wd = static_cast<unsigned>(z >= -4 ? (z + 4) % 7 : (z + 5) % 7 + 6);
+
+	res += this->getWeekdayName(wd);
 	res += ", ";
-	res += this->getMonthName(mons.count());
+	res += this->getMonthName(m - 1);
 	res += " ";
-	res += Convert::toString(ds.count()).padLeft(2, '0');
+	res += Convert::toString(d).padLeft(2, '0');
 	res += ", ";
-	res += Convert::toString(ys.count()).padLeft(4, '0');
+	res += Convert::toString(year_final).padLeft(4, '0');
 
 	return res;
 }
@@ -602,27 +677,27 @@ String DateTime::getWeekdayName(short wd_nr){
 	char* wd;
 
 	switch(wd_nr){
-	case 0:
-		wd = "Sunday";
-		break;
-	case 1:
-		wd = "Monday";
-		break;
-	case 2:
-		wd = "Tuesday";
-		break;
-	case 3:
-		wd = "Wednesday";
-		break;
-	case 4:
-		wd = "Thursday";
-		break;
-	case 5:
-		wd = "Friday";
-		break;
-	case 6:
-		wd = "Saturday";
-		break;
+		case 0:
+			wd = "Sunday";
+			break;
+		case 1:
+			wd = "Monday";
+			break;
+		case 2:
+			wd = "Tuesday";
+			break;
+		case 3:
+			wd = "Wednesday";
+			break;
+		case 4:
+			wd = "Thursday";
+			break;
+		case 5:
+			wd = "Friday";
+			break;
+		case 6:
+			wd = "Saturday";
+			break;
 	}
 
 	return String(wd);
@@ -632,42 +707,42 @@ String DateTime::getMonthName(short mon_nr){
 	char* mon;
 
 	switch(mon_nr){
-	case 0:
-		mon = "January";
-		break;
-	case 1:
-		mon = "February";
-		break;
-	case 2:
-		mon = "March";
-		break;
-	case 3:
-		mon = "April";
-		break;
-	case 4:
-		mon = "May";
-		break;
-	case 5:
-		mon = "June";
-		break;
-	case 6:
-		mon = "July";
-		break;
-	case 7:
-		mon = "August";
-		break;
-	case 8:
-		mon = "September";
-		break;
-	case 9:
-		mon = "October";
-		break;
-	case 10:
-		mon = "November";
-		break;
-	case 11:
-		mon = "December";
-		break;
+		case 0:
+			mon = "January";
+			break;
+		case 1:
+			mon = "February";
+			break;
+		case 2:
+			mon = "March";
+			break;
+		case 3:
+			mon = "April";
+			break;
+		case 4:
+			mon = "May";
+			break;
+		case 5:
+			mon = "June";
+			break;
+		case 6:
+			mon = "July";
+			break;
+		case 7:
+			mon = "August";
+			break;
+		case 8:
+			mon = "September";
+			break;
+		case 9:
+			mon = "October";
+			break;
+		case 10:
+			mon = "November";
+			break;
+		case 11:
+			mon = "December";
+			break;
 	}
 
 	return String(mon);

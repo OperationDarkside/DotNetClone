@@ -322,12 +322,16 @@ public:
 private:
 	time_point<system_clock> tp;
 
+	
 	String getWeekdayName(short wd_nr);
 	String getMonthName(short mon_nr);
 	template<typename T>
 	void setTime(long long nr);
-
+	
 	typedef duration<int, ratio_multiply<hours::period, ratio<24> >::type> days;
 	typedef duration<int, ratio_multiply<hours::period, ratio<24 * 30> >::type> months;
 	typedef duration<int, ratio_multiply<hours::period, ratio<24 * 365> >::type> years;
+	//typedef tuple<years, months, days> ymd;
+
+	tuple<years, months, days> from_days(days ds);
 };

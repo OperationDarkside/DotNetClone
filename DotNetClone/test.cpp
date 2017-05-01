@@ -459,6 +459,8 @@ void test_String_Class(){
 int main(){
 	test_String_Class();
 
+	/*DateTime dt_wd_test(2017,5,1);
+	dt_wd_test.toLongDateString();*/
 
 	DateTime* dt = new DateTime(2017, 2, 4);
 	std::cout << dt->Day() << "-" << dt->Month() << "-" << dt->Year() << std::endl;
@@ -605,7 +607,7 @@ int main(){
 	adapt.Fill(memTable);
 
 	con.Close();
-	
+
 	Console::Write("Tablename: ");
 	Console::WriteLine(memTable.TableName());
 
@@ -620,6 +622,12 @@ int main(){
 	Console::WriteLine(&dt_date);
 
 	memTable.Clear();
+
+	DateTime dt_february_test(2017, 1, 28);
+	dt_february_test.addDays(3);
+	Console::WriteLine(&dt_february_test);
+
+
 
 	system("PAUSE");
 }
