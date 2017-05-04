@@ -245,3 +245,5 @@ ModelManifest.xml
 .fake/
 /DotNetClone/mysql
 /DotNetClone/boost_include/boost
+/DNC/boost_include/boost
+/DNC/mysql
