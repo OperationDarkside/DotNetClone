@@ -1,6 +1,8 @@
 # ProjectDNC
 The purpose of this project is to provide basic classes and functionality to make code more readable. Due to restrictions of C++ there are some modifications. In the future there may be non-dotnet classes.
 
+**CAUTION**: This code is in an experimental state
+
 Motivation:
 C++ is not the programming language I learned from the start. So coming from C# and Java I had problems reading C++ Code.
 I'm aware, that the .NET Framework is available for C++, but the code then is not native and cross-plattform anymore.
