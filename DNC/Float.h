@@ -1,18 +1,24 @@
 #include "String.h"
 
 #pragma once
-class Float : public Object {
-public:
-	Float();
-	Float(float f);
-	~Float();
 
-	string toString();
-	string getTypeString();
+namespace dnc{
 
-	Float operator=(float f);
-	operator float();
-private:
-	float value;
-};
+	/**
+	Object related wrapper for the float type
+	*/
+	class Float: public Object{
+	public:
+		Float();
+		Float(float f);
+		~Float();
 
+		string toString();
+		string getTypeString();
+
+		Float operator=(float f);
+		operator float();
+	private:
+		float value;
+	};
+}

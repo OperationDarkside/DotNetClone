@@ -3,59 +3,63 @@
 #include "MySqlParameterCollection.h"
 
 #pragma once
-class MySqlCommand : public SqlCommand {
 
-	friend class MySqlConnection;
+namespace dnc::Data::SqlClient{
 
-public:
-	MySqlCommand();
-	MySqlCommand(String& cmdText);
-	MySqlCommand(String& cmdText, MySqlConnection* connection);
-	~MySqlCommand();
+	class MySqlCommand: public SqlCommand{
 
-	string toString();
-	string getTypeString();
+		friend class MySqlConnection;
 
-	int ExecuteNonQuery();
-	MySqlDataReader ExecuteReader();
-	template <typename T>
-	T ExecuteScalar();
+	public:
+		MySqlCommand();
+		MySqlCommand(String& cmdText);
+		MySqlCommand(String& cmdText, MySqlConnection* connection);
+		~MySqlCommand();
 
-	MySqlParameterCollection& Parameters();
-	void Parameters(MySqlParameterCollection& parameters);
+		string toString();
+		string getTypeString();
 
-private:
-	MySqlParameterCollection parameters;
+		int ExecuteNonQuery();
+		MySqlDataReader ExecuteReader();
+		template <typename T>
+		T ExecuteScalar();
 
-	MYSQL_BIND* bindParameters();
-};
+		MySqlParameterCollection& Parameters();
+		void Parameters(MySqlParameterCollection& parameters);
 
-template<typename T>
-inline T MySqlCommand::ExecuteScalar(){
-	String cmd;
-	SqlConnection* con;
-	MySqlConnection* myCon;
-	T resTemplate;
+	private:
+		MySqlParameterCollection parameters;
 
-	cmd = this->CommandText();
+		MYSQL_BIND* bindParameters();
+	};
 
-	if(cmd == ""){
-		throw "The command is empty";
+	template<typename T>
+	inline T MySqlCommand::ExecuteScalar(){
+		String cmd;
+		SqlConnection* con;
+		MySqlConnection* myCon;
+		T resTemplate;
+
+		cmd = this->CommandText();
+
+		if(cmd == ""){
+			throw "The command is empty";
+		}
+
+		con = this->Connection();
+
+		if(con == nullptr){
+			throw "Connection is null";
+		}
+
+		myCon = dynamic_cast<MySqlConnection*>(con);
+
+		if(!myCon->conn.connected()){
+			throw "Connection is closed";
+		}
+
+		//resTemplate = ;
+
+		return resTemplate;
 	}
-
-	con = this->Connection();
-
-	if(con == nullptr){
-		throw "Connection is null";
-	}
-
-	myCon = dynamic_cast<MySqlConnection*>(con);
-
-	if(!myCon->conn.connected()){
-		throw "Connection is closed";
-	}
-
-	//resTemplate = ;
-
-	return resTemplate;
 }

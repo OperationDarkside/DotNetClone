@@ -1,26 +1,27 @@
 #include "LongLong.h"
 
+namespace dnc{
+
+	LongLong::LongLong(){}
+
+	LongLong::LongLong(long long ll):value(ll){}
 
 
-LongLong::LongLong(){}
+	LongLong::~LongLong(){}
 
-LongLong::LongLong(long long ll):value(ll){}
+	string LongLong::toString(){
+		return to_string(this->value);
+	}
 
+	string LongLong::getTypeString(){
+		return string("LongLong");
+	}
 
-LongLong::~LongLong(){}
+	LongLong LongLong::operator=(long long ll){
+		return LongLong(ll);
+	}
 
-string LongLong::toString(){
-	return string("System.LongLong");
-}
-
-string LongLong::getTypeString(){
-	return string("LongLong");
-}
-
-LongLong LongLong::operator=(long long ll){
-	return LongLong(ll);
-}
-
-LongLong::operator long long(){
-	return this->value;
+	LongLong::operator long long(){
+		return this->value;
+	}
 }

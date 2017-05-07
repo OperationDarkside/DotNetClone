@@ -1,25 +1,26 @@
 #include "Short.h"
 
+namespace dnc{
 
+	Short::Short(){}
 
-Short::Short(){}
+	Short::Short(short s): value(s){}
 
-Short::Short(short s) : value(s){}
+	Short::~Short(){}
 
-Short::~Short(){}
+	string Short::toString(){
+		return string("System.Short");
+	}
 
-string Short::toString(){
-	return string("System.Short");
-}
+	string Short::getTypeString(){
+		return to_string(this->value);
+	}
 
-string Short::getTypeString(){
-	return string("Short");
-}
+	Short Short::operator=(short s){
+		return Short(s);
+	}
 
-Short Short::operator=(short s){
-	return Short(s);
-}
-
-Short::operator short(){
-	return this->value;
+	Short::operator short(){
+		return this->value;
+	}
 }

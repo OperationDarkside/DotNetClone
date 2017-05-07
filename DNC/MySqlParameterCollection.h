@@ -1,44 +1,46 @@
 #pragma once
 #include "MySqlParameter.h"
 
-class MySqlParameterCollection{
-public:
-	MySqlParameterCollection();
-	~MySqlParameterCollection();
+namespace dnc::Data::SqlClient{
 
-	string toString();
-	string getTypeString();
+	class MySqlParameterCollection{
+	public:
+		MySqlParameterCollection();
+		~MySqlParameterCollection();
 
-	friend class DataTable;
+		string toString();
+		string getTypeString();
 
-	/**
-	Adds a MySqlParameter instance to this collection
+		friend class DataTable;
 
-	@param The MySqlParameter to be added
-	*/
-	void Add(MySqlParameter& parameter);
-	/**
-	Removes all MySqlParameters from this instance
-	*/
-	void Clear();
-	/**
-	Returns the amount of MySqlParameters in this collection
+		/**
+		Adds a MySqlParameter instance to this collection
 
-	@return The row count
-	*/
-	long Count();
-	/**
-	Returns the index of the given MySqlParameter instance in this collection
-	*/
-	int IndexOf(MySqlParameter& parameter);
-	/**
-	Inserts the given MySqlParameter at the given position
-	*/
-	void InsertAt(MySqlParameter& parameter, int pos);
+		@param The MySqlParameter to be added
+		*/
+		void Add(MySqlParameter& parameter);
+		/**
+		Removes all MySqlParameters from this instance
+		*/
+		void Clear();
+		/**
+		Returns the amount of MySqlParameters in this collection
 
-	MySqlParameter& operator[](int columnNr);
+		@return The row count
+		*/
+		long Count();
+		/**
+		Returns the index of the given MySqlParameter instance in this collection
+		*/
+		int IndexOf(MySqlParameter& parameter);
+		/**
+		Inserts the given MySqlParameter at the given position
+		*/
+		void InsertAt(MySqlParameter& parameter, int pos);
 
-private:
-	vector<MySqlParameter> paramters;
-};
+		MySqlParameter& operator[](int columnNr);
 
+	private:
+		vector<MySqlParameter> paramters;
+	};
+}

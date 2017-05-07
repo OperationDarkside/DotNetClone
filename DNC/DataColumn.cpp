@@ -1,51 +1,53 @@
 #include "DataColumn.h"
 
-DataColumn::DataColumn(){}
+namespace dnc::Data{
 
-DataColumn::DataColumn(const char * name, Type& type){
-	this->name = String(&string(name));
-	this->type = type;
-}
+	DataColumn::DataColumn(){}
 
-DataColumn::DataColumn(String & name, Type& type){
-	this->name = name;
-	this->type = type;
-}
+	DataColumn::DataColumn(const char * name, Type& type){
+		this->name = String(&string(name));
+		this->type = type;
+	}
 
-DataColumn::~DataColumn(){
-}
+	DataColumn::DataColumn(String & name, Type& type){
+		this->name = name;
+		this->type = type;
+	}
 
-string DataColumn::toString(){
-	return string("System.Data.DataColumn");
-}
+	DataColumn::~DataColumn(){}
 
-string DataColumn::getTypeString(){
-	return string("DataColumn");
-}
+	string DataColumn::toString(){
+		return string("System.Data.DataColumn");
+	}
 
-bool DataColumn::checkType(Type& type){
-	return this->type == type;
-}
+	string DataColumn::getTypeString(){
+		return string("DataColumn");
+	}
 
-String DataColumn::ColumnName(){
-	return this->name;
-}
+	bool DataColumn::checkType(Type& type){
+		return this->type == type;
+	}
 
-void DataColumn::ColumnName(const char * columnName){
-	String* str = new String(&string(columnName));
-	this->name = str;
-}
+	String DataColumn::ColumnName(){
+		return this->name;
+	}
 
-void DataColumn::ColumnName(String & columnName){
-	String* str = new String(columnName);
-	this->name = str;
-}
+	void DataColumn::ColumnName(const char * columnName){
+		String* str = new String(&string(columnName));
+		this->name = str;
+	}
 
-Type DataColumn::DataType(){
+	void DataColumn::ColumnName(String & columnName){
+		String* str = new String(columnName);
+		this->name = str;
+	}
 
-	return this->type;
-}
+	Type DataColumn::DataType(){
 
-void DataColumn::DataType(Type & type){
-	this->type = type;
+		return this->type;
+	}
+
+	void DataColumn::DataType(Type & type){
+		this->type = type;
+	}
 }

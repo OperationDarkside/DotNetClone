@@ -7,38 +7,40 @@
 #include "String.h"
 #include <typeinfo>
 
-/**
-Stores the type of a class/primitive Type
-*/
-class Type : public Object {
-public:
-	Type();
-	Type(size_t hashcode, String& name);
-	~Type();
+namespace dnc{
 
 	/**
-	Returns a Type class instance of the given class
-
-	@param var variable of the seeked Type
+	Stores the type of a class/primitive Type
 	*/
-	template <typename T>
-	static Type getType(T var);
+	class Type: public Object{
+	public:
+		Type();
+		Type(size_t hashcode, String& name);
+		~Type();
 
-	bool operator==(Type& t);
+		/**
+		Returns a Type class instance of the given class
 
-private:
-	size_t code = 0;
-	String* name;
-};
+		@param var variable of the seeked Type
+		*/
+		template <typename T>
+		static Type getType(T var);
 
-template<typename T>
-inline Type Type::getType(T var){
-	const type_info& ti = typeid(var);
+		bool operator==(Type& t);
 
-	size_t code = ti.hash_code();
-	String* n = new String(&string(ti.name()));
+	private:
+		size_t code = 0;
+		String* name;
+	};
 
-	return Type(code, *n);
+	template<typename T>
+	inline Type Type::getType(T var){
+		const type_info& ti = typeid(var);
+
+		size_t code = ti.hash_code();
+		String* n = new String(&string(ti.name()));
+
+		return Type(code, *n);
+	}
 }
-
 #endif // !TYPE_H

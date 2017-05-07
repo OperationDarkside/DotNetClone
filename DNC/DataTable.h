@@ -7,66 +7,70 @@
 #include "DataColumnCollection.h"
 
 #pragma once
-/**
-In-Memory dynamic Table class
-*/
-class DataTable: public Object{
 
-	friend class DataColumnCollection;
+namespace dnc::Data {
 
-public:
-	// Constructors
-	DataTable();
-	DataTable(const char* name);
-	DataTable(String& name);
-	~DataTable();
-
-	// Inherited
-	string toString();
-	string getTypeString();
-
-	//Methods
 	/**
-	Creates a new DataRow with a link to the columns
-
-	@return New DataRow
+	In-Memory dynamic Table class
 	*/
-	DataRow NewRow();
-	/**
-	Removes all columns and rows
-	*/
-	void Clear();
+	class DataTable: public Object{
 
-	//Properties
-	/**
-	Returns the name of this table
+		friend class DataColumnCollection;
 
-	@return name
-	*/
-	String TableName();
-	/**
-	Sets the name of this DataTable instance
+	public:
+		// Constructors
+		DataTable();
+		DataTable(const char* name);
+		DataTable(String& name);
+		~DataTable();
 
-	@param name String with the name
-	*/
-	void TableName(String& name);
-	/**
-	Returns a reference to the columns of this instance
+		// Inherited
+		string toString();
+		string getTypeString();
 
-	@return columns
-	*/
-	DataColumnCollection& Columns();
-	/**
-	Returns a reference to the rows of this instance
-	*/
-	DataRowCollection& Rows();
+		//Methods
+		/**
+		Creates a new DataRow with a link to the columns
 
-	DataRow& operator[](unsigned int rowIndex);
-private:
-	String name;
-	DataColumnCollection columns;
-	DataRowCollection rows;
+		@return New DataRow
+		*/
+		DataRow NewRow();
+		/**
+		Removes all columns and rows
+		*/
+		void Clear();
 
-	void RemoveColumn(size_t index);
-};
+		//Properties
+		/**
+		Returns the name of this table
+
+		@return name
+		*/
+		String TableName();
+		/**
+		Sets the name of this DataTable instance
+
+		@param name String with the name
+		*/
+		void TableName(String& name);
+		/**
+		Returns a reference to the columns of this instance
+
+		@return columns
+		*/
+		DataColumnCollection& Columns();
+		/**
+		Returns a reference to the rows of this instance
+		*/
+		DataRowCollection& Rows();
+
+		DataRow& operator[](unsigned int rowIndex);
+	private:
+		String name;
+		DataColumnCollection columns;
+		DataRowCollection rows;
+
+		void RemoveColumn(size_t index);
+	};
+}
 #endif // !DATATABLE_H

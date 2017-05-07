@@ -1,11 +1,14 @@
 #include "Type.h"
 
-Type::Type(){}
+namespace dnc{
 
-Type::Type(size_t hashcode, String& name) : code(hashcode) , name(new String(name)) {}
+	Type::Type(){}
 
-Type::~Type(){}
+	Type::Type(size_t hashcode, String& name): code(hashcode), name(new String(name)){}
 
-bool Type::operator==(Type& t){
-	return this->code == t.code;
+	Type::~Type(){}
+
+	bool Type::operator==(Type& t){
+		return this->code == t.code;
+	}
 }

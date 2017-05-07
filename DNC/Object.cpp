@@ -1,38 +1,31 @@
 #include "Object.h"
 
+namespace dnc{
+
+	Object::Object(){
+		generateHashCode();
+	}
 
 
-Object::Object()
-{
-	generateHashCode();
-}
+	Object::~Object(){}
 
+	bool Object::equals(Object * o){
+		return o == this;
+	}
 
-Object::~Object()
-{
-}
+	int Object::getHashCode(){
+		return hashCode;
+	}
 
-bool Object::equals(Object * o)
-{
-	return o == this;
-}
+	std::string Object::getTypeString(){
+		return std::string("Object");
+	}
 
-int Object::getHashCode()
-{
-	return hashCode;
-}
+	std::string Object::toString(){
+		return std::string("System.Object");
+	}
 
-std::string Object::getTypeString()
-{
-	return std::string("Object");
-}
-
-std::string Object::toString()
-{
-	return std::string("System.Object");
-}
-
-void Object::generateHashCode()
-{
-	hashCode = (int)this;
+	void Object::generateHashCode(){
+		hashCode = (int)this;
+	}
 }

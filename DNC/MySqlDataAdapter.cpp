@@ -1,30 +1,33 @@
 #include "MySqlDataAdapter.h"
 #include "MySqlConnection.h"
 
-MySqlDataAdapter::MySqlDataAdapter(){}
+namespace dnc::Data::SqlClient{
 
-MySqlDataAdapter::MySqlDataAdapter(MySqlCommand & command):cmd(command){
+	MySqlDataAdapter::MySqlDataAdapter(){}
 
-}
+	MySqlDataAdapter::MySqlDataAdapter(MySqlCommand & command):cmd(command){
 
-MySqlDataAdapter::MySqlDataAdapter(String & selectCommandText, MySqlConnection * connection){
-	this->cmd = MySqlCommand(selectCommandText, connection);
-}
+	}
 
-MySqlDataAdapter::MySqlDataAdapter(String & selectCommandText, String & connectionString){
-	MySqlConnection con(connectionString);
+	MySqlDataAdapter::MySqlDataAdapter(String & selectCommandText, MySqlConnection * connection){
+		this->cmd = MySqlCommand(selectCommandText, connection);
+	}
 
-	this->cmd = MySqlCommand(selectCommandText, &con);
-}
+	MySqlDataAdapter::MySqlDataAdapter(String & selectCommandText, String & connectionString){
+		MySqlConnection con(connectionString);
 
-MySqlDataAdapter::~MySqlDataAdapter(){}
+		this->cmd = MySqlCommand(selectCommandText, &con);
+	}
 
-long MySqlDataAdapter::Fill(DataTable& table){
-	long res = 0;
+	MySqlDataAdapter::~MySqlDataAdapter(){}
 
-	MySqlDataReader reader = this->cmd.ExecuteReader();;
+	long MySqlDataAdapter::Fill(DataTable& table){
+		long res = 0;
 
-	reader.FillTable(table);
+		MySqlDataReader reader = this->cmd.ExecuteReader();;
 
-	return table.Rows().Count();
+		reader.FillTable(table);
+
+		return table.Rows().Count();
+	}
 }

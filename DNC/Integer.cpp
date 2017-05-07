@@ -1,26 +1,27 @@
 #include "Integer.h"
 
+namespace dnc{
+
+	Integer::Integer(){}
+
+	Integer::Integer(int i): value(i){}
 
 
-Integer::Integer(){}
+	Integer::~Integer(){}
 
-Integer::Integer(int i) : value(i){}
+	string Integer::toString(){
+		return to_string(this->value);
+	}
 
+	string Integer::getTypeString(){
+		return string("Integer");
+	}
 
-Integer::~Integer(){}
+	Integer Integer::operator=(int i){
+		return Integer(i);
+	}
 
-string Integer::toString(){
-	return string("System.Integer");
-}
-
-string Integer::getTypeString(){
-	return string("Integer");
-}
-
-Integer Integer::operator=(int i){
-	return Integer(i);
-}
-
-Integer::operator int(){
-	return this->value;
+	Integer::operator int(){
+		return this->value;
+	}
 }

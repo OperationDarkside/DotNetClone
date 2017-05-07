@@ -17,6 +17,9 @@
 #include <my_global.h>
 #include "mysql.h"
 
+using namespace dnc;
+using namespace dnc::Data;
+using namespace dnc::Data::SqlClient;
 
 String compare_clone(){
 	String str("Something");
@@ -623,9 +626,10 @@ int main(){
 
 	memTable.Clear();
 
+
 	DateTime dt_february_test(2017, 1, 28);
-	dt_february_test.addDays(3);
-	Console::WriteLine(&dt_february_test);
+	dt_february_test = dt_february_test.addDays(3);
+	Console::WriteLine(dt_february_test.toUtcString());
 
 
 

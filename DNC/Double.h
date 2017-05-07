@@ -1,18 +1,24 @@
 #include "String.h"
 
 #pragma once
-class Double : public Object {
-public:
-	Double();
-	Double(double d);
-	~Double();
 
-	string toString();
-	string getTypeString();
+namespace dnc{
 
-	Double operator=(double d);
-	operator double();
-private:
-	double value;
-};
+	/**
+	Object related wrapper for the double type
+	*/
+	class Double: public Object{
+	public:
+		Double();
+		Double(double d);
+		~Double();
 
+		string toString();
+		string getTypeString();
+
+		Double operator=(double d);
+		operator double();
+	private:
+		double value;
+	};
+}

@@ -2,14 +2,16 @@
 
 #pragma once
 
-using namespace std;
+namespace dnc::Data::SqlClient{
 
-class SqlDataReader : public Object {
+	using namespace std;
 
-	friend class SqlCommand;
+	class SqlDataReader: public Object{
 
-public:
-	SqlDataReader();
-	~SqlDataReader();
-};
+		friend class SqlCommand;
 
+	public:
+		SqlDataReader();
+		~SqlDataReader();
+	};
+}

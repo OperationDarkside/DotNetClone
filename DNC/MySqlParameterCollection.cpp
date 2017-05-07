@@ -1,40 +1,41 @@
 #include "MySqlParameterCollection.h"
 
+namespace dnc::Data::SqlClient{
+
+	MySqlParameterCollection::MySqlParameterCollection(){}
 
 
-MySqlParameterCollection::MySqlParameterCollection(){}
+	MySqlParameterCollection::~MySqlParameterCollection(){}
 
+	string MySqlParameterCollection::toString(){
+		return string("System.Data.MySql.MySqlClient.MySqlParameterCollection");
+	}
 
-MySqlParameterCollection::~MySqlParameterCollection(){}
+	string MySqlParameterCollection::getTypeString(){
+		return string("MySqlParameterCollection");
+	}
 
-string MySqlParameterCollection::toString(){
-	return string("System.Data.MySql.MySqlClient.MySqlParameterCollection");
-}
+	void MySqlParameterCollection::Add(MySqlParameter & parameter){
+		this->paramters.push_back(parameter);
+	}
 
-string MySqlParameterCollection::getTypeString(){
-	return string("MySqlParameterCollection");
-}
+	void MySqlParameterCollection::Clear(){
+		this->paramters.clear();
+	}
 
-void MySqlParameterCollection::Add(MySqlParameter & parameter){
-	this->paramters.push_back(parameter);
-}
+	long MySqlParameterCollection::Count(){
+		return this->paramters.size();
+	}
 
-void MySqlParameterCollection::Clear(){
-	this->paramters.clear();
-}
+	int MySqlParameterCollection::IndexOf(MySqlParameter & parameter){
+		return 0;
+	}
 
-long MySqlParameterCollection::Count(){
-	return this->paramters.size();
-}
+	void MySqlParameterCollection::InsertAt(MySqlParameter & parameter, int pos){
+		this->paramters.insert(this->paramters.begin() + pos, parameter);
+	}
 
-int MySqlParameterCollection::IndexOf(MySqlParameter & parameter){
-	return 0;
-}
-
-void MySqlParameterCollection::InsertAt(MySqlParameter & parameter, int pos){
-	this->paramters.insert(this->paramters.begin() + pos, parameter);
-}
-
-MySqlParameter & MySqlParameterCollection::operator[](int columnNr){
-	return this->paramters[columnNr];
+	MySqlParameter & MySqlParameterCollection::operator[](int columnNr){
+		return this->paramters[columnNr];
+	}
 }

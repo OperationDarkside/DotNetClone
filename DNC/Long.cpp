@@ -1,25 +1,26 @@
 #include "Long.h"
 
+namespace dnc{
 
+	Long::Long(){}
 
-Long::Long(){}
+	Long::Long(long l): value(l){}
 
-Long::Long(long l) : value(l) {}
+	Long::~Long(){}
 
-Long::~Long(){}
+	string Long::toString(){
+		return to_string(this->value);
+	}
 
-string Long::toString(){
-	return string("System.Long");
-}
+	string Long::getTypeString(){
+		return string("Long");
+	}
 
-string Long::getTypeString(){
-	return string("Long");
-}
+	Long Long::operator=(long l){
+		return Long(l);
+	}
 
-Long Long::operator=(long l){
-	return Long(l);
-}
-
-Long::operator long(){
-	return this->value;
+	Long::operator long(){
+		return this->value;
+	}
 }

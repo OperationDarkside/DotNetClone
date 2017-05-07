@@ -1,34 +1,26 @@
 #include "Boolean.h"
 
+namespace dnc{
 
-Boolean::Boolean()
-{
-}
+	Boolean::Boolean(){}
 
-Boolean::Boolean(bool b) : value(b)
-{
-}
+	Boolean::Boolean(bool b): value(b){}
 
-Boolean::~Boolean()
-{
-}
+	Boolean::~Boolean(){}
 
-string Boolean::toString()
-{
-	return string("System.Boolean");
-}
+	string Boolean::toString(){
+		return to_string(this->value);
+	}
 
-string Boolean::getTypeString()
-{
-	return string("Boolean");
-}
+	string Boolean::getTypeString(){
+		return string("Boolean");
+	}
 
-Boolean Boolean::operator=(bool b)
-{
-	return Boolean(b);
-}
+	Boolean Boolean::operator=(bool b){
+		return Boolean(b);
+	}
 
-Boolean::operator bool()
-{
-	return this->value;
+	Boolean::operator bool(){
+		return this->value;
+	}
 }

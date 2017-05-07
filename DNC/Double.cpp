@@ -1,25 +1,26 @@
 #include "Double.h"
 
+namespace dnc{
 
+	Double::Double(){}
 
-Double::Double(){}
+	Double::Double(double d): value(d){}
 
-Double::Double(double d) : value(d) {}
+	Double::~Double(){}
 
-Double::~Double(){}
+	string Double::toString(){
+		return to_string(this->value);
+	}
 
-string Double::toString(){
-	return string("System.Double");
-}
+	string Double::getTypeString(){
+		return string("Double");
+	}
 
-string Double::getTypeString(){
-	return string("Double");
-}
+	Double Double::operator=(double d){
+		return Double(d);
+	}
 
-Double Double::operator=(double d){
-	return Double(d);
-}
-
-Double::operator double(){
-	return this->value;
+	Double::operator double(){
+		return this->value;
+	}
 }

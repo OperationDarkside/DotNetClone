@@ -1,18 +1,23 @@
 #pragma once
 #include "String.h"
 
-class Decimal : public Object{
-public:
-	Decimal();
-	Decimal(long double ld);
-	~Decimal();
+namespace dnc{
 
-	string toString();
-	string getTypeString();
+	/**
+	Object related wrapper for the long double type
+	*/
+	class Decimal: public Object{
+	public:
+		Decimal();
+		Decimal(long double ld);
+		~Decimal();
 
-	Decimal operator=(long double ld);
-	operator long double();
-private:
-	long double value;
-};
+		string toString();
+		string getTypeString();
 
+		Decimal operator=(long double ld);
+		operator long double();
+	private:
+		long double value;
+	};
+}
