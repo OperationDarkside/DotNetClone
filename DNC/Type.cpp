@@ -8,6 +8,14 @@ namespace dnc{
 
 	Type::~Type(){}
 
+	std::string Type::ToString(){
+		return this->name->getStringValue();
+	}
+
+	std::string Type::getTypeString(){
+		return std::string("Type");
+	}
+
 	bool Type::operator==(Type& t){
 		return this->code == t.code;
 	}

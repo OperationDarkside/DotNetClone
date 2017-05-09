@@ -5,9 +5,6 @@
 
 namespace dnc{
 
-	using namespace std;
-	using namespace std::chrono;
-
 	/**
 	Represents a duration of time (c++ chrono duration)
 	*/
@@ -82,8 +79,8 @@ namespace dnc{
 
 		@return The c++ string duration representation
 		*/
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 		/**
 		Returns duration of this instance in microseconds
 
@@ -165,8 +162,8 @@ namespace dnc{
 		*/
 		void Ticks(long long ticks);
 	private:
-		typedef duration<int, ratio_multiply<hours::period, ratio<24> >::type> days;
+		typedef std::chrono::duration<int, std::ratio_multiply<std::chrono::hours::period, std::ratio<24> >::type> days;
 
-		system_clock::duration dur;
+		std::chrono::system_clock::duration dur;
 	};
 }

@@ -12,8 +12,8 @@ namespace dnc{
 		Boolean(bool b);
 		~Boolean();
 
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		Boolean operator=(bool b);
 		operator bool();

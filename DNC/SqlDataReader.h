@@ -1,17 +1,20 @@
 #include "String.h"
 
 #pragma once
+namespace dnc{
+	namespace Data{
+		namespace SqlClient{
 
-namespace dnc::Data::SqlClient{
 
-	using namespace std;
 
-	class SqlDataReader: public Object{
+			class SqlDataReader: public Object{
 
-		friend class SqlCommand;
+				friend class SqlCommand;
 
-	public:
-		SqlDataReader();
-		~SqlDataReader();
-	};
+			public:
+				SqlDataReader();
+				~SqlDataReader();
+			};
+		}
+	}
 }

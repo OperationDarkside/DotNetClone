@@ -2,8 +2,6 @@
 #include "String.h"
 #include <iostream>
 
-using namespace std;
-
 namespace dnc{
 
 	/**
@@ -12,8 +10,8 @@ namespace dnc{
 	class Console: public Object{
 	public:
 
-		string getTypeString();
-		string toString();
+		std::string getTypeString();
+		std::string toString();
 		/**
 		Reads a single sign from the standard input stream
 

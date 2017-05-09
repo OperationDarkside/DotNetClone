@@ -3,61 +3,63 @@
 #include "Type.h"
 
 #pragma once
-namespace dnc::Data{
-
-	/**
-	Column Object for the DataTable class
-	*/
-	class DataColumn: public Object{
-	public:
-		DataColumn();
-		DataColumn(const char* name, Type& type);
-		DataColumn(String& name, Type& o);
-		~DataColumn();
-
-		string toString();
-		string getTypeString();
+namespace dnc{
+	namespace Data{
 
 		/**
-		Returns the name of this column instance
-
-		@return The column name
+		Column Object for the DataTable class
 		*/
-		String ColumnName();
-		/**
-		Sets the name of this column instance
+		class DataColumn: public Object{
+		public:
+			DataColumn();
+			DataColumn(const char* name, Type& type);
+			DataColumn(String& name, Type& o);
+			~DataColumn();
 
-		@param columnName The column name
-		*/
-		void ColumnName(const char* columnName);
-		/**
-		Sets the name of this column instance
+			std::string toString();
+			std::string getTypeString();
 
-		@param columnName The column name
-		*/
-		void ColumnName(String& columnName);
+			/**
+			Returns the name of this column instance
 
-		/**
-		Compares the DataType of this Column with the given Type
+			@return The column name
+			*/
+			String ColumnName();
+			/**
+			Sets the name of this column instance
 
-		@param var Variable of the Type to compare
-		*/
-		bool checkType(Type& type);
+			@param columnName The column name
+			*/
+			void ColumnName(const char* columnName);
+			/**
+			Sets the name of this column instance
 
-		/**
-		Returns the data type of this column instance
+			@param columnName The column name
+			*/
+			void ColumnName(String& columnName);
 
-		@return The column's data type
-		*/
-		Type DataType();
-		/**
-		Sets the data type of this column instance
+			/**
+			Compares the DataType of this Column with the given Type
 
-		@param type The column's data type
-		*/
-		void DataType(Type& type);
-	private:
-		String name;
-		Type type;
-	};
+			@param var Variable of the Type to compare
+			*/
+			bool checkType(Type& type);
+
+			/**
+			Returns the data type of this column instance
+
+			@return The column's data type
+			*/
+			Type DataType();
+			/**
+			Sets the data type of this column instance
+
+			@param type The column's data type
+			*/
+			void DataType(Type& type);
+		private:
+			String name;
+			Type type;
+		};
+	}
 }

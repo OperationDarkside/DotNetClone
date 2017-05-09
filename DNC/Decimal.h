@@ -12,8 +12,8 @@ namespace dnc{
 		Decimal(long double ld);
 		~Decimal();
 
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		Decimal operator=(long double ld);
 		operator long double();

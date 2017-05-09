@@ -3,11 +3,11 @@
 #pragma once
 
 namespace dnc{
-
 	/**
 	Represents the base class to all DNC Classes
 	*/
 	class Object{
+
 	public:
 		Object();
 		virtual ~Object();

@@ -6,98 +6,100 @@
 
 #pragma once
 
-namespace dnc::IO{
-
-	/**
-	Provides methods to access and manipulate files
-	*/
-	class FileStream: public Object{
-	public:
-		/**
-		Creates a new FileStream instance
-		*/
-		FileStream();
-		//FileStream(FileStream& stream);
-		/**
-		Creates a new FileStream instance with a file connection
-
-		@param path File path to the file
-		@param fm FileMode how to open/create the file
-		*/
-		FileStream(String& path, FileMode fm);
-		/**
-		Creates a new FileStream instance with a file connection
-
-		@param path File path to the file
-		@param fm FileMode how to open/create the file
-		@param fa Sets the Read/Write access
-		*/
-		FileStream(String& path, FileMode fm, FileAccess fa);
-		~FileStream();
-
-		string toString();
-		string getTypeString();
+namespace dnc{
+	namespace IO{
 
 		/**
-		Closes the current FileStream
+		Provides methods to access and manipulate files
 		*/
-		void Close();
-		/**
-		Flushes the stream
-		*/
-		void Flush();
-		/**
-		Returns the file's size
+		class FileStream: public Object{
+		public:
+			/**
+			Creates a new FileStream instance
+			*/
+			FileStream();
+			//FileStream(FileStream& stream);
+			/**
+			Creates a new FileStream instance with a file connection
 
-		@return file's size
-		*/
-		long Length();
-		/**
-		Returns the file path
+			@param path File path to the file
+			@param fm FileMode how to open/create the file
+			*/
+			FileStream(String& path, FileMode fm);
+			/**
+			Creates a new FileStream instance with a file connection
 
-		@return file path
-		*/
-		String Name();
-		/**
-		Returns the current position of this file
+			@param path File path to the file
+			@param fm FileMode how to open/create the file
+			@param fa Sets the Read/Write access
+			*/
+			FileStream(String& path, FileMode fm, FileAccess fa);
+			~FileStream();
 
-		@return Position in this file
-		*/
-		long Position();
-		/**
-		Sets the position on the file
+			std::string toString();
+			std::string getTypeString();
 
-		@param pos Position where to Read/Write
-		*/
-		void Position(long pos);
-		/**
-		Reads a certain amount of chars/bytes into the buffer
+			/**
+			Closes the current FileStream
+			*/
+			void Close();
+			/**
+			Flushes the stream
+			*/
+			void Flush();
+			/**
+			Returns the file's size
 
-		@param bytes Where to write the bytes to
-		@param offset Where to start to write in "bytes"
-		@param count How many bytes to write
-		@return how many bytes where read
-		*/
-		int Read(char* bytes, int offset, int count);
-		/**
-		Sets the Read/Write position
+			@return file's size
+			*/
+			long Length();
+			/**
+			Returns the file path
 
-		@param offset Position
-		@param origin From where the offset position will be
-		@return The position which was set
-		*/
-		long Seek(long offset, SeekOrigin origin);
-		/**
-		Writes a certain amount of chars/bytes from the buffer to the file
+			@return file path
+			*/
+			String Name();
+			/**
+			Returns the current position of this file
 
-		@param bytes Where to write the bytes to
-		@param offset Where to start to write in "bytes"
-		@param count How many bytes to write
-		*/
-		void Write(char* bytes, int offset, int count);
+			@return Position in this file
+			*/
+			long Position();
+			/**
+			Sets the position on the file
 
-	private:
-		fstream& fs;
-		String path;
-	};
+			@param pos Position where to Read/Write
+			*/
+			void Position(long pos);
+			/**
+			Reads a certain amount of chars/bytes into the buffer
+
+			@param bytes Where to write the bytes to
+			@param offset Where to start to write in "bytes"
+			@param count How many bytes to write
+			@return how many bytes where read
+			*/
+			int Read(char* bytes, int offset, int count);
+			/**
+			Sets the Read/Write position
+
+			@param offset Position
+			@param origin From where the offset position will be
+			@return The position which was set
+			*/
+			long Seek(long offset, SeekOrigin origin);
+			/**
+			Writes a certain amount of chars/bytes from the buffer to the file
+
+			@param bytes Where to write the bytes to
+			@param offset Where to start to write in "bytes"
+			@param count How many bytes to write
+			*/
+			void Write(char* bytes, int offset, int count);
+
+		private:
+			std::fstream& fs;
+			String path;
+		};
+	}
 }

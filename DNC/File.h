@@ -3,106 +3,108 @@
 #include "FileStream.h"
 
 #pragma once
-namespace dnc::IO{
-
-	/**
-	Method collection for interaction with the file system
-	*/
-	class File: public Object{
-	public:
-		~File();
+namespace dnc{
+	namespace IO{
 
 		/**
-		Adds the given lines to a file
-
-		@param path Address to the file
-		@param contents List of strings to add
+		Method collection for interaction with the file system
 		*/
-		void AppenAllLines(String& path, vector<String*>& contents);
-		/**
-		Adds the given string to a file
+		class File: public Object{
+		public:
+			~File();
 
-		@param path Address to the file
-		@param contents String to write
-		*/
-		void AppenAllText(String& path, String& contents);
-		/**
-		Returns a FileStream for the file with the given path
+			/**
+			Adds the given lines to a file
 
-		@param path Address to the file
-		*/
-		FileStream AppendText(String& path);
-		/**
-		Copys the contents of the source file, creates a new file and writes the contents to it
+			@param path Address to the file
+			@param contents List of strings to add
+			*/
+			void AppenAllLines(String& path, std::vector<String*>& contents);
+			/**
+			Adds the given string to a file
 
-		@param sourceFileName Address to the source file
-		@param destFileName Address to the destination file
-		*/
-		void Copy(String& sourceFileName, String& destFileName);
-		/**
-		NIY --- Copys the contents of the source file, creates a new file and writes the contents to it
+			@param path Address to the file
+			@param contents String to write
+			*/
+			void AppenAllText(String& path, String& contents);
+			/**
+			Returns a FileStream for the file with the given path
 
-		@param sourceFileName Address to the source file
-		@param destFileName Address to the destination file
-		@overwrite If the destination should be overwritten if already existing
-		*/
-		void Copy(String& sourceFileName, String& destFileName, bool overwrite);
-		/**
-		Creates a new file and returns its FileStream
+			@param path Address to the file
+			*/
+			FileStream AppendText(String& path);
+			/**
+			Copys the contents of the source file, creates a new file and writes the contents to it
 
-		@param path Address to the file
-		*/
-		FileStream Create(String& path);
-		/**
-		Checks if the given file exists
+			@param sourceFileName Address to the source file
+			@param destFileName Address to the destination file
+			*/
+			void Copy(String& sourceFileName, String& destFileName);
+			/**
+			NIY --- Copys the contents of the source file, creates a new file and writes the contents to it
 
-		@param path Address to the file
-		*/
-		bool Exists(String& path);
-		/**
-		NIY --- Moves the file from source to destination, deleting the source
+			@param sourceFileName Address to the source file
+			@param destFileName Address to the destination file
+			@overwrite If the destination should be overwritten if already existing
+			*/
+			void Copy(String& sourceFileName, String& destFileName, bool overwrite);
+			/**
+			Creates a new file and returns its FileStream
 
-		@param sourceFileName Address to the source file
-		@param destFileName Address to the destination file
-		*/
-		void Move(String& sourceFileName, String& destFileName);
-		/**
-		Returns the files contents of the given filepath
+			@param path Address to the file
+			*/
+			FileStream Create(String& path);
+			/**
+			Checks if the given file exists
 
-		@param path Address to the file
-		*/
-		char* ReadAllBytes(String& path);
-		/**
-		Reads the files contents of the given filepath and returns its lines
+			@param path Address to the file
+			*/
+			bool Exists(String& path);
+			/**
+			NIY --- Moves the file from source to destination, deleting the source
 
-		@param path Address to the file
-		*/
-		vector<String*> ReadAllLines(String& path);
-		/**
-		Returns the files contents of the given filepath
+			@param sourceFileName Address to the source file
+			@param destFileName Address to the destination file
+			*/
+			void Move(String& sourceFileName, String& destFileName);
+			/**
+			Returns the files contents of the given filepath
 
-		@param path Address to the file
-		*/
-		String ReadAllText(String& path);
-		/**
-		Writes the bytes to the given file
+			@param path Address to the file
+			*/
+			char* ReadAllBytes(String& path);
+			/**
+			Reads the files contents of the given filepath and returns its lines
 
-		@param path Address to the file
-		*/
-		void WriteAllBytes(String& path, char* bytes);
-		/**
-		Writes the lines to the given file
+			@param path Address to the file
+			*/
+			std::vector<String*> ReadAllLines(String& path);
+			/**
+			Returns the files contents of the given filepath
 
-		@param path Address to the file
-		*/
-		void WriteAllLines(String& path, vector<String*> contents);
-		/**
-		Writes the string to the given file
+			@param path Address to the file
+			*/
+			String ReadAllText(String& path);
+			/**
+			Writes the bytes to the given file
 
-		@param path Address to the file
-		*/
-		void WriteAllText(String& path, String& contents);
-	private:
-		File();
-	};
+			@param path Address to the file
+			*/
+			void WriteAllBytes(String& path, char* bytes);
+			/**
+			Writes the lines to the given file
+
+			@param path Address to the file
+			*/
+			void WriteAllLines(String& path, std::vector<String*> contents);
+			/**
+			Writes the string to the given file
+
+			@param path Address to the file
+			*/
+			void WriteAllText(String& path, String& contents);
+		private:
+			File();
+		};
+	}
 }

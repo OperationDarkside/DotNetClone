@@ -12,324 +12,326 @@
 #include <typeinfo>
 
 #pragma once
-namespace dnc::Data{
-
-	/**
-	Row Object to a DataTable
-	*/
-	class DataRow: public Object{
-
-		friend class DataColumnCollection;
-		friend class DataRowCollection;
-		friend class DataTable;
-
-	public:
-
-		DataRow(const DataRow& row);
-		DataRow(DataRow&& row);
-		~DataRow();
-
-		string toString();
-		string getTypeString();
+namespace dnc{
+	namespace Data{
 
 		/**
-		Removes all values from this row
+		Row Object to a DataTable
 		*/
-		void Delete();
+		class DataRow: public Object{
 
-		/**
-		Returns the value of the cell in the given column
+			friend class DataColumnCollection;
+			friend class DataRowCollection;
+			friend class DataTable;
 
-		@param columnNr Zero based column index
-		@return Cell value of the given type (must be derived from Object)
-		*/
-		template <typename T>
-		T Field(int columnNr);
-		/**
-		Returns the bool value of the cell in the given column (Wraps the Boolean class)
+		public:
 
-		@param columnNr Zero based column index
-		@return bool cell value
-		*/
-		template <>
-		bool Field<bool>(int columnNr);
-		/**
-		Returns the short value of the cell in the given column (Wraps the Short class)
+			DataRow(const DataRow& row);
+			DataRow(DataRow&& row);
+			~DataRow();
 
-		@param columnNr Zero based column index
-		@return short cell value
-		*/
-		template <>
-		short Field<short>(int columnNr);
-		/**
-		Returns the int value of the cell in the given column (Wraps the Integer class)
+			std::string toString();
+			std::string getTypeString();
 
-		@param columnNr Zero based column index
-		@return int cell value
-		*/
-		template <>
-		int Field<int>(int columnNr);
-		/**
-		Returns the long value of the cell in the given column (Wraps the Long class)
+			/**
+			Removes all values from this row
+			*/
+			void Delete();
 
-		@param columnNr Zero based column index
-		@return long cell value
-		*/
-		template <>
-		long Field<long>(int columnNr);
-		/**
-		Returns the unsigned long value of the cell in the given column (Wraps the ULong class)
+			/**
+			Returns the value of the cell in the given column
 
-		@param columnNr Zero based column index
-		@return unsigned long cell value
-		*/
-		template <>
-		unsigned long Field<unsigned long>(int columnNr);
-		/**
-		Returns the long long value of the cell in the given column (Wraps the LongLong class)
+			@param columnNr Zero based column index
+			@return Cell value of the given type (must be derived from Object)
+			*/
+			template <typename T>
+			T Field(int columnNr);
+			/**
+			Returns the bool value of the cell in the given column (Wraps the Boolean class)
 
-		@param columnNr Zero based column index
-		@return long long cell value
-		*/
-		template <>
-		long long Field<long long>(int columnNr);
-		/**
-		Returns the float value of the cell in the given column (Wraps the Float class)
+			@param columnNr Zero based column index
+			@return bool cell value
+			*/
+			template <>
+			bool Field<bool>(int columnNr);
+			/**
+			Returns the short value of the cell in the given column (Wraps the Short class)
 
-		@param columnNr Zero based column index
-		@return float cell value
-		*/
-		template <>
-		float Field<float>(int columnNr);
-		/**
-		Returns the double value of the cell in the given column (Wraps the Double class)
+			@param columnNr Zero based column index
+			@return short cell value
+			*/
+			template <>
+			short Field<short>(int columnNr);
+			/**
+			Returns the int value of the cell in the given column (Wraps the Integer class)
 
-		@param columnNr Zero based column index
-		@return double cell value
-		*/
-		template <>
-		double Field<double>(int columnNr);
+			@param columnNr Zero based column index
+			@return int cell value
+			*/
+			template <>
+			int Field<int>(int columnNr);
+			/**
+			Returns the long value of the cell in the given column (Wraps the Long class)
 
-		/**
-		Sets the value of the cell in the given column
+			@param columnNr Zero based column index
+			@return long cell value
+			*/
+			template <>
+			long Field<long>(int columnNr);
+			/**
+			Returns the unsigned long value of the cell in the given column (Wraps the ULong class)
 
-		@param columnNr Zero based column index
-		@param value of the given type (must be derived from Object)
-		*/
+			@param columnNr Zero based column index
+			@return unsigned long cell value
+			*/
+			template <>
+			unsigned long Field<unsigned long>(int columnNr);
+			/**
+			Returns the long long value of the cell in the given column (Wraps the LongLong class)
+
+			@param columnNr Zero based column index
+			@return long long cell value
+			*/
+			template <>
+			long long Field<long long>(int columnNr);
+			/**
+			Returns the float value of the cell in the given column (Wraps the Float class)
+
+			@param columnNr Zero based column index
+			@return float cell value
+			*/
+			template <>
+			float Field<float>(int columnNr);
+			/**
+			Returns the double value of the cell in the given column (Wraps the Double class)
+
+			@param columnNr Zero based column index
+			@return double cell value
+			*/
+			template <>
+			double Field<double>(int columnNr);
+
+			/**
+			Sets the value of the cell in the given column
+
+			@param columnNr Zero based column index
+			@param value of the given type (must be derived from Object)
+			*/
+			template<typename T>
+			void SetField(int columnNr, T& value);
+			/**
+			Sets the value of the cell in the given column (Wraps the Boolean class)
+
+			@param columnNr Zero based column index
+			@param bool value of the given type
+			*/
+			void SetField(int columnNr, bool value);
+			/**
+			Sets the value of the cell in the given column (Wraps the Short class)
+
+			@param columnNr Zero based column index
+			@param short value of the given type
+			*/
+			void SetField(int columnNr, short value);
+			/**
+			Sets the value of the cell in the given column (Wraps the Integer class)
+
+			@param columnNr Zero based column index
+			@param int value of the given type
+			*/
+			void SetField(int columnNr, int value);
+			/**
+			Sets the value of the cell in the given column (Wraps the Long class)
+
+			@param columnNr Zero based column index
+			@param long value of the given type
+			*/
+			void SetField(int columnNr, long value);
+			/**
+			Sets the value of the cell in the given column (Wraps the ULong class)
+
+			@param columnNr Zero based column index
+			@param unsigned long value of the given type
+			*/
+			void SetField(int columnNr, unsigned long value);
+			/**
+			Sets the value of the cell in the given column (Wraps the LongLong class)
+
+			@param columnNr Zero based column index
+			@param long long value of the given type
+			*/
+			void SetField(int columnNr, long long value);
+			/**
+			Sets the value of the cell in the given column (Wraps the Float class)
+
+			@param columnNr Zero based column index
+			@param float value of the given type
+			*/
+			void SetField(int columnNr, float value);
+			/**
+			Sets the value of the cell in the given column (Wraps the Double class)
+
+			@param columnNr Zero based column index
+			@param double value of the given type
+			*/
+			void SetField(int columnNr, double value);
+			/**
+			Sets the value of the cell in the given column (Wraps the Decimal class)
+
+			@param columnNr Zero based column index
+			@param long double value of the given type
+			*/
+			void SetField(int columnNr, long double value);
+
+			/**
+			Returns the pointer to the value in the specified column
+
+			 @param columnNr Index of the column
+			 @return
+			*/
+			Object* operator[](int columnNr);
+			DataRow& operator=(const DataRow& row);
+			DataRow& operator=(DataRow&& row) noexcept;
+		private:
+			DataColumnCollection* cols;
+			std::vector<Object*> items;
+
+			DataRow();
+			DataRow(DataColumnCollection* columns);
+
+			/**
+			Removes one item from the inventory
+
+			@param index Position of the Cell to be deleted
+			*/
+			void RemoveItem(size_t index);
+		};
+
 		template<typename T>
-		void SetField(int columnNr, T& value);
-		/**
-		Sets the value of the cell in the given column (Wraps the Boolean class)
+		inline T DataRow::Field(int columnNr){
+			T* res;
+			Object* o = items[columnNr];
 
-		@param columnNr Zero based column index
-		@param bool value of the given type
-		*/
-		void SetField(int columnNr, bool value);
-		/**
-		Sets the value of the cell in the given column (Wraps the Short class)
+			res = dynamic_cast<T*>(o);
 
-		@param columnNr Zero based column index
-		@param short value of the given type
-		*/
-		void SetField(int columnNr, short value);
-		/**
-		Sets the value of the cell in the given column (Wraps the Integer class)
+			return *res;
+		}
+		template<>
+		inline bool DataRow::Field<bool>(int columnNr){
+			Object* o = items[columnNr];
 
-		@param columnNr Zero based column index
-		@param int value of the given type
-		*/
-		void SetField(int columnNr, int value);
-		/**
-		Sets the value of the cell in the given column (Wraps the Long class)
+			bool b;
+			Boolean* boo = dynamic_cast<Boolean*>(o);
 
-		@param columnNr Zero based column index
-		@param long value of the given type
-		*/
-		void SetField(int columnNr, long value);
-		/**
-		Sets the value of the cell in the given column (Wraps the ULong class)
+			b = *boo;
 
-		@param columnNr Zero based column index
-		@param unsigned long value of the given type
-		*/
-		void SetField(int columnNr, unsigned long value);
-		/**
-		Sets the value of the cell in the given column (Wraps the LongLong class)
+			return b;
+		}
+		template<>
+		inline short DataRow::Field<short>(int columnNr){
+			Object* o = items[columnNr];
 
-		@param columnNr Zero based column index
-		@param long long value of the given type
-		*/
-		void SetField(int columnNr, long long value);
-		/**
-		Sets the value of the cell in the given column (Wraps the Float class)
+			short s;
+			Short* sh = dynamic_cast<Short*>(o);
 
-		@param columnNr Zero based column index
-		@param float value of the given type
-		*/
-		void SetField(int columnNr, float value);
-		/**
-		Sets the value of the cell in the given column (Wraps the Double class)
+			s = *sh;
 
-		@param columnNr Zero based column index
-		@param double value of the given type
-		*/
-		void SetField(int columnNr, double value);
-		/**
-		Sets the value of the cell in the given column (Wraps the Decimal class)
+			return s;
+		}
+		template<>
+		inline int DataRow::Field<int>(int columnNr){
+			Object* o = items[columnNr];
 
-		@param columnNr Zero based column index
-		@param long double value of the given type
-		*/
-		void SetField(int columnNr, long double value);
+			int i;
+			Integer* inte = dynamic_cast<Integer*>(o);
 
-		/**
-		Returns the pointer to the value in the specified column
+			i = *inte;
 
-		 @param columnNr Index of the column
-		 @return
-		*/
-		Object* operator[](int columnNr);
-		DataRow& operator=(const DataRow& row);
-		DataRow& operator=(DataRow&& row) noexcept;
-	private:
-		DataColumnCollection* cols;
-		vector<Object*> items;
+			return i;
+		}
+		template<>
+		inline long DataRow::Field<long>(int columnNr){
+			Object* o = items[columnNr];
 
-		DataRow();
-		DataRow(DataColumnCollection* columns);
+			long l;
+			Long* lo = dynamic_cast<Long*>(o);
 
-		/**
-		Removes one item from the inventory
+			l = *lo;
 
-		@param index Position of the Cell to be deleted
-		*/
-		void RemoveItem(size_t index);
-	};
+			return l;
+		}
+		template<>
+		inline unsigned long DataRow::Field<unsigned long>(int columnNr){
+			Object* o = items[columnNr];
 
-	template<typename T>
-	inline T DataRow::Field(int columnNr){
-		T* res;
-		Object* o = items[columnNr];
+			unsigned long l;
+			ULong* ul = dynamic_cast<ULong*>(o);
 
-		res = dynamic_cast<T*>(o);
+			l = *ul;
 
-		return *res;
-	}
-	template<>
-	inline bool DataRow::Field<bool>(int columnNr){
-		Object* o = items[columnNr];
+			return l;
+		}
+		template<>
+		inline long long DataRow::Field<long long>(int columnNr){
+			Object* o = items[columnNr];
 
-		bool b;
-		Boolean* boo = dynamic_cast<Boolean*>(o);
+			long long ll;
+			LongLong* llo = dynamic_cast<LongLong*>(o);
 
-		b = *boo;
+			ll = *llo;
 
-		return b;
-	}
-	template<>
-	inline short DataRow::Field<short>(int columnNr){
-		Object* o = items[columnNr];
+			return ll;
+		}
+		template<>
+		inline float DataRow::Field<float>(int columnNr){
+			Object* o = items[columnNr];
 
-		short s;
-		Short* sh = dynamic_cast<Short*>(o);
+			float f;
+			Float* flo = dynamic_cast<Float*>(o);
 
-		s = *sh;
+			f = *flo;
 
-		return s;
-	}
-	template<>
-	inline int DataRow::Field<int>(int columnNr){
-		Object* o = items[columnNr];
+			return f;
+		}
+		template<>
+		inline double DataRow::Field<double>(int columnNr){
+			Object* o = items[columnNr];
 
-		int i;
-		Integer* inte = dynamic_cast<Integer*>(o);
+			double d;
+			Double* dob = dynamic_cast<Double*>(o);
 
-		i = *inte;
+			d = *dob;
 
-		return i;
-	}
-	template<>
-	inline long DataRow::Field<long>(int columnNr){
-		Object* o = items[columnNr];
+			return d;
+		}
+		template<>
+		inline long double DataRow::Field<long double>(int columnNr){
+			Object* o = items[columnNr];
 
-		long l;
-		Long* lo = dynamic_cast<Long*>(o);
+			double d;
+			Decimal* dob = dynamic_cast<Decimal*>(o);
 
-		l = *lo;
+			d = *dob;
 
-		return l;
-	}
-	template<>
-	inline unsigned long DataRow::Field<unsigned long>(int columnNr){
-		Object* o = items[columnNr];
-
-		unsigned long l;
-		ULong* ul = dynamic_cast<ULong*>(o);
-
-		l = *ul;
-
-		return l;
-	}
-	template<>
-	inline long long DataRow::Field<long long>(int columnNr){
-		Object* o = items[columnNr];
-
-		long long ll;
-		LongLong* llo = dynamic_cast<LongLong*>(o);
-
-		ll = *llo;
-
-		return ll;
-	}
-	template<>
-	inline float DataRow::Field<float>(int columnNr){
-		Object* o = items[columnNr];
-
-		float f;
-		Float* flo = dynamic_cast<Float*>(o);
-
-		f = *flo;
-
-		return f;
-	}
-	template<>
-	inline double DataRow::Field<double>(int columnNr){
-		Object* o = items[columnNr];
-
-		double d;
-		Double* dob = dynamic_cast<Double*>(o);
-
-		d = *dob;
-
-		return d;
-	}
-	template<>
-	inline long double DataRow::Field<long double>(int columnNr){
-		Object* o = items[columnNr];
-
-		double d;
-		Decimal* dob = dynamic_cast<Decimal*>(o);
-
-		d = *dob;
-
-		return d;
-	}
-
-	template<typename T>
-	inline void DataRow::SetField(int columnNr, T& value){
-		T* o = new T(value);
-
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+			return d;
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<T>(value))){
-			throw "Type mismatch!";
-			return;
-		}
+		template<typename T>
+		inline void DataRow::SetField(int columnNr, T& value){
+			T* o = new T(value);
 
-		this->items[columnNr] = o;
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
+
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<T>(value))){
+				throw "Type mismatch!";
+				return;
+			}
+
+			this->items[columnNr] = o;
+		}
 	}
 }

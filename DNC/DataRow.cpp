@@ -1,248 +1,250 @@
 #include "DataRow.h"
 #include "DataColumnCollection.h"
 
-namespace dnc::Data{
+namespace dnc{
+	namespace Data{
 
-	DataRow::DataRow(){}
+		DataRow::DataRow(){}
 
-	DataRow::DataRow(const DataRow & row): cols(move(row.cols)), items(move(row.items)){
-		int i = 0;
-		i++;
-	}
-
-	DataRow::DataRow(DataRow && row) : cols(move(row.cols)), items(move(row.items)){
-		row.cols = nullptr;
-	}
-
-	DataRow::DataRow(DataColumnCollection * columns) : cols(columns){
-		this->items.resize(columns->Count());
-	}
-
-	DataRow::~DataRow(){
-		//this->Delete();
-	}
-
-	string DataRow::toString(){
-		return string("System.Data.DataRow");
-	}
-
-	string DataRow::getTypeString(){
-		return string("DataRow");
-	}
-
-	void DataRow::Delete(){
-		size_t len = 0;
-
-		len = this->items.size();
-
-		for(size_t i = 0; i < len; i++){
-			delete this->items[i];
-		}
-	}
-
-	void DataRow::SetField(int columnNr, bool value){
-		Boolean* boo;
-
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+		DataRow::DataRow(const DataRow & row): cols(std::move(row.cols)), items(move(row.items)){
+			int i = 0;
+			i++;
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<bool>(value))){
-			throw "Type mismatch!";
-			return;
+		DataRow::DataRow(DataRow && row) : cols(std::move(row.cols)), items(move(row.items)){
+			row.cols = nullptr;
 		}
 
-		boo = new Boolean(value);
-
-		this->items[columnNr] = boo;
-	}
-
-	void DataRow::SetField(int columnNr, short value){
-		Short* sh;
-
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+		DataRow::DataRow(DataColumnCollection * columns) : cols(columns){
+			this->items.resize(columns->Count());
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<short>(value))){
-			throw "Type mismatch!";
-			return;
+		DataRow::~DataRow(){
+			//this->Delete();
 		}
 
-		sh = new Short(value);
-
-		this->items[columnNr] = sh;
-	}
-
-	void DataRow::SetField(int columnNr, int value){
-		Integer* inte;
-
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+		std::string DataRow::toString(){
+			return std::string("System.Data.DataRow");
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<int>(value))){
-			throw "Type mismatch!";
-			return;
+		std::string DataRow::getTypeString(){
+			return std::string("DataRow");
 		}
 
-		inte = new Integer(value);
+		void DataRow::Delete(){
+			size_t len = 0;
 
-		this->items[columnNr] = inte;
-	}
+			len = this->items.size();
 
-	void DataRow::SetField(int columnNr, long value){
-		Long* l;
-
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+			for(size_t i = 0; i < len; i++){
+				delete this->items[i];
+			}
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<long>(value))){
-			throw "Type mismatch!";
-			return;
+		void DataRow::SetField(int columnNr, bool value){
+			Boolean* boo;
+
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
+
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<bool>(value))){
+				throw "Type mismatch!";
+				return;
+			}
+
+			boo = new Boolean(value);
+
+			this->items[columnNr] = boo;
 		}
 
-		l = new Long(value);
+		void DataRow::SetField(int columnNr, short value){
+			Short* sh;
 
-		this->items[columnNr] = l;
-	}
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
 
-	void DataRow::SetField(int columnNr, unsigned long value){
-		ULong* l;
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<short>(value))){
+				throw "Type mismatch!";
+				return;
+			}
 
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+			sh = new Short(value);
+
+			this->items[columnNr] = sh;
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<unsigned long>(value))){
-			throw "Type mismatch!";
-			return;
+		void DataRow::SetField(int columnNr, int value){
+			Integer* inte;
+
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
+
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<int>(value))){
+				throw "Type mismatch!";
+				return;
+			}
+
+			inte = new Integer(value);
+
+			this->items[columnNr] = inte;
 		}
 
-		l = new ULong(value);
+		void DataRow::SetField(int columnNr, long value){
+			Long* l;
 
-		this->items[columnNr] = l;
-	}
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
 
-	void DataRow::SetField(int columnNr, long long value){
-		LongLong* l;
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<long>(value))){
+				throw "Type mismatch!";
+				return;
+			}
 
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+			l = new Long(value);
+
+			this->items[columnNr] = l;
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<long long>(value))){
-			throw "Type mismatch!";
-			return;
+		void DataRow::SetField(int columnNr, unsigned long value){
+			ULong* l;
+
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
+
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<unsigned long>(value))){
+				throw "Type mismatch!";
+				return;
+			}
+
+			l = new ULong(value);
+
+			this->items[columnNr] = l;
 		}
 
-		l = new LongLong(value);
+		void DataRow::SetField(int columnNr, long long value){
+			LongLong* l;
 
-		this->items[columnNr] = l;
-	}
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
 
-	void DataRow::SetField(int columnNr, float value){
-		Float* f;
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<long long>(value))){
+				throw "Type mismatch!";
+				return;
+			}
 
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+			l = new LongLong(value);
+
+			this->items[columnNr] = l;
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<float>(value))){
-			throw "Type mismatch!";
-			return;
+		void DataRow::SetField(int columnNr, float value){
+			Float* f;
+
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
+
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<float>(value))){
+				throw "Type mismatch!";
+				return;
+			}
+
+			f = new Float(value);
+
+			this->items[columnNr] = f;
 		}
 
-		f = new Float(value);
+		void DataRow::SetField(int columnNr, double value){
+			Double* d;
 
-		this->items[columnNr] = f;
-	}
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
 
-	void DataRow::SetField(int columnNr, double value){
-		Double* d;
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<double>(value))){
+				throw "Type mismatch!";
+				return;
+			}
 
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+			d = new Double(value);
+
+			this->items[columnNr] = d;
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<double>(value))){
-			throw "Type mismatch!";
-			return;
+		void DataRow::SetField(int columnNr, long double value){
+			Decimal* d;
+
+			if(columnNr >= this->cols->Count()){
+				throw "Column Nr out of Range!";
+				return;
+			}
+
+			DataColumn col = (*this->cols)[columnNr];
+			if(!col.checkType(Type::getType<long double>(value))){
+				throw "Type mismatch!";
+				return;
+			}
+
+			d = new Decimal(value);
+
+			this->items[columnNr] = d;
 		}
 
-		d = new Double(value);
+		Object* DataRow::operator[](int columnNr){
+			Object* o = items[columnNr];
 
-		this->items[columnNr] = d;
-	}
-
-	void DataRow::SetField(int columnNr, long double value){
-		Decimal* d;
-
-		if(columnNr >= this->cols->Count()){
-			throw "Column Nr out of Range!";
-			return;
+			return o;
 		}
 
-		DataColumn col = (*this->cols)[columnNr];
-		if(!col.checkType(Type::getType<long double>(value))){
-			throw "Type mismatch!";
-			return;
+		DataRow & DataRow::operator=(const DataRow & row){
+			if(this != &row){
+				this->cols = row.cols;
+				this->items = row.items;
+			}
+
+			return *this;
 		}
 
-		d = new Decimal(value);
-
-		this->items[columnNr] = d;
-	}
-
-	Object* DataRow::operator[](int columnNr){
-		Object* o = items[columnNr];
-
-		return o;
-	}
-
-	DataRow & DataRow::operator=(const DataRow & row){
-		if(this != &row){
+		DataRow & DataRow::operator=(DataRow && row) noexcept{
 			this->cols = row.cols;
-			this->items = row.items;
+			row.cols = nullptr;
+			return *this;
 		}
 
-		return *this;
-	}
+		void DataRow::RemoveItem(size_t index){
+			size_t len = 0;
 
-	DataRow & DataRow::operator=(DataRow && row) noexcept{
-		this->cols = row.cols;
-		row.cols = nullptr;
-		return *this;
-	}
+			len = this->items.size();
 
-	void DataRow::RemoveItem(size_t index){
-		size_t len = 0;
+			if((len - 1) < index){
+				throw "Remove item index out of range";
+			}
 
-		len = this->items.size();
+			delete this->items[index];
 
-		if((len - 1) < index){
-			throw "Remove item index out of range";
+			this->items.erase(this->items.begin() + index);
 		}
-
-		delete this->items[index];
-
-		this->items.erase(this->items.begin() + index);
 	}
 }

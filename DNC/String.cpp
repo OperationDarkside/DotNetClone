@@ -35,7 +35,7 @@ namespace dnc{
 	bool String::contains(String * str){
 		size_t pos = value.find(str->value);
 
-		if(pos != string::npos){
+		if(pos != std::string::npos){
 			return true;
 		} else{
 			return false;
@@ -374,11 +374,11 @@ namespace dnc{
 	}
 
 	String String::toLower(){
-		locale loc;
+		std::locale loc;
 		String* target = new String();
 
 
-		for(string::size_type i = 0; i < this->value.length(); i++){
+		for(std::string::size_type i = 0; i < this->value.length(); i++){
 			target->value += std::tolower(this->value[i], loc);
 		}
 
@@ -390,17 +390,17 @@ namespace dnc{
 	}
 
 	std::string String::getTypeString(){
-		string res("String");
+		std::string res("String");
 
 		return res;
 	}
 
 	String String::toUpper(){
-		locale loc;
+		std::locale loc;
 		String* target = new String();
 
 
-		for(string::size_type i = 0; i < this->value.length(); i++){
+		for(std::string::size_type i = 0; i < this->value.length(); i++){
 			target->value += std::toupper(this->value[i], loc);
 		}
 
@@ -513,7 +513,7 @@ namespace dnc{
 	}
 
 	bool String::operator==(const char * str){
-		string tmp1(str);
+		std::string tmp1(str);
 
 		return (this->value.compare(tmp1) == 0);
 	}
@@ -523,7 +523,7 @@ namespace dnc{
 	}
 
 	bool String::operator!=(const char * str){
-		string tmp1(str);
+		std::string tmp1(str);
 
 		return (this->value.compare(tmp1) != 0);
 	}
@@ -534,7 +534,7 @@ namespace dnc{
 		return *this;
 	}
 
-	String String::operator=(string & str){
+	String String::operator=(std::string & str){
 		this->value = str;
 
 		return *this;

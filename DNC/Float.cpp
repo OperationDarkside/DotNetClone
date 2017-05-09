@@ -9,12 +9,12 @@ namespace dnc{
 
 	Float::~Float(){}
 
-	string Float::toString(){
-		return to_string(this->value);
+	std::string Float::toString(){
+		return std::to_string(this->value);
 	}
 
-	string Float::getTypeString(){
-		return string("Float");
+	std::string Float::getTypeString(){
+		return std::string("Float");
 	}
 
 	Float Float::operator=(float f){

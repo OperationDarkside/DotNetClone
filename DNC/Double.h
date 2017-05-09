@@ -13,8 +13,8 @@ namespace dnc{
 		Double(double d);
 		~Double();
 
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		Double operator=(double d);
 		operator double();

@@ -9,12 +9,12 @@ namespace dnc{
 
 	Decimal::~Decimal(){}
 
-	string Decimal::toString(){
-		return to_string(this->value);
+	std::string Decimal::toString(){
+		return std::to_string(this->value);
 	}
 
-	string Decimal::getTypeString(){
-		return string("Decimal");
+	std::string Decimal::getTypeString(){
+		return std::string("Decimal");
 	}
 
 	Decimal Decimal::operator=(long double ld){

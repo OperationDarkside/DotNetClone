@@ -4,64 +4,64 @@ namespace dnc{
 
 	Console::~Console(){}
 
-	string Console::getTypeString(){
-		return string("Console");
+	std::string Console::getTypeString(){
+		return std::string("Console");
 	}
 
-	string Console::toString(){
-		return string("System.Console");
+	std::string Console::toString(){
+		return std::string("System.Console");
 	}
 
 	int Console::Read(){
 		int val = 0;
 
-		cin >> val;
+		std::cin >> val;
 
 		return val;
 	}
 
 	String Console::ReadLine(){
-		string res;
+		std::string res;
 
-		getline(cin, res);
+		std::getline(std::cin, res);
 
 		return String(&res);
 	}
 
 	void Console::Write(bool value){
-		cout << (value ? "true" : "false");
+		std::cout << (value ? "true" : "false");
 	}
 
 	void Console::Write(char c){
-		cout << c;
+		std::cout << c;
 	}
 
 	void Console::Write(char * buffer){
-		cout << buffer;
+		std::cout << buffer;
 	}
 
 	void Console::Write(double value){
-		cout << to_string(value);
+		std::cout << std::to_string(value);
 	}
 
 	void Console::Write(float value){
-		cout << to_string(value);
+		std::cout << std::to_string(value);
 	}
 
 	void Console::Write(int value){
-		cout << to_string(value);
+		std::cout << std::to_string(value);
 	}
 
 	void Console::Write(long value){
-		cout << to_string(value);
+		std::cout << std::to_string(value);
 	}
 
 	void Console::Write(Object * value){
-		cout << value->toString();
+		std::cout << value->toString();
 	}
 
 	void Console::Write(String& value){
-		cout << value.getStringValue();
+		std::cout << value.getStringValue();
 	}
 
 	void Console::Write(char * buffer, long startIndex, long count){
@@ -73,7 +73,7 @@ namespace dnc{
 		tmp = new char[count];
 
 		if(len < (startIndex + count)){
-			cout << "Array not big enough!" << endl;
+			std::cout << "Array not big enough!" << std::endl;
 			return;
 		}
 
@@ -82,60 +82,60 @@ namespace dnc{
 			++pos_tmp;
 		}
 
-		cout << tmp;
+		std::cout << tmp;
 	}
 
 	void Console::WriteLine(){
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(bool value){
 		Write(value);
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(char c){
 		Write(c);
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(char * buffer){
 		Write(buffer);
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(double value){
 		Write(value);
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(float value){
 		Write(value);
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(int value){
 		Write(value);
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(long value){
 		Write(value);
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(Object * value){
 		Write(value);
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(String& value){
 		Write(value);
-		cout << endl;
+		std::cout << std::endl;
 	}
 
 	void Console::WriteLine(char * buffer, long startIndex, long count){
 		Write(buffer, startIndex, count);
-		cout << endl;
+		std::cout << std::endl;
 	}
 }

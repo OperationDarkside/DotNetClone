@@ -5,27 +5,31 @@
 #include <my_global.h>
 #include "mysql.h"
 
-namespace dnc::Data::SqlClient{
+namespace dnc{
+	namespace Data{
+		namespace SqlClient{
 
-	using namespace std;
 
-	class MySqlConnection: public SqlConnection{
 
-		friend class MySqlCommand;
+			class MySqlConnection: public SqlConnection{
 
-	public:
-		MySqlConnection();
-		MySqlConnection(String& conString);
-		~MySqlConnection();
+				friend class MySqlCommand;
 
-		string toString();
-		string getTypeString();
+			public:
+				MySqlConnection();
+				MySqlConnection(String& conString);
+				~MySqlConnection();
 
-		void Close();
-		MySqlCommand CreateCommand();
-		void Open();
+				std::string toString();
+				std::string getTypeString();
 
-	private:
-		MYSQL* connection;
-	};
+				void Close();
+				MySqlCommand CreateCommand();
+				void Open();
+
+			private:
+				MYSQL* connection;
+			};
+		}
+	}
 }

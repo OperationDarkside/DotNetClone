@@ -10,8 +10,8 @@ namespace dnc{
 		Long(long l);
 		~Long();
 
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		Long operator=(long l);
 		operator long();

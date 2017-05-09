@@ -8,12 +8,12 @@ namespace dnc{
 
 	Long::~Long(){}
 
-	string Long::toString(){
-		return to_string(this->value);
+	std::string Long::toString(){
+		return std::to_string(this->value);
 	}
 
-	string Long::getTypeString(){
-		return string("Long");
+	std::string Long::getTypeString(){
+		return std::string("Long");
 	}
 
 	Long Long::operator=(long l){

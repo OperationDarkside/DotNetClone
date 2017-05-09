@@ -1,11 +1,15 @@
 #pragma once
 #include "Object.h"
 
-namespace dnc::Data::SqlClient{
+namespace dnc{
+	namespace Data{
+		namespace SqlClient{
 
-	class SqlParameter: public Object{
-	public:
-		SqlParameter();
-		~SqlParameter();
-	};
+			class SqlParameter: public Object{
+			public:
+				SqlParameter();
+				~SqlParameter();
+			};
+		}
+	}
 }

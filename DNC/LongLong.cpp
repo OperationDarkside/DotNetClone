@@ -9,12 +9,12 @@ namespace dnc{
 
 	LongLong::~LongLong(){}
 
-	string LongLong::toString(){
-		return to_string(this->value);
+	std::string LongLong::toString(){
+		return std::to_string(this->value);
 	}
 
-	string LongLong::getTypeString(){
-		return string("LongLong");
+	std::string LongLong::getTypeString(){
+		return std::string("LongLong");
 	}
 
 	LongLong LongLong::operator=(long long ll){

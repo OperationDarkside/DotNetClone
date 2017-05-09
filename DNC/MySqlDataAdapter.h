@@ -3,19 +3,26 @@
 #include "MySqlDataReader.h"
 #include "MySqlCommand.h"
 
-namespace dnc::Data::SqlClient{
+namespace dnc{
+	namespace Data{
+		namespace SqlClient{
 
-	class MySqlDataAdapter: public Object{
+			class MySqlDataAdapter: public Object{
 
-	public:
-		MySqlDataAdapter();
-		MySqlDataAdapter(MySqlCommand& command);
-		MySqlDataAdapter(String& selectCommandText, MySqlConnection* connection);
-		MySqlDataAdapter(String& selectCommandText, String& connectionString);
-		~MySqlDataAdapter();
+			public:
+				MySqlDataAdapter();
+				MySqlDataAdapter(MySqlCommand& command);
+				MySqlDataAdapter(String& selectCommandText, MySqlConnection* connection);
+				MySqlDataAdapter(String& selectCommandText, String& connectionString);
+				~MySqlDataAdapter();
 
-		long Fill(DataTable& table);
-	private:
-		MySqlCommand cmd;
-	};
+				std::string toString();
+				std::string getTypeString();
+
+				long Fill(DataTable& table);
+			private:
+				MySqlCommand cmd;
+			};
+		}
+	}
 }

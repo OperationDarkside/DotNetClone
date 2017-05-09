@@ -13,8 +13,8 @@ namespace dnc{
 		Integer(int i);
 		~Integer();
 
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		Integer operator=(int i);
 		operator int();

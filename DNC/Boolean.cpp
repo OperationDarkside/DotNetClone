@@ -8,12 +8,12 @@ namespace dnc{
 
 	Boolean::~Boolean(){}
 
-	string Boolean::toString(){
-		return to_string(this->value);
+	std::string Boolean::toString(){
+		return std::to_string(this->value);
 	}
 
-	string Boolean::getTypeString(){
-		return string("Boolean");
+	std::string Boolean::getTypeString(){
+		return std::string("Boolean");
 	}
 
 	Boolean Boolean::operator=(bool b){

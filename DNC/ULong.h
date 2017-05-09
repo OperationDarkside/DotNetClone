@@ -9,8 +9,8 @@ namespace dnc{
 		ULong(unsigned long ul);
 		~ULong();
 
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		ULong operator=(unsigned long l);
 		operator unsigned long();

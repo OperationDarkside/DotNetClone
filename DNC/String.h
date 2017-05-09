@@ -13,8 +13,6 @@
 
 namespace dnc{
 
-	using namespace std;
-
 	/**
 	Represents text as a chain of characters. (c++ std::string wrapper)
 	*/
@@ -35,7 +33,7 @@ namespace dnc{
 
 		@param str the C++ string to copy
 		*/
-		String(string* str);
+		String(std::string* str);
 		/**
 		Creates a new String class instance with the value of str
 
@@ -55,7 +53,7 @@ namespace dnc{
 
 		@return C++ string pointer
 		*/
-		string getStringValue();
+		std::string getStringValue();
 		/**
 		Compares this Instance to the given String str in size and char-by-char lexicographically
 
@@ -263,14 +261,14 @@ namespace dnc{
 		@param separator The character that splits 2 Strings
 		@return vector of Strings
 		*/
-		vector<String*> split(char separator);
+		std::vector<String*> split(char separator);
 		/**
 		Splits this instance String into a list(vector) with a String as separator
 
 		@param separator The String that splits 2 Strings
 		@return vector of Strings
 		*/
-		vector<String*> split(String* separator);
+		std::vector<String*> split(String* separator);
 		/**
 		Checks if this Instance starts with the given String str
 
@@ -318,8 +316,8 @@ namespace dnc{
 
 		@return c++ string
 		*/
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 		/**
 		Returns the characters of this String as uppercase
 
@@ -348,12 +346,12 @@ namespace dnc{
 		friend String& operator+(String& str1, String& str2);
 		friend String& operator+(String& str, const char* str2);
 		friend String& operator+(const char* str, String& str2);
-		friend String& operator+(string& str, String& str2);
-		friend String& operator+(String& str, string& str2);
+		friend String& operator+(std::string& str, String& str2);
+		friend String& operator+(String& str, std::string& str2);
 		friend String& operator+(String& str, int number);
 		friend String& operator+(int number, String& str);
 		String& operator+=(String& str);
-		String& operator+=(string& str);
+		String& operator+=(std::string& str);
 		String& operator+=(const char* str);
 		String& operator+=(int number);
 		bool operator==(String& str);
@@ -361,7 +359,7 @@ namespace dnc{
 		bool operator!=(String& str);
 		bool operator!=(const char* str);
 		String operator=(const char* str);
-		String operator=(string& str);
+		String operator=(std::string& str);
 	private:
 		std::string value;
 	};

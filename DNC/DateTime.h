@@ -4,11 +4,6 @@
 #include <ctime>
 #include <chrono>
 
-
-
-using namespace std;
-using namespace std::chrono;
-
 namespace dnc{
 
 	/**
@@ -186,8 +181,8 @@ namespace dnc{
 
 		@return String containing both date and time
 		*/
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		/**
 		Returns the current date component of this instance
@@ -322,7 +317,7 @@ namespace dnc{
 		*/
 		void Year(unsigned short year);
 	private:
-		time_point<system_clock> tp;
+		std::chrono::time_point<std::chrono::system_clock> tp;
 
 
 		String getWeekdayName(short wd_nr);
@@ -330,11 +325,11 @@ namespace dnc{
 		template<typename T>
 		void setTime(long long nr);
 
-		typedef duration<int, ratio_multiply<hours::period, ratio<24> >::type> days;
-		typedef duration<int, ratio_multiply<hours::period, ratio<24 * 30> >::type> months;
-		typedef duration<int, ratio_multiply<hours::period, ratio<24 * 365> >::type> years;
+		typedef std::chrono::duration<int, std::ratio_multiply<std::chrono::hours::period, std::ratio<24> >::type> days;
+		typedef std::chrono::duration<int, std::ratio_multiply<std::chrono::hours::period, std::ratio<24 * 30> >::type> months;
+		typedef std::chrono::duration<int, std::ratio_multiply<std::chrono::hours::period, std::ratio<24 * 365> >::type> years;
 		//typedef tuple<years, months, days> ymd;
 
-		tuple<years, months, days> from_days(days ds);
+		std::tuple<years, months, days> from_days(days ds);
 	};
 }

@@ -11,12 +11,12 @@ namespace dnc{
 
 	ULong::~ULong(){}
 
-	string ULong::toString(){
-		return string("System.ULong");
+	std::string ULong::toString(){
+		return std::string("System.ULong");
 	}
 
-	string ULong::getTypeString(){
-		return to_string(this->value);
+	std::string ULong::getTypeString(){
+		return std::to_string(this->value);
 	}
 
 	ULong ULong::operator=(unsigned long l){

@@ -1,11 +1,15 @@
 #include "SqlDataReader.h"
 
-namespace dnc::Data::SqlClient{
+namespace dnc{
+	namespace Data{
+		namespace SqlClient{
 
-	SqlDataReader::SqlDataReader(){
+			SqlDataReader::SqlDataReader(){
 
+			}
+
+
+			SqlDataReader::~SqlDataReader(){}
+		}
 	}
-
-
-	SqlDataReader::~SqlDataReader(){}
 }

@@ -10,8 +10,8 @@ namespace dnc{
 		Short(short s);
 		~Short();
 
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		Short operator=(short s);
 		operator short();

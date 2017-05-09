@@ -3,71 +3,73 @@
 
 #include "DataColumn.h"
 
-namespace dnc::Data {
+namespace dnc{
+	namespace Data{
 
-	class DataTable;
+		class DataTable;
 
-	#pragma once
-	/**
-	Stores the columns of a DataTable instance
-	*/
-	class DataColumnCollection: public Object{
-	public:
-		DataColumnCollection();
-		~DataColumnCollection();
-
-		string toString();
-		string getTypeString();
-
-		friend class DataTable;
-
+		#pragma once
 		/**
-		Adds a DataColumn instance to this collection
+		Stores the columns of a DataTable instance
+		*/
+		class DataColumnCollection: public Object{
+		public:
+			DataColumnCollection();
+			~DataColumnCollection();
 
-		@param The DataColumn instance to be added
-		*/
-		void Add(DataColumn& column);
-		/**
-		Removes all columns from this instance
-		*/
-		void Clear();
-		/**
-		Returns the amount of columns in this collection
+			std::string toString();
+			std::string getTypeString();
 
-		@return The column number
-		*/
-		long Count();
-		/**
-		Returns the position of the given column in this collection
+			friend class DataTable;
 
-		@return The column number
-		*/
-		int IndexOf(DataColumn& column);
-		/**
-		Removes the column from all rows
+			/**
+			Adds a DataColumn instance to this collection
 
-		@param column The column to remove
-		*/
-		void Remove(DataColumn* column);
-		/**
-		Removes the column with the given name from all rows
+			@param The DataColumn instance to be added
+			*/
+			void Add(DataColumn& column);
+			/**
+			Removes all columns from this instance
+			*/
+			void Clear();
+			/**
+			Returns the amount of columns in this collection
 
-		@param name of the colum to remove
-		*/
-		void Remove(String& name);
-		/**
-		Returns the DataTable instance associated with this DataColumnCollection instance
-		*/
-		DataTable* Table();
-		/**
-		Sets the DataTable instance to associate with this DataColumnCollection instance
-		*/
-		void Table(DataTable* _table);
+			@return The column number
+			*/
+			long Count();
+			/**
+			Returns the position of the given column in this collection
 
-		DataColumn& operator[](int colNr);
-	private:
-		DataTable* table;
-		vector<DataColumn> cols;
-	};
+			@return The column number
+			*/
+			int IndexOf(DataColumn& column);
+			/**
+			Removes the column from all rows
+
+			@param column The column to remove
+			*/
+			void Remove(DataColumn* column);
+			/**
+			Removes the column with the given name from all rows
+
+			@param name of the colum to remove
+			*/
+			void Remove(String& name);
+			/**
+			Returns the DataTable instance associated with this DataColumnCollection instance
+			*/
+			DataTable* Table();
+			/**
+			Sets the DataTable instance to associate with this DataColumnCollection instance
+			*/
+			void Table(DataTable* _table);
+
+			DataColumn& operator[](int colNr);
+		private:
+			DataTable* table;
+			std::vector<DataColumn> cols;
+		};
+	}
 }
 #endif // !DATACOLCOLLECTION_H

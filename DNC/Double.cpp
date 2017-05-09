@@ -8,12 +8,12 @@ namespace dnc{
 
 	Double::~Double(){}
 
-	string Double::toString(){
-		return to_string(this->value);
+	std::string Double::toString(){
+		return std::to_string(this->value);
 	}
 
-	string Double::getTypeString(){
-		return string("Double");
+	std::string Double::getTypeString(){
+		return std::string("Double");
 	}
 
 	Double Double::operator=(double d){

@@ -1,27 +1,28 @@
 #include "String.h"
 
 #pragma once
+namespace dnc{
+	namespace Data{
+		namespace SqlClient{
 
-namespace dnc::Data::SqlClient{
+			class SqlConnection: public Object{
+			public:
+				SqlConnection();
+				SqlConnection(String& conString);
+				~SqlConnection();
 
-	using namespace std;
+				std::string toString();
+				std::string getTypeString();
 
-	class SqlConnection: public Object{
-	public:
-		SqlConnection();
-		SqlConnection(String& conString);
-		~SqlConnection();
+				virtual void Close();
+				String ConnectionString();
+				void ConnectionString(String& conString);
+				virtual void Open();
 
-		string toString();
-		string getTypeString();
+			private:
+				String connectionString;
+			};
 
-		virtual void Close();
-		String ConnectionString();
-		void ConnectionString(String& conString);
-		virtual void Open();
-
-	private:
-		String connectionString;
-	};
-
+		}
+	}
 }

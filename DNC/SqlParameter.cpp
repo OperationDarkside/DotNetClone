@@ -1,9 +1,13 @@
 #include "SqlParameter.h"
 
-namespace dnc::Data::SqlClient{
+namespace dnc{
+	namespace Data{
+		namespace SqlClient{
 
-	SqlParameter::SqlParameter(){}
+			SqlParameter::SqlParameter(){}
 
 
-	SqlParameter::~SqlParameter(){}
+			SqlParameter::~SqlParameter(){}
+		}
+	}
 }

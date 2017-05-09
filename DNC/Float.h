@@ -13,8 +13,8 @@ namespace dnc{
 		Float(float f);
 		~Float();
 
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		Float operator=(float f);
 		operator float();

@@ -9,12 +9,12 @@ namespace dnc{
 
 	Integer::~Integer(){}
 
-	string Integer::toString(){
-		return to_string(this->value);
+	std::string Integer::toString(){
+		return std::to_string(this->value);
 	}
 
-	string Integer::getTypeString(){
-		return string("Integer");
+	std::string Integer::getTypeString(){
+		return std::string("Integer");
 	}
 
 	Integer Integer::operator=(int i){

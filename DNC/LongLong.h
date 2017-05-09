@@ -9,8 +9,8 @@ namespace dnc{
 		LongLong(long long ll);
 		~LongLong();
 
-		string toString();
-		string getTypeString();
+		std::string toString();
+		std::string getTypeString();
 
 		LongLong operator=(long long ll);
 		operator long long();

@@ -55,12 +55,12 @@ void test_String_Class(){
 
 
 	// Methods
-	String str_clone = compare_clone();
+	/*String str_clone = compare_clone();
 	if(str_clone == "Something"){
 		Console::WriteLine("cloning works!");
 	} else{
 		Console::WriteLine("Error");
-	}
+	}*/
 
 	std::string string_value = str2.getStringValue();
 	if(string_value == "Hello"){
@@ -262,7 +262,7 @@ void test_String_Class(){
 	}
 
 	String str_split1("Test;mit;Split");
-	vector<String*> array_split1 = str_split1.split(';');
+	std::vector<String*> array_split1 = str_split1.split(';');
 	if(*array_split1[2] == "Split"){
 		Console::WriteLine("split works!");
 	} else{
@@ -270,7 +270,7 @@ void test_String_Class(){
 	}
 
 	String str_split2("TestlostmitlostSplit");
-	vector<String*> array_split2 = str_split2.split(&String("lost"));
+	std::vector<String*> array_split2 = str_split2.split(&String("lost"));
 	if(*array_split2[2] == "Split"){
 		Console::WriteLine("split mit String works!");
 	} else{
@@ -381,7 +381,7 @@ void test_String_Class(){
 	}
 
 	String str_operator_add4;
-	str_operator_add4 = string("Hallo ") + String("Welt!");
+	str_operator_add4 = std::string("Hallo ") + String("Welt!");
 	if(str_operator_add4 == "Hallo Welt!"){
 		Console::WriteLine("operator_add std::string String works!");
 	} else{
@@ -389,7 +389,7 @@ void test_String_Class(){
 	}
 
 	String str_operator_add5;
-	str_operator_add5 = String("Hallo ") + string("Welt!");
+	str_operator_add5 = String("Hallo ") + std::string("Welt!");
 	if(str_operator_add5 == "Hallo Welt!"){
 		Console::WriteLine("operator_add String std::string works!");
 	} else{
@@ -421,7 +421,7 @@ void test_String_Class(){
 	}
 
 	String str_operator_add9("Hallo ");
-	str_operator_add9 += string("Welt!");
+	str_operator_add9 += std::string("Welt!");
 	if(str_operator_add9 == "Hallo Welt!"){
 		Console::WriteLine("operator_add += std::string works!");
 	} else{
@@ -558,7 +558,7 @@ int main(){
 
 	// mysql C API
 
-	cout << mysql_get_client_info() << endl;
+	std::cout << mysql_get_client_info() << std::endl;
 
 	/*MYSQL* conni = mysql_init(NULL);
 	if(mysql_real_connect(conni, "127.0.0.1", "root", "", "test", 3306, NULL, 0)){

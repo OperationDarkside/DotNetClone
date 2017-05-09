@@ -12,8 +12,8 @@ namespace dnc{
 
 	DateTime::DateTime(){}
 	DateTime::DateTime(long long ms){
-		microseconds dur(ms);
-		time_point<system_clock> dt(dur);
+		std::chrono::microseconds dur(ms);
+		std::chrono::time_point<std::chrono::system_clock> dt(dur);
 		this->tp = dt;
 	}
 
@@ -38,9 +38,9 @@ namespace dnc{
 		int days_since_epoch = era_t * 146097 + static_cast<int>(doe_t) - 719468;
 
 		this->tp += days(days_since_epoch);
-		this->tp += hours(hour);
-		this->tp += minutes(minute);
-		this->tp += seconds(second);
+		this->tp += std::chrono::hours(hour);
+		this->tp += std::chrono::minutes(minute);
+		this->tp += std::chrono::seconds(second);
 	}
 
 	DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day, unsigned int hour, unsigned int minute, unsigned int second, unsigned int millisecond){
@@ -52,10 +52,10 @@ namespace dnc{
 		int days_since_epoch = era_t * 146097 + static_cast<int>(doe_t) - 719468;
 
 		this->tp += days(days_since_epoch);
-		this->tp += hours(hour);
-		this->tp += minutes(minute);
-		this->tp += seconds(second);
-		this->tp += milliseconds(millisecond);
+		this->tp += std::chrono::hours(hour);
+		this->tp += std::chrono::minutes(minute);
+		this->tp += std::chrono::seconds(second);
+		this->tp += std::chrono::milliseconds(millisecond);
 	}
 
 	DateTime::DateTime(unsigned int year, unsigned int month, unsigned int day, unsigned int hour, unsigned int minute, unsigned int second, unsigned int millisecond, unsigned int microsecond){
@@ -67,77 +67,77 @@ namespace dnc{
 		int days_since_epoch = era_t * 146097 + static_cast<int>(doe_t) - 719468;
 
 		this->tp += days(days_since_epoch);
-		this->tp += hours(hour);
-		this->tp += minutes(minute);
-		this->tp += seconds(second);
-		this->tp += milliseconds(millisecond);
-		this->tp += microseconds(microsecond);
+		this->tp += std::chrono::hours(hour);
+		this->tp += std::chrono::minutes(minute);
+		this->tp += std::chrono::seconds(second);
+		this->tp += std::chrono::milliseconds(millisecond);
+		this->tp += std::chrono::microseconds(microsecond);
 	}
 
 	DateTime::~DateTime(){}
 
 	DateTime DateTime::add(TimeSpan * span){
-		time_point<system_clock> tp_new;
+		std::chrono::time_point<std::chrono::system_clock> tp_new;
 
-		tp_new = this->tp + microseconds(span->totalMicroseconds());
+		tp_new = this->tp + std::chrono::microseconds(span->totalMicroseconds());
 
-		return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
+		return DateTime(std::chrono::duration_cast<std::chrono::microseconds>(tp_new.time_since_epoch()).count());
 	}
 
 	DateTime DateTime::addDays(long long value){
-		time_point<system_clock> tp_new;
+		std::chrono::time_point<std::chrono::system_clock> tp_new;
 
 		tp_new = this->tp + days(value);
 
-		return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
+		return DateTime(std::chrono::duration_cast<std::chrono::microseconds>(tp_new.time_since_epoch()).count());
 	}
 
 	DateTime DateTime::addHours(long long value){
-		time_point<system_clock> tp_new;
+		std::chrono::time_point<std::chrono::system_clock> tp_new;
 
-		tp_new = this->tp + hours(value);
+		tp_new = this->tp + std::chrono::hours(value);
 
-		return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
+		return DateTime(std::chrono::duration_cast<std::chrono::microseconds>(tp_new.time_since_epoch()).count());
 	}
 
 	DateTime DateTime::addMicroseconds(long long ms){
-		time_point<system_clock> tp_new;
+		std::chrono::time_point<std::chrono::system_clock> tp_new;
 
-		tp_new = this->tp + microseconds(ms);
+		tp_new = this->tp + std::chrono::microseconds(ms);
 
-		return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
+		return DateTime(std::chrono::duration_cast<std::chrono::microseconds>(tp_new.time_since_epoch()).count());
 	}
 
 	DateTime DateTime::addMilliseconds(long long value){
-		time_point<system_clock> tp_new;
+		std::chrono::time_point<std::chrono::system_clock> tp_new;
 
-		tp_new = this->tp + milliseconds(value);
+		tp_new = this->tp + std::chrono::milliseconds(value);
 
-		return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
+		return DateTime(std::chrono::duration_cast<std::chrono::microseconds>(tp_new.time_since_epoch()).count());
 	}
 
 	DateTime DateTime::addMinutes(long long value){
-		time_point<system_clock> tp_new;
+		std::chrono::time_point<std::chrono::system_clock> tp_new;
 
-		tp_new = this->tp + minutes(value);
+		tp_new = this->tp + std::chrono::minutes(value);
 
-		return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
+		return DateTime(std::chrono::duration_cast<std::chrono::microseconds>(tp_new.time_since_epoch()).count());
 	}
 
 	DateTime DateTime::addMonths(long long value){
-		time_point<system_clock> tp_new;
+		std::chrono::time_point<std::chrono::system_clock> tp_new;
 
 		tp_new = this->tp + months(value);
 
-		return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
+		return DateTime(std::chrono::duration_cast<std::chrono::microseconds>(tp_new.time_since_epoch()).count());
 	}
 
 	DateTime DateTime::addSeconds(long long value){
-		time_point<system_clock> tp_new;
+		std::chrono::time_point<std::chrono::system_clock> tp_new;
 
-		tp_new = this->tp + seconds(value);
+		tp_new = this->tp + std::chrono::seconds(value);
 
-		return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
+		return DateTime(std::chrono::duration_cast<std::chrono::microseconds>(tp_new.time_since_epoch()).count());
 	}
 
 	DateTime DateTime::addTicks(long long ms){
@@ -145,11 +145,11 @@ namespace dnc{
 	}
 
 	DateTime DateTime::addYears(long value){
-		time_point<system_clock> tp_new;
+		std::chrono::time_point<std::chrono::system_clock> tp_new;
 
 		tp_new = this->tp + years(value);
 
-		return DateTime(duration_cast<microseconds>(tp_new.time_since_epoch()).count());
+		return DateTime(std::chrono::duration_cast<std::chrono::microseconds>(tp_new.time_since_epoch()).count());
 	}
 
 	int DateTime::compareTo(DateTime * value){
@@ -165,7 +165,7 @@ namespace dnc{
 	TimeSpan DateTime::substract(DateTime * value){
 		TimeSpan* res;
 
-		res = new TimeSpan(duration_cast<microseconds>(this->tp - value->tp).count());
+		res = new TimeSpan(std::chrono::duration_cast<std::chrono::microseconds>(this->tp - value->tp).count());
 
 		return *res;
 	}
@@ -173,9 +173,9 @@ namespace dnc{
 	DateTime DateTime::substract(TimeSpan * value){
 		DateTime * res;
 
-		microseconds dur(value->totalMicroseconds());
+		std::chrono::microseconds dur(value->totalMicroseconds());
 
-		time_point<system_clock> tmp = this->tp - dur;
+		std::chrono::time_point<std::chrono::system_clock> tmp = this->tp - dur;
 
 		res = new DateTime(tmp.time_since_epoch().count());
 
@@ -188,14 +188,14 @@ namespace dnc{
 		//years ys;
 		//months mons;
 		days ds;
-		milliseconds ms;
-		time_point<system_clock> tp_temp;
+		std::chrono::milliseconds ms;
+		std::chrono::time_point<std::chrono::system_clock> tp_temp;
 		// time_point<system_clock> tp_wd;
 		String res;
 
 
 		tp_temp = this->tp;
-		ms = duration_cast<milliseconds>(tp_temp.time_since_epoch());
+		ms = std::chrono::duration_cast<std::chrono::milliseconds>(tp_temp.time_since_epoch());
 
 
 
@@ -221,7 +221,7 @@ namespace dnc{
 		int m = 0;
 		int year_final = 0;
 
-		z = duration_cast<days>(ms).count() + 719468;
+		z = std::chrono::duration_cast<days>(ms).count() + 719468;
 		era = (z >= 0 ? z : z - 146096) / 146097;
 		doe = static_cast<unsigned>(z - era * 146097);          // [0, 146096]
 		yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;  // [0, 399]
@@ -273,27 +273,27 @@ namespace dnc{
 		years ys;
 		months mons;
 		days ds;
-		hours hs;
-		minutes mins;
-		seconds ss;
-		milliseconds ms;
-		time_point<system_clock> tp_temp;
+		std::chrono::hours hs;
+		std::chrono::minutes mins;
+		std::chrono::seconds ss;
+		std::chrono::milliseconds ms;
+		std::chrono::time_point<std::chrono::system_clock> tp_temp;
 		String res;
 
 		tp_temp = this->tp;
-		ms = duration_cast<milliseconds>(tp_temp.time_since_epoch());
+		ms = std::chrono::duration_cast<std::chrono::milliseconds>(tp_temp.time_since_epoch());
 
-		ys = duration_cast<years>(ms);
+		ys = std::chrono::duration_cast<years>(ms);
 		ms -= ys;
-		mons = duration_cast<months>(ms);
+		mons = std::chrono::duration_cast<months>(ms);
 		ms -= mons;
-		ds = duration_cast<days>(ms);
+		ds = std::chrono::duration_cast<days>(ms);
 		ms -= ds;
-		hs = duration_cast<hours>(ms);
+		hs = std::chrono::duration_cast<std::chrono::hours>(ms);
 		ms -= hs;
-		mins = duration_cast<minutes>(ms);
+		mins = std::chrono::duration_cast<std::chrono::minutes>(ms);
 		ms -= mins;
-		ss = duration_cast<seconds>(ms);
+		ss = std::chrono::duration_cast<std::chrono::seconds>(ms);
 		ms -= ss;
 
 		res += Convert::toString(hs.count()).padLeft(2, '0');
@@ -311,15 +311,15 @@ namespace dnc{
 		years ys;
 		months mons;
 		days ds;
-		hours hs;
-		minutes mins;
-		seconds ss;
-		milliseconds ms;
-		time_point<system_clock> tp_temp;
+		std::chrono::hours hs;
+		std::chrono::minutes mins;
+		std::chrono::seconds ss;
+		std::chrono::milliseconds ms;
+		std::chrono::time_point<std::chrono::system_clock> tp_temp;
 		String res;
 
 		tp_temp = this->tp;
-		ms = duration_cast<milliseconds>(tp_temp.time_since_epoch());
+		ms = std::chrono::duration_cast<std::chrono::milliseconds>(tp_temp.time_since_epoch());
 
 
 
@@ -335,7 +335,7 @@ namespace dnc{
 		int m = 0;
 		int year_final = 0;
 
-		z = duration_cast<days>(ms).count() + 719468;
+		z = std::chrono::duration_cast<days>(ms).count() + 719468;
 		era = (z >= 0 ? z : z - 146096) / 146097;
 		doe = static_cast<unsigned>(z - era * 146097);          // [0, 146096]
 		yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;  // [0, 399]
@@ -350,17 +350,17 @@ namespace dnc{
 
 
 
-		ys = duration_cast<years>(ms);
+		ys = std::chrono::duration_cast<years>(ms);
 		ms -= ys;
-		mons = duration_cast<months>(ms);
+		mons = std::chrono::duration_cast<months>(ms);
 		ms -= mons;
-		ds = duration_cast<days>(ms);
+		ds = std::chrono::duration_cast<days>(ms);
 		ms -= ds;
-		hs = duration_cast<hours>(ms);
+		hs = std::chrono::duration_cast<std::chrono::hours>(ms);
 		ms -= hs;
-		mins = duration_cast<minutes>(ms);
+		mins = std::chrono::duration_cast<std::chrono::minutes>(ms);
 		ms -= mins;
-		ss = duration_cast<seconds>(ms);
+		ss = std::chrono::duration_cast<std::chrono::seconds>(ms);
 		ms -= ss;
 
 		res += Convert::toString(year_final).padLeft(4, '0');
@@ -385,23 +385,23 @@ namespace dnc{
 		return toUtcString().getStringValue();
 	}
 
-	string DateTime::getTypeString(){
-		return string("DateTime");
+	std::string DateTime::getTypeString(){
+		return std::string("DateTime");
 	}
 
 	DateTime DateTime::Date(){
 		years ys;
 		months mons;
 		days ds;
-		time_point<system_clock> tp_temp;
+		std::chrono::time_point<std::chrono::system_clock> tp_temp;
 		DateTime res;
 
 		tp_temp = this->tp;
-		ds = duration_cast<days>(tp_temp.time_since_epoch());
+		ds = std::chrono::duration_cast<days>(tp_temp.time_since_epoch());
 
-		ys = duration_cast<years>(ds);
+		ys = std::chrono::duration_cast<years>(ds);
 		ds -= ys;
-		mons = duration_cast<months>(ds);
+		mons = std::chrono::duration_cast<months>(ds);
 		ds -= mons;
 
 		res = DateTime(ys.count(), mons.count(), ds.count());
@@ -410,21 +410,21 @@ namespace dnc{
 	}
 
 	void DateTime::Date(DateTime & date){
-		system_clock::time_point tmp = this->tp;
-		system_clock::time_point tmp_new = date.tp;
+		std::chrono::system_clock::time_point tmp = this->tp;
+		std::chrono::system_clock::time_point tmp_new = date.tp;
 
-		years y = duration_cast<years>(tmp.time_since_epoch());
+		years y = std::chrono::duration_cast<years>(tmp.time_since_epoch());
 		tmp -= y;
-		months m = duration_cast<months>(tmp.time_since_epoch());
+		months m = std::chrono::duration_cast<months>(tmp.time_since_epoch());
 		tmp -= m;
-		days d = duration_cast<days>(tmp.time_since_epoch());
+		days d = std::chrono::duration_cast<days>(tmp.time_since_epoch());
 		tmp -= d;
 
-		years y_new = duration_cast<years>(tmp_new.time_since_epoch());
+		years y_new = std::chrono::duration_cast<years>(tmp_new.time_since_epoch());
 		tmp_new -= y_new;
-		months m_new = duration_cast<months>(tmp_new.time_since_epoch());
+		months m_new = std::chrono::duration_cast<months>(tmp_new.time_since_epoch());
 		tmp_new -= m_new;
-		days d_new = duration_cast<days>(tmp_new.time_since_epoch());
+		days d_new = std::chrono::duration_cast<days>(tmp_new.time_since_epoch());
 
 		tmp += y_new;
 		tmp += m_new;
@@ -438,15 +438,15 @@ namespace dnc{
 		years ys;
 		months mons;
 		days ds;
-		seconds ss;
+		std::chrono::seconds ss;
 
-		ss = duration_cast<seconds>(this->tp.time_since_epoch());
+		ss = std::chrono::duration_cast<std::chrono::seconds>(this->tp.time_since_epoch());
 
-		ys = duration_cast<years>(ss);
+		ys = std::chrono::duration_cast<years>(ss);
 		ss -= ys;
-		mons = duration_cast<months>(ss);
+		mons = std::chrono::duration_cast<months>(ss);
 		ss -= mons;
-		ds = duration_cast<days>(ss);
+		ds = std::chrono::duration_cast<days>(ss);
 
 		res = ds.count();
 
@@ -454,9 +454,9 @@ namespace dnc{
 	}
 
 	void DateTime::Day(unsigned short day){
-		system_clock::time_point tmp = this->tp;
+		std::chrono::system_clock::time_point tmp = this->tp;
 
-		days d = duration_cast<days>(tmp.time_since_epoch());
+		days d = std::chrono::duration_cast<days>(tmp.time_since_epoch());
 		tmp -= d;
 
 		days d_new(day);
@@ -470,7 +470,7 @@ namespace dnc{
 		time_t tt;
 		tm tm;
 
-		tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
+		tt = std::chrono::system_clock::to_time_t(std::chrono::time_point_cast<std::chrono::microseconds>(this->tp));
 		tm = *localtime(&tt);
 
 		return tm.tm_wday;
@@ -480,21 +480,21 @@ namespace dnc{
 		time_t tt;
 		tm tm;
 
-		tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
+		tt = std::chrono::system_clock::to_time_t(std::chrono::time_point_cast<std::chrono::microseconds>(this->tp));
 		tm = *localtime(&tt);
 
 		tm.tm_wday = dow;
 
 		// still work to do, to keep microseconds
 
-		this->tp = system_clock::from_time_t(mktime(&tm));
+		this->tp = std::chrono::system_clock::from_time_t(mktime(&tm));
 	}
 
 	unsigned short DateTime::DayOfYear(){
 		time_t tt;
 		tm tm;
 
-		tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
+		tt = std::chrono::system_clock::to_time_t(std::chrono::time_point_cast<std::chrono::microseconds>(this->tp));
 		tm = *localtime(&tt);
 
 		return tm.tm_yday;
@@ -504,14 +504,14 @@ namespace dnc{
 		time_t tt;
 		tm tm;
 
-		tt = system_clock::to_time_t(time_point_cast<microseconds>(this->tp));
+		tt = std::chrono::system_clock::to_time_t(std::chrono::time_point_cast<std::chrono::microseconds>(this->tp));
 		tm = *localtime(&tt);
 
 		tm.tm_yday = doy;
 
 		// still work to do, to keep microseconds
 
-		this->tp = system_clock::from_time_t(mktime(&tm));
+		this->tp = std::chrono::system_clock::from_time_t(mktime(&tm));
 	}
 
 	unsigned short DateTime::Hour(){
@@ -519,18 +519,18 @@ namespace dnc{
 		years ys;
 		months mons;
 		days ds;
-		hours hs;
-		seconds ss;
+		std::chrono::hours hs;
+		std::chrono::seconds ss;
 
-		ss = duration_cast<seconds>(this->tp.time_since_epoch());
+		ss = std::chrono::duration_cast<std::chrono::seconds>(this->tp.time_since_epoch());
 
-		ys = duration_cast<years>(ss);
+		ys = std::chrono::duration_cast<years>(ss);
 		ss -= ys;
-		mons = duration_cast<months>(ss);
+		mons = std::chrono::duration_cast<months>(ss);
 		ss -= mons;
-		ds = duration_cast<days>(ss);
+		ds = std::chrono::duration_cast<days>(ss);
 		ss -= ds;
-		hs = duration_cast<hours>(ss);
+		hs = std::chrono::duration_cast<std::chrono::hours>(ss);
 
 		res = hs.count();
 
@@ -538,12 +538,12 @@ namespace dnc{
 	}
 
 	void DateTime::Hour(unsigned short _hours){
-		system_clock::time_point tmp = this->tp;
+		std::chrono::system_clock::time_point tmp = this->tp;
 
-		hours h = duration_cast<hours>(tmp.time_since_epoch());
+		std::chrono::hours h = std::chrono::duration_cast<std::chrono::hours>(tmp.time_since_epoch());
 		tmp -= h;
 
-		hours h_new(_hours);
+		std::chrono::hours h_new(_hours);
 
 		tmp += h_new;
 
@@ -555,24 +555,24 @@ namespace dnc{
 		years ys;
 		months mons;
 		days ds;
-		hours hs;
-		minutes mins;
-		seconds ss;
-		milliseconds ms;
+		std::chrono::hours hs;
+		std::chrono::minutes mins;
+		std::chrono::seconds ss;
+		std::chrono::milliseconds ms;
 
-		ms = duration_cast<milliseconds>(this->tp.time_since_epoch());
+		ms = std::chrono::duration_cast<std::chrono::milliseconds>(this->tp.time_since_epoch());
 
-		ys = duration_cast<years>(ms);
+		ys = std::chrono::duration_cast<years>(ms);
 		ms -= ys;
-		mons = duration_cast<months>(ms);
+		mons = std::chrono::duration_cast<months>(ms);
 		ms -= mons;
-		ds = duration_cast<days>(ms);
+		ds = std::chrono::duration_cast<days>(ms);
 		ms -= ds;
-		hs = duration_cast<hours>(ms);
+		hs = std::chrono::duration_cast<std::chrono::hours>(ms);
 		ms -= hs;
-		mins = duration_cast<minutes>(ms);
+		mins = std::chrono::duration_cast<std::chrono::minutes>(ms);
 		ms -= mins;
-		ss = duration_cast<seconds>(ms);
+		ss = std::chrono::duration_cast<std::chrono::seconds>(ms);
 		ms -= ss;
 
 		res = ms.count();
@@ -581,12 +581,12 @@ namespace dnc{
 	}
 
 	void DateTime::Millisecond(unsigned int ms){
-		system_clock::time_point tmp = this->tp;
+		std::chrono::system_clock::time_point tmp = this->tp;
 
-		milliseconds ms_old = duration_cast<milliseconds>(tmp.time_since_epoch());
+		std::chrono::milliseconds ms_old = std::chrono::duration_cast<std::chrono::milliseconds>(tmp.time_since_epoch());
 		tmp -= ms_old;
 
-		milliseconds ms_new(ms);
+		std::chrono::milliseconds ms_new(ms);
 
 		tmp += ms_new;
 
@@ -598,21 +598,21 @@ namespace dnc{
 		years ys;
 		months mons;
 		days ds;
-		hours hs;
-		minutes mins;
-		seconds ss;
+		std::chrono::hours hs;
+		std::chrono::minutes mins;
+		std::chrono::seconds ss;
 
-		ss = duration_cast<seconds>(this->tp.time_since_epoch());
+		ss = std::chrono::duration_cast<std::chrono::seconds>(this->tp.time_since_epoch());
 
-		ys = duration_cast<years>(ss);
+		ys = std::chrono::duration_cast<years>(ss);
 		ss -= ys;
-		mons = duration_cast<months>(ss);
+		mons = std::chrono::duration_cast<months>(ss);
 		ss -= mons;
-		ds = duration_cast<days>(ss);
+		ds = std::chrono::duration_cast<days>(ss);
 		ss -= ds;
-		hs = duration_cast<hours>(ss);
+		hs = std::chrono::duration_cast<std::chrono::hours>(ss);
 		ss -= hs;
-		mins = duration_cast<minutes>(ss);
+		mins = std::chrono::duration_cast<std::chrono::minutes>(ss);
 
 		res = mins.count();
 
@@ -620,12 +620,12 @@ namespace dnc{
 	}
 
 	void DateTime::Minute(unsigned short min){
-		system_clock::time_point tmp = this->tp;
+		std::chrono::system_clock::time_point tmp = this->tp;
 
-		minutes min_old = duration_cast<minutes>(tmp.time_since_epoch());
+		std::chrono::minutes min_old = std::chrono::duration_cast<std::chrono::minutes>(tmp.time_since_epoch());
 		tmp -= min_old;
 
-		minutes min_new(min);
+		std::chrono::minutes min_new(min);
 
 		tmp += min_new;
 
@@ -636,13 +636,13 @@ namespace dnc{
 		unsigned short res = 0;
 		years ys;
 		months mons;
-		seconds ss;
+		std::chrono::seconds ss;
 
-		ss = duration_cast<seconds>(this->tp.time_since_epoch());
+		ss = std::chrono::duration_cast<std::chrono::seconds>(this->tp.time_since_epoch());
 
-		ys = duration_cast<years>(ss);
+		ys = std::chrono::duration_cast<years>(ss);
 		ss -= ys;
-		mons = duration_cast<months>(ss);
+		mons = std::chrono::duration_cast<months>(ss);
 
 		res = mons.count();
 
@@ -658,21 +658,21 @@ namespace dnc{
 		years ys;
 		months mons;
 		days ds;
-		hours hs;
-		minutes mins;
-		seconds ss;
+		std::chrono::hours hs;
+		std::chrono::minutes mins;
+		std::chrono::seconds ss;
 
-		ss = duration_cast<seconds>(this->tp.time_since_epoch());
+		ss = std::chrono::duration_cast<std::chrono::seconds>(this->tp.time_since_epoch());
 
-		ys = duration_cast<years>(ss);
+		ys = std::chrono::duration_cast<years>(ss);
 		ss -= ys;
-		mons = duration_cast<months>(ss);
+		mons = std::chrono::duration_cast<months>(ss);
 		ss -= mons;
-		ds = duration_cast<days>(ss);
+		ds = std::chrono::duration_cast<days>(ss);
 		ss -= ds;
-		hs = duration_cast<hours>(ss);
+		hs = std::chrono::duration_cast<std::chrono::hours>(ss);
 		ss -= hs;
-		mins = duration_cast<minutes>(ss);
+		mins = std::chrono::duration_cast<std::chrono::minutes>(ss);
 		ss -= mins;
 
 		res = ss.count();
@@ -681,21 +681,21 @@ namespace dnc{
 	}
 
 	void DateTime::Second(unsigned short sec){
-		setTime<seconds>(sec);
+		setTime<std::chrono::seconds>(sec);
 	}
 
 	long long DateTime::Ticks(){
-		return nanoseconds(this->tp.time_since_epoch()).count();
+		return std::chrono::nanoseconds(this->tp.time_since_epoch()).count();
 	}
 
 	void DateTime::Ticks(long long micsec){
-		setTime<microseconds>(micsec);
+		setTime<std::chrono::microseconds>(micsec);
 	}
 
 	unsigned short DateTime::Year(){
 		unsigned short res = 0;
 
-		res = duration_cast<years>(this->tp.time_since_epoch()).count();
+		res = std::chrono::duration_cast<years>(this->tp.time_since_epoch()).count();
 
 		return res;
 	}
@@ -706,9 +706,9 @@ namespace dnc{
 
 	template<typename T>
 	void DateTime::setTime(long long nr){
-		system_clock::time_point tmp = this->tp;
+		std::chrono::system_clock::time_point tmp = this->tp;
 
-		T nr_old = duration_cast<T>(tmp.time_since_epoch());
+		T nr_old = std::chrono::duration_cast<T>(tmp.time_since_epoch());
 		tmp -= nr_old;
 
 		T nr_new(nr - 1970);

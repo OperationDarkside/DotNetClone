@@ -1,42 +1,46 @@
 #include "SqlConnection.h"
 
-namespace dnc::Data::SqlClient{
+namespace dnc{
+	namespace Data{
+		namespace SqlClient{
 
-	SqlConnection::SqlConnection(){
+			SqlConnection::SqlConnection(){
 
-	}
+			}
 
-	SqlConnection::SqlConnection(String & conString): connectionString(conString){
+			SqlConnection::SqlConnection(String & conString): connectionString(conString){
 
-	}
+			}
 
-	SqlConnection::~SqlConnection(){}
-
-
-
-	string SqlConnection::toString(){
-		return string("System.Data.SqlClient.SqlConnection");
-	}
-
-	string SqlConnection::getTypeString(){
-		return string("SqlConnection");
-	}
+			SqlConnection::~SqlConnection(){}
 
 
 
-	void SqlConnection::Close(){
-		throw "This class ist just an abstract class";
-	}
+			std::string SqlConnection::toString(){
+				return std::string("System.Data.SqlClient.SqlConnection");
+			}
 
-	String SqlConnection::ConnectionString(){
-		return this->connectionString;
-	}
+			std::string SqlConnection::getTypeString(){
+				return std::string("SqlConnection");
+			}
 
-	void SqlConnection::ConnectionString(String & conString){
-		this->connectionString = conString;
-	}
 
-	void SqlConnection::Open(){
-		throw "This class ist just an abstract class";
+
+			void SqlConnection::Close(){
+				throw "This class ist just an abstract class";
+			}
+
+			String SqlConnection::ConnectionString(){
+				return this->connectionString;
+			}
+
+			void SqlConnection::ConnectionString(String & conString){
+				this->connectionString = conString;
+			}
+
+			void SqlConnection::Open(){
+				throw "This class ist just an abstract class";
+			}
+		}
 	}
 }

@@ -4,7 +4,6 @@
 #include <iostream>
 
 #pragma once
-using namespace std;
 
 namespace dnc{
 	/**

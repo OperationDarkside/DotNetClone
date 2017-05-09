@@ -18,6 +18,9 @@ namespace dnc{
 		Type(size_t hashcode, String& name);
 		~Type();
 
+		std::string ToString();
+		std::string getTypeString();
+
 		/**
 		Returns a Type class instance of the given class
 
@@ -38,7 +41,7 @@ namespace dnc{
 		const type_info& ti = typeid(var);
 
 		size_t code = ti.hash_code();
-		String* n = new String(&string(ti.name()));
+		String* n = new String(&std::string(ti.name()));
 
 		return Type(code, *n);
 	}

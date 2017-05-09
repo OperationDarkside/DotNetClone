@@ -8,12 +8,12 @@ namespace dnc{
 
 	Short::~Short(){}
 
-	string Short::toString(){
-		return string("System.Short");
+	std::string Short::toString(){
+		return std::string(std::to_string(this->value));
 	}
 
-	string Short::getTypeString(){
-		return to_string(this->value);
+	std::string Short::getTypeString(){
+		return std::string("Short");
 	}
 
 	Short Short::operator=(short s){

@@ -62,7 +62,7 @@ namespace dnc{
 		} else if(*tmp == "false"){
 			return false;
 		} else{
-			cerr << "wrong format" << endl;
+			std::cerr << "wrong format" << std::endl;
 		}
 
 		return false;
@@ -76,9 +76,9 @@ namespace dnc{
 		unsigned short min = 0;
 		unsigned short sec = 0;
 		unsigned short ms = 0;
-		vector<String*> dates;
-		vector<String*> times;
-		vector<String*> tmp;
+		std::vector<String*> dates;
+		std::vector<String*> times;
+		std::vector<String*> tmp;
 		DateTime* dt;
 
 		try{
@@ -87,22 +87,22 @@ namespace dnc{
 			times = tmp[1]->split(':');
 
 			if(dates.size() == 3 && times.size() == 4){
-				year = stoi(dates[0]->getStringValue().c_str());
-				month = stoi(dates[1]->getStringValue().c_str());
-				day = stoi(dates[2]->getStringValue().c_str());
-				hour = stoi(times[0]->getStringValue().c_str());
-				min = stoi(times[1]->getStringValue().c_str());
-				sec = stoi(times[2]->getStringValue().c_str());
-				ms = stoi(times[3]->getStringValue().c_str());
+				year = std::stoi(dates[0]->getStringValue().c_str());
+				month = std::stoi(dates[1]->getStringValue().c_str());
+				day = std::stoi(dates[2]->getStringValue().c_str());
+				hour = std::stoi(times[0]->getStringValue().c_str());
+				min = std::stoi(times[1]->getStringValue().c_str());
+				sec = std::stoi(times[2]->getStringValue().c_str());
+				ms = std::stoi(times[3]->getStringValue().c_str());
 
 				dt = new DateTime(year, month, day, hour, min, sec, ms);
 
 				return *dt;
 			} else{
-				cerr << "Wrong format";
+				std::cerr << "Wrong format";
 			}
-		} catch(exception ex){
-			cerr << ex.what();
+		} catch(std::exception ex){
+			std::cerr << ex.what();
 		}
 
 		return NULL;
@@ -111,7 +111,7 @@ namespace dnc{
 	double Convert::toDouble(String & value){
 		double res = 0;
 
-		res = stod(value.getStringValue().c_str());
+		res = std::stod(value.getStringValue().c_str());
 
 		return res;
 	}
@@ -119,7 +119,7 @@ namespace dnc{
 	float Convert::toFloat(String & value){
 		float res = 0;
 
-		res = stof(value.getStringValue().c_str());
+		res = std::stof(value.getStringValue().c_str());
 
 		return res;
 	}
@@ -127,7 +127,7 @@ namespace dnc{
 	int Convert::toInt(String & value){
 		int res = 0;
 
-		res = stoi(value.getStringValue().c_str());
+		res = std::stoi(value.getStringValue().c_str());
 
 		return res;
 	}
@@ -135,7 +135,7 @@ namespace dnc{
 	long Convert::toLong(String & value){
 		long res = 0;
 
-		res = stol(value.getStringValue().c_str());
+		res = std::stol(value.getStringValue().c_str());
 
 		return res;
 	}
@@ -153,39 +153,39 @@ namespace dnc{
 	}
 
 	String Convert::toString(double value){
-		return new String(&to_string(value));
+		return new String(&std::to_string(value));
 	}
 
 	String Convert::toString(float value){
-		return new String(&to_string(value));
+		return new String(&std::to_string(value));
 	}
 
 	String Convert::toString(short value){
-		return new String(&to_string(value));
+		return new String(&std::to_string(value));
 	}
 
 	String Convert::toString(int value){
-		return new String(&to_string(value));
+		return new String(&std::to_string(value));
 	}
 
 	String Convert::toString(long value){
-		return new String(&to_string(value));
+		return new String(&std::to_string(value));
 	}
 
 	String Convert::toString(long long value){
-		return new String(&to_string(value));
+		return new String(&std::to_string(value));
 	}
 
 	String Convert::toString(unsigned short value){
-		return new String(&to_string(value));
+		return new String(&std::to_string(value));
 	}
 
 	String Convert::toString(unsigned int value){
-		return new String(&to_string(value));
+		return new String(&std::to_string(value));
 	}
 
 	String Convert::toString(unsigned long value){
-		return new String(&to_string(value));
+		return new String(&std::to_string(value));
 	}
 
 	String Convert::toString(Object * value){
