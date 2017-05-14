@@ -1,6 +1,9 @@
-#include <fstream>
-
 #pragma once
+
+#ifndef FILETOOLS_H
+#define FILETOOLS_H
+
+#include <fstream>
 
 namespace dnc{
 	namespace IO{
@@ -35,3 +38,4 @@ namespace dnc{
 		};
 	}
 }
+#endif // !FILETOOLS_H

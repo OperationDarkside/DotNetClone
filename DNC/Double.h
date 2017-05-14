@@ -1,6 +1,9 @@
-#include "String.h"
-
 #pragma once
+
+#ifndef DOUBLE_H
+#define DOUBLE_H
+
+#include "String.h"
 
 namespace dnc{
 
@@ -22,3 +25,4 @@ namespace dnc{
 		double value;
 	};
 }
+#endif // !DOUBLE_H

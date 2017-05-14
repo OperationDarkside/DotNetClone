@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef MYSQLCONNECTION_H
+#define MYSQLCONNECTION_H
+
 #include "SqlConnection.h"
 #include "MySqlCommand.h"
 #include <my_global.h>
@@ -33,3 +36,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !MYSQLCONNECTION_H

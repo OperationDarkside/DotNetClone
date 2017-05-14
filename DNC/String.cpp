@@ -32,8 +32,8 @@ namespace dnc{
 		return res;
 	}
 
-	bool String::contains(String * str){
-		size_t pos = value.find(str->value);
+	bool String::contains(String str){
+		size_t pos = value.find(str.value);
 
 		if(pos != std::string::npos){
 			return true;
@@ -287,46 +287,46 @@ namespace dnc{
 		return this;
 	}
 
-	std::vector<String*> String::split(char separator){
+	Collections::Generic::List<String> String::split(char separator){
 		std::string str;
 		std::stringstream ss;
-		std::vector<String*> res;
-		String* s;
+		Collections::Generic::List<String> res;
+		//String* s;
 
 
 		ss.str(this->value);
 
 		while(std::getline(ss, str, separator)){
-			res.push_back(new String(&str));
+			res.Add(String(&str));
 		}
 
 		return res;
 	}
 
-	std::vector<String*> String::split(String * separator){
+	Collections::Generic::List<String> String::split(String separator){
 		size_t currentPos = 0;
 		size_t oldPos = 0;
 		size_t len = 0;
-		std::vector<String*> res;
+		Collections::Generic::List<String> res;
 
 		len = this->value.length();
 
-		while((currentPos = this->value.find(separator->value, currentPos)) != std::string::npos){
-			res.push_back(new String(&this->value.substr(oldPos, currentPos - oldPos)));
-			currentPos += separator->value.length();
+		while((currentPos = this->value.find(separator.value, currentPos)) != std::string::npos){
+			res.Add(String(&this->value.substr(oldPos, currentPos - oldPos)));
+			currentPos += separator.value.length();
 			oldPos = currentPos;
 		}
 
 
 		if(oldPos < len){
-			res.push_back(new String(&this->value.substr(oldPos, len - oldPos)));
+			res.Add(new String(&this->value.substr(oldPos, len - oldPos)));
 		}
 
 		return res;
 	}
 
-	bool String::startsWith(String * str){
-		if(this->value.compare(0, str->value.size(), str->value) == 0){
+	bool String::startsWith(String str){
+		if(this->value.compare(0, str.value.size(), str.value) == 0){
 			return true;
 		} else{
 			return false;
@@ -375,14 +375,14 @@ namespace dnc{
 
 	String String::toLower(){
 		std::locale loc;
-		String* target = new String();
+		String target;
 
 
 		for(std::string::size_type i = 0; i < this->value.length(); i++){
-			target->value += std::tolower(this->value[i], loc);
+			target.value += std::tolower(this->value[i], loc);
 		}
 
-		return *target;
+		return target;
 	}
 
 	std::string String::toString(){
@@ -397,14 +397,14 @@ namespace dnc{
 
 	String String::toUpper(){
 		std::locale loc;
-		String* target = new String();
+		String target;
 
 
 		for(std::string::size_type i = 0; i < this->value.length(); i++){
-			target->value += std::toupper(this->value[i], loc);
+			target.value += std::toupper(this->value[i], loc);
 		}
 
-		return *target;
+		return target;
 	}
 
 	String String::trim(){
@@ -441,10 +441,10 @@ namespace dnc{
 
 	// Operators
 
-	String& operator+(String& str1, String& str2){
-		String* res = new String(&(str1.value + str2.value));
+	String operator+(String str1, String str2){
+		String res(&(str1.value + str2.value));
 
-		return *res;
+		return res;
 	}
 
 	String& operator+(String& str1, const char * str2){

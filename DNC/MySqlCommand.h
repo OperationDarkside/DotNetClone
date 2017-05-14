@@ -1,8 +1,11 @@
+#pragma once
+
+#ifndef MYSQLCOMMAND_H
+#define MYSQLCOMMAND_H
+
 #include "SqlCommand.h"
 #include "MySqlDataReader.h"
 #include "MySqlParameterCollection.h"
-
-#pragma once
 
 namespace dnc{
 	namespace Data{
@@ -67,3 +70,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !MYSQLCOMMAND_H

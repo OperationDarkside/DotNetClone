@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef MYSQLDATAREADER_H
+#define MYSQLDATAREADER_H
+
 #include "DateTime.h"
 #include "Type.h"
 #include "DataTable.h"
@@ -45,7 +49,7 @@ namespace dnc{
 
 			private:
 				String tableName;
-				std::vector<std::pair<String, Type>> cols;
+				Collections::Generic::List<std::pair<String, Type>> cols;
 				MYSQL_STMT* stmt;
 				MYSQL_RES* resultset;
 				MYSQL_BIND* row;
@@ -63,3 +67,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !MYSQLDATAREADER_H

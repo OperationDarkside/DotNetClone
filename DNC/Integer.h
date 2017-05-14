@@ -1,6 +1,9 @@
-#include "String.h"
-
 #pragma once
+
+#ifndef INTEGER_H
+#define INTEGER_H
+
+#include "String.h"
 
 namespace dnc{
 
@@ -23,3 +26,4 @@ namespace dnc{
 	};
 
 }
+#endif // !INTEGER_H

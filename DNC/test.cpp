@@ -16,6 +16,7 @@
 #include "MySqlDataAdapter.h"
 #include <my_global.h>
 #include "mysql.h"
+#include "List.h"
 
 using namespace dnc;
 using namespace dnc::Data;
@@ -262,16 +263,16 @@ void test_String_Class(){
 	}
 
 	String str_split1("Test;mit;Split");
-	std::vector<String*> array_split1 = str_split1.split(';');
-	if(*array_split1[2] == "Split"){
+	Collections::Generic::List<String> array_split1 = str_split1.split(';');
+	if(array_split1[2] == "Split"){
 		Console::WriteLine("split works!");
 	} else{
 		Console::WriteLine("Error");
 	}
 
 	String str_split2("TestlostmitlostSplit");
-	std::vector<String*> array_split2 = str_split2.split(&String("lost"));
-	if(*array_split2[2] == "Split"){
+	Collections::Generic::List<String> array_split2 = str_split2.split("lost");
+	if(array_split2[2] == "Split"){
 		Console::WriteLine("split mit String works!");
 	} else{
 		Console::WriteLine("Error");
@@ -631,6 +632,14 @@ int main(){
 	dt_february_test = dt_february_test.addDays(3);
 	Console::WriteLine(dt_february_test.toUtcString());
 
+
+	// LISTE
+	Collections::Generic::List<int> listInt;
+
+	listInt.Add(3);
+	listInt.Add(6);
+	listInt.Add(234);
+	listInt.Add(111111);
 
 
 	system("PAUSE");

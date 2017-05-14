@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef MYSQLPARAMETERCOLLECTION_H
+#define MYSQLPARAMETERCOLLECTION_H
+
 #include "MySqlParameter.h"
 
 namespace dnc{
@@ -43,8 +47,9 @@ namespace dnc{
 				MySqlParameter& operator[](int columnNr);
 
 			private:
-				std::vector<MySqlParameter> paramters;
+				Collections::Generic::List<MySqlParameter> paramters;
 			};
 		}
 	}
 }
+#endif // !MYSQLPARAMETERCOLLECTION_H

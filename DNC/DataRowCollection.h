@@ -1,6 +1,10 @@
+#pragma once
+
+#ifndef DATAROWCOLLECTION_H
+#define DATAROWCOLLECTION_H
+
 #include "DataRow.h"
 
-#pragma once
 namespace dnc{
 	namespace Data{
 
@@ -53,7 +57,8 @@ namespace dnc{
 			DataRow& operator[](unsigned int columnNr);
 
 		private:
-			std::vector<DataRow> rows;
+			Collections::Generic::List<DataRow> rows;
 		};
 	}
 }
+#endif // !DATAROWCOLLECTION_H

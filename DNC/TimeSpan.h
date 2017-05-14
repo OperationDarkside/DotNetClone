@@ -1,7 +1,10 @@
+#pragma once
+
+#ifndef TIMESPAN_H
+#define TIMESPAN_H
+
 #include <chrono>
 #include "String.h"
-
-#pragma once
 
 namespace dnc{
 
@@ -167,3 +170,4 @@ namespace dnc{
 		std::chrono::system_clock::duration dur;
 	};
 }
+#endif // !TIMESPAN_H

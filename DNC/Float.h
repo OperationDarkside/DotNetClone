@@ -1,6 +1,9 @@
-#include "String.h"
-
 #pragma once
+
+#ifndef FLOAT_H
+#define FLOAT_H
+
+#include "String.h"
 
 namespace dnc{
 
@@ -22,3 +25,4 @@ namespace dnc{
 		float value;
 	};
 }
+#endif // !FLOAT_H

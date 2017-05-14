@@ -3,13 +3,11 @@
 #ifndef STRING_H
 #define STRING_H
 
-#include <string>
 #include <algorithm>
 #include <locale>
-#include <vector>
 #include <sstream>
 #include <cctype>
-#include "Object.h"
+#include "List.h"
 
 namespace dnc{
 
@@ -67,7 +65,7 @@ namespace dnc{
 		@param str String pointer to check
 		@return true if this instance contains str
 		*/
-		bool contains(String* str);
+		bool contains(String str);
 		/**
 		Copys a substring of this instance to a destination String at a specific position
 
@@ -261,21 +259,21 @@ namespace dnc{
 		@param separator The character that splits 2 Strings
 		@return vector of Strings
 		*/
-		std::vector<String*> split(char separator);
+		Collections::Generic::List<String> split(char separator);
 		/**
 		Splits this instance String into a list(vector) with a String as separator
 
 		@param separator The String that splits 2 Strings
 		@return vector of Strings
 		*/
-		std::vector<String*> split(String* separator);
+		Collections::Generic::List<String> split(String separator);
 		/**
 		Checks if this Instance starts with the given String str
 
 		@param str String pointer to check
 		@return true if this instance starts with str
 		*/
-		bool startsWith(String* str);
+		bool startsWith(String str);
 		/**
 		Returns the characters of this instance as a String between the given position and the end
 
@@ -343,7 +341,7 @@ namespace dnc{
 		*/
 		String trimStart();
 
-		friend String& operator+(String& str1, String& str2);
+		friend String operator+(String str1, String str2);
 		friend String& operator+(String& str, const char* str2);
 		friend String& operator+(const char* str, String& str2);
 		friend String& operator+(std::string& str, String& str2);

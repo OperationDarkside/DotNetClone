@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef SQLPARAMETER_H
+#define SQLPARAMETER_H
+
 #include "Object.h"
 
 namespace dnc{
@@ -13,3 +17,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !SQLPARAMETER_H

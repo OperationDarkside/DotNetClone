@@ -1,8 +1,12 @@
+#pragma once
+
+#ifndef SQLCOMMAND_H
+#define SQLCOMMAND_H
+
 #include "String.h"
 #include "SqlConnection.h"
 #include "SqlDataReader.h"
 
-#pragma once
 namespace dnc{
 	namespace Data{
 		namespace SqlClient{
@@ -39,3 +43,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !SQLCOMMAND_H

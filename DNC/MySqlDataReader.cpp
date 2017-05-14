@@ -120,7 +120,7 @@ namespace dnc{
 							break;
 					}
 
-					this->cols.push_back(std::make_pair(field->name, t));
+					this->cols.Add(std::make_pair(field->name, t));
 				}
 
 				unsigned int lens = mysql_stmt_field_count(this->stmt);
@@ -335,7 +335,7 @@ namespace dnc{
 
 				table = GetSchemaTable();
 
-				colCount = this->cols.size();
+				colCount = this->cols.Count();
 				rowCount = mysql_stmt_num_rows(this->stmt);
 
 				for(size_t i = 0; i < rowCount; ++i){
@@ -672,7 +672,7 @@ namespace dnc{
 				MYSQL_FIELD* field;
 				MYSQL_TIME time;
 
-				if(!(i < this->cols.size())){
+				if(!(i < this->cols.Count())){
 					throw "Column out of Range!";
 				}
 
@@ -700,7 +700,7 @@ namespace dnc{
 				float res;
 				MYSQL_FIELD* field;
 
-				if(!(i < this->cols.size())){
+				if(!(i < this->cols.Count())){
 					throw "Column out of Range!";
 				}
 
@@ -722,7 +722,7 @@ namespace dnc{
 				float res;
 				MYSQL_FIELD* field;
 
-				if(!(i < this->cols.size())){
+				if(!(i < this->cols.Count())){
 					throw "Column out of Range!";
 				}
 
@@ -739,7 +739,7 @@ namespace dnc{
 				int res;
 				MYSQL_FIELD* field;
 
-				if(!(i < this->cols.size())){
+				if(!(i < this->cols.Count())){
 					throw "Column out of Range!";
 				}
 
@@ -757,7 +757,7 @@ namespace dnc{
 				long res;
 				MYSQL_FIELD* field;
 
-				if(!(i < this->cols.size())){
+				if(!(i < this->cols.Count())){
 					throw "Column out of Range!";
 				}
 
@@ -772,7 +772,7 @@ namespace dnc{
 			}
 
 			String MySqlDataReader::GetName(int i){
-				if(!(i < this->cols.size())){
+				if(!(i < this->cols.Count())){
 					throw "Column out of Range!";
 				}
 
@@ -783,7 +783,7 @@ namespace dnc{
 				int ordinal = -1;
 				size_t len = 0;
 
-				len = this->cols.size();
+				len = this->cols.Count();
 
 				for(size_t i = 0; i < len; i++){
 					if(this->cols[i].first == name){
@@ -821,7 +821,7 @@ namespace dnc{
 				short res;
 				MYSQL_FIELD* field;
 
-				if(!(i < this->cols.size())){
+				if(!(i < this->cols.Count())){
 					throw "Column out of Range!";
 				}
 
@@ -840,7 +840,7 @@ namespace dnc{
 				String res;
 				MYSQL_FIELD* field;
 
-				if(!(i < this->cols.size())){
+				if(!(i < this->cols.Count())){
 					throw "Column out of Range!";
 				}
 

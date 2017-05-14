@@ -1,10 +1,13 @@
-#include "Object.h"
+#pragma once
+
+#ifndef FILESTREAM_H
+#define FILESTREAM_H
+
+//#include "Object.h"
 #include "String.h"
 #include "FileTools.h"
 #include <iostream>
 #include <fstream>
-
-#pragma once
 
 namespace dnc{
 	namespace IO{
@@ -103,3 +106,4 @@ namespace dnc{
 		};
 	}
 }
+#endif // !FILESTREAM_H

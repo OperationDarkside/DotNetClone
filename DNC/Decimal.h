@@ -1,5 +1,9 @@
 #pragma once
-#include "String.h"
+
+#ifndef DECIMAL_H
+#define DECIMAL_H
+
+#include "Object.h"
 
 namespace dnc{
 
@@ -21,3 +25,4 @@ namespace dnc{
 		long double value;
 	};
 }
+#endif // !DECIMAL_H

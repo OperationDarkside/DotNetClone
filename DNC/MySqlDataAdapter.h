@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef MYSQLDATAADAPTER_H
+#define MYSQLDATAADAPTER_H
+
 #include "String.h"
 #include "MySqlDataReader.h"
 #include "MySqlCommand.h"
@@ -26,3 +30,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !MYSQLDATAADAPTER_H

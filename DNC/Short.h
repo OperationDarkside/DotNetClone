@@ -1,6 +1,9 @@
-#include "String.h"
-
 #pragma once
+
+#ifndef SHORT_H
+#define SHORT_H
+
+#include "String.h"
 
 namespace dnc{
 
@@ -20,3 +23,4 @@ namespace dnc{
 		short value;
 	};
 }
+#endif // !SHORT_H

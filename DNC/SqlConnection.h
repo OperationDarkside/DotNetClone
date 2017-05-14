@@ -1,6 +1,10 @@
+#pragma once
+
+#ifndef SQLCONNECTION_H
+#define SQLCONNECTION_H
+
 #include "String.h"
 
-#pragma once
 namespace dnc{
 	namespace Data{
 		namespace SqlClient{
@@ -26,3 +30,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !SQLCONNECTION_H

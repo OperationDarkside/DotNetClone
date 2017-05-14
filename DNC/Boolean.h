@@ -1,7 +1,10 @@
-#include "Object.h"
-#include "String.h"
-
 #pragma once
+#ifndef BOOLEAN_H
+#define BOOLEAN_H
+
+
+#include "Object.h"
+
 namespace dnc{
 	/**
 	Object related wrapper for primitive bool type
@@ -21,3 +24,4 @@ namespace dnc{
 		bool value;
 	};
 }
+#endif // !BOOLEAN_H

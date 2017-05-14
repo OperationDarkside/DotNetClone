@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef DATETIME_H
+#define DATETIME_H
+
 #include "TimeSpan.h"
 #include "String.h"
 #include <ctime>
@@ -333,3 +337,4 @@ namespace dnc{
 		std::tuple<years, months, days> from_days(days ds);
 	};
 }
+#endif // !DATETIME_H

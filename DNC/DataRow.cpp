@@ -6,17 +6,19 @@ namespace dnc{
 
 		DataRow::DataRow(){}
 
-		DataRow::DataRow(const DataRow & row): cols(std::move(row.cols)), items(move(row.items)){
+		DataRow::DataRow(const DataRow & row): cols(std::move(row.cols)), items(std::move(row.items)){
 			int i = 0;
 			i++;
 		}
 
-		DataRow::DataRow(DataRow && row) : cols(std::move(row.cols)), items(move(row.items)){
+		DataRow::DataRow(DataRow && row) : cols(std::move(row.cols)), items(std::move(row.items)){
 			row.cols = nullptr;
 		}
 
 		DataRow::DataRow(DataColumnCollection * columns) : cols(columns){
-			this->items.resize(columns->Count());
+			long len = columns->Count();
+
+			this->items = Collections::Generic::List<Object*>(len);
 		}
 
 		DataRow::~DataRow(){
@@ -34,7 +36,7 @@ namespace dnc{
 		void DataRow::Delete(){
 			size_t len = 0;
 
-			len = this->items.size();
+			len = this->items.Count();
 
 			for(size_t i = 0; i < len; i++){
 				delete this->items[i];
@@ -236,7 +238,7 @@ namespace dnc{
 		void DataRow::RemoveItem(size_t index){
 			size_t len = 0;
 
-			len = this->items.size();
+			len = this->items.Count();
 
 			if((len - 1) < index){
 				throw "Remove item index out of range";
@@ -244,7 +246,7 @@ namespace dnc{
 
 			delete this->items[index];
 
-			this->items.erase(this->items.begin() + index);
+			this->items.RemoveAt(index);
 		}
 	}
 }

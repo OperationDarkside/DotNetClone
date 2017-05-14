@@ -1,8 +1,12 @@
+#pragma once
+
+#ifndef DATACOLUM_H
+#define DATACOLUM_H
+
 #include "Object.h"
 #include "String.h"
 #include "Type.h"
 
-#pragma once
 namespace dnc{
 	namespace Data{
 
@@ -63,3 +67,4 @@ namespace dnc{
 		};
 	}
 }
+#endif // !DATACOLUM_H

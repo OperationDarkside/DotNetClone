@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef LONGLONG_H
+#define LONGLONG_H
+
 #include "String.h"
 
 namespace dnc{
@@ -18,3 +22,4 @@ namespace dnc{
 		long long value;
 	};
 }
+#endif // !LONGLONG_H

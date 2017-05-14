@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef CONSOLE_H
+#define CONSOLE_H
+
 #include "String.h"
 #include <iostream>
 
@@ -159,3 +163,4 @@ namespace dnc{
 		Console(){}
 	};
 }
+#endif // !CONSOLE_H

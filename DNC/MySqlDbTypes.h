@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef MYSQLDBTYPES_H
+#define MYSQLDBTYPES_H
+
 #include "mysql.h"
 
 namespace dnc{
@@ -41,3 +45,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !MYSQLDBTYPES_H

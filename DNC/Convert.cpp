@@ -76,24 +76,24 @@ namespace dnc{
 		unsigned short min = 0;
 		unsigned short sec = 0;
 		unsigned short ms = 0;
-		std::vector<String*> dates;
-		std::vector<String*> times;
-		std::vector<String*> tmp;
+		Collections::Generic::List<String> dates;
+		Collections::Generic::List<String> times;
+		Collections::Generic::List<String> tmp;
 		DateTime* dt;
 
 		try{
 			tmp = value.split('T');
-			dates = tmp[0]->split('-');
-			times = tmp[1]->split(':');
+			dates = tmp[0].split('-');
+			times = tmp[1].split(':');
 
-			if(dates.size() == 3 && times.size() == 4){
-				year = std::stoi(dates[0]->getStringValue().c_str());
-				month = std::stoi(dates[1]->getStringValue().c_str());
-				day = std::stoi(dates[2]->getStringValue().c_str());
-				hour = std::stoi(times[0]->getStringValue().c_str());
-				min = std::stoi(times[1]->getStringValue().c_str());
-				sec = std::stoi(times[2]->getStringValue().c_str());
-				ms = std::stoi(times[3]->getStringValue().c_str());
+			if(dates.Count() == 3 && times.Count() == 4){
+				year = std::stoi(dates[0].getStringValue().c_str());
+				month = std::stoi(dates[1].getStringValue().c_str());
+				day = std::stoi(dates[2].getStringValue().c_str());
+				hour = std::stoi(times[0].getStringValue().c_str());
+				min = std::stoi(times[1].getStringValue().c_str());
+				sec = std::stoi(times[2].getStringValue().c_str());
+				ms = std::stoi(times[3].getStringValue().c_str());
 
 				dt = new DateTime(year, month, day, hour, min, sec, ms);
 

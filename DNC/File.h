@@ -1,8 +1,12 @@
-#include "Object.h"
+#pragma once
+
+#ifndef FILE_H
+#define FILE_H
+
+//#include "Object.h"
 #include "String.h"
 #include "FileStream.h"
 
-#pragma once
 namespace dnc{
 	namespace IO{
 
@@ -19,7 +23,7 @@ namespace dnc{
 			@param path Address to the file
 			@param contents List of strings to add
 			*/
-			void AppenAllLines(String& path, std::vector<String*>& contents);
+			void AppenAllLines(String& path, Collections::Generic::List<String> contents);
 			/**
 			Adds the given string to a file
 
@@ -78,7 +82,7 @@ namespace dnc{
 
 			@param path Address to the file
 			*/
-			std::vector<String*> ReadAllLines(String& path);
+			Collections::Generic::List<String> ReadAllLines(String& path);
 			/**
 			Returns the files contents of the given filepath
 
@@ -96,7 +100,7 @@ namespace dnc{
 
 			@param path Address to the file
 			*/
-			void WriteAllLines(String& path, std::vector<String*> contents);
+			void WriteAllLines(String& path, Collections::Generic::List<String> contents);
 			/**
 			Writes the string to the given file
 
@@ -108,3 +112,4 @@ namespace dnc{
 		};
 	}
 }
+#endif // !FILE_H

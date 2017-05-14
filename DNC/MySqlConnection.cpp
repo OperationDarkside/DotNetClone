@@ -40,7 +40,7 @@ namespace dnc{
 				String uname;
 				String pw;
 				String conStr;
-				std::vector<String*> conKeyValues;
+				Collections::Generic::List<String> conKeyValues;
 
 				conStr = this->ConnectionString();
 
@@ -50,11 +50,11 @@ namespace dnc{
 
 				conKeyValues = conStr.split(';');
 
-				if(conKeyValues.size() != 4){
+				if(conKeyValues.Count() != 4){
 					throw "Not enough parameter in the connection string";
 				}
 
-				address = conKeyValues[0]->substring(7);
+				address = conKeyValues[0].substring(7);
 				indexColon = address.indexOf(':');
 
 				if(indexColon == -1){
@@ -65,9 +65,9 @@ namespace dnc{
 				}
 
 				host = address.substring(0, indexColon);
-				db = conKeyValues[1]->substring(9);
-				uname = conKeyValues[2]->substring(4);
-				pw = conKeyValues[3]->substring(9);
+				db = conKeyValues[1].substring(9);
+				uname = conKeyValues[2].substring(4);
+				pw = conKeyValues[3].substring(9);
 
 				this->connection = mysql_init(NULL);
 

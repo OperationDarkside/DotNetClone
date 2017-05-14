@@ -1,6 +1,10 @@
+#pragma once
+
+#ifndef SQLDATAADAPTER_H
+#define SQLDATAADAPTER_H
+
 #include "String.h"
 
-#pragma once
 namespace dnc{
 	namespace Data{
 		namespace SqlClient{
@@ -18,3 +22,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !SQLDATAADAPTER_H

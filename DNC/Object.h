@@ -1,6 +1,9 @@
-#include <string>
-
 #pragma once
+
+#ifndef OBJECT_H
+#define OBJECT_H
+
+#include <string>
 
 namespace dnc{
 	/**
@@ -43,3 +46,4 @@ namespace dnc{
 		void generateHashCode();
 	};
 }
+#endif // !OBJECT_H

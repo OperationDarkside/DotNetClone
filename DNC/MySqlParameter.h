@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef MYSQLPARAMETER_H
+#define MYSQLPARAMETER_H
+
 #include "String.h"
 #include "Type.h"
 #include "MySqlDbTypes.h"
@@ -46,3 +50,4 @@ namespace dnc{
 		}
 	}
 }
+#endif // !MYSQLPARAMETER_H

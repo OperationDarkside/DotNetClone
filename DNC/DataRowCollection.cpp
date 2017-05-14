@@ -16,29 +16,29 @@ namespace dnc{
 		}
 
 		void DataRowCollection::Add(DataRow& row){
-			this->rows.push_back(row);
+			this->rows.Add(row);
 		}
 
 		void DataRowCollection::Clear(){
 			size_t len = 0;
 
-			len = this->rows.size();
+			len = this->rows.Count();
 
 			for(size_t i = 0; i < len; i++){
 				this->rows[i].Delete();
 			}
 
-			this->rows.clear();
+			this->rows.Clear();
 		}
 
 		long DataRowCollection::Count(){
-			return this->rows.size();
+			return this->rows.Count();
 		}
 
 		int DataRowCollection::IndexOf(DataRow & row){
 			size_t len = 0;
 
-			len = this->rows.size();
+			len = this->rows.Count();
 
 			for(size_t i = 0; i < len; i++){
 				if(&this->rows[i].items == &row.items){
@@ -50,17 +50,17 @@ namespace dnc{
 		}
 
 		void DataRowCollection::InsertAt(DataRow & row, int pos){
-			this->rows.insert(this->rows.begin() + pos, row);
+			this->rows.Insert(pos, row);
 		}
 
 		void DataRowCollection::Remove(DataRow & row){
 			size_t len = 0;
 
-			len = this->rows.size();
+			len = this->rows.Count();
 
 			for(size_t i = 0; i < len; i++){
 				if(&this->rows[i].items == &row.items){
-					this->rows.erase(this->rows.begin() + i);
+					this->rows.RemoveAt(i);
 					return;
 				}
 			}
@@ -69,8 +69,8 @@ namespace dnc{
 		}
 
 		void DataRowCollection::RemoveAt(unsigned long index){
-			if(this->rows.size() > index){
-				this->rows.erase(this->rows.begin() + index);
+			if(this->rows.Count() > index){
+				this->rows.RemoveAt(index);
 			} else{
 				throw "Index of DataRow out of range";
 			}

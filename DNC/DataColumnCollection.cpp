@@ -18,7 +18,7 @@ namespace dnc{
 
 		void DataColumnCollection::Add(DataColumn& column){
 			size_t len = 0;
-			len = this->cols.size();
+			len = this->cols.Count();
 
 			for(size_t i = 0; i < len; i++){
 				if(this->cols[i].ColumnName() == column.ColumnName()){
@@ -27,20 +27,20 @@ namespace dnc{
 				}
 			}
 
-			this->cols.push_back(column);
+			this->cols.Add(column);
 		}
 
 		void DataColumnCollection::Clear(){
-			this->cols.clear();
+			this->cols.Clear();
 		}
 
 		long DataColumnCollection::Count(){
-			return this->cols.size();
+			return this->cols.Count();
 		}
 
 		int DataColumnCollection::IndexOf(DataColumn & column){
 			size_t len = 0;
-			len = this->cols.size();
+			len = this->cols.Count();
 
 			for(size_t i = 0; i < len; i++){
 				if(this->cols[i].ColumnName() == column.ColumnName()){
@@ -60,12 +60,12 @@ namespace dnc{
 				return;
 			}
 
-			len_col = this->cols.size();
+			len_col = this->cols.Count();
 			for(size_t i = 0; i < len_col; i++){
 				col2comp = &this->cols[i];
 
 				if(col2comp->ColumnName() == column->ColumnName()){
-					this->cols.erase(this->cols.begin() + i);
+					this->cols.RemoveAt(i);
 
 					this->table->RemoveColumn(i);
 					return;
@@ -77,12 +77,12 @@ namespace dnc{
 			size_t len_col = 0;
 			DataColumn* col2comp;
 
-			len_col = this->cols.size();
+			len_col = this->cols.Count();
 			for(size_t i = 0; i < len_col; i++){
 				col2comp = &this->cols[i];
 
 				if(col2comp->ColumnName() == name){
-					this->cols.erase(this->cols.begin() + i);
+					this->cols.RemoveAt(i);
 
 					this->table->RemoveColumn(i);
 					return;

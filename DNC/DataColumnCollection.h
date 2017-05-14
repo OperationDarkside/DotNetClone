@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef DATACOLCOLLECTION_H
 #define DATACOLCOLLECTION_H
 
@@ -68,7 +70,7 @@ namespace dnc{
 			DataColumn& operator[](int colNr);
 		private:
 			DataTable* table;
-			std::vector<DataColumn> cols;
+			Collections::Generic::List<DataColumn> cols;
 		};
 	}
 }

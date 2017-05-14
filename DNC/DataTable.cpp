@@ -66,7 +66,7 @@ namespace dnc{
 		void DataTable::RemoveColumn(size_t index){
 			size_t len = 0;
 
-			len = this->rows.rows.size();
+			len = this->rows.rows.Count();
 
 			for(size_t i = 0; i < len; i++){
 				this->rows.rows[i].RemoveItem(index);

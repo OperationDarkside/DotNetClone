@@ -18,15 +18,15 @@ namespace dnc{
 			}
 
 			void MySqlParameterCollection::Add(MySqlParameter & parameter){
-				this->paramters.push_back(parameter);
+				this->paramters.Add(parameter);
 			}
 
 			void MySqlParameterCollection::Clear(){
-				this->paramters.clear();
+				this->paramters.Clear();
 			}
 
 			long MySqlParameterCollection::Count(){
-				return this->paramters.size();
+				return this->paramters.Count();
 			}
 
 			int MySqlParameterCollection::IndexOf(MySqlParameter & parameter){
@@ -34,7 +34,7 @@ namespace dnc{
 			}
 
 			void MySqlParameterCollection::InsertAt(MySqlParameter & parameter, int pos){
-				this->paramters.insert(this->paramters.begin() + pos, parameter);
+				this->paramters.Insert(pos, parameter);
 			}
 
 			MySqlParameter & MySqlParameterCollection::operator[](int columnNr){

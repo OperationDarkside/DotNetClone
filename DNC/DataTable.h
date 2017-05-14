@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef DATATABLE_H
 #define DATATABLE_H
 
@@ -5,8 +7,6 @@
 #include "String.h"
 #include "DataRowCollection.h"
 #include "DataColumnCollection.h"
-
-#pragma once
 
 namespace dnc{
 	namespace Data{

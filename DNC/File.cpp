@@ -7,10 +7,10 @@ namespace dnc{
 
 		File::~File(){}
 
-		void File::AppenAllLines(String & path, std::vector<String*>& contents){
+		void File::AppenAllLines(String & path, Collections::Generic::List<String> contents){
 			size_t len = 0;
 			std::ofstream ofs;
-			String* line;
+			String line;
 
 			ofs.open(path.getStringValue(), std::ios::out | std::ios::app);
 
@@ -19,12 +19,12 @@ namespace dnc{
 				return;
 			}
 
-			len = contents.size();
+			len = contents.Count();
 			for(size_t i = 0; i < len; i++){
 				line = contents[i];
 
 				if(line != nullptr){
-					ofs << line->getStringValue() << std::endl;
+					ofs << line.getStringValue() << std::endl;
 				} else{
 					std::cerr << "Line is null" << std::endl;
 				}
@@ -108,13 +108,13 @@ namespace dnc{
 			return buffer;
 		}
 
-		std::vector<String*> File::ReadAllLines(String & path){
+		Collections::Generic::List<String> File::ReadAllLines(String & path){
 			std::string temp;
-			std::vector<String*> res;
+			Collections::Generic::List<String> res;
 			std::ifstream fs(path.getStringValue(), std::ios::in);
 
 			while(getline(fs, temp)){
-				res.push_back(new String(&temp));
+				res.Add(String(&temp));
 			}
 
 			fs.close();
@@ -144,18 +144,18 @@ namespace dnc{
 			fs.close();
 		}
 
-		void File::WriteAllLines(String & path, std::vector<String*> contents){
+		void File::WriteAllLines(String & path, Collections::Generic::List<String> contents){
 			long len = 0;
-			String* line;
+			String line;
 			std::ofstream fs(path.getStringValue(), std::ios::out);
 
-			len = contents.size();
+			len = contents.Count();
 
 			for(long i = 0; i < len; i++){
 				line = contents[i];
 
 				if(line != nullptr){
-					fs << (*line).getStringValue() << std::endl;
+					fs << line.getStringValue() << std::endl;
 				}
 			}
 

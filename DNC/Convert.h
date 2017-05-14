@@ -1,15 +1,16 @@
-#include "Object.h"
-#include "String.h"
+#pragma once
+
+#ifndef CONVERT_H
+#define CONVERT_H
+
 #include "DateTime.h"
 #include <iostream>
-
-#pragma once
 
 namespace dnc{
 	/**
 	Converts between various formats
 	*/
-	class Convert{
+	class Convert: public Object{
 	public:
 		~Convert();
 		static bool toBoolean(bool value);
@@ -49,3 +50,4 @@ namespace dnc{
 		Convert();
 	};
 }
+#endif // !CONVERT_H

@@ -1,4 +1,5 @@
-#include "Object.h"
+#pragma once
+
 #include "String.h"
 #include "Boolean.h"
 #include "Short.h"
@@ -9,9 +10,7 @@
 #include "Double.h"
 #include "Decimal.h"
 #include "LongLong.h"
-#include <typeinfo>
 
-#pragma once
 namespace dnc{
 	namespace Data{
 
@@ -194,7 +193,7 @@ namespace dnc{
 			DataRow& operator=(DataRow&& row) noexcept;
 		private:
 			DataColumnCollection* cols;
-			std::vector<Object*> items;
+			Collections::Generic::List<Object*> items;
 
 			DataRow();
 			DataRow(DataColumnCollection* columns);
