@@ -17,10 +17,12 @@
 #include <my_global.h>
 #include "mysql.h"
 #include "List.h"
+#include "Socket.h"
 
 using namespace dnc;
 using namespace dnc::Data;
 using namespace dnc::Data::SqlClient;
+using namespace dnc::Net::Sockets;
 
 String compare_clone(){
 	String str("Something");
@@ -641,6 +643,21 @@ int main(){
 	listInt.Add(234);
 	listInt.Add(111111);
 
+	// Socket
+	Socket sock;
+
+	sock.Connect(String("127.0.0.1"), 80);
+	sock.Send("GET /cgi-bin/CppWebToolkit.exe?prename=Marvin&lastname=%20du%20Pisser http/1.1\r\nHost: 127.0.0.1\r\nConnection: close\r\n\r\n");
+
+	char recv[5000];
+	//char* recv = new char[5000]();
+	//std::fill(recv, recv + 5000, 0);
+
+	sock.Receive(recv);
+
+	String received(recv);
+
+	Console::WriteLine(received);
 
 	system("PAUSE");
 }

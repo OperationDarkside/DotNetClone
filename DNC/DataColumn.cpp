@@ -5,6 +5,8 @@ namespace dnc{
 
 		DataColumn::DataColumn(){}
 
+		//DataColumn::DataColumn(DataColumn& value):name(value.name), type(value.type){}
+
 		DataColumn::DataColumn(const char * name, Type& type){
 			this->name = String(&std::string(name));
 			this->type = type;

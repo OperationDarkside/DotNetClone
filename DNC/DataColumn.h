@@ -16,6 +16,7 @@ namespace dnc{
 		class DataColumn: public Object{
 		public:
 			DataColumn();
+			//DataColumn(DataColumn& value);
 			DataColumn(const char* name, Type& type);
 			DataColumn(String& name, Type& o);
 			~DataColumn();

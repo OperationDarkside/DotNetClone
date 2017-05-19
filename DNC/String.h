@@ -20,6 +20,8 @@ namespace dnc{
 		Creates a new empty String class instance
 		*/
 		String();
+		String(const String& str);
+		String(String&& str);
 		/**
 		Creates a new String class instance with the value of str
 
@@ -358,6 +360,8 @@ namespace dnc{
 		bool operator!=(const char* str);
 		String operator=(const char* str);
 		String operator=(std::string& str);
+		String& operator=(String& str);
+		String& operator=(String&& str);
 	private:
 		std::string value;
 	};

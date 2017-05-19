@@ -4,6 +4,10 @@ namespace dnc{
 
 	String::String(){}
 
+	String::String(const String & str): value(str.value){}
+
+	String::String(String && str) : value(std::move(str.value)){}
+
 	String::String(String * str){
 		this->value = str->value;
 	}
@@ -537,6 +541,17 @@ namespace dnc{
 	String String::operator=(std::string & str){
 		this->value = str;
 
+		return *this;
+	}
+	String & String::operator=(String& str){
+		if(this != &str){
+			std::swap(this->value, str.value);
+		}
+
+		return *this;
+	}
+	String & String::operator=(String && str){
+		this->value = std::move(str.value);
 		return *this;
 	}
 }

@@ -120,6 +120,9 @@
     <ClCompile Include="List.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Socket.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -228,6 +231,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="List.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Socket.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
