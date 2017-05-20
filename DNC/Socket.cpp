@@ -5,7 +5,9 @@ namespace dnc{
 	namespace Net{
 		namespace Sockets{
 
-			Socket::Socket(){
+			Socket::Socket(){}
+
+			Socket::Socket(AddressFamily af, SocketType st, ProtocolType pt): addressFamily(af), sockType(st), protocolType(pt){
 				long rc = 0;
 				WSADATA wsa;
 
@@ -15,9 +17,9 @@ namespace dnc{
 					throw "Fehler: startWinsock, fehler code: " + rc;
 				}
 
-				sock = socket(AF_INET, SOCK_STREAM, 0);
+				sock = socket(af, st, pt);
 				if(sock == INVALID_SOCKET){
-					String strErr = "Fehler: Der Socket konnte nicht erstellt werden, fehler code: ";
+					String strErr = "Socket could not be created. Error code: ";
 					strErr += WSAGetLastError();
 					throw strErr.getStringValue();
 				}
@@ -26,17 +28,61 @@ namespace dnc{
 
 			Socket::~Socket(){}
 
+
+			Socket Socket::Accept(){
+				long rc = 0;
+				int addrLen = 0;
+				SOCKET acceptSocket;
+				SOCKADDR_IN addrSock;
+
+				addrLen = sizeof(addrSock);
+
+				acceptSocket = accept(this->sock, (SOCKADDR*)&addrSock, &addrLen);
+
+				Socket resSocket;
+
+				resSocket.sock = acceptSocket;
+				resSocket.addr = addrSock;
+				resSocket.addressFamily = this->addressFamily;
+				resSocket.sockType = this->sockType;
+				resSocket.protocolType = this->protocolType;
+
+				return resSocket;
+			}
+
+			void Socket::Bind(IPEndPoint ep){
+				long rc = 0;
+				long lAddr = 0;
+				std::vector<unsigned char> tmp;
+
+				tmp = ep.Address().GetAddressBytes();
+
+				lAddr = (tmp[0] << 24) | (tmp[1] << 16) | (tmp[2] << 8) | tmp[3];
+
+				memset(&this->addr, 0, sizeof(SOCKADDR_IN));
+				this->addr.sin_family = this->addressFamily;
+				this->addr.sin_port = htons(ep.Port());
+				this->addr.sin_addr.s_addr = inet_addr("127.0.0.1") /*lAddr*/;
+
+				rc = bind(this->sock, (SOCKADDR*)&this->addr, sizeof(SOCKADDR_IN));
+				if(rc == SOCKET_ERROR){
+					String strErr = "Socket could not be bound. Error code: ";
+					strErr += WSAGetLastError();
+					throw strErr.getStringValue();
+				}
+			}
+
 			void Socket::Connect(String host, int port){
 				long rc = 0;
 
-				memset(&addr, 0, sizeof(SOCKADDR_IN)); // zuerst alles auf 0 setzten
-				addr.sin_family = AF_INET;
-				addr.sin_port = htons(port); // wir verwenden mal port 12345
-				addr.sin_addr.s_addr = inet_addr(host.toCharArray()); // zielrechner ist unser eigener
+				memset(&this->addr, 0, sizeof(SOCKADDR_IN)); // zuerst alles auf 0 setzten
+				this->addr.sin_family = this->addressFamily;
+				this->addr.sin_port = htons(port); // wir verwenden mal port 12345
+				this->addr.sin_addr.s_addr = inet_addr(host.toCharArray()); // zielrechner ist unser eigener
 
 				rc = connect(sock, (SOCKADDR*)&addr, sizeof(SOCKADDR));
 				if(rc == SOCKET_ERROR){
-					String strErr = "Fehler: Der Socket konnte nicht erstellt werden, fehler code: ";
+					String strErr = "Could not connect. Error code: ";
 					strErr += WSAGetLastError();
 					throw strErr.getStringValue();
 				}
@@ -48,6 +94,17 @@ namespace dnc{
 
 			void Socket::Close(){
 				WSACleanup();
+			}
+
+			void Socket::Listen(int backlog){
+				long rc = 0;
+
+				rc = listen(this->sock, backlog);
+				if(rc == SOCKET_ERROR){
+					String strErr = "Fehler: Der Socket konnte nicht erstellt werden, fehler code: ";
+					strErr += WSAGetLastError();
+					throw strErr.getStringValue();
+				}
 			}
 
 			int Socket::Send(char * data){

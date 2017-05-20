@@ -18,10 +18,12 @@
 #include "mysql.h"
 #include "List.h"
 #include "Socket.h"
+//#include ""
 
 using namespace dnc;
 using namespace dnc::Data;
 using namespace dnc::Data::SqlClient;
+using namespace dnc::Net;
 using namespace dnc::Net::Sockets;
 
 String compare_clone(){
@@ -644,7 +646,7 @@ int main(){
 	listInt.Add(111111);
 
 	// Socket
-	Socket sock;
+	Socket sock(AddressFamily::IPv4, SocketType::Stream, ProtocolType::Tcp);
 
 	sock.Connect(String("127.0.0.1"), 80);
 	sock.Send("GET /cgi-bin/CppWebToolkit.exe?prename=Marvin&lastname=%20du%20Pisser http/1.1\r\nHost: 127.0.0.1\r\nConnection: close\r\n\r\n");
@@ -656,8 +658,24 @@ int main(){
 	sock.Receive(recv);
 
 	String received(recv);
-
 	Console::WriteLine(received);
+
+	// Socket Listen
+	Socket listenSock(AddressFamily::IPv4, SocketType::Stream, ProtocolType::Tcp);
+
+	std::vector<unsigned char> addr;
+	addr.push_back(127);
+	addr.push_back(0);
+	addr.push_back(0);
+	addr.push_back(1);
+
+	listenSock.Bind(IPEndPoint(IPAddress(addr), 999));
+	listenSock.Listen(10);
+	Socket accSock = listenSock.Accept();
+	
+	accSock.Receive(recv);
+
+	
 
 	system("PAUSE");
 }
