@@ -11,13 +11,13 @@ namespace dnc{
 
 			switch(fm){
 				case Append:
-					this->fs.open(path.getStringValue(), std::ios::app | std::ios::in | std::ios::out | std::ios::binary);
+					this->fs.open(path.GetStringValue(), std::ios::app | std::ios::in | std::ios::out | std::ios::binary);
 					break;
 				case Truncate:
-					this->fs.open(path.getStringValue(), std::ios::trunc | std::ios::in | std::ios::out | std::ios::binary);
+					this->fs.open(path.GetStringValue(), std::ios::trunc | std::ios::in | std::ios::out | std::ios::binary);
 					break;
 				default:
-					this->fs.open(path.getStringValue(), std::ios::in | std::ios::out | std::ios::binary);
+					this->fs.open(path.GetStringValue(), std::ios::in | std::ios::out | std::ios::binary);
 					break;
 			}
 		}
@@ -30,39 +30,39 @@ namespace dnc{
 				case Append:
 					switch(fa){
 						case 0:
-							this->fs.open(path.getStringValue(), std::ios::app | std::ios::in | std::ios::binary);
+							this->fs.open(path.GetStringValue(), std::ios::app | std::ios::in | std::ios::binary);
 							break;
 						case 1:
-							this->fs.open(path.getStringValue(), std::ios::app | std::ios::in | std::ios::out | std::ios::binary);
+							this->fs.open(path.GetStringValue(), std::ios::app | std::ios::in | std::ios::out | std::ios::binary);
 							break;
 						case 2:
-							this->fs.open(path.getStringValue(), std::ios::app | std::ios::out | std::ios::binary);
+							this->fs.open(path.GetStringValue(), std::ios::app | std::ios::out | std::ios::binary);
 							break;
 					}
 					break;
 				case Truncate:
 					switch(fa){
 						case 0:
-							this->fs.open(path.getStringValue(), std::ios::trunc | std::ios::in | std::ios::binary);
+							this->fs.open(path.GetStringValue(), std::ios::trunc | std::ios::in | std::ios::binary);
 							break;
 						case 1:
-							this->fs.open(path.getStringValue(), std::ios::trunc | std::ios::in | std::ios::out | std::ios::binary);
+							this->fs.open(path.GetStringValue(), std::ios::trunc | std::ios::in | std::ios::out | std::ios::binary);
 							break;
 						case 2:
-							this->fs.open(path.getStringValue(), std::ios::trunc | std::ios::out | std::ios::binary);
+							this->fs.open(path.GetStringValue(), std::ios::trunc | std::ios::out | std::ios::binary);
 							break;
 					}
 					break;
 				default:
 					switch(fa){
 						case 0:
-							this->fs.open(path.getStringValue(), std::ios::in | std::ios::binary);
+							this->fs.open(path.GetStringValue(), std::ios::in | std::ios::binary);
 							break;
 						case 1:
-							this->fs.open(path.getStringValue(), std::ios::in | std::ios::out | std::ios::binary);
+							this->fs.open(path.GetStringValue(), std::ios::in | std::ios::out | std::ios::binary);
 							break;
 						case 2:
-							this->fs.open(path.getStringValue(), std::ios::out | std::ios::binary);
+							this->fs.open(path.GetStringValue(), std::ios::out | std::ios::binary);
 							break;
 					}
 					break;
@@ -72,11 +72,11 @@ namespace dnc{
 
 		FileStream::~FileStream(){}
 
-		std::string FileStream::toString(){
+		std::string FileStream::ToString(){
 			return std::string("System.IO.FileStream");
 		}
 
-		std::string FileStream::getTypeString(){
+		std::string FileStream::GetTypeString(){
 			return std::string("FileStream");
 		}
 

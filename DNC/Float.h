@@ -16,8 +16,8 @@ namespace dnc{
 		Float(float f);
 		~Float();
 
-		std::string toString();
-		std::string getTypeString();
+		std::string ToString() override;
+		std::string GetTypeString() override;
 
 		Float operator=(float f);
 		operator float();

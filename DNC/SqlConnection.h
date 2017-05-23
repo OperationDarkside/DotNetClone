@@ -15,8 +15,8 @@ namespace dnc{
 				SqlConnection(String& conString);
 				~SqlConnection();
 
-				std::string toString();
-				std::string getTypeString();
+				std::string ToString() override;
+				std::string GetTypeString() override;
 
 				virtual void Close();
 				String ConnectionString();

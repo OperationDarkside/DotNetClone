@@ -33,13 +33,13 @@ namespace dnc{
 
 		@return C++ string class name
 		*/
-		virtual std::string getTypeString();
+		virtual std::string GetTypeString();
 		/**
 		Returns a c++ string pointer representation of this class. Should be implemented by every derivated class
 
 		@return C++ string with information about this class/instance
 		*/
-		virtual std::string toString();
+		virtual std::string ToString();
 	private:
 		int hashCode = 0;
 

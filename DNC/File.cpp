@@ -12,7 +12,7 @@ namespace dnc{
 			std::ofstream ofs;
 			String line;
 
-			ofs.open(path.getStringValue(), std::ios::out | std::ios::app);
+			ofs.open(path.GetStringValue(), std::ios::out | std::ios::app);
 
 			if(!ofs.is_open()){
 				std::cerr << "File could not be opened!" << std::endl;
@@ -24,7 +24,7 @@ namespace dnc{
 				line = contents[i];
 
 				if(line != nullptr){
-					ofs << line.getStringValue() << std::endl;
+					ofs << line.GetStringValue() << std::endl;
 				} else{
 					std::cerr << "Line is null" << std::endl;
 				}
@@ -37,14 +37,14 @@ namespace dnc{
 		void File::AppenAllText(String & path, String & contents){
 			std::ofstream ofs;
 
-			ofs.open(path.getStringValue(), std::ios::out | std::ios::app);
+			ofs.open(path.GetStringValue(), std::ios::out | std::ios::app);
 
 			if(!ofs.is_open()){
 				std::cerr << "File could not be opened!" << std::endl;
 				return;
 			}
 
-			ofs << contents.getStringValue();
+			ofs << contents.GetStringValue();
 
 			ofs.close();
 		}
@@ -52,7 +52,7 @@ namespace dnc{
 		FileStream File::AppendText(String& path){
 			std::fstream ofs;
 
-			ofs.open(path.getStringValue(), std::ios::out | std::ios::app);
+			ofs.open(path.GetStringValue(), std::ios::out | std::ios::app);
 
 			FileStream res(path, FileMode::Append);
 
@@ -63,8 +63,8 @@ namespace dnc{
 			std::ifstream ifs;
 			std::ofstream ofs;
 
-			ifs.open(sourceFileName.getStringValue(), std::ios::binary);
-			ofs.open(destFileName.getStringValue(), std::ios::binary);
+			ifs.open(sourceFileName.GetStringValue(), std::ios::binary);
+			ofs.open(destFileName.GetStringValue(), std::ios::binary);
 
 			ofs << ifs.rdbuf();
 
@@ -81,7 +81,7 @@ namespace dnc{
 		}
 
 		bool File::Exists(String & path){
-			std::fstream fs(path.getStringValue());
+			std::fstream fs(path.GetStringValue());
 
 			bool ex = fs.good();
 
@@ -111,7 +111,7 @@ namespace dnc{
 		Collections::Generic::List<String> File::ReadAllLines(String & path){
 			std::string temp;
 			Collections::Generic::List<String> res;
-			std::ifstream fs(path.getStringValue(), std::ios::in);
+			std::ifstream fs(path.GetStringValue(), std::ios::in);
 
 			while(getline(fs, temp)){
 				res.Add(String(&temp));
@@ -125,7 +125,7 @@ namespace dnc{
 		String File::ReadAllText(String & path){
 			std::string temp;
 			std::string res;
-			std::ifstream fs(path.getStringValue(), std::ios::in);
+			std::ifstream fs(path.GetStringValue(), std::ios::in);
 
 			while(getline(fs, temp)){
 				res += temp;
@@ -137,7 +137,7 @@ namespace dnc{
 		}
 
 		void File::WriteAllBytes(String & path, char * bytes){
-			std::ofstream fs(path.getStringValue(), std::ios::out);
+			std::ofstream fs(path.GetStringValue(), std::ios::out);
 
 			fs << bytes;
 
@@ -147,7 +147,7 @@ namespace dnc{
 		void File::WriteAllLines(String & path, Collections::Generic::List<String> contents){
 			long len = 0;
 			String line;
-			std::ofstream fs(path.getStringValue(), std::ios::out);
+			std::ofstream fs(path.GetStringValue(), std::ios::out);
 
 			len = contents.Count();
 
@@ -155,7 +155,7 @@ namespace dnc{
 				line = contents[i];
 
 				if(line != nullptr){
-					fs << line.getStringValue() << std::endl;
+					fs << line.GetStringValue() << std::endl;
 				}
 			}
 
@@ -163,9 +163,9 @@ namespace dnc{
 		}
 
 		void File::WriteAllText(String & path, String & contents){
-			std::ofstream fs(path.getStringValue(), std::ios::out);
+			std::ofstream fs(path.GetStringValue(), std::ios::out);
 
-			fs << contents.getStringValue();
+			fs << contents.GetStringValue();
 
 			fs.close();
 		}

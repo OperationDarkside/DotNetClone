@@ -20,8 +20,8 @@ namespace dnc{
 				SqlCommand(String& cmdText, SqlConnection* connection);
 				~SqlCommand();
 
-				std::string ToString();
-				std::string getTypeString();
+				std::string ToString() override;
+				std::string GetTypeString() override;
 
 				String CommandText();
 				void CommandText(String& cmdText);

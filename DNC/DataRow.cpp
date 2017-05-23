@@ -25,11 +25,11 @@ namespace dnc{
 			//this->Delete();
 		}
 
-		std::string DataRow::toString(){
+		std::string DataRow::ToString(){
 			return std::string("System.Data.DataRow");
 		}
 
-		std::string DataRow::getTypeString(){
+		std::string DataRow::GetTypeString(){
 			return std::string("DataRow");
 		}
 

@@ -39,8 +39,8 @@ namespace dnc{
 			FileStream(String& path, FileMode fm, FileAccess fa);
 			~FileStream();
 
-			std::string toString();
-			std::string getTypeString();
+			std::string ToString() override;
+			std::string GetTypeString() override;
 
 			/**
 			Closes the current FileStream

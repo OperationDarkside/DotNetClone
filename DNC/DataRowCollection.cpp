@@ -7,11 +7,11 @@ namespace dnc{
 
 		DataRowCollection::~DataRowCollection(){}
 
-		std::string DataRowCollection::toString(){
+		std::string DataRowCollection::ToString(){
 			return std::string("System.Data.DataRowCollection");
 		}
 
-		std::string DataRowCollection::getTypeString(){
+		std::string DataRowCollection::GetTypeString(){
 			return std::string("DataRowCollection");
 		}
 

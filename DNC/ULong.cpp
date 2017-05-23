@@ -11,11 +11,11 @@ namespace dnc{
 
 	ULong::~ULong(){}
 
-	std::string ULong::toString(){
+	std::string ULong::ToString(){
 		return std::string("System.ULong");
 	}
 
-	std::string ULong::getTypeString(){
+	std::string ULong::GetTypeString(){
 		return std::to_string(this->value);
 	}
 

@@ -185,8 +185,8 @@ namespace dnc{
 
 		@return String containing both date and time
 		*/
-		std::string toString();
-		std::string getTypeString();
+		std::string ToString() override;
+		std::string GetTypeString() override;
 
 		/**
 		Returns the current date component of this instance

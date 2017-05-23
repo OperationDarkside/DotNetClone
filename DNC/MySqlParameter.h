@@ -11,7 +11,7 @@ namespace dnc{
 	namespace Data{
 		namespace SqlClient{
 
-			class MySqlParameter{
+			class MySqlParameter: public Object{
 
 				friend class MySqlParameterCollection;
 				friend class MySqlCommand;
@@ -29,8 +29,8 @@ namespace dnc{
 				MySqlParameter(MySqlDbTypes _type, String& value);
 				~MySqlParameter();
 
-				std::string toString();
-				std::string getTypeString();
+				std::string ToString() override;
+				std::string GetTypeString() override;
 
 				template<typename T>
 				T Value();

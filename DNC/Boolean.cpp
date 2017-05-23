@@ -8,11 +8,11 @@ namespace dnc{
 
 	Boolean::~Boolean(){}
 
-	std::string Boolean::toString(){
+	std::string Boolean::ToString(){
 		return std::to_string(this->value);
 	}
 
-	std::string Boolean::getTypeString(){
+	std::string Boolean::GetTypeString(){
 		return std::string("Boolean");
 	}
 

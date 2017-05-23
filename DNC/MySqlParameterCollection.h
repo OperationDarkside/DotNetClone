@@ -9,13 +9,13 @@ namespace dnc{
 	namespace Data{
 		namespace SqlClient{
 
-			class MySqlParameterCollection{
+			class MySqlParameterCollection: public Object{
 			public:
 				MySqlParameterCollection();
 				~MySqlParameterCollection();
 
-				std::string toString();
-				std::string getTypeString();
+				std::string ToString() override;
+				std::string GetTypeString() override;
 
 				friend class DataTable;
 

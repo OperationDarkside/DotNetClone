@@ -16,8 +16,8 @@ namespace dnc{
 		Double(double d);
 		~Double();
 
-		std::string toString();
-		std::string getTypeString();
+		std::string ToString() override;
+		std::string GetTypeString() override;
 
 		Double operator=(double d);
 		operator double();

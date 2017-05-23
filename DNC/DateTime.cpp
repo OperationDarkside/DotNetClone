@@ -381,11 +381,11 @@ namespace dnc{
 		return res;
 	}
 
-	std::string DateTime::toString(){
-		return toUtcString().getStringValue();
+	std::string DateTime::ToString(){
+		return toUtcString().GetStringValue();
 	}
 
-	std::string DateTime::getTypeString(){
+	std::string DateTime::GetTypeString(){
 		return std::string("DateTime");
 	}
 

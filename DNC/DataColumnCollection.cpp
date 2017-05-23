@@ -8,11 +8,11 @@ namespace dnc{
 
 		DataColumnCollection::~DataColumnCollection(){}
 
-		std::string DataColumnCollection::toString(){
+		std::string DataColumnCollection::ToString(){
 			return std::string("System.Data.DataColumnCollection");
 		}
 
-		std::string DataColumnCollection::getTypeString(){
+		std::string DataColumnCollection::GetTypeString(){
 			return std::string("DataColumnCollection");
 		}
 

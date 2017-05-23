@@ -18,8 +18,8 @@ namespace dnc{
 		Type(size_t hashcode, String& name);
 		~Type();
 
-		std::string ToString();
-		std::string getTypeString();
+		std::string ToString() override;
+		std::string GetTypeString() override;
 
 		/**
 		Returns a Type class instance of the given class

@@ -18,11 +18,11 @@ namespace dnc{
 
 			MySqlCommand::~MySqlCommand(){}
 
-			std::string MySqlCommand::toString(){
+			std::string MySqlCommand::ToString(){
 				return std::string("System.Data.MySqlClient.MySqlCommand");
 			}
 
-			std::string MySqlCommand::getTypeString(){
+			std::string MySqlCommand::GetTypeString(){
 				return std::string("MySqlCommand");
 			}
 

@@ -132,6 +132,15 @@
     <ClCompile Include="IPAddress.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TcpClient.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="LingerOption.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkStream.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -261,6 +270,18 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ProtocolType.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketFlags.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TcpClient.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="LingerOption.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkStream.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

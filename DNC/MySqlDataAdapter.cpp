@@ -23,11 +23,11 @@ namespace dnc{
 
 			MySqlDataAdapter::~MySqlDataAdapter(){}
 
-			std::string MySqlDataAdapter::toString(){
+			std::string MySqlDataAdapter::ToString(){
 				return std::string("System.Data.MySql.MySqlClient.MySqlDataAdapter");
 			}
 
-			std::string MySqlDataAdapter::getTypeString(){
+			std::string MySqlDataAdapter::GetTypeString(){
 				return std::string("MySqlDataAdapter");
 			}
 

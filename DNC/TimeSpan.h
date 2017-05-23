@@ -82,8 +82,8 @@ namespace dnc{
 
 		@return The c++ string duration representation
 		*/
-		std::string toString();
-		std::string getTypeString();
+		std::string ToString() override;
+		std::string GetTypeString() override;
 		/**
 		Returns duration of this instance in microseconds
 

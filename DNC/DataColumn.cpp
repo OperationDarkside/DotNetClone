@@ -19,11 +19,11 @@ namespace dnc{
 
 		DataColumn::~DataColumn(){}
 
-		std::string DataColumn::toString(){
+		std::string DataColumn::ToString(){
 			return std::string("System.Data.DataColumn");
 		}
 
-		std::string DataColumn::getTypeString(){
+		std::string DataColumn::GetTypeString(){
 			return std::string("DataColumn");
 		}
 

@@ -13,8 +13,8 @@ namespace dnc{
 		LongLong(long long ll);
 		~LongLong();
 
-		std::string toString();
-		std::string getTypeString();
+		std::string ToString() override;
+		std::string GetTypeString() override;
 
 		LongLong operator=(long long ll);
 		operator long long();

@@ -20,8 +20,8 @@ namespace dnc{
 				MySqlDataAdapter(String& selectCommandText, String& connectionString);
 				~MySqlDataAdapter();
 
-				std::string toString();
-				std::string getTypeString();
+				std::string ToString() override;
+				std::string GetTypeString() override;
 
 				long Fill(DataTable& table);
 			private:

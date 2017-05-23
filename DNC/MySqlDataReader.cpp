@@ -8,11 +8,11 @@ namespace dnc{
 				mysql_free_result(this->resultset);
 			}
 
-			std::string MySqlDataReader::toString(){
+			std::string MySqlDataReader::ToString(){
 				return std::string("System.Data.MySqlClient.MySqlDataReader");
 			}
 
-			std::string MySqlDataReader::getTypeString(){
+			std::string MySqlDataReader::GetTypeString(){
 				return std::string("MySqlDataReader");
 			}
 

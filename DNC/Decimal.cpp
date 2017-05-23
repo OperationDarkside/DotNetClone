@@ -9,11 +9,11 @@ namespace dnc{
 
 	Decimal::~Decimal(){}
 
-	std::string Decimal::toString(){
+	std::string Decimal::ToString(){
 		return std::to_string(this->value);
 	}
 
-	std::string Decimal::getTypeString(){
+	std::string Decimal::GetTypeString(){
 		return std::string("Decimal");
 	}
 

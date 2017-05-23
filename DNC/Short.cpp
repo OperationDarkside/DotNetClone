@@ -8,11 +8,11 @@ namespace dnc{
 
 	Short::~Short(){}
 
-	std::string Short::toString(){
+	std::string Short::ToString(){
 		return std::string(std::to_string(this->value));
 	}
 
-	std::string Short::getTypeString(){
+	std::string Short::GetTypeString(){
 		return std::string("Short");
 	}
 

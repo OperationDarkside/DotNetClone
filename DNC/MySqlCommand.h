@@ -21,8 +21,8 @@ namespace dnc{
 				MySqlCommand(String& cmdText, MySqlConnection* connection);
 				~MySqlCommand();
 
-				std::string toString();
-				std::string getTypeString();
+				std::string ToString() override;
+				std::string GetTypeString() override;
 
 				int ExecuteNonQuery();
 				MySqlDataReader ExecuteReader();

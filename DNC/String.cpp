@@ -27,7 +27,7 @@ namespace dnc{
 		return String(&this->value);
 	}
 
-	std::string String::getStringValue(){
+	std::string String::GetStringValue(){
 		return value;
 	}
 
@@ -389,11 +389,11 @@ namespace dnc{
 		return target;
 	}
 
-	std::string String::toString(){
+	std::string String::ToString(){
 		return this->value;
 	}
 
-	std::string String::getTypeString(){
+	std::string String::GetTypeString(){
 		std::string res("String");
 
 		return res;

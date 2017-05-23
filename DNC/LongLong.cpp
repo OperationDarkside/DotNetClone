@@ -9,11 +9,11 @@ namespace dnc{
 
 	LongLong::~LongLong(){}
 
-	std::string LongLong::toString(){
+	std::string LongLong::ToString(){
 		return std::to_string(this->value);
 	}
 
-	std::string LongLong::getTypeString(){
+	std::string LongLong::GetTypeString(){
 		return std::string("LongLong");
 	}
 

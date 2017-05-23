@@ -13,6 +13,9 @@ namespace dnc{
 			public:
 				SqlParameter();
 				~SqlParameter();
+
+				std::string ToString() override;
+				std::string GetTypeString() override;
 			};
 		}
 	}

@@ -16,8 +16,8 @@ namespace dnc{
 			static const char* Any;
 			static const char* Loopback;
 
-			std::string ToString();
-			std::string getTypeString();
+			std::string ToString() override;
+			std::string GetTypeString() override;
 
 			std::vector<unsigned char> GetAddressBytes();
 			long ScopeId();

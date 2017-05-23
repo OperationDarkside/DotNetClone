@@ -31,7 +31,7 @@ namespace dnc{
 			return std::string("IPAddress");
 		}
 
-		std::string dnc::Net::IPAddress::getTypeString(){
+		std::string dnc::Net::IPAddress::GetTypeString(){
 			return std::string("System.Net.IPAddress");
 		}
 		std::vector<unsigned char> IPAddress::GetAddressBytes(){

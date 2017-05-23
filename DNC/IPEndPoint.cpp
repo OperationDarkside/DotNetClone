@@ -23,7 +23,7 @@ namespace dnc{
 		std::string IPEndPoint::ToString(){
 			return std::string("IPEndPoint");
 		}
-		std::string IPEndPoint::getTypeString(){
+		std::string IPEndPoint::GetTypeString(){
 			return std::string("System.Net.IPEndPoint");
 		}
 		int IPEndPoint::Port(){

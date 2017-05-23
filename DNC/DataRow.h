@@ -29,8 +29,8 @@ namespace dnc{
 			DataRow(DataRow&& row);
 			~DataRow();
 
-			std::string toString();
-			std::string getTypeString();
+			std::string ToString() override;
+			std::string GetTypeString() override;
 
 			/**
 			Removes all values from this row

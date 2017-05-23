@@ -560,6 +560,16 @@ int main(){
 			return 1;
 		}
 	}*/
+	int ipaaaa = 0;
+
+	ipaaaa = (127 << 24) | (0 << 16) | (0 << 8) | (1 << 0);
+
+	unsigned char bytes[4];
+
+	bytes[0] = ipaaaa & 0xFF;
+	bytes[1] = (ipaaaa >> 8) & 0xFF;
+	bytes[2] = (ipaaaa >> 16) & 0xFF;
+	bytes[3] = (ipaaaa >> 24) & 0xFF;
 
 	// mysql C API
 
@@ -651,13 +661,12 @@ int main(){
 	sock.Connect(String("127.0.0.1"), 80);
 	sock.Send("GET /cgi-bin/CppWebToolkit.exe?prename=Marvin&lastname=%20du%20Pisser http/1.1\r\nHost: 127.0.0.1\r\nConnection: close\r\n\r\n");
 
-	char recv[5000];
-	//char* recv = new char[5000]();
-	//std::fill(recv, recv + 5000, 0);
+	std::array<char, 500> recvData;
 
-	sock.Receive(recv);
+	sock.Receive(recvData);
+	sock.Close();
 
-	String received(recv);
+	String received(recvData);
 	Console::WriteLine(received);
 
 	// Socket Listen
@@ -672,10 +681,28 @@ int main(){
 	listenSock.Bind(IPEndPoint(IPAddress(addr), 999));
 	listenSock.Listen(10);
 	Socket accSock = listenSock.Accept();
-	
-	accSock.Receive(recv);
 
-	
+	Console::WriteLine();
+
+	while(true){
+		//char recvBuffer;
+		//std::string recvBufferStr;
+		//recvBuffer.resize(10);
+		std::array<char, 50> recvBuffer;
+
+		int bytesrecvd = accSock.Receive(recvBuffer);
+
+		//char * d = &recvBuffer;
+
+		String recvBufferStr = recvBuffer;
+
+		Console::Write(recvBuffer);
+
+		if(bytesrecvd != 50){
+			break;
+		}
+	}
+
 
 	system("PAUSE");
 }

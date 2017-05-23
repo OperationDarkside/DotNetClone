@@ -8,11 +8,11 @@ namespace dnc{
 
 	Double::~Double(){}
 
-	std::string Double::toString(){
+	std::string Double::ToString(){
 		return std::to_string(this->value);
 	}
 
-	std::string Double::getTypeString(){
+	std::string Double::GetTypeString(){
 		return std::string("Double");
 	}
 

@@ -14,8 +14,8 @@ namespace dnc{
 	class Console: public Object{
 	public:
 
-		std::string getTypeString();
-		std::string toString();
+		std::string GetTypeString() override;
+		std::string ToString() override;
 		/**
 		Reads a single sign from the standard input stream
 
@@ -84,6 +84,13 @@ namespace dnc{
 		*/
 		static void Write(String& value);
 		/**
+		Writes the array content to the standard outputstream
+
+		@param value array of chars to write
+		*/
+		template<size_t num>
+		static void Write(std::array<char, num> value);
+		/**
 		Writes a c_string's substring to the standard outputstream
 
 		@param buffer c_string source
@@ -150,6 +157,13 @@ namespace dnc{
 		*/
 		static void WriteLine(String& value);
 		/**
+		Writes the Array content with a new line to the standard outputstreamn
+
+		@param value String to write
+		*/
+		template<size_t num>
+		static void WriteLine(std::array<char, num> value);
+		/**
 		Writes a c_string's substring with a new line to the standard outputstream
 
 		@param buffer c_string source
@@ -162,5 +176,18 @@ namespace dnc{
 	private:
 		Console(){}
 	};
+
+	template<size_t num>
+	inline void Console::Write(std::array<char, num> value){
+		std::string str;
+		str.append(value.begin(), value.end());
+		std::cout << str;
+	}
+
+	template<size_t num>
+	inline void Console::WriteLine(std::array<char, num> value){
+		Write(value);
+		std::cout << std::endl;
+	}
 }
 #endif // !CONSOLE_H

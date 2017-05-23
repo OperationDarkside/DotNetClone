@@ -79,7 +79,7 @@ namespace dnc{
 		return res;
 	}
 
-	std::string TimeSpan::toString(){
+	std::string TimeSpan::ToString(){
 		std::chrono::system_clock::duration tmp;
 		std::string* res;
 
@@ -109,7 +109,7 @@ namespace dnc{
 		return *res;
 	}
 
-	std::string TimeSpan::getTypeString(){
+	std::string TimeSpan::GetTypeString(){
 		return std::string("TimeSpan");
 	}
 

@@ -78,11 +78,11 @@ namespace dnc{
 
 			MySqlParameter::~MySqlParameter(){}
 
-			std::string MySqlParameter::toString(){
+			std::string MySqlParameter::ToString(){
 				return std::string("System.Data.MySqlClient.MySqlParameter");
 			}
 
-			std::string MySqlParameter::getTypeString(){
+			std::string MySqlParameter::GetTypeString(){
 				return std::string("MySqlParameter");
 			}
 

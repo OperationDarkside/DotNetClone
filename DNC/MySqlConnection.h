@@ -23,8 +23,8 @@ namespace dnc{
 				MySqlConnection(String& conString);
 				~MySqlConnection();
 
-				std::string toString();
-				std::string getTypeString();
+				std::string ToString() override;
+				std::string GetTypeString() override;
 
 				void Close();
 				MySqlCommand CreateCommand();

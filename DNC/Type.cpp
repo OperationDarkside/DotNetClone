@@ -9,10 +9,10 @@ namespace dnc{
 	Type::~Type(){}
 
 	std::string Type::ToString(){
-		return this->name->getStringValue();
+		return this->name->GetStringValue();
 	}
 
-	std::string Type::getTypeString(){
+	std::string Type::GetTypeString(){
 		return std::string("Type");
 	}
 

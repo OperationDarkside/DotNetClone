@@ -16,8 +16,8 @@ namespace dnc{
 		Integer(int i);
 		~Integer();
 
-		std::string toString();
-		std::string getTypeString();
+		std::string ToString() override;
+		std::string GetTypeString() override;
 
 		Integer operator=(int i);
 		operator int();

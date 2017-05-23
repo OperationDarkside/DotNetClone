@@ -87,13 +87,13 @@ namespace dnc{
 			times = tmp[1].split(':');
 
 			if(dates.Count() == 3 && times.Count() == 4){
-				year = std::stoi(dates[0].getStringValue().c_str());
-				month = std::stoi(dates[1].getStringValue().c_str());
-				day = std::stoi(dates[2].getStringValue().c_str());
-				hour = std::stoi(times[0].getStringValue().c_str());
-				min = std::stoi(times[1].getStringValue().c_str());
-				sec = std::stoi(times[2].getStringValue().c_str());
-				ms = std::stoi(times[3].getStringValue().c_str());
+				year = std::stoi(dates[0].GetStringValue().c_str());
+				month = std::stoi(dates[1].GetStringValue().c_str());
+				day = std::stoi(dates[2].GetStringValue().c_str());
+				hour = std::stoi(times[0].GetStringValue().c_str());
+				min = std::stoi(times[1].GetStringValue().c_str());
+				sec = std::stoi(times[2].GetStringValue().c_str());
+				ms = std::stoi(times[3].GetStringValue().c_str());
 
 				dt = new DateTime(year, month, day, hour, min, sec, ms);
 
@@ -111,7 +111,7 @@ namespace dnc{
 	double Convert::toDouble(String & value){
 		double res = 0;
 
-		res = std::stod(value.getStringValue().c_str());
+		res = std::stod(value.GetStringValue().c_str());
 
 		return res;
 	}
@@ -119,7 +119,7 @@ namespace dnc{
 	float Convert::toFloat(String & value){
 		float res = 0;
 
-		res = std::stof(value.getStringValue().c_str());
+		res = std::stof(value.GetStringValue().c_str());
 
 		return res;
 	}
@@ -127,7 +127,7 @@ namespace dnc{
 	int Convert::toInt(String & value){
 		int res = 0;
 
-		res = std::stoi(value.getStringValue().c_str());
+		res = std::stoi(value.GetStringValue().c_str());
 
 		return res;
 	}
@@ -135,7 +135,7 @@ namespace dnc{
 	long Convert::toLong(String & value){
 		long res = 0;
 
-		res = std::stol(value.getStringValue().c_str());
+		res = std::stol(value.GetStringValue().c_str());
 
 		return res;
 	}
@@ -189,10 +189,10 @@ namespace dnc{
 	}
 
 	String Convert::toString(Object * value){
-		return new String(&value->toString());
+		return new String(&value->ToString());
 	}
 
 	String Convert::toString(DateTime * value){
-		return new String(&value->toString());
+		return new String(&value->ToString());
 	}
 }

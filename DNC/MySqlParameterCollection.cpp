@@ -9,11 +9,11 @@ namespace dnc{
 
 			MySqlParameterCollection::~MySqlParameterCollection(){}
 
-			std::string MySqlParameterCollection::toString(){
+			std::string MySqlParameterCollection::ToString(){
 				return std::string("System.Data.MySqlClient.MySqlParameterCollection");
 			}
 
-			std::string MySqlParameterCollection::getTypeString(){
+			std::string MySqlParameterCollection::GetTypeString(){
 				return std::string("MySqlParameterCollection");
 			}
 

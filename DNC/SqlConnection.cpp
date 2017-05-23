@@ -16,11 +16,11 @@ namespace dnc{
 
 
 
-			std::string SqlConnection::toString(){
+			std::string SqlConnection::ToString(){
 				return std::string("System.Data.SqlClient.SqlConnection");
 			}
 
-			std::string SqlConnection::getTypeString(){
+			std::string SqlConnection::GetTypeString(){
 				return std::string("SqlConnection");
 			}
 

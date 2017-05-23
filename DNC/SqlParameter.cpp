@@ -8,6 +8,12 @@ namespace dnc{
 
 
 			SqlParameter::~SqlParameter(){}
+			std::string SqlParameter::ToString(){
+				return std::string("System.Data.SqlClient.SqlParameter");
+			}
+			std::string SqlParameter::GetTypeString(){
+				return std::string("SqlParameter");
+			}
 		}
 	}
 }

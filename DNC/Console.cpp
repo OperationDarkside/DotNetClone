@@ -4,11 +4,11 @@ namespace dnc{
 
 	Console::~Console(){}
 
-	std::string Console::getTypeString(){
+	std::string Console::GetTypeString(){
 		return std::string("Console");
 	}
 
-	std::string Console::toString(){
+	std::string Console::ToString(){
 		return std::string("System.Console");
 	}
 

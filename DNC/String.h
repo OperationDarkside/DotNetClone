@@ -7,6 +7,7 @@
 #include <locale>
 #include <sstream>
 #include <cctype>
+#include <array>
 #include "List.h"
 
 namespace dnc{
@@ -40,6 +41,13 @@ namespace dnc{
 		@param str the c-string to copy
 		*/
 		String(char* str);
+		/**
+		Creates a new String class instance with the value of str
+
+		@param str the c++ array of chars to copy
+		*/
+		template<size_t num>
+		String(std::array<char, num> str);
 		~String();
 
 		/**
@@ -53,7 +61,7 @@ namespace dnc{
 
 		@return C++ string pointer
 		*/
-		std::string getStringValue();
+		std::string GetStringValue();
 		/**
 		Compares this Instance to the given String str in size and char-by-char lexicographically
 
@@ -316,8 +324,8 @@ namespace dnc{
 
 		@return c++ string
 		*/
-		std::string toString();
-		std::string getTypeString();
+		std::string ToString() override;
+		std::string GetTypeString() override;
 		/**
 		Returns the characters of this String as uppercase
 
@@ -358,6 +366,8 @@ namespace dnc{
 		bool operator==(const char* str);
 		bool operator!=(String& str);
 		bool operator!=(const char* str);
+		template<size_t num>
+		String operator=(std::array<char, num> str);
 		String operator=(const char* str);
 		String operator=(std::string& str);
 		String& operator=(String& str);
@@ -365,6 +375,20 @@ namespace dnc{
 	private:
 		std::string value;
 	};
+
+	template<size_t num>
+	inline String::String(std::array<char, num> str){
+
+		this->value.append(str.begin(), str.end());
+	}
+
+	template<size_t num>
+	inline String String::operator=(std::array<char, num> str){
+
+		this->value.append(str.begin(), str.end());
+
+		return *this;
+	}
 }
 
 #endif

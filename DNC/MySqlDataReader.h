@@ -23,8 +23,8 @@ namespace dnc{
 			public:
 				~MySqlDataReader();
 
-				std::string toString();
-				std::string getTypeString();
+				std::string ToString() override;
+				std::string GetTypeString() override;
 
 				unsigned int FieldCount();
 				bool GetBoolean(int i);

@@ -21,7 +21,7 @@ namespace dnc{
 				if(sock == INVALID_SOCKET){
 					String strErr = "Socket could not be created. Error code: ";
 					strErr += WSAGetLastError();
-					throw strErr.getStringValue();
+					throw strErr.GetStringValue();
 				}
 			}
 
@@ -57,18 +57,18 @@ namespace dnc{
 
 				tmp = ep.Address().GetAddressBytes();
 
-				lAddr = (tmp[0] << 24) | (tmp[1] << 16) | (tmp[2] << 8) | tmp[3];
+				lAddr = (tmp[3] << 24) | (tmp[2] << 16) | (tmp[1] << 8) | tmp[0];
 
 				memset(&this->addr, 0, sizeof(SOCKADDR_IN));
 				this->addr.sin_family = this->addressFamily;
 				this->addr.sin_port = htons(ep.Port());
-				this->addr.sin_addr.s_addr = inet_addr("127.0.0.1") /*lAddr*/;
+				this->addr.sin_addr.s_addr = /*inet_addr("127.0.0.1")*/ lAddr;
 
 				rc = bind(this->sock, (SOCKADDR*)&this->addr, sizeof(SOCKADDR_IN));
 				if(rc == SOCKET_ERROR){
 					String strErr = "Socket could not be bound. Error code: ";
 					strErr += WSAGetLastError();
-					throw strErr.getStringValue();
+					throw strErr.GetStringValue();
 				}
 			}
 
@@ -84,7 +84,7 @@ namespace dnc{
 				if(rc == SOCKET_ERROR){
 					String strErr = "Could not connect. Error code: ";
 					strErr += WSAGetLastError();
-					throw strErr.getStringValue();
+					throw strErr.GetStringValue();
 				}
 			}
 
@@ -103,7 +103,7 @@ namespace dnc{
 				if(rc == SOCKET_ERROR){
 					String strErr = "Fehler: Der Socket konnte nicht erstellt werden, fehler code: ";
 					strErr += WSAGetLastError();
-					throw strErr.getStringValue();
+					throw strErr.GetStringValue();
 				}
 			}
 
@@ -113,7 +113,7 @@ namespace dnc{
 
 				len = strlen(data);
 
-				bytesSend = send(sock, data, len, 0);
+				bytesSend = send(this->sock, data, len, 0);
 
 				if(bytesSend == 0){
 					throw "Not send.";
@@ -126,13 +126,10 @@ namespace dnc{
 				return bytesSend;
 			}
 
-			int Socket::Receive(char * data){
+			int Socket::Receive(char * buffer, int size, SocketFlags socketFlags){
 				int bytesReceived = 0;
-				size_t len = 0;
 
-				len = strlen(data);
-
-				bytesReceived = recv(sock, data, len, 0);
+				bytesReceived = recv(this->sock, buffer, size, socketFlags);
 
 				if(bytesReceived == 0){
 					throw "Server disconnected";

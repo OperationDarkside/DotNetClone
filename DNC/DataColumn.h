@@ -21,8 +21,8 @@ namespace dnc{
 			DataColumn(String& name, Type& o);
 			~DataColumn();
 
-			std::string toString();
-			std::string getTypeString();
+			std::string ToString() override;
+			std::string GetTypeString() override;
 
 			/**
 			Returns the name of this column instance

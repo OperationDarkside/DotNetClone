@@ -10,8 +10,8 @@ namespace dnc{
 		public:
 			EndPoint();
 
-			std::string ToString();
-			std::string getTypeString();
+			std::string ToString() override;
+			std::string GetTypeString() override;
 
 			virtual dnc::Net::AddressFamily AddressFamily();
 			virtual void AddressFamily(dnc::Net::AddressFamily addressFamily);

@@ -16,8 +16,8 @@ namespace dnc{
 			DataRowCollection();
 			~DataRowCollection();
 
-			std::string toString();
-			std::string getTypeString();
+			std::string ToString() override;
+			std::string GetTypeString() override;
 
 			friend class DataTable;
 

@@ -21,8 +21,8 @@ namespace dnc{
 				List(unsigned int capacity);
 				~List();
 
-				std::string ToString();
-				std::string getTypeString();
+				std::string ToString() override;
+				std::string GetTypeString() override;
 
 				/**
 				Adds a new Item to the list

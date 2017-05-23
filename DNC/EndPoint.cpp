@@ -12,7 +12,7 @@ namespace dnc{
 			return std::string("EndPoint");
 		}
 
-		std::string EndPoint::getTypeString(){
+		std::string EndPoint::GetTypeString(){
 			return std::string("System.Net.EndPoint");
 		}
 

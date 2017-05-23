@@ -11,8 +11,8 @@ namespace dnc{
 			IPEndPoint(IPAddress address, int port);
 			~IPEndPoint();
 
-			std::string ToString();
-			std::string getTypeString();
+			std::string ToString() override;
+			std::string GetTypeString() override;
 
 			int Port();
 			void Port(int p);

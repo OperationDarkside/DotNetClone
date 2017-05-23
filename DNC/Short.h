@@ -13,8 +13,8 @@ namespace dnc{
 		Short(short s);
 		~Short();
 
-		std::string toString();
-		std::string getTypeString();
+		std::string ToString() override;
+		std::string GetTypeString() override;
 
 		Short operator=(short s);
 		operator short();

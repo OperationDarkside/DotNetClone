@@ -150,6 +150,7 @@
     <ClCompile Include="Integer.cpp" />
     <ClCompile Include="IPAddress.cpp" />
     <ClCompile Include="IPEndPoint.cpp" />
+    <ClCompile Include="LingerOption.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Long.cpp" />
     <ClCompile Include="LongLong.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="MySqlDataReader.cpp" />
     <ClCompile Include="MySqlParameter.cpp" />
     <ClCompile Include="MySqlParameterCollection.cpp" />
+    <ClCompile Include="NetworkStream.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Short.cpp" />
     <ClCompile Include="Socket.cpp" />
@@ -167,6 +169,7 @@
     <ClCompile Include="SqlDataReader.cpp" />
     <ClCompile Include="SqlParameter.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="TcpClient.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="Type.cpp" />
@@ -193,6 +196,7 @@
     <ClInclude Include="Integer.h" />
     <ClInclude Include="IPAddress.h" />
     <ClInclude Include="IPEndPoint.h" />
+    <ClInclude Include="LingerOption.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Long.h" />
     <ClInclude Include="LongLong.h" />
@@ -203,16 +207,19 @@
     <ClInclude Include="MySqlDbTypes.h" />
     <ClInclude Include="MySqlParameter.h" />
     <ClInclude Include="MySqlParameterCollection.h" />
+    <ClInclude Include="NetworkStream.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ProtocolType.h" />
     <ClInclude Include="Short.h" />
     <ClInclude Include="Socket.h" />
+    <ClInclude Include="SocketFlags.h" />
     <ClInclude Include="SocketType.h" />
     <ClInclude Include="SqlCommand.h" />
     <ClInclude Include="SqlConnection.h" />
     <ClInclude Include="SqlDataReader.h" />
     <ClInclude Include="SqlParameter.h" />
     <ClInclude Include="String.h" />
+    <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="ULong.h" />

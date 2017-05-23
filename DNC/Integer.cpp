@@ -9,11 +9,11 @@ namespace dnc{
 
 	Integer::~Integer(){}
 
-	std::string Integer::toString(){
+	std::string Integer::ToString(){
 		return std::to_string(this->value);
 	}
 
-	std::string Integer::getTypeString(){
+	std::string Integer::GetTypeString(){
 		return std::string("Integer");
 	}
 

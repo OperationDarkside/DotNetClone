@@ -22,11 +22,11 @@ namespace dnc{
 			this->Clear();
 		}
 
-		std::string DataTable::toString(){
+		std::string DataTable::ToString(){
 			return std::string("System.Data.DataTable");
 		}
 
-		std::string DataTable::getTypeString(){
+		std::string DataTable::GetTypeString(){
 			return std::string("DataTable");
 		}
 

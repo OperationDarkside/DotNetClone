@@ -14,11 +14,11 @@ namespace dnc{
 
 			MySqlConnection::~MySqlConnection(){}
 
-			std::string MySqlConnection::toString(){
+			std::string MySqlConnection::ToString(){
 				return std::string("System.Data.MySqlClient.MySqlConnection");
 			}
 
-			std::string MySqlConnection::getTypeString(){
+			std::string MySqlConnection::GetTypeString(){
 				return std::string("MySqlConnection");
 			}
 

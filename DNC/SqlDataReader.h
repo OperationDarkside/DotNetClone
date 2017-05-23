@@ -9,15 +9,14 @@ namespace dnc{
 	namespace Data{
 		namespace SqlClient{
 
-
-
 			class SqlDataReader: public Object{
-
 				friend class SqlCommand;
-
 			public:
 				SqlDataReader();
 				~SqlDataReader();
+
+				std::string ToString() override;
+				std::string GetTypeString() override;
 			};
 		}
 	}

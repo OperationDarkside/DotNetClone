@@ -17,11 +17,11 @@ namespace dnc{
 		return hashCode;
 	}
 
-	std::string Object::getTypeString(){
+	std::string Object::GetTypeString(){
 		return std::string("Object");
 	}
 
-	std::string Object::toString(){
+	std::string Object::ToString(){
 		return std::string("System.Object");
 	}
 

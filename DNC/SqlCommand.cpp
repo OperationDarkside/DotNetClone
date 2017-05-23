@@ -21,7 +21,7 @@ namespace dnc{
 				return std::string("System.Data.SqlClient.SqlCommand");
 			}
 
-			std::string SqlCommand::getTypeString(){
+			std::string SqlCommand::GetTypeString(){
 				return std::string("SqlCommand");
 			}
 
