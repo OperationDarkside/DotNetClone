@@ -7,6 +7,7 @@ namespace dnc{
 
 		class IPEndPoint: public EndPoint{
 		public:
+			//IPEndPoint();
 			IPEndPoint(long address, int port);
 			IPEndPoint(IPAddress address, int port);
 			~IPEndPoint();

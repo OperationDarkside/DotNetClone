@@ -15,6 +15,9 @@ namespace dnc{
 			class TcpClient: public Object{
 			public:
 				TcpClient();
+				TcpClient(AddressFamily family);
+				TcpClient(IPEndPoint localEP);
+				TcpClient(String hostname, int port);
 				~TcpClient();
 
 				std::string ToString() override;
@@ -41,6 +44,17 @@ namespace dnc{
 				void SendBufferSize(int size);
 				int SendTimeout();
 				void SendTimeout(int timeout);
+
+			private:
+				bool discon = true;
+				//bool noDel;
+				//int recvBufSize;
+				//int recvTimeout;
+				//int sendBufSize;
+				//int sendTimeout;
+				LingerOption lo;
+				Socket sock;
+				//IPEndPoint endPoint;
 			};
 
 		}

@@ -13,6 +13,7 @@
 #include "ProtocolType.h"
 #include "IPEndPoint.h"
 #include "SocketFlags.h"
+#include "LingerOption.h"
 #include <array>
 
 
@@ -21,6 +22,9 @@ namespace dnc{
 		namespace Sockets{
 
 			class Socket: public Object{
+
+				friend class TcpClient;
+
 			public:
 				Socket(AddressFamily af, SocketType st, ProtocolType pt);
 				~Socket();
@@ -29,15 +33,30 @@ namespace dnc{
 				std::string GetTypeString() override;
 
 				Socket Accept();
+				int Available();
 				void Bind(IPEndPoint ep);
+				void Connect(IPEndPoint ep);
+				void Connect(IPAddress address, int port);
 				void Connect(String host, int port);
 				void Disconnect();
 				void Close();
+				LingerOption LingerState();
+				void LingerState(LingerOption option);
 				void Listen(int backlog);
-				int Send(char* data);
+				bool NoDelay();
+				void NoDelay(bool noDelay);
 				template<size_t Num>
 				int Receive(std::array<char, Num>& data);
 				int Receive(char* buffer, int size, SocketFlags socketFlags);
+				int ReceiveBufferSize();
+				void ReceiveBufferSize(int size);
+				int ReceiveTimeout();
+				void ReceiveTimeout(int timeout);
+				int Send(char* data);
+				int SendBufferSize();
+				void SendBufferSize(int size);
+				int SendTimeout();
+				void SendTimeout(int timeout);
 			private:
 				Socket();
 				AddressFamily addressFamily;

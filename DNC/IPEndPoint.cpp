@@ -2,7 +2,7 @@
 
 namespace dnc{
 	namespace Net{
-
+		//IPEndPoint::IPEndPoint(){}
 		IPEndPoint::IPEndPoint(long address, int port): port(port){
 			std::vector<unsigned char> ad;
 
