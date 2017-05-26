@@ -73,7 +73,7 @@ namespace dnc{
 			}
 
 			NetworkStream TcpClient::GetStream(){
-				return NetworkStream();
+				return NetworkStream(this->sock);
 			}
 
 			LingerOption TcpClient::LingerState(){

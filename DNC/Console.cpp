@@ -57,11 +57,11 @@ namespace dnc{
 	}
 
 	void Console::Write(Object * value){
-		std::cout << value->toString();
+		std::cout << value->ToString();
 	}
 
 	void Console::Write(String& value){
-		std::cout << value.getStringValue();
+		std::cout << value.GetStringValue();
 	}
 
 	void Console::Write(char * buffer, long startIndex, long count){

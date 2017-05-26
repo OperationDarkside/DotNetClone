@@ -48,6 +48,7 @@ namespace dnc{
 		*/
 		template<size_t num>
 		String(std::array<char, num> str);
+
 		~String();
 
 		/**
@@ -148,6 +149,15 @@ namespace dnc{
 		@return this instance with str attached
 		*/
 		String insert(unsigned int startIndex, String* str);
+
+		/**
+		Returns a String consisting of the collections contents separated by the separator
+
+		@param separator String that separates the list values
+		@param values Strings to join
+		*/
+		static String Join(String separator, Collections::Generic::List<String> values);
+
 		/**
 		Return the position of the last occurence of the character c
 
@@ -372,6 +382,8 @@ namespace dnc{
 		String operator=(std::string& str);
 		String& operator=(String& str);
 		String& operator=(String&& str);
+		operator std::string();
+
 	private:
 		std::string value;
 	};

@@ -152,6 +152,22 @@ namespace dnc{
 		return this;
 	}
 
+	String String::Join(String separator, dnc::Collections::Generic::List<String> vals){
+		std::ostringstream s;
+		std::vector<String> tmp;
+		String res;
+
+		tmp = vals.Vector();
+
+		std::copy(tmp.begin(), tmp.end(), std::ostream_iterator<std::string>(s, separator.toCharArray()));
+
+		res = s.str();
+
+		res = res.substring(0, res.length() - separator.length());
+
+		return res;
+	}
+
 	unsigned int String::lastIndexOf(char c){
 		size_t found = this->value.find_last_of(c);
 		if(found == std::string::npos){
@@ -554,4 +570,8 @@ namespace dnc{
 		this->value = std::move(str.value);
 		return *this;
 	}
+	String::operator std::string(){
+		return this->value;
+	}
+
 }

@@ -47,12 +47,18 @@ namespace dnc{
 				void NoDelay(bool noDelay);
 				template<size_t Num>
 				int Receive(std::array<char, Num>& data);
+				template<size_t Num>
+				int Receive(std::array<char, Num>& data, int offset, int size);
 				int Receive(char* buffer, int size, SocketFlags socketFlags);
 				int ReceiveBufferSize();
 				void ReceiveBufferSize(int size);
 				int ReceiveTimeout();
 				void ReceiveTimeout(int timeout);
 				int Send(char* data);
+				template<size_t Num>
+				int Send(std::array<unsigned char, Num> data);
+				template<size_t Num>
+				int Send(std::array<unsigned char, Num> data, int offset, int size);
 				int SendBufferSize();
 				void SendBufferSize(int size);
 				int SendTimeout();
@@ -78,7 +84,7 @@ namespace dnc{
 
 				data.fill(0);
 
-				bytesReceived = recv(sock, data.data(), len, 0);
+				bytesReceived = recv(this->sock, data.data(), len, 0);
 
 				if(bytesReceived == 0){
 					throw "Server disconnected";
@@ -88,6 +94,67 @@ namespace dnc{
 				//std::swap(tmp, data);
 
 				return bytesReceived;
+			}
+
+			template<size_t Num>
+			inline int Socket::Receive(std::array<char, Num>& data, int offset, int size){
+				int bytesReceived = 0;
+				std::array<char, size> tmp;
+
+				if(Num < (size + offset)){
+					throw "Array not long enough!";
+				}
+
+				tmp.fill(0);
+
+				bytesReceived = recv(this->sock, tmp.data(), size, 0);
+
+				if(bytesReceived == 0){
+					throw "Server disconnected";
+				}
+
+				std::copy(tmp.begin(), tmp.end(), data.begin() + offset);
+
+				return bytesReceived;
+			}
+
+			template<size_t Num>
+			inline int Socket::Send(std::array<unsigned char, Num> data){				
+				int bytesSend = 0;
+
+				bytesSend = send(this->sock, data.data(), Num, 0);
+
+				if(bytesSend == 0){
+					throw "No bytes send.";
+				}
+				if(bytesSend != len){
+					throw "Not all bytes sent.";
+				}
+
+				return bytesSend;
+			}
+
+			template<size_t Num>
+			inline int Socket::Send(std::array<unsigned char, Num> data, int offset, int size){
+				int bytesSend = 0;
+				std::array<unsigned char, size> tmp;
+
+				if( Num < (offset + size)){
+					throw "Array not big enough.";
+				}
+
+				std::copy(data.begin() + offset, data.end() + offset + size, tmp.begin());
+
+				bytesSend = send(this->sock, tmp.data(), size, 0);
+
+				if(bytesSend == 0){
+					throw "No bytes send.";
+				}
+				if(bytesSend != len){
+					throw "Not all bytes sent.";
+				}
+
+				return bytesSend;
 			}
 
 

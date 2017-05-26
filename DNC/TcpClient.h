@@ -52,7 +52,7 @@ namespace dnc{
 				//int recvTimeout;
 				//int sendBufSize;
 				//int sendTimeout;
-				LingerOption lo;
+				//LingerOption lo;
 				Socket sock;
 				//IPEndPoint endPoint;
 			};

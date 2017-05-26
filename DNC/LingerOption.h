@@ -3,7 +3,7 @@
 #define LINGEROPTION_H
 
 #include "String.h"
-#include "Socket.h"
+//#include "Socket.h"
 
 namespace dnc{
 	namespace Net{

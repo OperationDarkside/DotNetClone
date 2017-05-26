@@ -147,6 +147,18 @@ namespace dnc{
 				@return Pointer to the array
 				*/
 				T* ToArray();
+				/**
+				Returns the contained vector
+
+				@return The vector wrapped by this class
+				*/
+				std::vector<T> Vector();
+				/**
+				Sets the vector for this class
+
+				@param vec vector to be the datasource for this class
+				*/
+				void Vector(std::vector<T> vec);
 
 				T& operator[](int position);
 
@@ -172,7 +184,7 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline std::string List<T>::getTypeString(){
+			inline std::string List<T>::GetTypeString(){
 				return std::string("List");
 			}
 
@@ -415,6 +427,16 @@ namespace dnc{
 			template<typename T>
 			inline T * List<T>::ToArray(){
 				return this->values.data();
+			}
+
+			template<typename T>
+			inline std::vector<T> List<T>::Vector(){
+				return this->values;
+			}
+
+			template<typename T>
+			inline void List<T>::Vector(std::vector<T> vec){
+				this->values = vec;
 			}
 
 			template<typename T>

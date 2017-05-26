@@ -67,7 +67,7 @@ void test_String_Class(){
 		Console::WriteLine("Error");
 	}*/
 
-	std::string string_value = str2.getStringValue();
+	std::string string_value = str2.GetStringValue();
 	if(string_value == "Hello"){
 		Console::WriteLine("getStringValue works!");
 	} else{
@@ -462,6 +462,18 @@ void test_String_Class(){
 	} else{
 		Console::WriteLine("Error");
 	}
+
+	dnc::Collections::Generic::List<String> listStrings;
+	listStrings.Add("Hallo");
+	listStrings.Add("Welt");
+	listStrings.Add("Noob");
+
+	String joined_string = String::Join(" ", listStrings);
+	if(joined_string == "Hallo Welt Noob"){
+		Console::WriteLine("join String works!");
+	} else{
+		Console::WriteLine("Error");
+	}
 }
 
 int main(){
@@ -472,18 +484,18 @@ int main(){
 
 	DateTime* dt = new DateTime(2017, 2, 4);
 	std::cout << dt->Day() << "-" << dt->Month() << "-" << dt->Year() << std::endl;
-	std::cout << dt->toLongDateString().getStringValue() << std::endl << dt->toLongTimeString().getStringValue() << std::endl;
+	std::cout << dt->toLongDateString().GetStringValue() << std::endl << dt->toLongTimeString().GetStringValue() << std::endl;
 	dt->Year(2014);
 	std::cout << dt->Day() << "-" << dt->Month() << "-" << dt->Year() << std::endl;
 
 	DateTime* dt1 = new DateTime(456734564423L);
-	std::cout << dt1->toLongDateString().getStringValue() << std::endl << dt1->toLongTimeString().getStringValue() << std::endl;
+	std::cout << dt1->toLongDateString().GetStringValue() << std::endl << dt1->toLongTimeString().GetStringValue() << std::endl;
 
 	Object* o = new Object();
-	std::cout << o->toString() << std::endl;
+	std::cout << o->ToString() << std::endl;
 
 	TimeSpan* ts = new TimeSpan(4567345745L);
-	std::cout << ts->toString() << std::endl;
+	std::cout << ts->ToString() << std::endl;
 
 	Console::WriteLine("Gimme some money!!!");
 	Console::WriteLine(ts);
@@ -683,7 +695,7 @@ int main(){
 	Socket accSock = listenSock.Accept();
 
 	Console::WriteLine();
-
+	
 	while(true){
 		//char recvBuffer;
 		//std::string recvBufferStr;
