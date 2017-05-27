@@ -21,6 +21,7 @@ namespace dnc{
 
 		Double operator=(double d);
 		operator double();
+
 	private:
 		double value;
 	};

@@ -18,7 +18,8 @@ namespace dnc{
 	}
 
 	Decimal Decimal::operator=(long double ld){
-		return Decimal(ld);
+		this->value = ld;
+		return *this;
 	}
 
 	Decimal::operator long double(){

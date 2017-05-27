@@ -24,8 +24,12 @@ namespace dnc{
 
 		IPAddress::~IPAddress(){}
 
-		const char* IPAddress::Any = new char[4]{0, 0, 0, 0};
-		const char* IPAddress::Loopback = new char[4]{127, 0, 0, 1};
+		IPAddress IPAddress::Any = IPAddress(std::vector<unsigned char>{127,0,0,1});
+
+		IPAddress IPAddress::Loopback = IPAddress(std::vector<unsigned char>{127, 0, 0, 1});
+
+		//const char* IPAddress::Any = new char[4]{0, 0, 0, 0};
+		//const char* IPAddress::Loopback = new char[4]{127, 0, 0, 1};
 
 		std::string dnc::Net::IPAddress::ToString(){
 			return std::string("IPAddress");

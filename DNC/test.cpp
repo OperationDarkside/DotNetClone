@@ -18,13 +18,25 @@
 #include "mysql.h"
 #include "List.h"
 #include "Socket.h"
-//#include ""
+#include "TestDataClass.h"
+#include <functional>
+#include <map>
+#include <memory>
 
 using namespace dnc;
 using namespace dnc::Data;
 using namespace dnc::Data::SqlClient;
 using namespace dnc::Net;
 using namespace dnc::Net::Sockets;
+
+/*void print_num(int i){
+	std::cout << i << '\n';
+}*/
+
+void foo(){}
+void goo(std::string* p){}
+void bar(int& p){}
+int bar2(){ return 6; }
 
 String compare_clone(){
 	String str("Something");
@@ -695,7 +707,7 @@ int main(){
 	Socket accSock = listenSock.Accept();
 
 	Console::WriteLine();
-	
+
 	while(true){
 		//char recvBuffer;
 		//std::string recvBufferStr;
@@ -715,6 +727,21 @@ int main(){
 		}
 	}
 
+	// Serialization
 
+	double tttt = 5.3;
+
+	Double ddddd = tttt;
+	//Object& blabla = tttt;
+
+	TestDataClass testClass;
+	testClass.SetField1(55);
+	testClass.SetField2(5.5);
+	testClass.SetField3("blubb");
+
+	String blubb = testClass.ToXml();
+
+	Console::WriteLine(blubb);
+	
 	system("PAUSE");
 }

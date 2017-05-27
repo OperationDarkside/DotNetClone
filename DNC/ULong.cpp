@@ -20,7 +20,9 @@ namespace dnc{
 	}
 
 	ULong ULong::operator=(unsigned long l){
-		return ULong(l);
+		this->value = l;
+
+		return *this;
 	}
 
 	ULong::operator unsigned long(){

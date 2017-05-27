@@ -1,4 +1,5 @@
 #include "Object.h"
+#include "Double.h"
 
 namespace dnc{
 
@@ -6,6 +7,9 @@ namespace dnc{
 		generateHashCode();
 	}
 
+	Object::Object(double d){
+		
+	}
 
 	Object::~Object(){}
 
@@ -24,6 +28,12 @@ namespace dnc{
 	std::string Object::ToString(){
 		return std::string("System.Object");
 	}
+
+	/*Object& Object::operator=(double d){
+		return Double(d);
+	}
+
+	Object::operator double(){}*/
 
 	void Object::generateHashCode(){
 		hashCode = (int)this;

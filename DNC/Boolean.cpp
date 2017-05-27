@@ -17,7 +17,9 @@ namespace dnc{
 	}
 
 	Boolean Boolean::operator=(bool b){
-		return Boolean(b);
+		this->value = b;
+
+		return *this;
 	}
 
 	Boolean::operator bool(){

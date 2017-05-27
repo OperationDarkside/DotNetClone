@@ -467,62 +467,63 @@ namespace dnc{
 		return res;
 	}
 
-	String& operator+(String& str1, const char * str2){
+	String operator+(String& str1, const char * str2){
 		str1 += str2;
 
 		return str1;
 	}
 
-	String & operator+(const char * str, String & str2){
-		str2.value.insert(0, str);
+	String operator+(char * str, String & str2){
+		//str2.value.insert(0, str);
 		//str2 += str;
+		String res = str;
 
-		return str2;
+		return res + str2;
 	}
 
-	String & operator+(std::string & str, String & str2){
+	String operator+(std::string & str, String & str2){
 		str2.value.insert(0, str);
 
 		return str2;
 	}
 
-	String & operator+(String & str, std::string & str2){
+	String operator+(String & str, std::string & str2){
 		str += str2;
 
 		return str;
 	}
 
-	String& operator+(String& str, int number){
+	String operator+(String& str, int number){
 		str += std::to_string(number);
 
 		return str;
 	}
 
-	String & operator+(int number, String & str){
+	String operator+(int number, String & str){
 		str.value = std::to_string(number) + str.value;
 
 		return str;
 	}
 
-	String& String::operator+=(String& str){
+	String String::operator+=(String& str){
 		this->value += str.value;
 
 		return *this;
 	}
 
-	String& String::operator+=(std::string& str){
+	String String::operator+=(std::string& str){
 		this->value += str;
 
 		return *this;
 	}
 
-	String& String::operator+=(const char * str){
+	String String::operator+=(const char * str){
 		this->value += str;
 
 		return *this;
 	}
 
-	String& String::operator+=(int number){
+	String String::operator+=(int number){
 		this->value += std::to_string(number);
 
 		return *this;

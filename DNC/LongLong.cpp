@@ -18,7 +18,9 @@ namespace dnc{
 	}
 
 	LongLong LongLong::operator=(long long ll){
-		return LongLong(ll);
+		this->value = ll;
+
+		return *this;
 	}
 
 	LongLong::operator long long(){

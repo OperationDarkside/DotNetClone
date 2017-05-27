@@ -13,6 +13,7 @@ namespace dnc{
 
 	public:
 		Object();
+		Object(double d);
 		virtual ~Object();
 
 		/**
@@ -40,6 +41,10 @@ namespace dnc{
 		@return C++ string with information about this class/instance
 		*/
 		virtual std::string ToString();
+
+		//Object& operator=(double d);
+		//operator double();
+
 	private:
 		int hashCode = 0;
 

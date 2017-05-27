@@ -18,7 +18,8 @@ namespace dnc{
 	}
 
 	Float Float::operator=(float f){
-		return Float(f);
+		this->value = f;
+		return *this;
 	}
 
 	Float::operator float(){

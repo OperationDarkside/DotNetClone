@@ -362,16 +362,16 @@ namespace dnc{
 		String trimStart();
 
 		friend String operator+(String str1, String str2);
-		friend String& operator+(String& str, const char* str2);
-		friend String& operator+(const char* str, String& str2);
-		friend String& operator+(std::string& str, String& str2);
-		friend String& operator+(String& str, std::string& str2);
-		friend String& operator+(String& str, int number);
-		friend String& operator+(int number, String& str);
-		String& operator+=(String& str);
-		String& operator+=(std::string& str);
-		String& operator+=(const char* str);
-		String& operator+=(int number);
+		friend String operator+(String& str, const char* str2);
+		friend String operator+(char* str, String& str2);
+		friend String operator+(std::string& str, String& str2);
+		friend String operator+(String& str, std::string& str2);
+		friend String operator+(String& str, int number);
+		friend String operator+(int number, String& str);
+		String operator+=(String& str);
+		String operator+=(std::string& str);
+		String operator+=(const char* str);
+		String operator+=(int number);
 		bool operator==(String& str);
 		bool operator==(const char* str);
 		bool operator!=(String& str);

@@ -13,8 +13,8 @@ namespace dnc{
 			IPAddress(long address);
 			~IPAddress();
 
-			static const char* Any;
-			static const char* Loopback;
+			static IPAddress Any;
+			static IPAddress Loopback;
 
 			std::string ToString() override;
 			std::string GetTypeString() override;

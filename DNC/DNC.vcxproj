@@ -162,6 +162,7 @@
     <ClCompile Include="MySqlParameterCollection.cpp" />
     <ClCompile Include="NetworkStream.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Serializable.cpp" />
     <ClCompile Include="Short.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="SqlCommand.cpp" />
@@ -170,7 +171,9 @@
     <ClCompile Include="SqlParameter.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="TcpClient.cpp" />
+    <ClCompile Include="TcpListener.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="TestDataClass.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="ULong.cpp" />
@@ -210,6 +213,7 @@
     <ClInclude Include="NetworkStream.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ProtocolType.h" />
+    <ClInclude Include="Serializable.h" />
     <ClInclude Include="Short.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="SocketFlags.h" />
@@ -220,6 +224,8 @@
     <ClInclude Include="SqlParameter.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="TcpClient.h" />
+    <ClInclude Include="TcpListener.h" />
+    <ClInclude Include="TestDataClass.h" />
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="ULong.h" />

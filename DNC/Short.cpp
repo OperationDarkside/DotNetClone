@@ -17,7 +17,9 @@ namespace dnc{
 	}
 
 	Short Short::operator=(short s){
-		return Short(s);
+		this->value = s;
+
+		return *this;
 	}
 
 	Short::operator short(){

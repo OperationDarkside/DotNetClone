@@ -18,7 +18,9 @@ namespace dnc{
 	}
 
 	Integer Integer::operator=(int i){
-		return Integer(i);
+		this->value = i;
+
+		return *this;
 	}
 
 	Integer::operator int(){
