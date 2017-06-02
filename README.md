@@ -12,10 +12,12 @@ So I started this little side-project to bring the comfort of .NET to native C++
 As mentioned above, I am not an experienced C++ developer, so the code is not optimized or anything.
 
 However, you are very welcome to check the code and point out bugs/impovements :-)
+If you want to contribute, message me on Twitter
 
-Current working subject: Adding namespaces
+Current working subject: Serialization
 
 Implemented Classes:
+- AddressFamily
 - Boolean
 - Console
 - Convert
@@ -27,11 +29,15 @@ Implemented Classes:
 - DateTime
 - Decimal
 - Double
+- EndPoint
 - File
 - FileStream
 - FileTools
 - Float
 - Integer
+- IPAddress
+- IPEndPoint
+- LingerOption
 - List
 - Long
 - LongLong
@@ -42,13 +48,22 @@ Implemented Classes:
 - MySqlDbTypes
 - MySqlParameter
 - MySqlParameterCollection
+- NetworkStream
 - Object
+- ProtocolType
+- Serializable
 - Short
+- Socket
+- SocketFlags
+- SocketType
 - SqlCommand
 - SqlConnection
 - SqlDataReader
 - sqlParameter
 - String
+- TcpClient
+- TcpListener
+- TestDataClass (Serialization)
 - TimeSpan
 - Type
 - ULong
