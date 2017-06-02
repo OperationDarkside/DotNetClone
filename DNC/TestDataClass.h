@@ -6,7 +6,7 @@
 
 namespace dnc{
 
-	class TestDataClass: public Serializable{
+	class TestDataClass: public Serializable<TestDataClass>{
 	public:
 		TestDataClass();
 		~TestDataClass();
@@ -17,13 +17,17 @@ namespace dnc{
 		double GetField2();
 		void SetField2(double val);
 
-		String GetField3();
+		String& GetField3();
 		void SetField3(String val);
+
+		TestDataClass* GetField4();
+		void SetField4(TestDataClass* val);
 
 	private:
 		Integer field1;
 		Double field2;
 		String field3;
+		TestDataClass* field4;
 	};
 
 }

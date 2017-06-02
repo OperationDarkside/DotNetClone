@@ -12,6 +12,12 @@ namespace dnc{
 		this->value = str->value;
 	}
 
+	String::String(Object & str){
+		String& strRef = (String&)str;
+
+		this->value = strRef.value;
+	}
+
 	String::String(std::string * str){
 		this->value = *str;
 	}
@@ -505,6 +511,18 @@ namespace dnc{
 		return str;
 	}
 
+	String operator+(String & str, unsigned long long number) {
+		str += std::to_string(number);
+
+		return str;
+	}
+
+	String operator+(unsigned long long number, String & str) {
+		str.value = std::to_string(number) + str.value;
+
+		return str;
+	}
+
 	String String::operator+=(String& str){
 		this->value += str.value;
 
@@ -560,6 +578,7 @@ namespace dnc{
 
 		return *this;
 	}
+
 	String & String::operator=(String& str){
 		if(this != &str){
 			std::swap(this->value, str.value);

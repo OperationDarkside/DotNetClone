@@ -23,12 +23,13 @@ namespace dnc{
 		String();
 		String(const String& str);
 		String(String&& str);
+		String(Object& str);
 		/**
 		Creates a new String class instance with the value of str
 
 		@param str the String to copy
 		*/
-		String(String* str);
+		String(String* str);;
 		/**
 		Creates a new String class instance with the value of str
 
@@ -368,6 +369,8 @@ namespace dnc{
 		friend String operator+(String& str, std::string& str2);
 		friend String operator+(String& str, int number);
 		friend String operator+(int number, String& str);
+		friend String operator+(String& str, unsigned long long number);
+		friend String operator+(unsigned long long number, String& str);
 		String operator+=(String& str);
 		String operator+=(std::string& str);
 		String operator+=(const char* str);

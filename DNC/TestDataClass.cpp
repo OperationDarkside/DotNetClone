@@ -2,7 +2,7 @@
 
 namespace dnc{
 
-	TestDataClass::TestDataClass(){
+	TestDataClass::TestDataClass() {
 
 		Object& f1 = this->field1;
 		Object& f2 = this->field2;
@@ -33,7 +33,7 @@ namespace dnc{
 		this->field2 = val;
 	}
 
-	String TestDataClass::GetField3(){
+	String& TestDataClass::GetField3(){
 		return this->field3;
 	}
 
@@ -41,4 +41,15 @@ namespace dnc{
 		this->field3 = val;
 	}
 
+	TestDataClass* TestDataClass::GetField4() {
+		return this->field4;
+	}
+
+	void TestDataClass::SetField4(TestDataClass* val) {
+		this->field4 = val;
+		if(val != nullptr) {
+			this->attributes.Add(SerializableAttribute(String("Field4"), *val));
+		}
+	}
+	
 }

@@ -13,7 +13,6 @@ namespace dnc{
 
 	public:
 		Object();
-		Object(double d);
 		virtual ~Object();
 
 		/**
@@ -28,7 +27,7 @@ namespace dnc{
 
 		@return The hashcode
 		*/
-		virtual int getHashCode();
+		virtual unsigned long long getHashCode();
 		/**
 		Returns a c++ string pointer representation of this class name
 
@@ -46,7 +45,7 @@ namespace dnc{
 		//operator double();
 
 	private:
-		int hashCode = 0;
+		unsigned long long hashCode = 0;
 
 		void generateHashCode();
 	};

@@ -7,17 +7,13 @@ namespace dnc{
 		generateHashCode();
 	}
 
-	Object::Object(double d){
-		
-	}
-
 	Object::~Object(){}
 
 	bool Object::equals(Object * o){
 		return o == this;
 	}
 
-	int Object::getHashCode(){
+	unsigned long long Object::getHashCode(){
 		return hashCode;
 	}
 
@@ -36,6 +32,6 @@ namespace dnc{
 	Object::operator double(){}*/
 
 	void Object::generateHashCode(){
-		hashCode = (int)this;
+		hashCode = (unsigned long long)this;
 	}
 }

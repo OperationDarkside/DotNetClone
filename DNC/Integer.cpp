@@ -6,6 +6,12 @@ namespace dnc{
 
 	Integer::Integer(int i): value(i){}
 
+	Integer::Integer(Object & o){
+		Integer& in_ref = (Integer&)o;
+
+		this->value = in_ref.value;
+	}
+
 
 	Integer::~Integer(){}
 

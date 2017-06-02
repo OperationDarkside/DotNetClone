@@ -14,6 +14,7 @@ namespace dnc{
 	public:
 		Integer();
 		Integer(int i);
+		Integer(Object& o);
 		~Integer();
 
 		std::string ToString() override;
