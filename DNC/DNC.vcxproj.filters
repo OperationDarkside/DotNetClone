@@ -302,5 +302,8 @@
     <ClInclude Include="TestDataClass.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Dictionary.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

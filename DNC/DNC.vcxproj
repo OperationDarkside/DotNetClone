@@ -190,6 +190,7 @@
     <ClInclude Include="DataTable.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="Decimal.h" />
+    <ClInclude Include="Dictionary.h" />
     <ClInclude Include="Double.h" />
     <ClInclude Include="EndPoint.h" />
     <ClInclude Include="File.h" />
