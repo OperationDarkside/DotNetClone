@@ -4,12 +4,12 @@ namespace dnc{
 
 	Type::Type(){}
 
-	Type::Type(size_t hashcode, String& name): code(hashcode), name(new String(name)){}
+	Type::Type(size_t hashcode, String& name): code(hashcode), name(name){}
 
 	Type::~Type(){}
 
 	std::string Type::ToString(){
-		return this->name->GetStringValue();
+		return this->name.GetStringValue();
 	}
 
 	std::string Type::GetTypeString(){

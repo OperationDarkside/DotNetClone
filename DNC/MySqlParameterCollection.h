@@ -47,7 +47,7 @@ namespace dnc{
 				MySqlParameter& operator[](int columnNr);
 
 			private:
-				Collections::Generic::List<MySqlParameter> paramters;
+				Collections::Generic::List<MySqlParameter> parameters;
 			};
 		}
 	}

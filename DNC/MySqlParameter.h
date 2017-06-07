@@ -18,6 +18,8 @@ namespace dnc{
 
 			public:
 				MySqlParameter();
+				//MySqlParameter(const MySqlParameter& copy);
+				//MySqlParameter(MySqlParameter&& move);
 				MySqlParameter(MySqlDbTypes _type);
 				MySqlParameter(MySqlDbTypes _type, char value);
 				MySqlParameter(MySqlDbTypes _type, short value);
@@ -39,6 +41,9 @@ namespace dnc{
 
 				//String& Name();
 				//void Name(String& name);
+
+				MySqlParameter& operator=(const MySqlParameter& copy);
+				//MySqlParameter& operator=(MySqlParameter&& move);
 
 			private:
 				//String name;

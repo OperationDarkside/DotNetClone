@@ -9,6 +9,10 @@ namespace dnc {
 	namespace Collections {
 		namespace Generic {
 
+			//-------------------------------------------
+			// Header
+			//-------------------------------------------
+
 			template<typename K, typename V>
 			class Dictionary : public Object {
 			public:
@@ -24,7 +28,7 @@ namespace dnc {
 
 				void Add(K key, V value);
 				void Clear();
-				bool ContainsKey(K& key);
+				bool ContainsKey(K key);
 				bool ContainsValue(V& value);
 				bool Remove(K& key);
 
@@ -33,6 +37,10 @@ namespace dnc {
 			private:
 				std::map<K, V> m;
 			};
+
+			//-------------------------------------------
+			// Source
+			//-------------------------------------------
 
 			template<typename K, typename V>
 			inline Dictionary<K, V>::Dictionary() {
@@ -68,7 +76,7 @@ namespace dnc {
 
 			template<typename K, typename V>
 			inline void Dictionary<K, V>::Add(K key, V value) {
-				this->m.insert(key, value);
+				this->m.emplace(key, value);
 			}
 
 			template<typename K, typename V>
@@ -77,10 +85,10 @@ namespace dnc {
 			}
 
 			template<typename K, typename V>
-			inline bool Dictionary<K, V>::ContainsKey(K & key) {
+			inline bool Dictionary<K, V>::ContainsKey(K key) {
 				std::map<K, V>::iterator it = this->m.find(key);
 
-				if(it != it.end()) {
+				if(it != this->m.end()) {
 					return true;
 				} else {
 					return false;

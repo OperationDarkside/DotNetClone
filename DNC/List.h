@@ -7,15 +7,15 @@
 #include <vector>
 
 
-namespace dnc{
-	namespace Collections{
-		namespace Generic{
+namespace dnc {
+	namespace Collections {
+		namespace Generic {
 
 			/**
 			Generic collection with indexed access and several manipulation methods (wraps the std::vector)
 			*/
 			template<typename T>
-			class List: public Object{
+			class List : public Object {
 			public:
 				List();
 				List(unsigned int capacity);
@@ -72,14 +72,14 @@ namespace dnc{
 				@param item Pointer to the searched item
 				@return Position
 				*/
-				long long IndexOf(T* item);
+				long long IndexOf(T& item);
 				/**
 				Returns the position of the item in this list
 				@param item Pointer to the searched item
 				@param index Starting point where the search begins
 				@return Position
 				*/
-				long long IndexOf(T* item, int index);
+				long long IndexOf(T& item, int index);
 				/**
 				Returns the position of the item in this list
 				@param item Pointer to the searched item
@@ -87,7 +87,7 @@ namespace dnc{
 				@param count Number items to be searched
 				@return Position
 				*/
-				long long IndexOf(T* item, int index, int count);
+				long long IndexOf(T& item, int index, int count);
 				/**
 				Inserts a new item into the list at the given position
 				@param index Position where to insert
@@ -105,14 +105,14 @@ namespace dnc{
 				@param item Pointer to the searched item
 				@return Position
 				*/
-				unsigned long LastIndexOf(T* item);
+				unsigned long LastIndexOf(T& item);
 				/**
 				Returns the position of the item in this list starting at the end from front
 				@param item Pointer to the searched item
 				@param index Starting point where the search begins
 				@return Position
 				*/
-				unsigned long LastIndexOf(T* item, int index);
+				unsigned long LastIndexOf(T& item, int index);
 				/**
 				Returns the position of the item in this list starting at the end from front
 				@param item Pointer to the searched item
@@ -120,13 +120,13 @@ namespace dnc{
 				@param count Number items to be searched
 				@return Position
 				*/
-				unsigned long LastIndexOf(T* item, int index, int count);
+				unsigned long LastIndexOf(T& item, int index, int count);
 				/**
 				Removes a specific item from this list
 				@param item Pointer to the be removed item
 				@return if it was removed
 				*/
-				bool Remove(T* item);
+				bool Remove(T& item);
 				/**
 				Removes a specific item from this list
 				@param index Position of the item to be removed
@@ -168,54 +168,54 @@ namespace dnc{
 
 
 			template<typename T>
-			inline List<T>::List(){}
+			inline List<T>::List() {}
 
 			template<typename T>
-			inline List<T>::List(unsigned int capacity){
+			inline List<T>::List(unsigned int capacity) {
 				this->values = std::vector<T>(capacity);
 			}
 
 			template<typename T>
-			inline List<T>::~List(){}
+			inline List<T>::~List() {}
 
 			template<typename T>
-			inline std::string List<T>::ToString(){
+			inline std::string List<T>::ToString() {
 				return std::string("System.Collections.Generics.List");
 			}
 
 			template<typename T>
-			inline std::string List<T>::GetTypeString(){
+			inline std::string List<T>::GetTypeString() {
 				return std::string("List");
 			}
 
 			template<typename T>
-			inline void List<T>::Add(T item){
+			inline void List<T>::Add(T item) {
 				this->values.push_back(item);
 			}
 
 			template<typename T>
-			inline void List<T>::AddRange(T collection[]){
+			inline void List<T>::AddRange(T collection[]) {
 				std::vector<T> temp(collection);
 				this->values.insert(this->values.end(), temp.begin(), temp.end());
 			}
 
 			template<typename T>
-			inline void List<T>::AddRange(List<T> collection){
+			inline void List<T>::AddRange(List<T> collection) {
 				this->values.insert(this->values.end(), collection.begin(), collection.end());
 			}
 
 			template<typename T>
-			inline void List<T>::Clear(){
+			inline void List<T>::Clear() {
 				this->values.clear();
 			}
 
 			template<typename T>
-			inline bool List<T>::Contains(T item){
+			inline bool List<T>::Contains(T item) {
 				return std::find(this->values.begin(), this->values.end(), item) != this->values.end();
 			}
 
 			template<typename T>
-			inline void List<T>::CopyTo(T * array[]){
+			inline void List<T>::CopyTo(T * array[]) {
 				size_t fullsize = 0, len = 0;
 				T* original;
 				T temp[];
@@ -232,17 +232,17 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline unsigned long List<T>::Count(){
+			inline unsigned long List<T>::Count() {
 				return this->values.size();
 			}
 
 			template<typename T>
-			inline List<T> List<T>::GetRange(int index, int count){
+			inline List<T> List<T>::GetRange(int index, int count) {
 				List<T> res;
 				std::vector<T>::iterator start;
 				std::vector<T>::iterator end;
 
-				if((index + count) > this->values.size()){
+				if((index + count) > this->values.size()) {
 					throw "Index and/or count out of range";
 				}
 
@@ -255,14 +255,14 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline long long List<T>::IndexOf(T * item){
+			inline long long List<T>::IndexOf(T& item) {
 				long long res = -1;
 				size_t len = 0;
 
 				len = this->values.size();
 
-				for(size_t i = 0; i < len; i++){
-					if(&this->values[i] == item){
+				for(size_t i = 0; i < len; i++) {
+					if(this->values[i] == item) {
 						res = i;
 						break;
 					}
@@ -272,18 +272,18 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline long long List<T>::IndexOf(T * item, int index){
+			inline long long List<T>::IndexOf(T& item, int index) {
 				long long res = -1;
 				size_t len = 0;
 
 				len = this->values.size();
 
-				if(index > len){
+				if(index > len) {
 					throw "IndexOf: Index out of range";
 				}
 
-				for(size_t i = index; i < len; i++){
-					if(&this->values[i] == item){
+				for(size_t i = index; i < len; i++) {
+					if(this->values[i] == item) {
 						res = i;
 						break;
 					}
@@ -293,18 +293,18 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline long long List<T>::IndexOf(T * item, int index, int count){
+			inline long long List<T>::IndexOf(T& item, int index, int count) {
 				long long res = -1;
 				size_t len = 0;
 
 				len = index + count;
 
-				if(len > this->values.size()){
+				if(len > this->values.size()) {
 					throw "IndexOf: Index and/or count out of range";
 				}
 
-				for(size_t i = index; i < len; i++){
-					if(&this->values[i] == item){
+				for(size_t i = index; i < len; i++) {
+					if(this->values[i] == item) {
 						res = i;
 						break;
 					}
@@ -314,8 +314,8 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline void List<T>::Insert(int index, T item){
-				if(index > this->values.size()){
+			inline void List<T>::Insert(int index, T item) {
+				if(index > this->values.size()) {
 					throw "Insert: Index out of range";
 				}
 
@@ -323,8 +323,8 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline void List<T>::InsertRange(int index, List<T> collection){
-				if(index > this->values.size()){
+			inline void List<T>::InsertRange(int index, List<T> collection) {
+				if(index > this->values.size()) {
 					throw "Insert: Index out of range";
 				}
 
@@ -332,14 +332,14 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline unsigned long List<T>::LastIndexOf(T * item){
+			inline unsigned long List<T>::LastIndexOf(T& item) {
 				long long res = -1;
 				size_t len = 0;
 
 				len = this->values.size() - 1;
 
-				for(size_t i = len; i > -1; --i){
-					if(&this->values[i] == item){
+				for(size_t i = len; i > -1; --i) {
+					if(this->values[i] == item) {
 						res = i;
 						break;
 					}
@@ -349,18 +349,18 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline unsigned long List<T>::LastIndexOf(T * item, int index){
+			inline unsigned long List<T>::LastIndexOf(T& item, int index) {
 				long long res = -1;
 				// size_t len = 0;
 
 				// len = this->values.size() - 1;
 
-				if(index < this->values.size()){
+				if(index < this->values.size()) {
 					throw "LastIndexOf: Index out of range";
 				}
 
-				for(size_t i = index; i > -1; --i){
-					if(&this->values[i] == item){
+				for(size_t i = index; i > -1; --i) {
+					if(this->values[i] == item) {
 						res = i;
 						break;
 					}
@@ -370,18 +370,18 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline unsigned long List<T>::LastIndexOf(T * item, int index, int count){
+			inline unsigned long List<T>::LastIndexOf(T& item, int index, int count) {
 				long long res = -1;
 				size_t len = 0;
 
 				len = index - count;
 
-				if(index < this->values.size() && len > 0){
+				if(index < this->values.size() && len > 0) {
 					throw "LastIndexOf: Index and/or count out of range";
 				}
 
-				for(size_t i = index; i > -1; --i){
-					if(&this->values[i] == item){
+				for(size_t i = index; i > -1; --i) {
+					if(this->values[i] == item) {
 						res = i;
 						break;
 					}
@@ -391,14 +391,14 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline bool List<T>::Remove(T * item){
+			inline bool List<T>::Remove(T& item) {
 				bool res = false;
 				size_t len = 0;
 
 				len = this->values.size();
 
-				for(size_t i = 0; i < len; i++){
-					if(&this->values[i] == item){
+				for(size_t i = 0; i < len; i++) {
+					if(this->values[i] == item) {
 						this->values.erase(this->values.begin() + i);
 
 						res = true;
@@ -410,49 +410,49 @@ namespace dnc{
 			}
 
 			template<typename T>
-			inline void List<T>::RemoveAt(int index){
+			inline void List<T>::RemoveAt(int index) {
 				this->values.erase(this->values.begin() + index);
 			}
 
 			template<typename T>
-			inline void List<T>::RemoveRange(int index, int count){
+			inline void List<T>::RemoveRange(int index, int count) {
 				this->values.erase(this->values.begin() + index, this->values.begin() + index + count);
 			}
 
 			template<typename T>
-			inline void List<T>::Reverse(){
+			inline void List<T>::Reverse() {
 				std::reverse(this->values.begin(), this->values.end());
 			}
 
 			template<typename T>
-			inline T * List<T>::ToArray(){
+			inline T * List<T>::ToArray() {
 				return this->values.data();
 			}
 
 			template<typename T>
-			inline std::vector<T> List<T>::Vector(){
+			inline std::vector<T> List<T>::Vector() {
 				return this->values;
 			}
 
 			template<typename T>
-			inline void List<T>::Vector(std::vector<T> vec){
+			inline void List<T>::Vector(std::vector<T> vec) {
 				this->values = vec;
 			}
 
 			template<typename T>
-			inline T& List<T>::operator[](int position){
+			inline T& List<T>::operator[](int position) {
 				size_t len = 0;
 
 				len = this->values.size();
 
-				if(len > 0 && position < len){
+				if(len > 0 && position < len) {
 					return this->values[position];
-				} else{
+				} else {
 					throw "Index out of Range!";
 				}
 			}
 
-}
+		}
 	}
 }
 #endif // !LIST_H

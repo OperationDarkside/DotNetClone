@@ -175,7 +175,7 @@ namespace dnc{
 				params = new MYSQL_BIND[paramLen];
 
 				for(size_t i = 0; i < paramLen; ++i){
-					MySqlParameter param = this->parameters[i];
+					MySqlParameter& param = this->parameters[i];
 
 					params[i] = param.param;
 				}
