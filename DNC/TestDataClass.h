@@ -6,7 +6,7 @@
 
 namespace dnc{
 
-	class TestDataClass: public Serializable<TestDataClass>{
+	class TestDataClass: public Serializable {
 	public:
 		TestDataClass();
 		~TestDataClass();
