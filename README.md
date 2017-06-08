@@ -12,7 +12,6 @@ So I started this little side-project to bring the comfort of .NET to native C++
 As mentioned above, I am not an experienced C++ developer, so the code is not optimized or anything.
 
 However, you are very welcome to check the code and point out bugs/impovements :-)
-If you want to contribute, message me on Twitter
 
 
 **Serialization**
@@ -34,6 +33,24 @@ TestDataClass::TestDataClass() {
 }
 
 String xmlString = testClass.ToXml();
+```
+
+**Sockets**
+
+Requesting a website:
+
+```C++
+Socket sock(AddressFamily::IPv4, SocketType::Stream, ProtocolType::Tcp);
+sock.Connect(String("127.0.0.1"), 80);
+sock.Send("GET /cgi-bin/CppWebToolkit.exe?prename=Marvin&lastname=%20du%20Horst http/1.1\r\nHost: 127.0.0.1\r\nConnection: close\r\n\r\n");
+
+std::array<char, 500> recvData;
+
+sock.Receive(recvData);
+sock.Close();
+
+String received(recvData);
+Console::WriteLine(received);
 ```
 
 **MySql**
@@ -82,6 +99,8 @@ bool istype = Type::isType<Object, String>(tmp_o);
 
 Frameworks:
 - MySql C API - Installed
+
+If you want to contribute or point out bugs send me a mail at spiritusbrenner@gmail.com
 
 Maintainer:
 Sebastian Greis
