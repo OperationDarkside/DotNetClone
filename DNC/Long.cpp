@@ -25,4 +25,16 @@ namespace dnc{
 	Long::operator long(){
 		return this->value;
 	}
+
+	void Long::FromString(std::string val) {
+		std::string::size_type sz;
+
+		try {
+			this->value = std::stol(val, &sz);
+		} catch(const std::invalid_argument& ia) {
+			throw "Couldn't convert std::string to double";
+		} catch(const std::out_of_range& oor) {
+			throw "Out of range error";
+		}
+	}
 }

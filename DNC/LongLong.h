@@ -8,6 +8,9 @@
 namespace dnc{
 
 	class LongLong: public Object{
+
+		friend class Serializable;
+
 	public:
 		LongLong();
 		LongLong(long long ll);
@@ -20,6 +23,8 @@ namespace dnc{
 		operator long long();
 	private:
 		long long value;
+
+		void FromString(std::string val) override;
 	};
 }
 #endif // !LONGLONG_H

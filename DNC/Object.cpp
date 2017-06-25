@@ -34,4 +34,7 @@ namespace dnc{
 	void Object::generateHashCode(){
 		hashCode = (unsigned long long)this;
 	}
+	void Object::FromString(std::string val) {
+		
+	}
 }

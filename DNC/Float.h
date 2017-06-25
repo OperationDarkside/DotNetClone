@@ -11,6 +11,9 @@ namespace dnc{
 	Object related wrapper for the float type
 	*/
 	class Float: public Object{
+
+		friend class Serializable;
+
 	public:
 		Float();
 		Float(float f);
@@ -23,6 +26,8 @@ namespace dnc{
 		operator float();
 	private:
 		float value;
+
+		void FromString(std::string val) override;
 	};
 }
 #endif // !FLOAT_H

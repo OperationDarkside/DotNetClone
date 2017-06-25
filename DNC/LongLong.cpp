@@ -26,4 +26,16 @@ namespace dnc{
 	LongLong::operator long long(){
 		return this->value;
 	}
+
+	void LongLong::FromString(std::string val) {
+		std::string::size_type sz;
+
+		try {
+			this->value = std::stoll(val, &sz);
+		} catch(const std::invalid_argument& ia) {
+			throw "Couldn't convert std::string to double";
+		} catch(const std::out_of_range& oor) {
+			throw "Out of range error";
+		}
+	}
 }

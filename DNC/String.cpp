@@ -594,4 +594,12 @@ namespace dnc{
 		return this->value;
 	}
 
+	char String::operator[](unsigned int index) {
+		return this->value[index];
+	}
+
+	void String::FromString(std::string val) {
+		this->value = val;
+	}
+
 }

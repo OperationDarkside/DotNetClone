@@ -28,4 +28,16 @@ namespace dnc{
 	ULong::operator unsigned long(){
 		return this->value;
 	}
+
+	void ULong::FromString(std::string val) {
+		std::string::size_type sz;
+
+		try {
+			this->value = std::stoul(val, &sz);
+		} catch(const std::invalid_argument& ia) {
+			throw "Couldn't convert std::string to double";
+		} catch(const std::out_of_range& oor) {
+			throw "Out of range error";
+		}
+	}
 }

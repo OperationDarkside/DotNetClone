@@ -11,6 +11,9 @@ namespace dnc{
 	Object related wrapper for the double type
 	*/
 	class Double: public Object{
+
+		friend class Serializable;
+
 	public:
 		Double();
 		Double(double d);
@@ -24,6 +27,8 @@ namespace dnc{
 
 	private:
 		double value;
+
+		void FromString(std::string val) override;
 	};
 }
 #endif // !DOUBLE_H

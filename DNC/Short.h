@@ -8,6 +8,9 @@
 namespace dnc{
 
 	class Short: public Object{
+
+		friend class Serializable;
+
 	public:
 		Short();
 		Short(short s);
@@ -21,6 +24,8 @@ namespace dnc{
 
 	private:
 		short value;
+
+		void FromString(std::string val) override;
 	};
 }
 #endif // !SHORT_H

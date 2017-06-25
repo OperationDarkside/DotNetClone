@@ -11,6 +11,9 @@ namespace dnc{
 	Object related wrapper for the int type
 	*/
 	class Integer: public Object{
+
+		friend class Serializable;
+
 	public:
 		Integer();
 		Integer(int i);
@@ -24,6 +27,8 @@ namespace dnc{
 		operator int();
 	private:
 		int value;
+
+		void FromString(std::string val) override;
 	};
 
 }

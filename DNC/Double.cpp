@@ -28,4 +28,18 @@ namespace dnc{
 		return this->value;
 	}
 
+	void Double::FromString(std::string val) {
+		std::string::size_type sz;
+
+		try {
+			this->value = std::stod(val, &sz);
+		} catch(const std::invalid_argument& ia) {
+			throw "Couldn't convert std::string to double";
+		} catch(const std::out_of_range& oor) {
+			throw "Out of range error";
+		}
+
+		// this->value = std::atof(val.data());
+	}
+
 }

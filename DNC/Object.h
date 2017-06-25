@@ -11,6 +11,8 @@ namespace dnc{
 	*/
 	class Object{
 
+		friend class Serializable;
+
 	public:
 		Object();
 		virtual ~Object();
@@ -48,6 +50,8 @@ namespace dnc{
 		unsigned long long hashCode = 0;
 
 		void generateHashCode();
+
+		virtual void FromString(std::string val);
 	};
 }
 #endif // !OBJECT_H

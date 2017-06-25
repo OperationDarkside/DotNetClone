@@ -25,4 +25,16 @@ namespace dnc{
 	Short::operator short(){
 		return this->value;
 	}
+
+	void Short::FromString(std::string val) {
+		std::string::size_type sz;
+
+		try {
+			this->value = std::stoi(val, &sz);
+		} catch(const std::invalid_argument& ia) {
+			throw "Couldn't convert std::string to double";
+		} catch(const std::out_of_range& oor) {
+			throw "Out of range error";
+		}
+	}
 }

@@ -16,6 +16,9 @@ namespace dnc{
 	Represents text as a chain of characters. (c++ std::string wrapper)
 	*/
 	class String: public Object{
+
+		friend class Serializable;
+
 	public:
 		/**
 		Creates a new empty String class instance
@@ -386,9 +389,12 @@ namespace dnc{
 		String& operator=(String& str);
 		String& operator=(String&& str);
 		operator std::string();
+		char operator[](unsigned int index);
 
 	private:
 		std::string value;
+
+		void FromString(std::string val) override;
 	};
 
 	template<size_t num>
