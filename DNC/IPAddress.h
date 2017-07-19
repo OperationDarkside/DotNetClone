@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef IPADDRESS_H
+#define IPADDRESS_H
+
 #include "Object.h"
 #include <vector>
 
@@ -30,3 +34,4 @@ namespace dnc{
 
 	}
 }
+#endif

@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef TESTDATACLASS_H
+#define TESTDATACLASS_H
+
 #include "Serializable.h"
 #include "String.h"
 #include "Integer.h"
@@ -31,3 +35,4 @@ namespace dnc{
 	};
 
 }
+#endif

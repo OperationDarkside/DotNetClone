@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef DATAROW_H
+#define DATAROW_H
+
 #include "String.h"
 #include "Boolean.h"
 #include "Short.h"
@@ -334,3 +337,4 @@ namespace dnc{
 		}
 	}
 }
+#endif

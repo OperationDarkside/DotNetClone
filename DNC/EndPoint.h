@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef ENDPOINT_H
+#define ENDPOINT_H
+
 #include "Object.h"
 #include "AddressFamily.h"
 
@@ -22,3 +26,4 @@ namespace dnc{
 		};
 	}
 }
+#endif

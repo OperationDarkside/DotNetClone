@@ -1,7 +1,7 @@
 #include "Serializable.h"
 
 namespace dnc {
-
+	SerializableAttribute::SerializableAttribute(const SerializableAttribute & obj) : name(obj.name), member(obj.member) {}
 	SerializableAttribute::SerializableAttribute(String attrName, Object & member) : name(attrName), member(member) {}
 
 	SerializableAttribute::~SerializableAttribute() {}
@@ -22,11 +22,32 @@ namespace dnc {
 		this->member = mem;
 	}
 
+	SerializableAttribute & SerializableAttribute::operator=(SerializableAttribute & obj) {
+		this->name = obj.name;
+		this->member = obj.member;
+
+		return *this;
+	}
+
+
 	Serializable::Serializable() {}
 
 	Serializable::~Serializable() {}
 
-	String Serializable::ToXml() {
+	String & Serializable::Name() {
+		return this->name;
+	}
+
+	SerializableAttribute & Serializable::Attribute(int index) {
+		return this->attributes[index];
+	}
+
+	size_t Serializable::AttrLen() {
+		return this->attributes.Count();
+	}
+
+
+	/*String Serializable::ToXml() {
 		String res;
 		size_t len;
 		Collections::Generic::List<unsigned long long> childPtrs;
@@ -54,8 +75,10 @@ namespace dnc {
 				res += "</" + attrName + ">";
 			} else {
 				// Step into
+				res += "<" + attrName + " type=\"" + val.GetTypeString() + "\">";
 				childPtrs.Add(child->getHashCode());
 				res += child->ToXml(childPtrs);
+				res += "</" + attrName + ">";
 			}
 		}
 
@@ -97,15 +120,15 @@ namespace dnc {
 					++depth;
 				}
 
-				/*if(i != 0 && tag_name != "") {
+				//if(i != 0 && tag_name != "") {
 
-				}*/
+				//}
 				if(depth < 3) {
 					isTag = true;
 					continue;
 				}
 			} else if(xmlString[i] == '>') {
-				
+
 
 
 				// Standalone tag
@@ -123,7 +146,7 @@ namespace dnc {
 					--depth;
 
 					if(depth < 2) {
-						
+
 						tag = "";
 						continue;
 					}
@@ -145,7 +168,7 @@ namespace dnc {
 			}
 
 		}
-	}
+	}*/
 
 	void Serializable::SetProperty(std::string& propName, std::string& propValue) {
 		size_t len = attributes.Count();
@@ -158,7 +181,7 @@ namespace dnc {
 		}
 	}
 
-	String Serializable::ToXml(Collections::Generic::List<unsigned long long>& _childPtrs) {
+	/*String Serializable::ToXml(Collections::Generic::List<unsigned long long>& _childPtrs) {
 		unsigned long long hash = 0;
 		String res;
 		size_t len;
@@ -192,7 +215,9 @@ namespace dnc {
 				} else {
 					// Call serialize
 					_childPtrs.Add(hash);
+					res += "<" + attrName + " type=\"" + val.GetTypeString() + "\">";
 					res += child->ToXml(_childPtrs);
+					res += "</" + attrName + ">";
 				}
 			}
 		}
@@ -204,5 +229,5 @@ namespace dnc {
 
 	void Serializable::FromString(std::string val) {
 		this->FromXml(String(&val));
-	}
+	}*/
 }

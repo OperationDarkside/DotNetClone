@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef IPENDPOINT_H
+#define IPENDPOINT_H
+
 #include "EndPoint.h"
 #include "IPAddress.h"
 
@@ -26,3 +30,4 @@ namespace dnc{
 		};
 	}
 }
+#endif

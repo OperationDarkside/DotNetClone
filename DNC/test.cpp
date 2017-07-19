@@ -15,6 +15,7 @@
 #include <functional>
 #include <map>
 #include "Dictionary.h"
+#include "XmlSerializer.h"
 
 using namespace dnc;
 using namespace dnc::Data;
@@ -726,6 +727,7 @@ int main() {
 
 	Double ddddd = tttt;
 	//Object& blabla = tttt;
+	dnc::Xml::XmlSerializer serializer;
 
 	TestDataClass* tmp = new TestDataClass();
 
@@ -740,13 +742,14 @@ int main() {
 	testClass.SetField3("blubb");
 	testClass.SetField4(tmp);
 
-	String blubb = testClass.ToXml();
+	String blubb = serializer.Serialize(testClass);
 
 	Console::WriteLine(blubb);
 
 	// Deserialization
 	TestDataClass deserialClass;
-	deserialClass.FromXml(blubb);
+	deserialClass.SetField4(new TestDataClass());
+	deserialClass = serializer.Deserialize<TestDataClass>(blubb);
 
 	// isType
 	Object* tmp_o = new String();

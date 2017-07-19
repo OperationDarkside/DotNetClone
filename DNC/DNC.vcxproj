@@ -177,6 +177,7 @@
     <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="ULong.cpp" />
+    <ClCompile Include="XmlSerializer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddressFamily.h" />
@@ -230,6 +231,7 @@
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="ULong.h" />
+    <ClInclude Include="XmlSerializer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
