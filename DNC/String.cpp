@@ -360,11 +360,11 @@ namespace dnc{
 	}
 
 	String String::substring(unsigned int startIndex){
-		return new String(&this->value.substr(startIndex));
+		return String(&this->value.substr(startIndex));
 	}
 
 	String String::substring(unsigned int startIndex, unsigned int length){
-		return new String(&this->value.substr(startIndex, length));
+		return String(&this->value.substr(startIndex, length));
 	}
 
 	char * String::toCharArray(){

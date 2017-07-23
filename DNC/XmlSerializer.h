@@ -8,10 +8,13 @@
 namespace dnc {
 	namespace Xml {
 
-		class XmlSerializer {
+		class XmlSerializer : public Object {
 		public:
 			XmlSerializer();
 			~XmlSerializer();
+
+			std::string ToString() override;
+			std::string GetTypeString() override;
 
 			template<class T>
 			String Serialize(T& obj);

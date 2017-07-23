@@ -15,6 +15,9 @@ namespace dnc {
 		SerializableAttribute(String attrName, Object& member);
 		~SerializableAttribute();
 
+		std::string ToString() override;
+		std::string GetTypeString() override;
+
 		String AttributeName();
 		void AttributeName(String name);
 
@@ -36,6 +39,8 @@ namespace dnc {
 		Serializable();
 		virtual ~Serializable() = 0;
 
+		std::string ToString() override;
+		std::string GetTypeString() override;
 		//String ToXml();
 		//void FromXml(String& xmlString);
 

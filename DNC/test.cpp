@@ -16,6 +16,7 @@
 #include <map>
 #include "Dictionary.h"
 #include "XmlSerializer.h"
+#include "JsonSerializer.h"
 
 using namespace dnc;
 using namespace dnc::Data;
@@ -728,6 +729,7 @@ int main() {
 	Double ddddd = tttt;
 	//Object& blabla = tttt;
 	dnc::Xml::XmlSerializer serializer;
+	dnc::Json::JsonSerializer jSerializer;
 
 	TestDataClass* tmp = new TestDataClass();
 
@@ -743,6 +745,7 @@ int main() {
 	testClass.SetField4(tmp);
 
 	String blubb = serializer.Serialize(testClass);
+	String jBlubb = jSerializer.Serialize(testClass);
 
 	Console::WriteLine(blubb);
 

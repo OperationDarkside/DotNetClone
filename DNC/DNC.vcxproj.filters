@@ -153,6 +153,9 @@
     <ClCompile Include="XmlSerializer.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="JsonSerializer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -309,6 +312,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="XmlSerializer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonSerializer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,6 +6,14 @@ namespace dnc {
 
 	SerializableAttribute::~SerializableAttribute() {}
 
+	std::string SerializableAttribute::ToString() {
+		return std::string("System.SerializableAttribute");
+	}
+
+	std::string SerializableAttribute::GetTypeString() {
+		return std::string("SerializableAttribute");
+	}
+
 	String SerializableAttribute::AttributeName() {
 		return this->name;
 	}
@@ -33,6 +41,14 @@ namespace dnc {
 	Serializable::Serializable() {}
 
 	Serializable::~Serializable() {}
+
+	std::string Serializable::ToString() {
+		return std::string("System.Serializable");
+	}
+
+	std::string Serializable::GetTypeString() {
+		return std::string("Serializable");
+	}
 
 	String & Serializable::Name() {
 		return this->name;

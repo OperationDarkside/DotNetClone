@@ -150,6 +150,7 @@
     <ClCompile Include="Integer.cpp" />
     <ClCompile Include="IPAddress.cpp" />
     <ClCompile Include="IPEndPoint.cpp" />
+    <ClCompile Include="JsonSerializer.cpp" />
     <ClCompile Include="LingerOption.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Long.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Integer.h" />
     <ClInclude Include="IPAddress.h" />
     <ClInclude Include="IPEndPoint.h" />
+    <ClInclude Include="JsonSerializer.h" />
     <ClInclude Include="LingerOption.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Long.h" />

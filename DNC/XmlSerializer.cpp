@@ -8,6 +8,14 @@ namespace dnc {
 
 		XmlSerializer::~XmlSerializer() {}
 
+		std::string XmlSerializer::ToString() {
+			return std::string("System.Xml.XmlSerializer");
+		}
+
+		std::string XmlSerializer::GetTypeString() {
+			return std::string("XmlSerializer");
+		}
+
 		String XmlSerializer::ToXml(Serializable* obj, Collections::Generic::List<unsigned long long>& _childPtrs) {
 			unsigned long long hash = 0;
 			String res;
