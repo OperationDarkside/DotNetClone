@@ -206,8 +206,9 @@ namespace dnc{
 							break;
 						case enum_field_types::MYSQL_TYPE_LONG:
 						{
-							long l = 0;
-							this->row[i].buffer = (char*)&l;
+							this->buffers[i] = new char[sizeof(int)];
+							//int l = 0;
+							this->row[i].buffer = this->buffers[i];
 						}
 						break;
 						case enum_field_types::MYSQL_TYPE_LONGLONG:

@@ -58,6 +58,18 @@ namespace dnc {
 		return this->attributes[index];
 	}
 
+	SerializableAttribute & Serializable::Attribute(const std::string & name) {
+		size_t len = attributes.Count();
+
+		for(size_t i = 0; i < len; i++) {
+			if(attributes[i].AttributeName().GetStringValue() == name) {
+				return attributes[i];
+			}
+		}
+
+		throw "Attribute not found!";
+	}
+
 	size_t Serializable::AttrLen() {
 		return this->attributes.Count();
 	}

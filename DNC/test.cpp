@@ -12,11 +12,13 @@
 #include <my_global.h>
 #include "Socket.h"
 #include "TestDataClass.h"
+#include "TestSqlClass.h"
 #include <functional>
 #include <map>
 #include "Dictionary.h"
 #include "XmlSerializer.h"
 #include "JsonSerializer.h"
+#include "CsvSerializer.h"
 
 using namespace dnc;
 using namespace dnc::Data;
@@ -634,10 +636,14 @@ int main() {
 
 	con.Open();
 
-	MySqlCommand cmd(String("SELECT * FROM test WHERE ID = ?"), &con);
+	MySqlCommand cmd(String("SELECT * FROM test"), &con);
 	cmd.Parameters().Add(MySqlParameter(MySqlDbTypes::LONG, 3));
 
 	MySqlDataAdapter adapt(cmd);
+
+	MySqlDataReader reader = cmd.ExecuteReader();
+
+	Collections::Generic::List<TestSqlClass> serialized = reader.Deserialize<TestSqlClass>();
 
 	DataTable memTable;
 
@@ -730,6 +736,7 @@ int main() {
 	//Object& blabla = tttt;
 	dnc::Xml::XmlSerializer serializer;
 	dnc::Json::JsonSerializer jSerializer;
+	dnc::CSV::CsvSerializer csvSerializer;
 
 	TestDataClass* tmp = new TestDataClass();
 
@@ -744,6 +751,12 @@ int main() {
 	testClass.SetField3("blubb");
 	testClass.SetField4(tmp);
 
+	TestDataClass testClass1;
+	testClass1.SetField1(42);
+	testClass1.SetField2(1.1);
+	testClass1.SetField3("bla");
+	testClass1.SetField4(tmp);
+
 	String blubb = serializer.Serialize(testClass);
 	String jBlubb = jSerializer.Serialize(testClass);
 
@@ -753,6 +766,13 @@ int main() {
 	TestDataClass deserialClass;
 	deserialClass.SetField4(new TestDataClass());
 	deserialClass = serializer.Deserialize<TestDataClass>(blubb);
+
+	dnc::Collections::Generic::List<TestDataClass> tdList;
+	tdList.Add(*tmp);
+	tdList.Add(testClass);
+	tdList.Add(testClass1);
+
+	String csv = csvSerializer.Serialize(tdList);
 
 	// isType
 	Object* tmp_o = new String();

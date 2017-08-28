@@ -135,6 +135,7 @@
     <ClCompile Include="Boolean.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Convert.cpp" />
+    <ClCompile Include="CsvSerializer.cpp" />
     <ClCompile Include="DataColumn.cpp" />
     <ClCompile Include="DataColumnCollection.cpp" />
     <ClCompile Include="DataRow.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="TcpListener.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="TestDataClass.cpp" />
+    <ClCompile Include="TestSqlClass.cpp" />
     <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="ULong.cpp" />
@@ -185,6 +187,7 @@
     <ClInclude Include="Boolean.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Convert.h" />
+    <ClInclude Include="CsvSerializer.h" />
     <ClInclude Include="DataColumn.h" />
     <ClInclude Include="DataColumnCollection.h" />
     <ClInclude Include="DataRow.h" />
@@ -230,6 +233,7 @@
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpListener.h" />
     <ClInclude Include="TestDataClass.h" />
+    <ClInclude Include="TestSqlClass.h" />
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="ULong.h" />

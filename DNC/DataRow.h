@@ -13,14 +13,15 @@
 #include "Double.h"
 #include "Decimal.h"
 #include "LongLong.h"
+#include <memory>
 
-namespace dnc{
-	namespace Data{
+namespace dnc {
+	namespace Data {
 
 		/**
 		Row Object to a DataTable
 		*/
-		class DataRow: public Object{
+		class DataRow : public Object {
 
 			friend class DataColumnCollection;
 			friend class DataRowCollection;
@@ -196,7 +197,7 @@ namespace dnc{
 			DataRow& operator=(DataRow&& row) noexcept;
 		private:
 			DataColumnCollection* cols;
-			Collections::Generic::List<Object*> items;
+			Collections::Generic::List<std::shared_ptr<Object>> items;
 
 			DataRow();
 			DataRow(DataColumnCollection* columns);
@@ -210,130 +211,171 @@ namespace dnc{
 		};
 
 		template<typename T>
-		inline T DataRow::Field(int columnNr){
+		inline T DataRow::Field(int columnNr) {
 			T* res;
-			Object* o = items[columnNr];
+			Object* o = items[columnNr].get();
 
 			res = dynamic_cast<T*>(o);
 
-			return *res;
+			if(res != nullptr) {
+				return *res;
+			} else {
+				throw "Bad Conversion";
+			}
 		}
+
 		template<>
-		inline bool DataRow::Field<bool>(int columnNr){
-			Object* o = items[columnNr];
+		inline bool DataRow::Field<bool>(int columnNr) {
+			Object* o = items[columnNr].get();
 
 			bool b;
 			Boolean* boo = dynamic_cast<Boolean*>(o);
 
-			b = *boo;
+			if(boo != nullptr) {
+				b = *boo;
+			} else {
+				throw "Bad bool Conversion";
+			}
 
 			return b;
 		}
 		template<>
-		inline short DataRow::Field<short>(int columnNr){
-			Object* o = items[columnNr];
+		inline short DataRow::Field<short>(int columnNr) {
+			Object* o = items[columnNr].get();
 
 			short s;
 			Short* sh = dynamic_cast<Short*>(o);
 
-			s = *sh;
+			if(sh != nullptr) {
+				s = *sh;
+			} else {
+				throw "Bad bool Conversion";
+			}
 
 			return s;
 		}
 		template<>
-		inline int DataRow::Field<int>(int columnNr){
-			Object* o = items[columnNr];
+		inline int DataRow::Field<int>(int columnNr) {
+			Object* o = items[columnNr].get();
 
 			int i;
 			Integer* inte = dynamic_cast<Integer*>(o);
 
-			i = *inte;
+			if(inte != nullptr) {
+				i = *inte;
+			} else {
+				throw "Bad bool Conversion";
+			}
 
 			return i;
 		}
 		template<>
-		inline long DataRow::Field<long>(int columnNr){
-			Object* o = items[columnNr];
+		inline long DataRow::Field<long>(int columnNr) {
+			Object* o = items[columnNr].get();
 
 			long l;
 			Long* lo = dynamic_cast<Long*>(o);
 
-			l = *lo;
+			if(lo != nullptr) {
+				l = *lo;
+			} else {
+				throw "Bad bool Conversion";
+			}
 
 			return l;
 		}
 		template<>
-		inline unsigned long DataRow::Field<unsigned long>(int columnNr){
-			Object* o = items[columnNr];
+		inline unsigned long DataRow::Field<unsigned long>(int columnNr) {
+			Object* o = items[columnNr].get();
 
 			unsigned long l;
 			ULong* ul = dynamic_cast<ULong*>(o);
 
-			l = *ul;
+			if(ul != nullptr) {
+				l = *ul;
+			} else {
+				throw "Bad bool Conversion";
+			}
 
 			return l;
 		}
 		template<>
-		inline long long DataRow::Field<long long>(int columnNr){
-			Object* o = items[columnNr];
+		inline long long DataRow::Field<long long>(int columnNr) {
+			Object* o = items[columnNr].get();
 
 			long long ll;
 			LongLong* llo = dynamic_cast<LongLong*>(o);
 
-			ll = *llo;
+			if(llo != nullptr) {
+				ll = *llo;
+			} else {
+				throw "Bad bool Conversion";
+			}
 
 			return ll;
 		}
 		template<>
-		inline float DataRow::Field<float>(int columnNr){
-			Object* o = items[columnNr];
+		inline float DataRow::Field<float>(int columnNr) {
+			Object* o = items[columnNr].get();
 
 			float f;
 			Float* flo = dynamic_cast<Float*>(o);
 
-			f = *flo;
+			if(flo != nullptr) {
+				f = *flo;
+			} else {
+				throw "Bad bool Conversion";
+			}
 
 			return f;
 		}
 		template<>
-		inline double DataRow::Field<double>(int columnNr){
-			Object* o = items[columnNr];
+		inline double DataRow::Field<double>(int columnNr) {
+			Object* o = items[columnNr].get();
 
 			double d;
 			Double* dob = dynamic_cast<Double*>(o);
 
-			d = *dob;
+			if(dob != nullptr) {
+				d = *dob;
+			} else {
+				throw "Bad bool Conversion";
+			}
 
 			return d;
 		}
 		template<>
-		inline long double DataRow::Field<long double>(int columnNr){
-			Object* o = items[columnNr];
+		inline long double DataRow::Field<long double>(int columnNr) {
+			Object* o = items[columnNr].get();
 
 			double d;
 			Decimal* dob = dynamic_cast<Decimal*>(o);
 
-			d = *dob;
+			if(dob != nullptr) {
+				d = *dob;
+			} else {
+				throw "Bad bool Conversion";
+			}
 
 			return d;
 		}
 
 		template<typename T>
-		inline void DataRow::SetField(int columnNr, T& value){
-			T* o = new T(value);
+		inline void DataRow::SetField(int columnNr, T& value) {
+			static_assert(std::is_base_of<Object, T>::value, "T is not an Object");
 
-			if(columnNr >= this->cols->Count()){
+			if(columnNr >= this->cols->Count()) {
 				throw "Column Nr out of Range!";
 				return;
 			}
 
 			DataColumn col = (*this->cols)[columnNr];
-			if(!col.checkType(Type::getType<T>(value))){
+			if(!col.checkType(Type::getType<T>(value))) {
 				throw "Type mismatch!";
 				return;
 			}
 
-			this->items[columnNr] = o;
+			this->items[columnNr].reset(new T(value));
 		}
 	}
 }

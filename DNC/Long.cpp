@@ -16,7 +16,7 @@ namespace dnc{
 		return std::string("Long");
 	}
 
-	Long Long::operator=(long l){
+	Long& Long::operator=(long l){
 		this->value = l;
 
 		return *this;

@@ -156,6 +156,12 @@
     <ClCompile Include="JsonSerializer.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="CsvSerializer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSqlClass.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -315,6 +321,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="JsonSerializer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CsvSerializer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSqlClass.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

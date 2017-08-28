@@ -46,6 +46,7 @@ namespace dnc {
 
 		String& Name();
 		SerializableAttribute& Attribute(int index);
+		SerializableAttribute& Attribute(const std::string& name);
 		size_t AttrLen();
 
 		void SetProperty(std::string& propName, std::string& propValue);

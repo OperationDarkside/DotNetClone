@@ -19,7 +19,7 @@ namespace dnc{
 		std::string ToString() override;
 		std::string GetTypeString() override;
 
-		Long operator=(long l);
+		Long& operator=(long l);
 		operator long();
 	private:
 		long value;

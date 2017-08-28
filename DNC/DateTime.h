@@ -77,70 +77,70 @@ namespace dnc{
 		@param span TimeSpan to be added
 		@return This instance with the added TimeSpan
 		*/
-		DateTime add(TimeSpan* span);
+		DateTime& add(TimeSpan* span);
 		/**
 		Adds the given days to this instance's timepoint
 
 		@param days Number of days to be added
 		@return This instance with the added days
 		*/
-		DateTime addDays(long long days);
+		DateTime& addDays(long long days);
 		/**
 		Adds the given hours to this instance's timepoint
 
 		@param hours Number of hours to be added
 		@return This instance with the added hours
 		*/
-		DateTime addHours(long long hours);
+		DateTime& addHours(long long hours);
 		/**
 		Adds the given microsedonds to this instance's timepoint
 
 		@param microseconds Number of microseconds to be added
 		@return This instance with the added microseconds
 		*/
-		DateTime addMicroseconds(long long microseconds);
+		DateTime& addMicroseconds(long long microseconds);
 		/**
 		Adds the given milliseconds to this instance's timepoint
 
 		@param milliseconds Number of milliseconds to be added
 		@return This instance with the added milliseconds
 		*/
-		DateTime addMilliseconds(long long milliseconds);
+		DateTime& addMilliseconds(long long milliseconds);
 		/**
 		Adds the given minutes to this instance's timepoint
 
 		@param minutes Number of minutes to be added
 		@return This instance with the added minutes
 		*/
-		DateTime addMinutes(long long minutes);
+		DateTime& addMinutes(long long minutes);
 		/**
 		Adds the given months to this instance's timepoint
 
 		@param months Number of months to be added
 		@return This instance with the added months
 		*/
-		DateTime addMonths(long long months);
+		DateTime& addMonths(long long months);
 		/**
 		Adds the given seconds to this instance's timepoint
 
 		@param seconds Number of seconds to be added
 		@return This instance with the added seconds
 		*/
-		DateTime addSeconds(long long seconds);
+		DateTime& addSeconds(long long seconds);
 		/**
 		Adds the given ticks to this instance's timepoint (might change)
 
 		@param microseconds Number of microseconds to be added
 		@return This instance with the added microseconds
 		*/
-		DateTime addTicks(long long microseconds);
+		DateTime& addTicks(long long microseconds);
 		/**
 		Adds the given years to this instance's timepoint
 
 		@param years Number of years to be added
 		@return This instance with the added years
 		*/
-		DateTime addYears(long years);
+		DateTime& addYears(long years);
 		/**
 		Compares the given DateTime instance with this instance
 
