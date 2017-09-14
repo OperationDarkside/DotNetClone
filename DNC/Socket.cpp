@@ -139,7 +139,7 @@ namespace dnc{
 				memset(&this->addr, 0, sizeof(SOCKADDR_IN)); // zuerst alles auf 0 setzten
 				this->addr.sin_family = this->addressFamily;
 				this->addr.sin_port = htons(port); // wir verwenden mal port 12345
-				this->addr.sin_addr.s_addr = inet_addr(host.toCharArray()); // zielrechner ist unser eigener
+				this->addr.sin_addr.s_addr = inet_addr(host.ToCharArray()); // zielrechner ist unser eigener
 
 				rc = connect(sock, (SOCKADDR*)&addr, sizeof(SOCKADDR));
 				if(rc == SOCKET_ERROR){

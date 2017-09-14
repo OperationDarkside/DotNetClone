@@ -48,30 +48,30 @@ namespace dnc{
 					throw "Connection string is empty";
 				}
 
-				conKeyValues = conStr.split(';');
+				conKeyValues = conStr.Split(';');
 
 				if(conKeyValues.Count() != 4){
 					throw "Not enough parameter in the connection string";
 				}
 
-				address = conKeyValues[0].substring(7);
-				indexColon = address.indexOf(':');
+				address = conKeyValues[0].Substring(7);
+				indexColon = address.IndexOf(':');
 
 				if(indexColon == -1){
 					port = 3306;
 				} else{
-					portStr = address.substring(indexColon + 1, address.length() - indexColon);
+					portStr = address.Substring(indexColon + 1, address.Length() - indexColon);
 					port = Convert::toInt(portStr);
 				}
 
-				host = address.substring(0, indexColon);
-				db = conKeyValues[1].substring(9);
-				uname = conKeyValues[2].substring(4);
-				pw = conKeyValues[3].substring(9);
+				host = address.Substring(0, indexColon);
+				db = conKeyValues[1].Substring(9);
+				uname = conKeyValues[2].Substring(4);
+				pw = conKeyValues[3].Substring(9);
 
 				this->connection = mysql_init(NULL);
 
-				this->connection = mysql_real_connect(this->connection, host.toCharArray(), uname.toCharArray(), pw.toCharArray(), db.toCharArray(), port, NULL, 0);
+				this->connection = mysql_real_connect(this->connection, host.ToCharArray(), uname.ToCharArray(), pw.ToCharArray(), db.ToCharArray(), port, NULL, 0);
 
 				if(!this->connection){
 					std::cerr << mysql_error(this->connection);

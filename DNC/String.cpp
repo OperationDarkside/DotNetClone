@@ -29,7 +29,7 @@ namespace dnc{
 
 	String::~String(){}
 
-	String String::clone(){
+	String String::Clone(){
 		return String(&this->value);
 	}
 
@@ -37,12 +37,12 @@ namespace dnc{
 		return value;
 	}
 
-	int String::compareTo(String * str){
+	int String::CompareTo(String * str){
 		int res = this->value.compare(str->value);
 		return res;
 	}
 
-	bool String::contains(String str){
+	bool String::Contains(String str){
 		size_t pos = value.find(str.value);
 
 		if(pos != std::string::npos){
@@ -52,12 +52,12 @@ namespace dnc{
 		}
 	}
 
-	void String::copyTo(unsigned int sourceIndex, String * destination, unsigned int destinationIndex, unsigned int count){
+	void String::CopyTo(unsigned int sourceIndex, String * destination, unsigned int destinationIndex, unsigned int count){
 		std::string buf = this->value.substr(sourceIndex, count);
 		destination->value.insert(destinationIndex, buf);
 	}
 
-	bool String::endsWith(String * str){
+	bool String::EndsWith(String * str){
 		size_t lenEnding = 0;
 		size_t lenValue = 0;
 
@@ -77,7 +77,7 @@ namespace dnc{
 		return false;
 	}
 
-	unsigned int String::indexOf(char c){
+	unsigned int String::IndexOf(char c){
 		size_t found = 0;
 
 		found = this->value.find(c);
@@ -89,7 +89,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::indexOf(char c, unsigned int startIndex){
+	unsigned int String::IndexOf(char c, unsigned int startIndex){
 		size_t found = 0;
 
 		found = this->value.find(c, startIndex);
@@ -101,7 +101,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::indexOf(char c, unsigned int startIndex, unsigned int count){
+	unsigned int String::IndexOf(char c, unsigned int startIndex, unsigned int count){
 		size_t found = 0;
 
 		found = this->value.find(c, startIndex);
@@ -115,7 +115,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::indexOf(String * str){
+	unsigned int String::IndexOf(String * str){
 		size_t found = 0;
 
 		found = this->value.find(str->value);
@@ -127,7 +127,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::indexOf(String * str, unsigned int startIndex){
+	unsigned int String::IndexOf(String * str, unsigned int startIndex){
 		size_t found = 0;
 
 		found = this->value.find(str->value, startIndex);
@@ -139,7 +139,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::indexOf(String * str, unsigned int startIndex, unsigned int count){
+	unsigned int String::IndexOf(String * str, unsigned int startIndex, unsigned int count){
 		size_t found = 0;
 
 		found = this->value.find(str->value, startIndex);
@@ -153,7 +153,7 @@ namespace dnc{
 		return found;
 	}
 
-	String String::insert(unsigned int startIndex, String * str){
+	String String::Insert(unsigned int startIndex, String * str){
 		this->value.insert(startIndex, str->value);
 		return this;
 	}
@@ -165,16 +165,16 @@ namespace dnc{
 
 		tmp = vals.Vector();
 
-		std::copy(tmp.begin(), tmp.end(), std::ostream_iterator<std::string>(s, separator.toCharArray()));
+		std::copy(tmp.begin(), tmp.end(), std::ostream_iterator<std::string>(s, separator.ToCharArray()));
 
 		res = s.str();
 
-		res = res.substring(0, res.length() - separator.length());
+		res = res.Substring(0, res.Length() - separator.Length());
 
 		return res;
 	}
 
-	unsigned int String::lastIndexOf(char c){
+	unsigned int String::LastIndexOf(char c){
 		size_t found = this->value.find_last_of(c);
 		if(found == std::string::npos){
 			return -1;
@@ -183,7 +183,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::lastIndexOf(char c, unsigned int startIndex){
+	unsigned int String::LastIndexOf(char c, unsigned int startIndex){
 		size_t found = this->value.find_last_of(c, startIndex);
 		if(found == std::string::npos){
 			return -1;
@@ -192,7 +192,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::lastIndexOf(char c, unsigned int startIndex, unsigned int count){
+	unsigned int String::LastIndexOf(char c, unsigned int startIndex, unsigned int count){
 		size_t found = this->value.find_last_of(new char[1]{c}, startIndex, count);
 		if(found == std::string::npos){
 			return -1;
@@ -201,7 +201,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::lastIndexOf(String * str){
+	unsigned int String::LastIndexOf(String * str){
 		size_t found = this->value.rfind(str->value);
 		if(found == std::string::npos){
 			return -1;
@@ -210,7 +210,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::lastIndexOf(String * str, unsigned int startIndex){
+	unsigned int String::LastIndexOf(String * str, unsigned int startIndex){
 		size_t found = this->value.rfind(str->value, startIndex);
 		if(found == std::string::npos){
 			return -1;
@@ -219,7 +219,7 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::lastIndexOf(String * str, unsigned int startIndex, unsigned int count){
+	unsigned int String::LastIndexOf(String * str, unsigned int startIndex, unsigned int count){
 		size_t found = this->value.rfind(str->value, startIndex);
 		if(found == std::string::npos){
 			return -1;
@@ -231,11 +231,11 @@ namespace dnc{
 		return found;
 	}
 
-	unsigned int String::length(){
+	unsigned int String::Length(){
 		return this->value.length();
 	}
 
-	String String::padLeft(int totalWidth){
+	String String::PadLeft(int totalWidth){
 		int len = 0;
 
 		len = this->value.size();
@@ -247,7 +247,7 @@ namespace dnc{
 		return this;
 	}
 
-	String String::padLeft(int totalWidth, char paddingChar){
+	String String::PadLeft(int totalWidth, char paddingChar){
 		int len = 0;
 
 		len = this->value.size();
@@ -259,7 +259,7 @@ namespace dnc{
 		return this;
 	}
 
-	String String::padRight(int totalWidth){
+	String String::PadRight(int totalWidth){
 		int len = 0;
 
 		len = this->value.size();
@@ -271,7 +271,7 @@ namespace dnc{
 		return this;
 	}
 
-	String String::padRight(int totalWidth, char paddingChar){
+	String String::PadRight(int totalWidth, char paddingChar){
 		int len = 0;
 
 		len = this->value.size();
@@ -283,25 +283,25 @@ namespace dnc{
 		return this;
 	}
 
-	String String::remove(unsigned int startIndex){
+	String String::Remove(unsigned int startIndex){
 		this->value.erase(startIndex);
 
 		return this;
 	}
 
-	String String::remove(unsigned int startIndex, unsigned int count){
+	String String::Remove(unsigned int startIndex, unsigned int count){
 		this->value.erase(startIndex, count);
 
 		return this;
 	}
 
-	String String::replace(char oldChar, char newChar){
+	String String::Replace(char oldChar, char newChar){
 		std::replace(this->value.begin(), this->value.end(), oldChar, newChar);
 
 		return this;
 	}
 
-	String String::replace(String * oldString, String * newString){
+	String String::Replace(String * oldString, String * newString){
 		size_t startPos = 0;
 
 		while((startPos = this->value.find(oldString->value, startPos)) != std::string::npos){
@@ -313,7 +313,7 @@ namespace dnc{
 		return this;
 	}
 
-	Collections::Generic::List<String> String::split(char separator){
+	Collections::Generic::List<String> String::Split(char separator){
 		std::string str;
 		std::stringstream ss;
 		Collections::Generic::List<String> res;
@@ -329,7 +329,7 @@ namespace dnc{
 		return res;
 	}
 
-	Collections::Generic::List<String> String::split(String separator){
+	Collections::Generic::List<String> String::Split(String separator){
 		size_t currentPos = 0;
 		size_t oldPos = 0;
 		size_t len = 0;
@@ -351,7 +351,7 @@ namespace dnc{
 		return res;
 	}
 
-	bool String::startsWith(String str){
+	bool String::StartsWith(String str){
 		if(this->value.compare(0, str.value.size(), str.value) == 0){
 			return true;
 		} else{
@@ -359,15 +359,15 @@ namespace dnc{
 		}
 	}
 
-	String String::substring(unsigned int startIndex){
+	String String::Substring(unsigned int startIndex){
 		return String(&this->value.substr(startIndex));
 	}
 
-	String String::substring(unsigned int startIndex, unsigned int length){
+	String String::Substring(unsigned int startIndex, unsigned int length){
 		return String(&this->value.substr(startIndex, length));
 	}
 
-	char * String::toCharArray(){
+	char * String::ToCharArray(){
 		size_t len = 0;
 		char* target;
 
@@ -383,7 +383,7 @@ namespace dnc{
 		return target;
 	}
 
-	char * String::toCharArray(unsigned int startIndex, unsigned int length){
+	char * String::ToCharArray(unsigned int startIndex, unsigned int length){
 		char* target;
 		std::string buf;
 
@@ -399,7 +399,7 @@ namespace dnc{
 		return target;
 	}
 
-	String String::toLower(){
+	String String::ToLower(){
 		std::locale loc;
 		String target;
 
@@ -421,7 +421,7 @@ namespace dnc{
 		return res;
 	}
 
-	String String::toUpper(){
+	String String::ToUpper(){
 		std::locale loc;
 		String target;
 
@@ -433,7 +433,7 @@ namespace dnc{
 		return target;
 	}
 
-	String String::trim(){
+	String String::Trim(){
 		size_t first = 0;
 		size_t last = 0;
 
@@ -446,7 +446,7 @@ namespace dnc{
 		return this;
 	}
 
-	String String::trimEnd(){
+	String String::TrimEnd(){
 		size_t last = 0;
 
 		last = this->value.find_last_not_of(' ');
@@ -454,7 +454,7 @@ namespace dnc{
 		return this;
 	}
 
-	String String::trimStart(){
+	String String::TrimStart(){
 		size_t first = 0;
 
 		first = this->value.find_first_not_of(' ');

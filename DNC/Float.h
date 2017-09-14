@@ -25,7 +25,7 @@ namespace dnc{
 		Float operator=(float f);
 		operator float();
 	private:
-		float value;
+		float value = 0;
 
 		void FromString(std::string val) override;
 	};

@@ -82,7 +82,7 @@ namespace dnc {
 			bool isTag = false;
 			bool isClosingTag = false;
 			unsigned short depth = 0;
-			size_t len = xmlString.length();
+			size_t len = xmlString.Length();
 			std::string tag;
 			std::string tag_name = "";
 			std::string val = "";

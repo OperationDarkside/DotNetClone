@@ -686,13 +686,13 @@ namespace dnc{
 
 				time = *((MYSQL_TIME*)this->row[i].buffer);
 
-				res.addYears(time.year);
-				res.addMonths(time.month);
-				res.addDays(time.day);
-				res.addHours(time.hour);
-				res.addMinutes(time.minute);
-				res.addSeconds(time.second);
-				res.addMicroseconds(time.second_part);
+				res.AddYears(time.year);
+				res.AddMonths(time.month);
+				res.AddDays(time.day);
+				res.AddHours(time.hour);
+				res.AddMinutes(time.minute);
+				res.AddSeconds(time.second);
+				res.AddMicroseconds(time.second_part);
 
 				return res;
 			}

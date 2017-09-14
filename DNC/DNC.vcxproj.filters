@@ -162,6 +162,9 @@
     <ClCompile Include="TestSqlClass.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="TestString.cpp">
+      <Filter>Headerdateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -327,6 +330,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TestSqlClass.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TestDateTime.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

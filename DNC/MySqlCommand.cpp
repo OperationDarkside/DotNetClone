@@ -48,7 +48,7 @@ namespace dnc{
 				myCon = dynamic_cast<MySqlConnection*>(con);
 
 				if(this->parameters.Count() > 0){
-					query_res = mysql_query(myCon->connection, cmd.toCharArray());
+					query_res = mysql_query(myCon->connection, cmd.ToCharArray());
 
 					if(query_res){
 						std::cerr << mysql_error(myCon->connection);
@@ -63,7 +63,7 @@ namespace dnc{
 					stmt = mysql_stmt_init(myCon->connection);
 
 					// Prepare
-					cmdP = cmd.toCharArray();
+					cmdP = cmd.ToCharArray();
 					mysql_stmt_prepare(stmt, cmdP, strlen(cmdP));
 					mysql_stmt_bind_param(stmt, this->bindParameters());
 					if(mysql_stmt_execute(stmt)){
@@ -119,7 +119,7 @@ namespace dnc{
 				stmt = mysql_stmt_init(myCon->connection);
 
 				// Prepare
-				cmdP = cmd.toCharArray();
+				cmdP = cmd.ToCharArray();
 				mysql_stmt_prepare(stmt, cmdP, strlen(cmdP));
 
 				// Param count

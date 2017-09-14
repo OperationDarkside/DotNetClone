@@ -60,7 +60,7 @@ namespace dnc{
 
 		@return String with the same value
 		*/
-		String clone();
+		String Clone();
 		/**
 		Returns the C++ string value of this instance
 
@@ -73,14 +73,14 @@ namespace dnc{
 		@param str String pointer to compare to this instance
 		@return < 0, == 0 or > 0
 		*/
-		int compareTo(String* str);
+		int CompareTo(String* str);
 		/**
 		Checks if this Instance contains the given String str
 
 		@param str String pointer to check
 		@return true if this instance contains str
 		*/
-		bool contains(String str);
+		bool Contains(String str);
 		/**
 		Copys a substring of this instance to a destination String at a specific position
 
@@ -89,21 +89,21 @@ namespace dnc{
 		@param destinationIndex Position where to write to in the destination String
 		@param count How many characters to copy
 		*/
-		void copyTo(unsigned int sourceIndex, String* destination, unsigned int destinationIndex, unsigned int count);
+		void CopyTo(unsigned int sourceIndex, String* destination, unsigned int destinationIndex, unsigned int count);
 		/**
 		Checks if this Instance ends with the given String str
 
 		@param str String pointer to check
 		@return true if this instance ends with str
 		*/
-		bool endsWith(String* str);
+		bool EndsWith(String* str);
 		/**
 		Return the position of the occurence of the character c
 
 		@param c character to find
 		@return Position where it was found
 		*/
-		unsigned int indexOf(char c);
+		unsigned int IndexOf(char c);
 		/**
 		Return the position of the occurence of the character c starting at a specific position
 
@@ -111,7 +111,7 @@ namespace dnc{
 		@param startIndex starting at this position
 		@return Position where it was found
 		*/
-		unsigned int indexOf(char c, unsigned int startIndex);
+		unsigned int IndexOf(char c, unsigned int startIndex);
 		/**
 		Return the position of the occurence of the character c starting at a specific position for a limitied number of characters
 
@@ -120,14 +120,14 @@ namespace dnc{
 		@param count number of chars to search
 		@return Position where it was found
 		*/
-		unsigned int indexOf(char c, unsigned int startIndex, unsigned int count);
+		unsigned int IndexOf(char c, unsigned int startIndex, unsigned int count);
 		/**
 		Return the position of the occurence of the String str
 
 		@param str String to find
 		@return Position where it was found
 		*/
-		unsigned int indexOf(String* str);
+		unsigned int IndexOf(String* str);
 		/**
 		Return the position of the occurence of the String str starting at a specific position
 
@@ -135,7 +135,7 @@ namespace dnc{
 		@param startIndex starting at this position
 		@return Position where it was found
 		*/
-		unsigned int indexOf(String* str, unsigned int startIndex);
+		unsigned int IndexOf(String* str, unsigned int startIndex);
 		/**
 		Return the position of the occurence of the String str starting at a specific position for a limitied number of characters
 
@@ -144,7 +144,7 @@ namespace dnc{
 		@param count number of chars to search
 		@return Position where it was found
 		*/
-		unsigned int indexOf(String* str, unsigned int startIndex, unsigned int count);
+		unsigned int IndexOf(String* str, unsigned int startIndex, unsigned int count);
 		/**
 		Return this instance with the given String attached
 
@@ -152,7 +152,7 @@ namespace dnc{
 		@param str String to inster
 		@return this instance with str attached
 		*/
-		String insert(unsigned int startIndex, String* str);
+		String Insert(unsigned int startIndex, String* str);
 
 		/**
 		Returns a String consisting of the collections contents separated by the separator
@@ -168,7 +168,7 @@ namespace dnc{
 		@param c character to find
 		@return Position where it was found
 		*/
-		unsigned int lastIndexOf(char c);
+		unsigned int LastIndexOf(char c);
 		/**
 		Return the position of the last occurence of the character c starting at a specific position
 
@@ -176,7 +176,7 @@ namespace dnc{
 		@param startIndex starting at this position
 		@return Position where it was found
 		*/
-		unsigned int lastIndexOf(char c, unsigned int startIndex);
+		unsigned int LastIndexOf(char c, unsigned int startIndex);
 		/**
 		Return the position of the last occurence of the String str starting at a specific position for a limitied number of characters
 
@@ -185,14 +185,14 @@ namespace dnc{
 		@param count number of chars to search
 		@return Position where it was found
 		*/
-		unsigned int lastIndexOf(char c, unsigned int startIndex, unsigned int count);
+		unsigned int LastIndexOf(char c, unsigned int startIndex, unsigned int count);
 		/**
 		Return the position of the last occurence of the String str
 
 		@param str String to find
 		@return Position where it was found
 		*/
-		unsigned int lastIndexOf(String* str);
+		unsigned int LastIndexOf(String* str);
 		/**
 		Return the position of the last occurence of the String str starting at a specific position
 
@@ -200,7 +200,7 @@ namespace dnc{
 		@param startIndex starting at this position
 		@return Position where it was found
 		*/
-		unsigned int lastIndexOf(String* str, unsigned int startIndex);
+		unsigned int LastIndexOf(String* str, unsigned int startIndex);
 		/**
 		Return the position of the last occurence of the String str starting at a specific position for a limitied number of characters
 
@@ -209,20 +209,20 @@ namespace dnc{
 		@param count number of chars to search
 		@return Position where it was found
 		*/
-		unsigned int lastIndexOf(String* str, unsigned int startIndex, unsigned int count);
+		unsigned int LastIndexOf(String* str, unsigned int startIndex, unsigned int count);
 		/**
 		Character count of the current instance
 
 		@return character count
 		*/
-		unsigned int length();
+		unsigned int Length();
 		/**
 		Fills this String with spaces starting from the beginning to reach the given width
 
 		@param totalWidth target width
 		@return this instance with added spaces
 		*/
-		String padLeft(int totalWidth);
+		String PadLeft(int totalWidth);
 		/**
 		Fills this String with padding characters starting from the beginning to reach the given width
 
@@ -230,14 +230,14 @@ namespace dnc{
 		@param paddingChar character to insert
 		@return this instance with added spaces
 		*/
-		String padLeft(int totalWidth, char paddingChar);
+		String PadLeft(int totalWidth, char paddingChar);
 		/**
 		Fills this String with spaces starting at the end to reach the given width
 
 		@param totalWidth target width
 		@return this instance with added characters
 		*/
-		String padRight(int totalWidth);
+		String PadRight(int totalWidth);
 		/**
 		Fills this String with padding characters starting at the end to reach the given width
 
@@ -245,14 +245,14 @@ namespace dnc{
 		@param paddingChar character to insert
 		@return this instance with added characters
 		*/
-		String padRight(int totalWidth, char paddingChar);
+		String PadRight(int totalWidth, char paddingChar);
 		/**
 		Removes characters starting at the startIndex
 
 		@param startIndex position where to start removing
 		@return this instance with removed characters
 		*/
-		String remove(unsigned int startIndex);
+		String Remove(unsigned int startIndex);
 		/**
 		Removes characters starting at the startIndex for a limited number
 
@@ -260,7 +260,7 @@ namespace dnc{
 		@param count how many characters to remove
 		@return this instance with removed characters
 		*/
-		String remove(unsigned int startIndex, unsigned int count);
+		String Remove(unsigned int startIndex, unsigned int count);
 		/**
 		Replaces all old characters with new characters
 
@@ -268,7 +268,7 @@ namespace dnc{
 		@param newChar character to insert instead
 		@return this instance with replaced characters
 		*/
-		String replace(char oldChar, char newChar);
+		String Replace(char oldChar, char newChar);
 		/**
 		Replaces all old Strings with new String
 
@@ -276,35 +276,35 @@ namespace dnc{
 		@param newString String to insert instead
 		@return this instance with replaced Strings
 		*/
-		String replace(String* oldString, String* newString);
+		String Replace(String* oldString, String* newString);
 		/**
 		Splits this instance String into a list(vector) with a character as separator
 
 		@param separator The character that splits 2 Strings
 		@return vector of Strings
 		*/
-		Collections::Generic::List<String> split(char separator);
+		Collections::Generic::List<String> Split(char separator);
 		/**
 		Splits this instance String into a list(vector) with a String as separator
 
 		@param separator The String that splits 2 Strings
 		@return vector of Strings
 		*/
-		Collections::Generic::List<String> split(String separator);
+		Collections::Generic::List<String> Split(String separator);
 		/**
 		Checks if this Instance starts with the given String str
 
 		@param str String pointer to check
 		@return true if this instance starts with str
 		*/
-		bool startsWith(String str);
+		bool StartsWith(String str);
 		/**
 		Returns the characters of this instance as a String between the given position and the end
 
 		@param startIndex Position in the current instance where to start writing the substring
 		@return String that contains the substring
 		*/
-		String substring(unsigned int startIndex);
+		String Substring(unsigned int startIndex);
 		/**
 		Returns the characters of this instance as a String between the given position and length
 
@@ -312,13 +312,13 @@ namespace dnc{
 		@param length Number of characters to copy
 		@return String that contains the substring
 		*/
-		String substring(unsigned int startIndex, unsigned int length);
+		String Substring(unsigned int startIndex, unsigned int length);
 		/**
 		Returns the characters of this instance as a c-string
 
 		@return char pointer that contains the Strings characters
 		*/
-		char* toCharArray();
+		char* ToCharArray();
 		/**
 		Returns the characters of this instance as a c-string limited by a startIndex and length
 
@@ -326,13 +326,13 @@ namespace dnc{
 		@param length Number of characters to copy
 		@return char pointer that contains the Sub-Strings characters
 		*/
-		char* toCharArray(unsigned int startIndex, unsigned int length);
+		char* ToCharArray(unsigned int startIndex, unsigned int length);
 		/**
 		Returns the characters of this String as lowercase
 
 		@return String of lowercase characters
 		*/
-		String toLower();
+		String ToLower();
 		/**
 		Returns the c++ string representation of this instance
 
@@ -345,25 +345,25 @@ namespace dnc{
 
 		@return String of uppercase characters
 		*/
-		String toUpper();
+		String ToUpper();
 		/**
 		Returns this instance with the spaces cut off at the beginning and end
 
 		@return Trimmed String
 		*/
-		String trim();
+		String Trim();
 		/**
 		Returns this instance with the spaces cut off at the end
 
 		@return Trimmed String
 		*/
-		String trimEnd();
+		String TrimEnd();
 		/**
 		Returns this instance with the spaces cut off at the beginning
 
 		@return Trimmed String
 		*/
-		String trimStart();
+		String TrimStart();
 
 		friend String operator+(String str1, String str2);
 		friend String operator+(String& str, const char* str2);

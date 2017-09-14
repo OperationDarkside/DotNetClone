@@ -76,7 +76,7 @@ namespace dnc {
 			MySqlParameter::MySqlParameter(MySqlDbTypes _type, String & value) : t(Type::getType<String>(String())) {
 				memset(&this->param, 0, sizeof(this->param));
 				this->param.buffer_type = static_cast<enum_field_types>(_type);
-				char* val = value.toCharArray();
+				char* val = value.ToCharArray();
 				this->param.buffer = val;
 				unsigned long len = strlen(val);
 				this->param.length = &len;

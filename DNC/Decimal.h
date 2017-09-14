@@ -22,7 +22,7 @@ namespace dnc{
 		Decimal operator=(long double ld);
 		operator long double();
 	private:
-		long double value;
+		long double value = 0;
 	};
 }
 #endif // !DECIMAL_H

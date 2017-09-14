@@ -22,7 +22,7 @@ namespace dnc{
 		LongLong operator=(long long ll);
 		operator long long();
 	private:
-		long long value;
+		long long value = 0;
 
 		void FromString(std::string val) override;
 	};

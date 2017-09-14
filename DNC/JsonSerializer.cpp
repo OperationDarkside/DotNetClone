@@ -64,7 +64,7 @@ namespace dnc {
 				}
 			}
 
-			res = res.substring(0, res.length() - 1);
+			res = res.Substring(0, res.Length() - 1);
 
 			res += "}}";
 

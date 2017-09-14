@@ -23,7 +23,7 @@ namespace dnc{
 		operator short();
 
 	private:
-		short value;
+		short value = 0;
 
 		void FromString(std::string val) override;
 	};

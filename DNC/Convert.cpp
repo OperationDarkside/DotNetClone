@@ -56,7 +56,7 @@ namespace dnc{
 	}
 
 	bool Convert::toBoolean(String & value){
-		String* tmp = &value.toLower();
+		String* tmp = &value.ToLower();
 		if(*tmp == "true"){
 			return true;
 		} else if(*tmp == "false"){
@@ -82,9 +82,9 @@ namespace dnc{
 		DateTime* dt;
 
 		try{
-			tmp = value.split('T');
-			dates = tmp[0].split('-');
-			times = tmp[1].split(':');
+			tmp = value.Split('T');
+			dates = tmp[0].Split('-');
+			times = tmp[1].Split(':');
 
 			if(dates.Count() == 3 && times.Count() == 4){
 				year = std::stoi(dates[0].GetStringValue().c_str());

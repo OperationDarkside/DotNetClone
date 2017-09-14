@@ -77,109 +77,109 @@ namespace dnc{
 		@param span TimeSpan to be added
 		@return This instance with the added TimeSpan
 		*/
-		DateTime& add(TimeSpan* span);
+		DateTime& Add(TimeSpan* span);
 		/**
 		Adds the given days to this instance's timepoint
 
 		@param days Number of days to be added
 		@return This instance with the added days
 		*/
-		DateTime& addDays(long long days);
+		DateTime& AddDays(long long days);
 		/**
 		Adds the given hours to this instance's timepoint
 
 		@param hours Number of hours to be added
 		@return This instance with the added hours
 		*/
-		DateTime& addHours(long long hours);
+		DateTime& AddHours(long long hours);
 		/**
 		Adds the given microsedonds to this instance's timepoint
 
 		@param microseconds Number of microseconds to be added
 		@return This instance with the added microseconds
 		*/
-		DateTime& addMicroseconds(long long microseconds);
+		DateTime& AddMicroseconds(long long microseconds);
 		/**
 		Adds the given milliseconds to this instance's timepoint
 
 		@param milliseconds Number of milliseconds to be added
 		@return This instance with the added milliseconds
 		*/
-		DateTime& addMilliseconds(long long milliseconds);
+		DateTime& AddMilliseconds(long long milliseconds);
 		/**
 		Adds the given minutes to this instance's timepoint
 
 		@param minutes Number of minutes to be added
 		@return This instance with the added minutes
 		*/
-		DateTime& addMinutes(long long minutes);
+		DateTime& AddMinutes(long long minutes);
 		/**
 		Adds the given months to this instance's timepoint
 
 		@param months Number of months to be added
 		@return This instance with the added months
 		*/
-		DateTime& addMonths(long long months);
+		DateTime& AddMonths(long long months);
 		/**
 		Adds the given seconds to this instance's timepoint
 
 		@param seconds Number of seconds to be added
 		@return This instance with the added seconds
 		*/
-		DateTime& addSeconds(long long seconds);
+		DateTime& AddSeconds(long long seconds);
 		/**
 		Adds the given ticks to this instance's timepoint (might change)
 
 		@param microseconds Number of microseconds to be added
 		@return This instance with the added microseconds
 		*/
-		DateTime& addTicks(long long microseconds);
+		DateTime& AddTicks(long long microseconds);
 		/**
 		Adds the given years to this instance's timepoint
 
 		@param years Number of years to be added
 		@return This instance with the added years
 		*/
-		DateTime& addYears(long years);
+		DateTime& AddYears(long years);
 		/**
 		Compares the given DateTime instance with this instance
 
 		@param value DateTime instance to be compared to
 		@return Number > 0, 0 or < 0
 		*/
-		int compareTo(DateTime* value);
+		int CompareTo(DateTime* value);
 		/**
 		Returns the TimeSpan between this instance and the given Datetime instance
 
 		@param value DateTime instance to be subtracted
 		@return TimeSpan between the two DateTime instances
 		*/
-		TimeSpan substract(DateTime* value);
+		TimeSpan Substract(DateTime* value);
 		/**
 		Returns the DateTime that results in the subtraction between this instance and the given Timespan instance
 
 		@param value TimeSpan to subtract
 		@return DateTime instance after the TimeSpan was subtracted
 		*/
-		DateTime substract(TimeSpan* value);
+		DateTime Substract(TimeSpan* value);
 		/**
 		Returns this DateTime instance's date component as a String with the Format "Weekday day. Monthname year"
 
 		@return String containing the time
 		*/
-		String toLongDateString();
+		String ToLongDateString();
 		/**
 		Returns this DateTime instance's time component as a String with the Format "hours:minutes:seconds"
 
 		@return String containing the time
 		*/
-		String toLongTimeString();
+		String ToLongTimeString();
 		/**
 		Returns this DateTime instance's date and time component as a String with the Format "year-month-dayThours:minutes:seconds"
 
 		@return String containing both date and time
 		*/
-		String toUtcString();
+		String ToUtcString();
 		/**
 		Returns this instance value as UTC formated string
 
@@ -211,7 +211,7 @@ namespace dnc{
 
 		@param day Day component to set
 		*/
-		void Day(unsigned short day);
+		//void Day(unsigned short day);
 		/**
 		Returns the current day of week [0 - 6] of this instance
 
@@ -223,7 +223,7 @@ namespace dnc{
 
 		@param dow Day of week component to set
 		*/
-		void DayOfWeek(unsigned short dow);
+		//void DayOfWeek(unsigned short dow);
 		/**
 		Returns the current day of year since 1.1. [0 - 365] of this instance
 
@@ -235,7 +235,7 @@ namespace dnc{
 
 		@param doy Day of year component to set
 		*/
-		void DayOfYear(unsigned short doy);
+		//void DayOfYear(unsigned short doy);
 		/**
 		Returns the current hours of this instance
 
@@ -247,7 +247,7 @@ namespace dnc{
 
 		@param hours Hour component to set
 		*/
-		void Hour(unsigned short hours);
+		//void Hour(unsigned short hours);
 		/**
 		Returns the current milliseconds of this instance
 
@@ -259,7 +259,7 @@ namespace dnc{
 
 		@param ms Millisecond component to set
 		*/
-		void Millisecond(unsigned int ms);
+		//void Millisecond(unsigned int ms);
 		/**
 		Returns the current minutes of this instance
 
@@ -271,7 +271,7 @@ namespace dnc{
 
 		@param min Minute component to set
 		*/
-		void Minute(unsigned short min);
+		//void Minute(unsigned short min);
 		/**
 		Returns the current month of this instance
 
@@ -283,7 +283,7 @@ namespace dnc{
 
 		@param mon Month component to set
 		*/
-		void Month(unsigned short mon);
+		//void Month(unsigned short mon);
 		/**
 		Returns the current seconds of this instance
 
@@ -295,7 +295,7 @@ namespace dnc{
 
 		@param sec Second component to set
 		*/
-		void Second(unsigned short sec);
+		//void Second(unsigned short sec);
 		/**
 		Returns this instance in ticks (microseconds)
 
@@ -307,7 +307,7 @@ namespace dnc{
 
 		@param microseconds Microsecond component to set
 		*/
-		void Ticks(long long microseconds);
+		//void Ticks(long long microseconds);
 		/**
 		Returns the current year of this instance
 
@@ -319,7 +319,7 @@ namespace dnc{
 
 		@param year Year component to set
 		*/
-		void Year(unsigned short year);
+		//void Year(unsigned short year);
 	private:
 		std::chrono::time_point<std::chrono::system_clock> tp;
 

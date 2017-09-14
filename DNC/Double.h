@@ -26,7 +26,7 @@ namespace dnc{
 		operator double();
 
 	private:
-		double value;
+		double value = 0;
 
 		void FromString(std::string val) override;
 	};

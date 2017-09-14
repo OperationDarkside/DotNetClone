@@ -26,7 +26,7 @@ namespace dnc{
 		Integer operator=(int i);
 		operator int();
 	private:
-		int value;
+		int value = 0;
 
 		void FromString(std::string val) override;
 	};

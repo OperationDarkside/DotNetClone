@@ -172,6 +172,7 @@
     <ClCompile Include="SqlDataReader.cpp" />
     <ClCompile Include="SqlParameter.cpp" />
     <ClCompile Include="String.cpp" />
+    <ClCompile Include="TestString.cpp" />
     <ClCompile Include="TcpClient.cpp" />
     <ClCompile Include="TcpListener.cpp" />
     <ClCompile Include="test.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpListener.h" />
     <ClInclude Include="TestDataClass.h" />
+    <ClInclude Include="TestDateTime.h" />
     <ClInclude Include="TestSqlClass.h" />
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="Type.h" />
