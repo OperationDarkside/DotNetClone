@@ -114,7 +114,7 @@ namespace dnc{
 			std::ifstream fs(path.GetStringValue(), std::ios::in);
 
 			while(getline(fs, temp)){
-				res.Add(String(&temp));
+				res.Add(String(temp));
 			}
 
 			fs.close();
@@ -133,7 +133,7 @@ namespace dnc{
 
 			fs.close();
 
-			return String(&res);
+			return String(res);
 		}
 
 		void File::WriteAllBytes(String & path, char * bytes){

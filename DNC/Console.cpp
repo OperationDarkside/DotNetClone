@@ -25,7 +25,7 @@ namespace dnc{
 
 		std::getline(std::cin, res);
 
-		return String(&res);
+		return String(res);
 	}
 
 	void Console::Write(bool value){

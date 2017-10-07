@@ -49,9 +49,9 @@ namespace dnc{
 		const type_info& ti = typeid(var);
 
 		size_t code = ti.hash_code();
-		String* n = new String(&std::string(ti.name()));
+		String n(std::string(ti.name()));
 
-		return Type(code, *n);
+		return Type(code, n);
 	}
 
 	template<typename T1, typename T2>

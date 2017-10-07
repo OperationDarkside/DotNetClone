@@ -45,7 +45,7 @@ namespace dnc{
 		static String toString(unsigned int value);
 		static String toString(unsigned long value);
 		static String toString(Object* value);
-		static String toString(DateTime* value);
+		static String toString(DateTime& value);
 	private:
 		Convert();
 	};

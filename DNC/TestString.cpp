@@ -21,7 +21,7 @@ namespace dnc {
 		} else {
 			Console::WriteLine("Error");
 		}
-		String str4(&std::string("World"));
+		String str4(std::string("World"));
 		if(str4 == "World") {
 			Console::WriteLine("std::string constructor works!");
 		} else {

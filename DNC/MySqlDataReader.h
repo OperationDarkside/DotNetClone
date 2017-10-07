@@ -107,7 +107,7 @@ namespace dnc{
 							case enum_field_types::MYSQL_TYPE_BLOB:
 							{
 								std::string str = (char*)this->row[g].buffer;
-								String temp(&str);
+								String temp(str);
 								attr.Member(temp);
 							}
 							break;
@@ -208,7 +208,7 @@ namespace dnc{
 							case enum_field_types::MYSQL_TYPE_JSON:
 							{
 								std::string str = (char*)this->row[g].buffer;
-								String temp(&str);
+								String temp(str);
 								attr.Member(temp);
 							}
 							break;
@@ -228,14 +228,14 @@ namespace dnc{
 							case enum_field_types::MYSQL_TYPE_LONG_BLOB:
 							{
 								std::string str = (char*)this->row[g].buffer;
-								String temp(&str);
+								String temp(str);
 								attr.Member(temp);
 							}
 							break;
 							case enum_field_types::MYSQL_TYPE_MEDIUM_BLOB:
 							{
 								std::string str = (char*)this->row[g].buffer;
-								String temp(&str);
+								String temp(str);
 								attr.Member(temp);
 							}
 							break;
@@ -279,7 +279,7 @@ namespace dnc{
 							case enum_field_types::MYSQL_TYPE_STRING:
 							{
 								std::string str = (char*)this->row[g].buffer;
-								String temp(&str);
+								String temp(str);
 								attr.Member(temp);
 							}
 							break;
@@ -369,20 +369,20 @@ namespace dnc{
 							case enum_field_types::MYSQL_TYPE_TINY_BLOB:
 							{
 								std::string str = (char*)this->row[g].buffer;
-								String temp(&str);
+								String temp(str);
 								attr.Member(temp);
 							}
 							break;
 							case enum_field_types::MYSQL_TYPE_VARCHAR:
 							{
 								std::string str = (char*)this->row[g].buffer;
-								String temp(&str);
+								String temp(str);
 								attr.Member(temp);
 							}
 							case enum_field_types::MYSQL_TYPE_VAR_STRING:
 							{
 								std::string str = (char*)this->row[g].buffer;
-								String temp(&str);
+								String temp(str);
 								String& s = (String&)attr.Member();
 								s = temp;
 							}

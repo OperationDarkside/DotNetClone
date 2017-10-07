@@ -38,7 +38,7 @@ namespace dnc{
 
 		@param str the C++ string to copy
 		*/
-		String(std::string* str);
+		String(std::string& str);
 		/**
 		Creates a new String class instance with the value of str
 

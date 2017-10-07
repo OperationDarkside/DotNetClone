@@ -18,8 +18,8 @@ namespace dnc{
 		this->value = strRef.value;
 	}
 
-	String::String(std::string * str){
-		this->value = *str;
+	String::String(std::string & str){
+		this->value = str;
 	}
 
 	String::String(char * str){
@@ -30,7 +30,7 @@ namespace dnc{
 	String::~String(){}
 
 	String String::Clone(){
-		return String(&this->value);
+		return String(this->value);
 	}
 
 	std::string String::GetStringValue(){
@@ -323,7 +323,7 @@ namespace dnc{
 		ss.str(this->value);
 
 		while(std::getline(ss, str, separator)){
-			res.Add(String(&str));
+			res.Add(String(str));
 		}
 
 		return res;
@@ -338,14 +338,14 @@ namespace dnc{
 		len = this->value.length();
 
 		while((currentPos = this->value.find(separator.value, currentPos)) != std::string::npos){
-			res.Add(String(&this->value.substr(oldPos, currentPos - oldPos)));
+			res.Add(String(this->value.substr(oldPos, currentPos - oldPos)));
 			currentPos += separator.value.length();
 			oldPos = currentPos;
 		}
 
 
 		if(oldPos < len){
-			res.Add(new String(&this->value.substr(oldPos, len - oldPos)));
+			res.Add(new String(this->value.substr(oldPos, len - oldPos)));
 		}
 
 		return res;
@@ -360,11 +360,11 @@ namespace dnc{
 	}
 
 	String String::Substring(unsigned int startIndex){
-		return String(&this->value.substr(startIndex));
+		return String(this->value.substr(startIndex));
 	}
 
 	String String::Substring(unsigned int startIndex, unsigned int length){
-		return String(&this->value.substr(startIndex, length));
+		return String(this->value.substr(startIndex, length));
 	}
 
 	char * String::ToCharArray(){
@@ -468,7 +468,7 @@ namespace dnc{
 	// Operators
 
 	String operator+(String str1, String str2){
-		String res(&(str1.value + str2.value));
+		String res(str1.value + str2.value);
 
 		return res;
 	}

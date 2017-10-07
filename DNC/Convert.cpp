@@ -141,58 +141,56 @@ namespace dnc{
 	}
 
 	String Convert::toString(bool value){
-		String* res;
-
-		res = new String(value ? "true" : "false");
+		String res(value ? "true" : "false");
 
 		return res;
 	}
 
 	String Convert::toString(char value){
-		return new String(&value);
+		return String(std::string(&value));
 	}
 
 	String Convert::toString(double value){
-		return new String(&std::to_string(value));
+		return String(std::to_string(value));
 	}
 
 	String Convert::toString(float value){
-		return new String(&std::to_string(value));
+		return String(std::to_string(value));
 	}
 
 	String Convert::toString(short value){
-		return new String(&std::to_string(value));
+		return String(std::to_string(value));
 	}
 
 	String Convert::toString(int value){
-		return new String(&std::to_string(value));
+		return String(std::to_string(value));
 	}
 
 	String Convert::toString(long value){
-		return new String(&std::to_string(value));
+		return String(std::to_string(value));
 	}
 
 	String Convert::toString(long long value){
-		return new String(&std::to_string(value));
+		return String(std::to_string(value));
 	}
 
 	String Convert::toString(unsigned short value){
-		return new String(&std::to_string(value));
+		return String(std::to_string(value));
 	}
 
 	String Convert::toString(unsigned int value){
-		return new String(&std::to_string(value));
+		return String(std::to_string(value));
 	}
 
 	String Convert::toString(unsigned long value){
-		return new String(&std::to_string(value));
+		return String(std::to_string(value));
 	}
 
 	String Convert::toString(Object * value){
-		return new String(&value->ToString());
+		return String(value->ToString());
 	}
 
-	String Convert::toString(DateTime * value){
-		return new String(&value->ToString());
+	String Convert::toString(DateTime & value){
+		return String(value.ToString());
 	}
 }

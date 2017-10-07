@@ -727,11 +727,24 @@ namespace dnc{
 	}*/
 
 	unsigned short DateTime::Year(){
-		unsigned short res = 0;
+		int z = 0;
+		int era = 0;
+		int doe = 0;
+		int yoe = 0;
+		int y = 0;
+		std::chrono::milliseconds ms;
+		std::chrono::time_point<std::chrono::system_clock> tp_temp;
 
-		res = std::chrono::duration_cast<years>(this->tp.time_since_epoch()).count();
+		tp_temp = this->tp;
+		ms = std::chrono::duration_cast<std::chrono::milliseconds>(tp_temp.time_since_epoch());
+		
+		z = std::chrono::duration_cast<days>(ms).count() + 719468;
+		era = (z >= 0 ? z : z - 146096) / 146097;
+		doe = static_cast<unsigned>(z - era * 146097);          // [0, 146096]
+		yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;  // [0, 399]
+		y = static_cast<days::rep>(yoe) + era * 400;
 
-		return res;
+		return y;
 	}
 
 	/*void DateTime::Year(unsigned short year){
