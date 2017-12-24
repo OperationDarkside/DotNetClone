@@ -16,6 +16,7 @@
 #include "LingerOption.h"
 #include <array>
 
+#pragma comment(lib, "Ws2_32.lib")
 
 namespace dnc{
 	namespace Net{
@@ -35,6 +36,8 @@ namespace dnc{
 				Socket Accept();
 				int Available();
 				void Bind(IPEndPoint ep);
+				bool Blocking();
+				void Blocking(bool value);
 				void Connect(IPEndPoint ep);
 				void Connect(IPAddress address, int port);
 				void Connect(String host, int port);
@@ -54,7 +57,7 @@ namespace dnc{
 				void ReceiveBufferSize(int size);
 				int ReceiveTimeout();
 				void ReceiveTimeout(int timeout);
-				int Send(char* data);
+				int Send(const char* data);
 				template<size_t Num>
 				int Send(std::array<unsigned char, Num> data);
 				template<size_t Num>
@@ -65,6 +68,7 @@ namespace dnc{
 				void SendTimeout(int timeout);
 			private:
 				Socket();
+				bool blocking = true;
 				AddressFamily addressFamily;
 				SocketType sockType;
 				ProtocolType protocolType;
