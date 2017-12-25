@@ -2,6 +2,7 @@
 #define TEST_STRING_CLASS_H
 
 #include "Console.h"
+#include "DateTime.h"
 
 namespace dnc {
 	void test_String_Class() {
@@ -441,6 +442,14 @@ namespace dnc {
 		String joined_string = String::Join(" ", listStrings);
 		if(joined_string == "Hallo Welt Noob") {
 			Console::WriteLine("join String works!");
+		} else {
+			Console::WriteLine("Error");
+		}
+
+		DateTime dt = 25;
+		String object_template_string = String("Peters age is ") + dt;
+		if(object_template_string == "Peters age is 25") {
+			Console::WriteLine("Object Template String works!");
 		} else {
 			Console::WriteLine("Error");
 		}

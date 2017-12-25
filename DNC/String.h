@@ -26,7 +26,7 @@ namespace dnc{
 		String();
 		String(const String& str);
 		String(String&& str);
-		String(Object& str);
+		//String(Object& str);
 		/**
 		Creates a new String class instance with the value of str
 
@@ -44,7 +44,7 @@ namespace dnc{
 
 		@param str the c-string to copy
 		*/
-		String(char* str);
+		String(const char* str);
 		/**
 		Creates a new String class instance with the value of str
 
@@ -366,18 +366,52 @@ namespace dnc{
 		String TrimStart();
 
 		friend String operator+(String str1, String str2);
-		friend String operator+(String& str, const char* str2);
-		friend String operator+(char* str, String& str2);
-		friend String operator+(std::string& str, String& str2);
-		friend String operator+(String& str, std::string& str2);
-		friend String operator+(String& str, int number);
-		friend String operator+(int number, String& str);
-		friend String operator+(String& str, unsigned long long number);
-		friend String operator+(unsigned long long number, String& str);
+		//friend String operator+(String str, const char* str2);
+		//friend String operator+(const char* str, String str2);
+		//friend String operator+(std::string& str, String str2);
+		//friend String operator+(String str, std::string& str2);
+		//friend String operator+(String& str, int number);
+		//friend String operator+(int number, String& str);
+		//friend String operator+(String& str, unsigned long long number);
+		//friend String operator+(unsigned long long number, String& str);
+		template<typename T, typename = std::enable_if_t<std::is_arithmetic<T>::value, T>>
+		friend String operator+(T t, String str) {
+			str.value = std::to_string(t) + str.value;
+			return str;
+		}
+		template<typename T, typename = std::enable_if<std::is_arithmetic<T>::value>::type>
+		friend String operator+(String str, T t) {
+			str.value = str.value + std::to_string(t);
+			return str;
+		}
+		template<typename Obj, std::enable_if_t<std::is_class<Obj>::value && std::is_base_of<Object, Obj>::value && !std::is_same<String, Obj>::value, Obj>* = nullptr>
+		friend String operator+(Obj t, String str) {
+			str.value = t.ToString() + str.value;
+			return str;
+		}
+		template<typename Obj, std::enable_if_t<std::is_class<Obj>::value && std::is_base_of<Object, Obj>::value && !std::is_same<String, Obj>::value, Obj>* = nullptr>
+		friend String operator+(String str, Obj t) {
+			str.value = str.value + t.ToString();
+			return str;
+		}
 		String operator+=(String& str);
 		String operator+=(std::string& str);
 		String operator+=(const char* str);
-		String operator+=(int number);
+		//String operator+=(int number);
+		template<typename T, typename = std::false_type>
+		String operator+=(T t) {
+			return *this;
+		}
+		template<typename T, typename std::enable_if_t<std::is_arithmetic<T>::value, T>>
+		String operator+=(T t) {
+			this->value += std::to_string(t);
+			return str;
+		}
+		template<typename T, typename std::enable_if_t<std::is_base_of<Object, T>::value && ! std::is_same<String, T>::value, T>>
+		String operator+=(T t) {
+			this->value += t.ToString();
+			return str;
+		}
 		bool operator==(String& str);
 		bool operator==(const char* str);
 		bool operator!=(String& str);
@@ -385,7 +419,7 @@ namespace dnc{
 		template<size_t num>
 		String operator=(std::array<char, num> str);
 		String operator=(const char* str);
-		String operator=(std::string& str);
+		String operator=(const std::string& str);
 		String& operator=(String& str);
 		String& operator=(String&& str);
 		operator std::string();

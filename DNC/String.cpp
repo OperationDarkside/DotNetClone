@@ -12,17 +12,17 @@ namespace dnc{
 		this->value = str->value;
 	}
 
-	String::String(Object & str){
-		String& strRef = (String&)str;
+	/*String::String(Object & str){
+		//String& strRef = (String&)str;
 
-		this->value = strRef.value;
-	}
+		this->value = str.ToString();
+	}*/
 
 	String::String(std::string & str){
 		this->value = str;
 	}
 
-	String::String(char * str){
+	String::String(const char * str){
 		this->value = str;
 	}
 
@@ -468,38 +468,41 @@ namespace dnc{
 	// Operators
 
 	String operator+(String str1, String str2){
-		String res(str1.value + str2.value);
-
-		return res;
+		//String res(str1.value + str2.value);
+		str1 += str2;
+		return str1;
 	}
 
-	String operator+(String& str1, const char * str2){
+	/*String operator+(String str1, const char * str2){
 		str1 += str2;
 
 		return str1;
 	}
 
-	String operator+(char * str, String & str2){
-		//str2.value.insert(0, str);
+	String operator+(const char * str, String str2){
+		const char* bla1 = "dfgdfg";
+		std::string bla2 = "dfsgf";
+		bla2 = bla1 + bla2;
+		//str2.value = str + str2.value;
 		//str2 += str;
-		String res = str;
-
-		return res + str2;
-	}
-
-	String operator+(std::string & str, String & str2){
-		str2.value.insert(0, str);
+		//String res = str;
 
 		return str2;
-	}
+	}*/
 
-	String operator+(String & str, std::string & str2){
+	/*String operator+(std::string & str, String str2){
+		str2.value = str + str2.value;
+
+		return str2;
+	}*/
+
+	/*String operator+(String str, std::string & str2){
 		str += str2;
 
 		return str;
-	}
+	}*/
 
-	String operator+(String& str, int number){
+	/*String operator+(String& str, int number){
 		str += std::to_string(number);
 
 		return str;
@@ -521,7 +524,7 @@ namespace dnc{
 		str.value = std::to_string(number) + str.value;
 
 		return str;
-	}
+	}*/
 
 	String String::operator+=(String& str){
 		this->value += str.value;
@@ -541,11 +544,11 @@ namespace dnc{
 		return *this;
 	}
 
-	String String::operator+=(int number){
+	/*String String::operator+=(int number){
 		this->value += std::to_string(number);
 
 		return *this;
-	}
+	}*/
 
 	bool String::operator==(String & str){
 		return (this->value.compare(str.value) == 0);
@@ -573,7 +576,7 @@ namespace dnc{
 		return *this;
 	}
 
-	String String::operator=(std::string & str){
+	String String::operator=(const std::string & str){
 		this->value = str;
 
 		return *this;
