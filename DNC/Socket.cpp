@@ -308,13 +308,19 @@ namespace dnc {
 				}
 			}
 
+			bool Socket::operator==(const Socket & socket) {
+				return sock == socket.sock;
+			}
+
 			int Socket::Receive(char * buffer, int size, SocketFlags socketFlags) {
 				int bytesReceived = 0;
 
 				bytesReceived = recv(this->sock, buffer, size, socketFlags);
 
-				if(bytesReceived == 0) {
-					throw "Server disconnected";
+				if(bytesReceived < 0) {
+					String strErr = "Reading Error. Code: ";
+					strErr += WSAGetLastError();
+					throw strErr.GetStringValue();
 				}
 
 				return bytesReceived;
@@ -363,6 +369,50 @@ namespace dnc {
 				res = setsockopt(this->sock, SOL_SOCKET, SO_RCVTIMEO, (char*) timeout, len);
 				if(res < 0) {
 					throw "Couldn't set Receive Timeout";
+				}
+			}
+
+			int Socket::Select(std::vector<Socket*>& readSocks, std::vector<Socket*>& writeSocks, std::vector<Socket*>& errorSocks, long timeoutSec, long timeoutMSec) {
+				int select_ret_val = 0;
+				fd_set readFD = {0};
+				fd_set writeFD = {0};
+				fd_set errorFD = {0};
+				TIMEVAL tv = {0};
+
+				if(timeoutSec > 0 || timeoutMSec > 0) {
+					tv.tv_sec = timeoutSec;
+					tv.tv_usec = timeoutMSec;
+				}
+
+				SetFDSockets(readSocks, &readFD);
+				SetFDSockets(writeSocks, &writeFD);
+				SetFDSockets(errorSocks, &errorFD);
+
+				select_ret_val = select(0,
+										readFD.fd_count != 0 ? &readFD : NULL,
+										writeFD.fd_count != 0 ? &writeFD : NULL,
+										errorFD.fd_count != 0 ? &errorFD : NULL,
+										timeoutSec > 0 || timeoutMSec > 0 ? &tv : NULL);
+				
+				GetFDSockets(readSocks, &readFD);
+				GetFDSockets(writeSocks, &writeFD);
+				GetFDSockets(errorSocks, &errorFD);
+
+				return select_ret_val;
+			}
+
+			void Socket::SetFDSockets(std::vector<Socket*>& socks, fd_set* set) {
+				if(socks.size() > 0) {
+					FD_ZERO(set);
+					for(Socket* s : socks) {
+						FD_SET(s->sock, set);
+					}
+				}
+			}
+
+			void Socket::GetFDSockets(std::vector<Socket*>& socks, fd_set * set) {
+				if(socks.size() > 0) {
+					socks.erase(std::remove_if(socks.begin(), socks.end(), [set](Socket* s) { return !FD_ISSET(s->sock, set); }), socks.end());
 				}
 			}
 

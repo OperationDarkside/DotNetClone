@@ -57,6 +57,7 @@ namespace dnc{
 				void ReceiveBufferSize(int size);
 				int ReceiveTimeout();
 				void ReceiveTimeout(int timeout);
+				static int Select(std::vector<Socket*>& readSocks, std::vector<Socket*>& writeSocks, std::vector<Socket*>& errorSocks, long timeoutSec, long timeoutMSec);
 				int Send(const char* data);
 				template<size_t Num>
 				int Send(std::array<unsigned char, Num> data);
@@ -66,8 +67,13 @@ namespace dnc{
 				void SendBufferSize(int size);
 				int SendTimeout();
 				void SendTimeout(int timeout);
+
+				bool operator==(const Socket& socket);
 			private:
 				Socket();
+				static void SetFDSockets(std::vector<Socket*>& socks, fd_set* set);
+				static void GetFDSockets(std::vector<Socket*>& socks, fd_set* set);
+
 				bool blocking = true;
 				AddressFamily addressFamily;
 				SocketType sockType;
@@ -90,8 +96,11 @@ namespace dnc{
 
 				bytesReceived = recv(this->sock, data.data(), len, 0);
 
-				if(bytesReceived == 0){
-					throw "Server disconnected";
+				if(bytesReceived < 0) {
+					String strErr = "Reading Error. Code: ";
+					int error = WSAGetLastError();
+					strErr += error;
+					throw strErr.GetStringValue();
 				}
 
 				//tmp.swap(data);
