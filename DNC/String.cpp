@@ -544,6 +544,11 @@ namespace dnc{
 		return *this;
 	}
 
+	String String::operator+=(char str) {
+		value += str;
+		return *this;
+	}
+
 	/*String String::operator+=(int number){
 		this->value += std::to_string(number);
 

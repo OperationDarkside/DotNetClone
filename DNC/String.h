@@ -397,20 +397,21 @@ namespace dnc{
 		String operator+=(String& str);
 		String operator+=(std::string& str);
 		String operator+=(const char* str);
+		String operator+=(char str);
 		//String operator+=(int number);
-		template<typename T, typename = std::false_type>
+		/*template<typename T, typename = std::false_type>
 		String operator+=(T t) {
 			return *this;
-		}
-		template<typename T, typename std::enable_if_t<std::is_arithmetic<T>::value, T>>
+		}*/
+		template<typename T, std::enable_if_t<std::is_arithmetic<T>::value, T>* = nullptr>
 		String operator+=(T t) {
 			this->value += std::to_string(t);
-			return str;
+			return *this;
 		}
-		template<typename T, typename std::enable_if_t<std::is_base_of<Object, T>::value && ! std::is_same<String, T>::value, T>>
-		String operator+=(T t) {
+		template<typename T, std::enable_if_t<std::is_base_of<Object, T>::value && ! std::is_same<String, T>::value, T>* = nullptr>
+		String operator+=(T& t) {
 			this->value += t.ToString();
-			return str;
+			return *this;
 		}
 		bool operator==(String& str);
 		bool operator==(const char* str);
