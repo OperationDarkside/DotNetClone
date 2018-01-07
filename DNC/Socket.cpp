@@ -60,6 +60,7 @@ namespace dnc {
 				resSocket.addressFamily = this->addressFamily;
 				resSocket.sockType = this->sockType;
 				resSocket.protocolType = this->protocolType;
+				resSocket.connected = true;
 
 				return resSocket;
 			}
@@ -132,6 +133,7 @@ namespace dnc {
 					strErr += WSAGetLastError();
 					throw strErr.GetStringValue();
 				}
+				connected = true;
 			}
 
 			void Socket::Connect(IPAddress address, int port) {
@@ -154,6 +156,7 @@ namespace dnc {
 					strErr += WSAGetLastError();
 					throw strErr.GetStringValue();
 				}
+				connected = true;
 			}
 
 			void Socket::Connect(String host, int port) {
@@ -170,10 +173,16 @@ namespace dnc {
 					strErr += WSAGetLastError();
 					throw strErr.GetStringValue();
 				}
+				connected = true;
+			}
+
+			bool Socket::Connected() {
+				return connected;
 			}
 
 			void Socket::Disconnect() {
 				closesocket(sock);
+				connected = false;
 			}
 
 			void Socket::Close() {

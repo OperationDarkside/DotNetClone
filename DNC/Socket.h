@@ -27,6 +27,7 @@ namespace dnc{
 				friend class TcpClient;
 
 			public:
+				Socket();
 				Socket(AddressFamily af, SocketType st, ProtocolType pt);
 				~Socket();
 
@@ -41,6 +42,7 @@ namespace dnc{
 				void Connect(IPEndPoint ep);
 				void Connect(IPAddress address, int port);
 				void Connect(String host, int port);
+				bool Connected();
 				void Disconnect();
 				void Close();
 				LingerOption LingerState();
@@ -70,11 +72,12 @@ namespace dnc{
 
 				bool operator==(const Socket& socket);
 			private:
-				Socket();
+				
 				static void SetFDSockets(std::vector<Socket*>& socks, fd_set* set);
 				static void GetFDSockets(std::vector<Socket*>& socks, fd_set* set);
 
 				bool blocking = true;
+				bool connected = false;
 				AddressFamily addressFamily;
 				SocketType sockType;
 				ProtocolType protocolType;
