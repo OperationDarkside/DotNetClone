@@ -21,6 +21,7 @@
 #include "XmlSerializer.h"
 #include "JsonSerializer.h"
 #include "CsvSerializer.h"
+#include "SerializationTestClass.h"
 
 using namespace dnc;
 using namespace dnc::Data;
@@ -743,6 +744,19 @@ int main() {
 	}
 	*/
 	// Serialization
+
+	SerializationTestClass serTestClass;
+	serTestClass.setVar1 ("Hello world!");
+	serTestClass.setVar2 (1337);
+	serTestClass.setVar3 (13.37);
+	std::vector<SerializationTestClass> subs;
+	subs.push_back ({});
+	serTestClass.setVar4 (subs);
+
+	SerializationObject serObj = serTestClass.serialize ();
+
+	SerializationTestClass deserTestClass;
+	deserTestClass.deserialize (serObj);
 
 	double tttt = 5.3;
 

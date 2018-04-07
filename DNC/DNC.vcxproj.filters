@@ -165,6 +165,12 @@
     <ClCompile Include="TestString.cpp">
       <Filter>Headerdateien</Filter>
     </ClCompile>
+    <ClCompile Include="Serializer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SerializationObject.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -333,6 +339,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="TestDateTime.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializationObject.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializationTestClass.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
